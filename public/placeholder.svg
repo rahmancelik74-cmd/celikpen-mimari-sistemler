@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-label="Çelikpen Görsel Yakında">
+  <rect width="600" height="400" fill="#f1f5f9" />
+  <rect x="20" y="20" width="560" height="360" rx="16" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 6" />
+  <g transform="translate(300, 175)">
+    <polygon points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" fill="#0B3B60" />
+    <text x="0" y="8" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="900">ÇP</text>
+  </g>
+  <text x="300" y="255" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700">Görsel Yakında</text>
+</svg>

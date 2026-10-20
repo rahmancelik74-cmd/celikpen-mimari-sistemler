@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <defs>
+    <linearGradient id="veinGrey" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.0" />
+      <stop offset="28%" stop-color="#94A3B8" stop-opacity="0.45" />
+      <stop offset="55%" stop-color="#64748B" stop-opacity="0.28" />
+      <stop offset="82%" stop-color="#C8BFA8" stop-opacity="0.38" />
+      <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.0" />
+    </linearGradient>
+    <linearGradient id="veinTaupe" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C8BFA8" stop-opacity="0.0" />
+      <stop offset="35%" stop-color="#C8BFA8" stop-opacity="0.42" />
+      <stop offset="68%" stop-color="#94A3B8" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#C8BFA8" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+  <!-- Ana Organik Calacatta Damar Akışları -->
+  <path
+    d="M-60,120 C110,165 210,85 370,190 C520,290 610,240 760,355 C835,412 890,460 960,510"
+    fill="none"
+    stroke="url(#veinGrey)"
+    stroke-width="2.4"
+    stroke-linecap="round"
+  />
+  <path
+    d="M-40,145 C135,190 225,115 390,210 C540,305 635,268 785,380"
+    fill="none"
+    stroke="url(#veinTaupe)"
+    stroke-width="1.1"
+    stroke-linecap="round"
+  />
+  <path
+    d="M110,-40 C210,95 280,220 440,310 C600,400 680,550 860,690 C900,722 930,750 960,790"
+    fill="none"
+    stroke="url(#veinGrey)"
+    stroke-width="1.8"
+    stroke-linecap="round"
+  />
+  <path
+    d="M370,190 C410,245 435,295 440,310"
+    fill="none"
+    stroke="#94A3B8"
+    stroke-opacity="0.22"
+    stroke-width="1.1"
+  />
+  <path
+    d="M-50,520 C140,480 270,580 450,530 C630,480 740,610 950,590"
+    fill="none"
+    stroke="url(#veinTaupe)"
+    stroke-width="2.1"
+    stroke-linecap="round"
+  />
+  <path
+    d="M-20,545 C165,505 290,600 470,555 C645,510 755,635 940,615"
+    fill="none"
+    stroke="url(#veinGrey)"
+    stroke-width="0.9"
+    stroke-linecap="round"
+  />
+  <path
+    d="M180,940 C310,790 420,730 580,640 C710,565 810,450 950,340"
+    fill="none"
+    stroke="url(#veinTaupe)"
+    stroke-width="1.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M450,530 C505,575 545,610 580,640"
+    fill="none"
+    stroke="#C8BFA8"
+    stroke-opacity="0.28"
+    stroke-width="1.0"
+  />
+</svg>

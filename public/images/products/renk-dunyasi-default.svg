@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <rect width="800" height="520" fill="#F1F5F9" />
+  <text x="400" y="48" text-anchor="middle" fill="#0B1560" font-family="sans-serif" font-size="18" font-weight="bold">WİNSA &amp; ÇELİKPEN MİMARİ RENK VE LAMİNASYON KARTELASI</text>
+  <!-- 6 Architectural Swatch Cards -->
+  <g font-family="sans-serif">
+    <rect x="50" y="75" width="215" height="190" rx="12" fill="#2F3640" stroke="#FFFFFF" stroke-width="4" />
+    <text x="157" y="225" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Antrasit Gri (RAL 7016)</text>
+    <text x="157" y="246" text-anchor="middle" fill="#CBD5E1" font-size="11">Kumlu Mat &amp; Düz Seçenek</text>
+
+    <rect x="292" y="75" width="215" height="190" rx="12" fill="#8C5220" stroke="#FFFFFF" stroke-width="4" />
+    <text x="400" y="225" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Altın Meşe (Golden Oak)</text>
+    <text x="400" y="246" text-anchor="middle" fill="#FDE68A" font-size="11">3D Doğal Ahşap Folyo</text>
+
+    <rect x="535" y="75" width="215" height="190" rx="12" fill="#181B20" stroke="#FFFFFF" stroke-width="4" />
+    <text x="642" y="225" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Gece Siyahı (RAL 9005)</text>
+    <text x="642" y="246" text-anchor="middle" fill="#94A3B8" font-size="11">QUALICOAT İpek Mat</text>
+
+    <rect x="50" y="290" width="215" height="190" rx="12" fill="#5C3A21" stroke="#FFFFFF" stroke-width="4" />
+    <text x="157" y="440" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Koyu Ceviz &amp; Fındık</text>
+    <text x="157" y="461" text-anchor="middle" fill="#FDE68A" font-size="11">Cool Colors UV Korumalı</text>
+
+    <rect x="292" y="290" width="215" height="190" rx="12" fill="#7F8FA6" stroke="#FFFFFF" stroke-width="4" />
+    <text x="400" y="440" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Gümüş Gri &amp; Eloksal</text>
+    <text x="400" y="461" text-anchor="middle" fill="#F1F5F9" font-size="11">Metalik Mimari Seri</text>
+
+    <rect x="535" y="290" width="215" height="190" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+    <text x="642" y="440" text-anchor="middle" fill="#0B1560" font-size="14" font-weight="bold">Trafik Beyazı &amp; Krem</text>
+    <text x="642" y="461" text-anchor="middle" fill="#475569" font-size="11">RAL 9016 / EN 513 Sınıf S</text>
+  </g>
+</svg>

@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF9F5;
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.92) 0%, rgba(250, 249, 245, 0.4) 48%, transparent 75%),
+    radial-gradient(circle at 82% 78%, rgba(200, 191, 168, 0.12) 0%, rgba(148, 163, 184, 0.06) 52%, transparent 80%),
+    url('/images/marble-veins.svg'),
+    linear-gradient(135deg, #FAF9F5 0%, #F5F3EE 50%, #F3F1EC 100%);
+  background-size: 100% 100%, 100% 100%, 760px 760px, 100% 100%;
+  background-attachment: fixed;
+  color: #0f172a; /* slate-900 */
+}
+
+/* Lüks Calacatta Krem & Güvercin Grisi Mermer Yüzey Sınıfı */
+.marble-surface,
+.marble-cream-bg {
+  background-color: #FAF9F5;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.9) 0%, transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(200, 191, 168, 0.14) 0%, rgba(148, 163, 184, 0.08) 55%, transparent 85%),
+    url('/images/marble-veins.svg'),
+    linear-gradient(135deg, #FAF9F5 0%, #F4F2ED 52%, #EFECE6 100%);
+  background-size: 100% 100%, 100% 100%, 680px 680px, 100% 100%;
+}
+
+@keyframes winsaFadeIn {
+  from {
+    opacity: 0.92;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.winsa-page-fade {
+  animation: winsaFadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Mimari Temperli Cam Parlama (Glass-Sheen) & Yükselme Efekti */
+.winsa-card-hover {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms ease;
+}
+
+.winsa-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(11, 21, 96, 0.08),
+    0 8px 10px -6px rgba(11, 21, 96, 0.05);
+}
+
+.glass-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  width: 65%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: left 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.glass-sheen:hover::after {
+  left: 140%;
+}
+
+@keyframes architecturalMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-architectural-marquee {
+  display: flex;
+  width: max-content;
+  animation: architecturalMarquee 32s linear infinite;
+}
+
+.animate-architectural-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes fadeUpSubtle {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUpSubtle 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hover-lift {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -12px rgba(11, 21, 96, 0.14);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(11, 21, 96, 0.1);
+}
+
+/* Akustik Osiloskop: Açık camda canlı titreşen ses dalgası barları */
+@keyframes acousticWavePulse {
+  0% {
+    transform: scaleY(0.55);
+  }
+  100% {
+    transform: scaleY(1.12);
+  }
+}
+
+.acoustic-wave-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.acoustic-wave-bar--active {
+  animation: acousticWavePulse 620ms ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acoustic-wave-bar--active {
+    animation: none;
+  }
+}

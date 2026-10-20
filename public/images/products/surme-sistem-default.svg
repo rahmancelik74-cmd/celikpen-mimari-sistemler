@@ -1,0 +1,47 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="bgSlide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+    <linearGradient id="anthFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="skyGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.72" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.45" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#bgSlide)" />
+  <!-- Wide Hebeschiebe / Comfort Slide Frame -->
+  <rect x="50" y="60" width="510" height="390" rx="6" fill="url(#anthFrame)" stroke="#0F172A" stroke-width="3" />
+  <!-- Fixed Panoramic Left Sash -->
+  <rect x="68" y="78" width="235" height="354" fill="#334155" />
+  <rect x="80" y="90" width="211" height="330" fill="url(#skyGlass)" stroke="#0284C7" stroke-width="1.5" />
+  <polygon points="80,90 190,90 80,290" fill="#FFFFFF" opacity="0.35" />
+  <!-- Sliding Right Sash -->
+  <rect x="295" y="74" width="247" height="362" fill="#1E293B" stroke="#94A3B8" stroke-width="1.5" />
+  <rect x="309" y="88" width="219" height="334" fill="url(#skyGlass)" stroke="#0284C7" stroke-width="1.5" />
+  <polygon points="309,88 430,88 309,280" fill="#FFFFFF" opacity="0.4" />
+  <!-- Sliding Direction Arrow -->
+  <line x1="460" y1="255" x2="360" y2="255" stroke="#D91B24" stroke-width="5" />
+  <polygon points="360,243 336,255 360,267" fill="#D91B24" />
+  <!-- HS Long Architectural Handle -->
+  <rect x="530" y="215" width="7" height="65" rx="3" fill="#E2E8F0" />
+  <!-- Low Barrier Aluminum Threshold -->
+  <rect x="50" y="444" width="510" height="10" fill="#94A3B8" />
+  <!-- Right Info Card -->
+  <rect x="580" y="60" width="185" height="390" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+  <rect x="580" y="60" width="185" height="44" rx="12" fill="#0B1560" />
+  <text x="672" y="87" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold">KALDIR-SÜR &amp; SÜRME</text>
+  <rect x="602" y="122" width="140" height="150" rx="6" fill="#0F172A" />
+  <rect x="614" y="135" width="52" height="124" fill="#38BDF8" opacity="0.7" />
+  <rect x="676" y="135" width="52" height="124" fill="#0284C7" opacity="0.85" />
+  <text x="672" y="305" text-anchor="middle" fill="#0B1560" font-family="sans-serif" font-size="13" font-weight="bold">149 - 175 mm Kasa</text>
+  <text x="672" y="328" text-anchor="middle" fill="#D91B24" font-family="sans-serif" font-size="12" font-weight="bold">300 kg Kanat Kapasitesi</text>
+  <text x="672" y="350" text-anchor="middle" fill="#334155" font-family="sans-serif" font-size="11">EPDM Vakum Conta</text>
+  <text x="672" y="370" text-anchor="middle" fill="#334155" font-family="sans-serif" font-size="11">Engelsiz Alt Eşik</text>
+  <rect x="600" y="396" width="145" height="32" rx="6" fill="#D91B24" />
+  <text x="672" y="417" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="bold">PANORAMA &amp; COMFORT</text>
+</svg>

@@ -1,0 +1,38 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <rect width="600" height="420" fill="#0F172A" />
+  <g stroke="#1E293B" stroke-width="1">
+    <line x1="0" y1="70" x2="600" y2="70" />
+    <line x1="0" y1="140" x2="600" y2="140" />
+    <line x1="0" y1="210" x2="600" y2="210" />
+    <line x1="0" y1="280" x2="600" y2="280" />
+    <line x1="0" y1="350" x2="600" y2="350" />
+    <line x1="100" y1="0" x2="100" y2="420" />
+    <line x1="200" y1="0" x2="200" y2="420" />
+    <line x1="300" y1="0" x2="300" y2="420" />
+    <line x1="400" y1="0" x2="400" y2="420" />
+    <line x1="500" y1="0" x2="500" y2="420" />
+  </g>
+  <!-- CAD Dimension Lines -->
+  <line x1="120" y1="375" x2="480" y2="375" stroke="#38BDF8" stroke-width="1.5" />
+  <line x1="120" y1="365" x2="120" y2="385" stroke="#38BDF8" stroke-width="1.5" />
+  <line x1="480" y1="365" x2="480" y2="385" stroke="#38BDF8" stroke-width="1.5" />
+  <text x="300" y="395" text-anchor="middle" fill="#38BDF8" font-family="monospace" font-size="12">PROFİL KESİT DERİNLİĞİ (MM) • CAD 1:1 ÖLÇEK</text>
+  <!-- Multi-chamber CAD blueprint -->
+  <rect x="120" y="150" width="360" height="190" fill="none" stroke="#F8FAFC" stroke-width="2.5" />
+  <rect x="135" y="165" width="45" height="160" fill="none" stroke="#94A3B8" stroke-width="1.5" />
+  <rect x="190" y="165" width="45" height="160" fill="none" stroke="#94A3B8" stroke-width="1.5" />
+  <!-- Galvanized Steel Reinforcement Chamber -->
+  <rect x="248" y="165" width="95" height="160" fill="#1E293B" stroke="#D91B24" stroke-width="3" />
+  <text x="295" y="250" text-anchor="middle" fill="#D91B24" font-family="monospace" font-size="11" font-weight="bold">DESTEK SACI</text>
+  <rect x="355" y="165" width="50" height="160" fill="none" stroke="#94A3B8" stroke-width="1.5" />
+  <rect x="415" y="165" width="50" height="160" fill="none" stroke="#94A3B8" stroke-width="1.5" />
+  <!-- Triple Glazing Unit Top -->
+  <rect x="245" y="40" width="12" height="110" fill="#38BDF8" opacity="0.6" stroke="#38BDF8" />
+  <rect x="290" y="40" width="12" height="110" fill="#38BDF8" opacity="0.6" stroke="#38BDF8" />
+  <rect x="335" y="40" width="12" height="110" fill="#38BDF8" opacity="0.6" stroke="#38BDF8" />
+  <!-- EPDM Gaskets -->
+  <circle cx="240" cy="150" r="7" fill="#D91B24" />
+  <circle cx="352" cy="150" r="7" fill="#D91B24" />
+  <text x="455" y="85" fill="#F8FAFC" font-family="monospace" font-size="11">← ŞİŞECAM KONFOR ISICAM</text>
+  <text x="455" y="110" fill="#D91B24" font-family="monospace" font-size="11">← EPDM SIZDIRMAZLIK CONTASI</text>
+</svg>
