@@ -268,6 +268,14 @@ const GLASS_TINTS: GlassTint[] = [
 
 type ShowcaseModuleTab = 'hotspots' | 'acoustic' | 'wizard' | 'studio' | 'blueprint';
 
+const MODULE_TABS: { id: ShowcaseModuleTab; badge: string; label: string }[] = [
+  { id: 'hotspots', badge: '01', label: 'Sıcak Nokta Analiz' },
+  { id: 'acoustic', badge: '02', label: '-38 dB Akustik Deneyim' },
+  { id: 'wizard', badge: '03', label: '3 Tıkla Sistem Bulucu' },
+  { id: 'studio', badge: '04', label: 'Renk & Cam Stüdyosu' },
+  { id: 'blueprint', badge: '05', label: 'CAD Çizimden Gerçeğe' },
+];
+
 /* ============================================================================
    ÜRÜNLER SAYFASI İÇİN KOMPAKT İNTERAKTİF LAB ÖNİZLEMESİ
    ============================================================================ */
@@ -415,6 +423,9 @@ export const InnovativeShowcase: React.FC = () => {
   const [isLensDragging, setIsLensDragging] = useState<boolean>(false);
   const lensContainerRef = useRef<HTMLDivElement | null>(null);
 
+  // Sekme çubuğu klavye odağı (roving tabindex)
+  const moduleTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
   const handleLensMove = (clientX: number) => {
     const el = lensContainerRef.current;
     if (!el) return;
@@ -446,17 +457,33 @@ export const InnovativeShowcase: React.FC = () => {
 
   const matchedSystem = WIZARD_MATRIX[wizardSpace][wizardPriority];
 
-  const MODULE_TABS: { id: ShowcaseModuleTab; badge: string; label: string }[] = [
-    { id: 'hotspots', badge: '01', label: 'Sıcak Nokta Analiz' },
-    { id: 'acoustic', badge: '02', label: '-38 dB Akustik Deneyim' },
-    { id: 'wizard', badge: '03', label: '3 Tıkla Sistem Bulucu' },
-    { id: 'studio', badge: '04', label: 'Renk & Cam Stüdyosu' },
-    { id: 'blueprint', badge: '05', label: 'CAD Çizimden Gerçeğe' },
-  ];
+  const handleModuleTabKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    currentIndex: number
+  ) => {
+    let nextIndex: number | null = null;
+
+    if (event.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % MODULE_TABS.length;
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + MODULE_TABS.length) % MODULE_TABS.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = MODULE_TABS.length - 1;
+    }
+
+    if (nextIndex === null) return;
+
+    event.preventDefault();
+    setActiveModule(MODULE_TABS[nextIndex].id);
+    moduleTabRefs.current[nextIndex]?.focus();
+  };
 
   return (
     <section
       id="mimari-inovasyon-merkezi"
+      aria-labelledby="interaktif-lab-baslik"
       className="marble-surface relative overflow-hidden border-y border-[#0B1560]/10 py-16 sm:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -467,7 +494,10 @@ export const InnovativeShowcase: React.FC = () => {
               <span className="h-[1.5px] w-5 bg-[#D91B24]" />
               <span>İNTERAKTİF MİMARİ LABORATUVAR</span>
             </div>
-            <h2 className="mt-1.5 text-2xl font-black tracking-tight text-[#0B1560] sm:text-3xl">
+            <h2
+              id="interaktif-lab-baslik"
+              className="mt-1.5 text-2xl font-black tracking-tight text-[#0B1560] sm:text-3xl"
+            >
               Teknolojiyi ve Detayları Canlı Keşfedin
             </h2>
           </div>
@@ -478,16 +508,23 @@ export const InnovativeShowcase: React.FC = () => {
             aria-label="İnteraktif Mimari Modüller"
             className="flex flex-wrap gap-1.5 rounded-2xl border border-[#0B1560]/15 bg-white p-1.5 shadow-2xs"
           >
-            {MODULE_TABS.map((tab) => {
+            {MODULE_TABS.map((tab, tabIndex) => {
               const isSelected = activeModule === tab.id;
               return (
                 <button
                   key={tab.id}
+                  ref={(element) => {
+                    moduleTabRefs.current[tabIndex] = element;
+                  }}
+                  id={`showcase-tab-${tab.id}`}
                   type="button"
                   role="tab"
                   aria-selected={isSelected}
+                  aria-controls={`showcase-panel-${tab.id}`}
+                  tabIndex={isSelected ? 0 : -1}
                   onClick={() => setActiveModule(tab.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all ${
+                  onKeyDown={(event) => handleModuleTabKeyDown(event, tabIndex)}
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D91B24] focus-visible:ring-offset-2 ${
                     isSelected
                       ? 'bg-[#0B1560] text-white shadow-xs'
                       : 'text-[#0B1560]/80 hover:bg-slate-100 hover:text-[#D91B24]'
@@ -511,7 +548,13 @@ export const InnovativeShowcase: React.FC = () => {
             MODÜL 1: SICAK NOKTA MİMARİ ANALİZ (5 PULSING HOTSPOT PİNS)
            ===================================================================== */}
         {activeModule === 'hotspots' && (
-          <div className="animate-fade-up mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+          <div
+            role="tabpanel"
+            id="showcase-panel-hotspots"
+            aria-labelledby="showcase-tab-hotspots"
+            tabIndex={0}
+            className="animate-fade-up mt-8 grid grid-cols-1 gap-6 focus:outline-none lg:grid-cols-12 lg:items-center"
+          >
             {/* Sol: Vektörel Mimari Cephe & Cam Balkon Kesiti + 5 Kırmızı '+' Pin */}
             <div className="relative overflow-hidden rounded-2xl border border-[#0B1560]/20 bg-[#0B1560] p-4 shadow-xl lg:col-span-7">
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#071126]">
@@ -824,7 +867,13 @@ export const InnovativeShowcase: React.FC = () => {
             MODÜL 2: CANLI SES YALITIMI DENEYİMİ (-38 dB AKUSTİK OSİLOSKOP)
            ===================================================================== */}
         {activeModule === 'acoustic' && (
-          <div className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-sm sm:p-8">
+          <div
+            role="tabpanel"
+            id="showcase-panel-acoustic"
+            aria-labelledby="showcase-tab-acoustic"
+            tabIndex={0}
+            className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-sm focus:outline-none sm:p-8"
+          >
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
               {/* Sol: Açık / Kapalı Kontrolü ve Desibel Göstergesi */}
               <div className="space-y-4 lg:col-span-5">
@@ -1051,7 +1100,13 @@ export const InnovativeShowcase: React.FC = () => {
             MODÜL 3: MİNİMALİST "3 TIKLA SİSTEM BULUCU" GÖRSEL SİHİRBAZ
            ===================================================================== */}
         {activeModule === 'wizard' && (
-          <div className="animate-fade-up mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+          <div
+            role="tabpanel"
+            id="showcase-panel-wizard"
+            aria-labelledby="showcase-tab-wizard"
+            tabIndex={0}
+            className="animate-fade-up mt-8 grid grid-cols-1 gap-6 focus:outline-none lg:grid-cols-12 lg:items-center"
+          >
             {/* Sol: 2 Hızlı Seçim Adımı + 3. Tıkla İncele */}
             <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs lg:col-span-6">
               <div>
@@ -1189,7 +1244,13 @@ export const InnovativeShowcase: React.FC = () => {
             MODÜL 4: CANLI PROFİL & CAM RENGİ STÜDYOSU (LIVE MATERIAL STUDIO)
            ===================================================================== */}
         {activeModule === 'studio' && (
-          <div className="animate-fade-up mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+          <div
+            role="tabpanel"
+            id="showcase-panel-studio"
+            aria-labelledby="showcase-tab-studio"
+            tabIndex={0}
+            className="animate-fade-up mt-8 grid grid-cols-1 gap-6 focus:outline-none lg:grid-cols-12 lg:items-center"
+          >
             {/* Sol: Dinamik Vektörel 3D Mimari Pencere & Cam Balkon Çerçevesi */}
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-[#0F172A] p-6 text-white shadow-lg lg:col-span-6">
               <div className="flex items-center justify-between text-xs">
@@ -1392,7 +1453,13 @@ export const InnovativeShowcase: React.FC = () => {
             MODÜL 5: "CAD MİMARİ ÇİZİMDEN GERÇEĞE" (BLUEPRINT-TO-REALITY LENS)
            ===================================================================== */}
         {activeModule === 'blueprint' && (
-          <div className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-2xs">
+          <div
+            role="tabpanel"
+            id="showcase-panel-blueprint"
+            aria-labelledby="showcase-tab-blueprint"
+            tabIndex={0}
+            className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-2xs focus:outline-none"
+          >
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
               <div>
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D91B24]">
