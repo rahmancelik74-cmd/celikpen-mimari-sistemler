@@ -4,39 +4,26 @@ import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
 
+/**
+ * Tüm kamuya açık rotaları tek kaynaktan üretir.
+ * Öncelikler: ana sayfa 1.0, ürünler 0.9, mahalle sayfaları 0.85,
+ * profesyonel/kurumsal alt sayfalar 0.8.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE_CONFIG.siteUrl;
   const now = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${base}`,
+      url: base,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
-      url: `${base}/kurumsal`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
       url: `${base}/urunler`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.95,
-    },
-    {
-      url: `${base}/satis-noktalari`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/profesyoneller`,
-      lastModified: now,
-      changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
@@ -46,28 +33,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${base}/blog/eylul-2026-yargitay-cam-balkon-karari`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.85,
-    },
-    {
-      url: `${base}/karsilastir`,
+      url: `${base}/satis-noktalari`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${base}/nasil-calisiriz`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/hakkimizda`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
     },
     {
       url: `${base}/iletisim`,
@@ -76,10 +45,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${base}/yorumlar`,
+      url: `${base}/karsilastir`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${base}/galeri`,
@@ -88,10 +57,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${base}/blog`,
+      url: `${base}/yorumlar`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
+    },
+    {
+      url: `${base}/kurumsal`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/profesyoneller`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/hakkimizda`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
+      url: `${base}/nasil-calisiriz`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
+      url: `${base}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    {
+      url: `${base}/blog/eylul-2026-yargitay-cam-balkon-karari`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
   ];
 
@@ -106,21 +111,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${base}/profesyoneller/${sub.slug}`,
     lastModified: now,
     changeFrequency: 'monthly',
-    priority: 0.85,
+    priority: 0.8,
   }));
 
   const corporateSubRoutes: MetadataRoute.Sitemap = CORPORATE_SUBPAGES.map((sub) => ({
     url: `${base}/kurumsal/${sub.slug}`,
     lastModified: now,
     changeFrequency: 'monthly',
-    priority: 0.85,
+    priority: 0.8,
   }));
 
   const productRoutes: MetadataRoute.Sitemap = SITE_CONFIG.productSeries.map((p) => ({
     url: `${base}/sistemler/${p.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
-    priority: 0.9,
+    priority: 0.85,
   }));
 
   const neighborhoodRoutes: MetadataRoute.Sitemap = SITE_CONFIG.neighborhoods.map((n) => ({

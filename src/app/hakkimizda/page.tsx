@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { WINSA_CONTENT_CONFIG } from '../../config/winsa-content.config';
 
 const CONTENT = {
@@ -46,10 +47,17 @@ const CONTENT = {
   ctaContact: 'İletişim & Ücretsiz Keşif Talebi →',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: CONTENT.metaTitle,
   description: CONTENT.metaDescription,
-};
+  path: '/hakkimizda',
+  keywords: [
+    'Çelikpen hakkında',
+    'cam balkon üreticisi Bahçelievler',
+    'Kocasinan CNC üretim tesisi',
+    'TS EN 12150 temperli cam',
+  ],
+});
 
 export default function HakkimizdaPage() {
   const totalCompletedProjects = SITE_CONFIG.neighborhoods.reduce(

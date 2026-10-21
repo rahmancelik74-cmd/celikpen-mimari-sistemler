@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { generatePageMetadata } from '../../../config/seo.config';
 import {
   WINSA_PRODUCTS,
   getWinsaProductBySlug,
@@ -11,6 +12,11 @@ import {
 import { MinimalSubpageHeader } from '../../../components/MinimalSubpageHeader';
 import { ProductDetailInteractive } from '../../../components/ProductDetailInteractive';
 import { PrintDatasheetButton } from '../../../components/PrintDatasheetButton';
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildProductSchema,
+} from '../../../components/SeoJsonLd';
 
 export function generateStaticParams() {
   return getAllWinsaProductSlugs().map((slug) => ({ slug }));
@@ -24,10 +30,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const prod = getWinsaProductBySlug(slug) || WINSA_PRODUCTS[0];
 
-  return {
+  return generatePageMetadata({
     title: `${prod.name} | Teknik Özellikler & Kesit | ${SITE_CONFIG.brandName}`,
     description: `${prod.tagline} ${prod.shortDescription}`,
-  };
+    path: `/urunler/${prod.slug}`,
+    keywords: [
+      prod.name,
+      prod.category,
+      prod.code,
+      `${prod.name} fiyat`,
+      'cam balkon teknik özellikler',
+    ],
+    image: prod.defaultImage,
+    imageAlt: `${prod.name} teknik kesit ve uygulama görseli`,
+  });
 }
 
 export default async function UrunDetayPage({
@@ -41,25 +57,25 @@ export default async function UrunDetayPage({
     .filter((item) => item.slug !== prod.slug)
     .slice(0, 4);
 
-  const productSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+  const productSchema = buildProductSchema({
     name: prod.name,
     sku: prod.code,
     category: prod.category,
-    description: prod.shortDescription,
-    brand: {
-      '@type': 'Brand',
-      name: `${SITE_CONFIG.brandName}`,
-    },
-  };
+    description: prod.fullDescription || prod.shortDescription,
+    path: `/urunler/${prod.slug}`,
+    image: prod.defaultImage,
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Ana Sayfa', path: '/' },
+    { name: 'Ürünlerimiz', path: '/urunler' },
+    { name: prod.name, path: `/urunler/${prod.slug}` },
+  ]);
 
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8 print:py-2">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
+      <JsonLd data={productSchema} id="urun-product-jsonld" />
+      <JsonLd data={breadcrumbSchema} id="urun-breadcrumb-jsonld" />
 
       <MinimalSubpageHeader
         breadcrumbLabel={prod.code}

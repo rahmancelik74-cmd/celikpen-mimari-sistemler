@@ -1,14 +1,22 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { SalesPointsDirectory } from '../../components/SalesPointsDirectory';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: `Satış Noktaları & Showroom — Kocasinan Merkez ve Bahçelievler Keşif Ağı | ${SITE_CONFIG.brandName}`,
   description:
     'Çelikpen Kocasinan Merkez Mah. Mahmutbey Cad. No: 345 Bahçelievler/İstanbul fabrika showroomumuz ve 11 mahalle gezici lazerli keşif noktalarımız.',
-};
+  path: '/satis-noktalari',
+  keywords: [
+    'Çelikpen showroom',
+    'Bahçelievler cam balkon showroom',
+    'Kocasinan Merkez fabrika',
+    'cam balkon satış noktaları',
+  ],
+});
 
 export default function SatisNoktalariPage() {
   return (

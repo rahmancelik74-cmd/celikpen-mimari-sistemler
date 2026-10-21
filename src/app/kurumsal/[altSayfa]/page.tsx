@@ -3,8 +3,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { generatePageMetadata } from '../../../config/seo.config';
 import { CORPORATE_SUBPAGES } from '../../../config/winsa-corporate.config';
 import { MinimalSubpageHeader } from '../../../components/MinimalSubpageHeader';
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildWebPageSchema,
+} from '../../../components/SeoJsonLd';
 
 export function generateStaticParams() {
   return CORPORATE_SUBPAGES.map((item) => ({
@@ -20,12 +26,24 @@ export async function generateMetadata({
   const { altSayfa } = await params;
   const pageData = CORPORATE_SUBPAGES.find((p) => p.slug === altSayfa);
   if (!pageData) {
-    return { title: 'Kurumsal | Çelikpen' };
+    return generatePageMetadata({
+      title: 'Kurumsal | Çelikpen',
+      description: 'Çelikpen kurumsal bilgileri.',
+      path: `/kurumsal/${altSayfa}`,
+      noIndex: true,
+    });
   }
-  return {
+  return generatePageMetadata({
     title: `${pageData.title} | Kurumsal — ${SITE_CONFIG.brandName}`,
     description: pageData.seoDescription,
-  };
+    path: `/kurumsal/${pageData.slug}`,
+    keywords: [
+      pageData.title,
+      `${SITE_CONFIG.brandName} kurumsal`,
+      'cam balkon üreticisi İstanbul',
+      'Bahçelievler cam balkon firması',
+    ],
+  });
 }
 
 export default async function KurumsalAltSayfa({
@@ -40,8 +58,23 @@ export default async function KurumsalAltSayfa({
     notFound();
   }
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Ana Sayfa', path: '/' },
+    { name: 'Kurumsal', path: '/kurumsal' },
+    { name: currentData.title, path: `/kurumsal/${currentData.slug}` },
+  ]);
+
+  const webPageSchema = buildWebPageSchema({
+    name: `${currentData.title} | Çelikpen Kurumsal`,
+    description: currentData.seoDescription,
+    path: `/kurumsal/${currentData.slug}`,
+    type: 'AboutPage',
+  });
+
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8">
+      <JsonLd data={breadcrumbSchema} id="kurumsal-breadcrumb-jsonld" />
+      <JsonLd data={webPageSchema} id="kurumsal-webpage-jsonld" />
       <MinimalSubpageHeader
         breadcrumbLabel={currentData.title}
         parentBreadcrumb={{ label: 'Kurumsal', href: '/kurumsal' }}

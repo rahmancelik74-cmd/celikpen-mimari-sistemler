@@ -1,8 +1,13 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Poppins } from 'next/font/google';
 import { SITE_CONFIG } from '../config/site.config';
-import { SeoSchema } from '../components/SeoSchema';
+import {
+  SEO_BUSINESS,
+  SEO_ICON,
+  generatePageMetadata,
+} from '../config/seo.config';
+import { SeoJsonLd } from '../components/SeoJsonLd';
 import { SiteHeader } from '../components/header/MegaMenu';
 import { Footer } from '../components/Footer';
 import { PageTransitionBar } from '../components/PageTransitionBar';
@@ -16,10 +21,50 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
-export const metadata: Metadata = {
+const baseMetadata = generatePageMetadata({
   title: SITE_CONFIG.fullTitle,
-  description:
-    'Bahçelievler Kocasinan merkezli Çelikpen Cam Balkon & Mimari Sistemler: Isıcamlı cam balkon, giyotin cam, bioklimatik pergola, kış bahçesi, sürme cam, alüminyum & PVC doğrama ve plise perde sistemleri.',
+  description: SEO_BUSINESS.description,
+  path: '/',
+  keywords: [
+    'Bahçelievler cam balkon',
+    'Kocasinan cam balkon',
+    'İstanbul cam balkon üretici',
+    'ısıcamlı cam balkon fiyatları',
+  ],
+  imageAlt:
+    'Çelikpen Bahçelievler Kocasinan Merkez ısıcamlı cam balkon ve bioklimatik pergola uygulaması',
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
+  applicationName: `${SITE_CONFIG.brandName} Cam Balkon & Mimari Cam Sistemleri`,
+  authors: [{ name: SEO_BUSINESS.name, url: SITE_CONFIG.siteUrl }],
+  creator: SEO_BUSINESS.name,
+  publisher: SEO_BUSINESS.name,
+  category: 'construction',
+  classification: 'Cam balkon, mimari cam sistemleri ve alüminyum doğrama',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: SEO_ICON, type: 'image/svg+xml' },
+    ],
+    shortcut: SEO_ICON,
+    apple: SEO_ICON,
+  },
+  manifest: '/manifest.webmanifest',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0F172A',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({
@@ -31,7 +76,7 @@ export default function RootLayout({
     <html lang="tr" className={poppins.variable}>
       <body className="bg-white font-sans text-slate-800 antialiased">
         <PageTransitionBar />
-        <SeoSchema />
+        <SeoJsonLd />
 
         {/* Sabit üst bar + ana menü; tüm sayfalarda aynı kurumsal kabuk */}
         <SiteHeader>{children}</SiteHeader>

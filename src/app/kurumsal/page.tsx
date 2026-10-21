@@ -2,14 +2,22 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { CORPORATE_SUBPAGES } from '../../config/winsa-corporate.config';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: `Kurumsal — Vizyon, CNC Üretim ve Kalite Standartlarımız | ${SITE_CONFIG.brandName}`,
   description:
     'Çelikpen Cam Balkon & Mimari Sistemler kurumsal yapısı: Kocasinan Merkez CNC üretim tesisi, TS EN 12608-1 ve TSE EN 12150 kalite politikamız.',
-};
+  path: '/kurumsal',
+  keywords: [
+    'Çelikpen kurumsal',
+    'cam balkon üreticisi İstanbul',
+    'CNC alüminyum üretim',
+    'kalite belgeleri cam balkon',
+  ],
+});
 
 const CORPORATE_COUNTERS = [
   { value: '25+ Yıl', label: 'Mimari Mühendislik Tecrübesi' },

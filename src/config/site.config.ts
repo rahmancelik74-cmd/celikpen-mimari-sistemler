@@ -35,7 +35,7 @@ export const SITE_CONFIG = {
   address: 'Kocasinan Merkez Mah. Mahmutbey Cad. Üretim & Showroom, Bahçelievler / İstanbul',
   phoneDisplay: '0 (212) 555 00 34',
   phoneRaw: '+902125550034',
-  whatsappNumber: '905320000034', // Başında + olmadan ülke kodu ile
+  whatsappNumber: '902125550034', // Başında + olmadan ülke kodu ile
   workingHours: 'Pazartesi - Cumartesi: 08:30 - 19:30',
   coordinates: {
     latitude: 41.0168,

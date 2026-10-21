@@ -3,54 +3,19 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
-const securityHeaders = [
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
-  {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
-  },
-  {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
-  },
-  {
-    key: 'Referrer-Policy',
-    value: 'strict-origin-when-cross-origin',
-  },
-  {
-    key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(self), interest-cohort=()',
-  },
-  {
-    key: 'X-DNS-Prefetch-Control',
-    value: 'on',
-  },
-];
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  // WAF'ın /wp-admin/ gibi sondaki eğik çizgili probları Next'in otomatik
+  // 308'inden önce görebilmesi için yerleşik trailing-slash yönlendirmesi kapalı.
+  // Normalizasyon middleware içinde güvenlik başlıklarıyla birlikte yapılır.
+  skipTrailingSlashRedirect: true,
   // C:\Users\rahma\package-lock.json yüzünden yanlış kök algılanmasını engeller
   outputFileTracingRoot: projectRoot,
   images: {
     formats: ['image/avif', 'image/webp'],
-  },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: securityHeaders,
-      },
-    ];
   },
   // Eski ürün bağlantılarını güncel WINSA katalog slug'larına kalıcı olarak yönlendirir.
   async redirects() {
@@ -104,6 +69,11 @@ const nextConfig = {
         source: '/urunler/safir-surme',
         destination: '/urunler?kategori=surme-sistemler',
         permanent: false,
+      },
+      {
+        source: '/urunler/winstor',
+        destination: '/urunler/winstor-monoblok-panjur',
+        permanent: true,
       },
     ];
   },

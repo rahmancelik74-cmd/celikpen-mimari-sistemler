@@ -1,5 +1,21 @@
 import React from 'react';
+import type { Metadata } from 'next';
+import { generatePageMetadata } from '../../config/seo.config';
 import { PriceCalculator } from '../../components/PriceCalculator';
+
+export const metadata: Metadata = generatePageMetadata({
+  title: 'Cam Balkon Fiyat Hesaplama — 2026 Net m² Fabrika Fiyatı | Çelikpen',
+  description:
+    'Bahçelievler cam balkon fiyatlarını 30 saniyede hesaplayın. Balkon tipi, ölçü, cam ve profil rengi seçin; ısıcamlı, katlanır, sürme ve giyotin cam balkon 2026 net m² fabrika fiyatını anında görün.',
+  path: '/fiyat-hesapla',
+  keywords: [
+    'cam balkon fiyat hesaplama',
+    'cam balkon m2 fiyatı 2026',
+    'Bahçelievler cam balkon fiyatları',
+    'ısıcamlı cam balkon fiyat',
+    'giyotin cam balkon fiyat',
+  ],
+});
 
 export default function FiyatHesaplaPage() {
   return (

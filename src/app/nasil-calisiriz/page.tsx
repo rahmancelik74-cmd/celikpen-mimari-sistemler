@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 
 const CONTENT = {
   metaTitle: `Nasıl Çalışırız? 4 Adımda Lazerli Keşif, CNC Üretim ve Montaj | ${SITE_CONFIG.brandName}`,
@@ -75,10 +76,17 @@ const CONTENT = {
   },
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: CONTENT.metaTitle,
   description: CONTENT.metaDescription,
-};
+  path: '/nasil-calisiriz',
+  keywords: [
+    'cam balkon montaj süreci',
+    'ücretsiz keşif nasıl yapılır',
+    'cam balkon ölçü alma',
+    'Bahçelievler cam balkon montaj',
+  ],
+});
 
 export default function NasilCalisirizPage() {
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(

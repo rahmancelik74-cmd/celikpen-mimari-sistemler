@@ -3,10 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { generatePageMetadata } from '../../../config/seo.config';
 import { CELIKPEN_PRICING_CONFIG } from '../../../config/pricing.config';
 import { SYSTEM_FAQS } from '../../../config/system-faq.config';
 import { WINSA_CONTENT_CONFIG } from '../../../config/winsa-content.config';
 import { PriceCalculator } from '../../../components/PriceCalculator';
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildServiceSchema,
+} from '../../../components/SeoJsonLd';
 
 const CONTENT = {
   compareLinkLabel: '⚖️ Yakın Sistemlerle Karşılaştır →',
@@ -28,10 +34,20 @@ export async function generateMetadata({
     SITE_CONFIG.productSeries[0];
   const sysPricing = CELIKPEN_PRICING_CONFIG.systems[prod.pricingSystemId];
 
-  return {
+  return generatePageMetadata({
     title: `${prod.name} (${prod.code}) | ${sysPricing.netPricePerM2.toLocaleString('tr-TR')} ₺/m² | ${SITE_CONFIG.brandName}`,
     description: `${prod.tagline} ${prod.description}`,
-  };
+    path: `/sistemler/${prod.slug}`,
+    keywords: [
+      prod.name,
+      prod.code,
+      `${prod.name} fiyat`,
+      `${prod.name} m2 fiyatı`,
+      'cam balkon sistemleri',
+    ],
+    image: prod.image,
+    imageAlt: `${prod.name} mimari cam sistem detayı`,
+  });
 }
 
 export default async function SistemSeriPage({
@@ -51,14 +67,13 @@ export default async function SistemSeriPage({
   const imgSrc = prod.image || '/placeholder.svg';
 
   const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: prod.name,
-    description: prod.description,
-    provider: {
-      '@type': 'LocalBusiness',
-      name: SITE_CONFIG.fullTitle,
-    },
+    ...buildServiceSchema({
+      name: prod.name,
+      description: prod.description,
+      serviceType: 'Cam balkon ve mimari cam sistemleri',
+      path: `/sistemler/${prod.slug}`,
+      areaServed: ['İstanbul', 'Bahçelievler, İstanbul'],
+    }),
     offers: {
       '@type': 'Offer',
       price: sysPricing.netPricePerM2,
@@ -69,18 +84,24 @@ export default async function SistemSeriPage({
         priceCurrency: 'TRY',
         unitCode: 'MTK',
       },
+      availability: 'https://schema.org/InStock',
+      seller: { '@id': 'https://celikpen.com.tr/#business' },
     },
   };
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Ana Sayfa', path: '/' },
+    { name: 'Mimari Cam Sistemleri', path: '/urunler' },
+    { name: prod.name, path: `/sistemler/${prod.slug}` },
+  ]);
+
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
+      <JsonLd data={serviceSchema} id="sistem-service-jsonld" />
+      <JsonLd data={breadcrumbSchema} id="sistem-breadcrumb-jsonld" />
 
       {/* Üst Navigasyon */}
-      <nav className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <div className="flex items-center gap-2">
           <Link href="/" className="hover:text-celikpen-brand-soft">
             Ana Sayfa

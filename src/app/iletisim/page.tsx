@@ -1,13 +1,21 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { ContactForm } from '../../components/ContactForm';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: 'İletişim & Ücretsiz Lazerli Keşif — Çelikpen Bahçelievler | 0 (212) 555 00 34',
   description: `${SITE_CONFIG.address}. Ücretsiz lazerli ölçü ve mimari sistem danışmanlığı için telefon: ${SITE_CONFIG.phoneDisplay}.`,
-};
+  path: '/iletisim',
+  keywords: [
+    'Çelikpen iletişim',
+    'Bahçelievler cam balkon telefon',
+    'ücretsiz lazerli keşif',
+    'Kocasinan Merkez showroom',
+  ],
+});
 
 export default function IletisimPage() {
   const directionsWhatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(

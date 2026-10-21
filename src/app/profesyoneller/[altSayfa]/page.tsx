@@ -14,7 +14,14 @@ import {
   BLOG_POSTS,
 } from '../../../config/winsa-professionals.config';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { generatePageMetadata } from '../../../config/seo.config';
 import { MinimalSubpageHeader } from '../../../components/MinimalSubpageHeader';
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildServiceSchema,
+  buildWebPageSchema,
+} from '../../../components/SeoJsonLd';
 import { CopySpecCard } from '../../../components/CopySpecCard';
 import { PrintDatasheetButton } from '../../../components/PrintDatasheetButton';
 import { MuvafakatnameForm } from '../../../components/MuvafakatnameForm';
@@ -33,12 +40,25 @@ export async function generateMetadata({
   const { altSayfa } = await params;
   const pageMeta = PROFESSIONAL_SUBPAGES.find((p) => p.slug === altSayfa);
   if (!pageMeta) {
-    return { title: 'Profesyoneller | Çelikpen' };
+    return generatePageMetadata({
+      title: 'Profesyoneller | Çelikpen',
+      description: 'Çelikpen profesyoneller portalı.',
+      path: `/profesyoneller/${altSayfa}`,
+      noIndex: true,
+    });
   }
-  return {
+  return generatePageMetadata({
     title: `${pageMeta.title} | Profesyoneller — ${SITE_CONFIG.brandName}`,
     description: pageMeta.seoDescription,
-  };
+    path: `/profesyoneller/${pageMeta.slug}`,
+    keywords: [
+      pageMeta.title,
+      'cam balkon teknik şartname',
+      'mimari cam sistemleri kataloğu',
+      'Winsa profesyonel doküman',
+      'alüminyum profil CAD kesit',
+    ],
+  });
 }
 
 export default async function ProfesyonellerAltSayfa({
@@ -55,8 +75,32 @@ export default async function ProfesyonellerAltSayfa({
 
   const slug = currentMeta.slug as ProfessionalSubpageSlug;
 
+  const serviceSchema = buildServiceSchema({
+    name: `${currentMeta.title} — Çelikpen Profesyoneller`,
+    description: currentMeta.seoDescription,
+    serviceType: currentMeta.title,
+    path: `/profesyoneller/${currentMeta.slug}`,
+    areaServed: ['İstanbul', 'Bahçelievler, İstanbul'],
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Ana Sayfa', path: '/' },
+    { name: 'Profesyoneller', path: '/profesyoneller' },
+    { name: currentMeta.title, path: `/profesyoneller/${currentMeta.slug}` },
+  ]);
+
+  const webPageSchema = buildWebPageSchema({
+    name: `${currentMeta.title} | Çelikpen Profesyoneller`,
+    description: currentMeta.seoDescription,
+    path: `/profesyoneller/${currentMeta.slug}`,
+    type: 'CollectionPage',
+  });
+
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8">
+      <JsonLd data={serviceSchema} id="profesyonel-service-jsonld" />
+      <JsonLd data={breadcrumbSchema} id="profesyonel-breadcrumb-jsonld" />
+      <JsonLd data={webPageSchema} id="profesyonel-webpage-jsonld" />
       <MinimalSubpageHeader
         breadcrumbLabel={currentMeta.title}
         parentBreadcrumb={{ label: 'Profesyoneller', href: '/profesyoneller' }}

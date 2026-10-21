@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { BLOG_POSTS } from '../../config/blog.config';
 
 const CONTENT = {
@@ -16,10 +17,18 @@ const CONTENT = {
   readingSuffix: 'dk okuma',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: CONTENT.metaTitle,
   description: CONTENT.metaDescription,
-};
+  path: '/blog',
+  keywords: [
+    'cam balkon blog',
+    'Yargıtay cam balkon kararı',
+    '4/5 muvafakatname',
+    'cam balkon mevzuatı',
+    'ısıcamlı cam balkon rehberi',
+  ],
+});
 
 export default function BlogListPage() {
   return (

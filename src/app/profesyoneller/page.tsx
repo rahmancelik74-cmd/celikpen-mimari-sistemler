@@ -2,14 +2,22 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { PROFESSIONAL_SUBPAGES } from '../../config/winsa-professionals.config';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: `Profesyoneller — Mimar, Mühendis ve Teknik Katalog Merkezi | ${SITE_CONFIG.brandName}`,
   description:
     'Mimarlar, mühendisler ve proje yönetimleri için Çelikpen CAD profil kesitleri, 2026 dijital kataloglar ve teknik şartnameler.',
-};
+  path: '/profesyoneller',
+  keywords: [
+    'cam balkon CAD kesit',
+    'alüminyum profil şartnamesi',
+    'mimari cam sistemleri kataloğu',
+    'Winsa teknik doküman',
+  ],
+});
 
 export default function ProfesyonellerPage() {
   return (

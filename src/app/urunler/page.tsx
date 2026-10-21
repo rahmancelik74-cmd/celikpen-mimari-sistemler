@@ -2,16 +2,25 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { WINSA_PRODUCTS } from '../../config/winsa-products.config';
 import { WinsaCatalogGrid } from '../../components/WinsaCatalogGrid';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 import { InteractiveLabPreview } from '../../components/InnovativeShowcase';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: `Ürünlerimiz — Cam Balkon, Kış Bahçesi, Giyotin ve PVC Sistemler | ${SITE_CONFIG.brandName}`,
   description:
     'Revotech Gold, Dorado 76, Safir 76/70, Panorama HS 76 Kaldır-Sür, Comfort Slide, Lotus, Vera 4+20+4 Isıcamlı Cam Balkon ve Winstor Panjur sistemleri mimari ürün kataloğu.',
-};
+  path: '/urunler',
+  keywords: [
+    'cam balkon modelleri',
+    'ısıcamlı cam balkon serileri',
+    'giyotin cam sistemleri',
+    'PVC pencere sistemleri',
+    'alüminyum doğrama kataloğu',
+  ],
+});
 
 export default function UrunlerHubPage() {
   return (

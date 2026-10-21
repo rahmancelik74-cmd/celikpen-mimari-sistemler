@@ -2,8 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { generatePageMetadata } from '../../../config/seo.config';
 import { CELIKPEN_PRICING_CONFIG } from '../../../config/pricing.config';
 import { PriceCalculator } from '../../../components/PriceCalculator';
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildServiceSchema,
+} from '../../../components/SeoJsonLd';
 
 export function generateStaticParams() {
   const baseParams = SITE_CONFIG.neighborhoods.map((n) => ({ mahalle: n.slug }));
@@ -20,10 +26,19 @@ export async function generateMetadata({
     SITE_CONFIG.neighborhoods.find((n) => n.slug === mahalle) ||
     SITE_CONFIG.neighborhoods[0];
 
-  return {
+  return generatePageMetadata({
     title: `${info.name} Cam Balkon & 2026 Net m² Fiyatları | ${SITE_CONFIG.brandName}`,
     description: `${info.name} (${info.urbanFocus}) bölgesine özel ${info.recommendedSystem}. Kocasinan Merkez fabrikamızdan aynı gün ücretsiz lazerli keşif ve %15 kentsel dönüşüm indirimi.`,
-  };
+    path: `/bahcelievler/${mahalle}`,
+    keywords: [
+      `${info.name} cam balkon`,
+      `${info.name} cam balkon fiyatları`,
+      `${info.name} ısıcamlı cam balkon`,
+      `${info.name} giyotin cam`,
+      `${info.name} cam balkon üretici`,
+      'Bahçelievler cam balkon',
+    ],
+  });
 }
 
 export default async function MahallePage({
@@ -40,10 +55,26 @@ export default async function MahallePage({
   const frostedOption = CELIKPEN_PRICING_CONFIG.glassOptions.alt_buzlu;
   const discountPercent = Math.round(CELIKPEN_PRICING_CONFIG.bulkBuildingDiscountRate * 100);
 
+  const serviceSchema = buildServiceSchema({
+    name: `${info.name} Cam Balkon ve Mimari Cam Sistemleri`,
+    description: `${info.name} mahallesinde ısıcamlı cam balkon, katlanır cam balkon, sürme cam, giyotin cam ve kış bahçesi uygulamaları. ${info.highlightProblem}`,
+    serviceType: 'Cam balkon ve mimari cam sistemleri',
+    path: `/bahcelievler/${mahalle}`,
+    areaServed: [info.name, 'Bahçelievler, İstanbul', 'İstanbul'],
+  });
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Ana Sayfa', path: '/' },
+    { name: 'Bahçelievler', path: '/satis-noktalari' },
+    { name: info.name, path: `/bahcelievler/${mahalle}` },
+  ]);
+
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
+      <JsonLd data={serviceSchema} id="mahalle-service-jsonld" />
+      <JsonLd data={breadcrumbSchema} id="mahalle-breadcrumb-jsonld" />
       {/* Üst Navigasyon */}
-      <nav className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <div className="flex items-center gap-2">
           <Link href="/" className="hover:text-celikpen-brand-soft">
             Ana Sayfa

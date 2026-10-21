@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
+import { generatePageMetadata } from '../../config/seo.config';
 import { TESTIMONIALS } from '../../config/testimonials.config';
 
 const CONTENT = {
@@ -17,10 +18,17 @@ const CONTENT = {
   ctaCalculator: 'Balkonunuz İçin Net m² Fiyat Hesapla →',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: CONTENT.metaTitle,
   description: CONTENT.metaDescription,
-};
+  path: '/yorumlar',
+  keywords: [
+    'Bahçelievler cam balkon yorumları',
+    'Çelikpen müşteri yorumları',
+    'cam balkon memnuniyet',
+    'Kocasinan cam balkon değerlendirme',
+  ],
+});
 
 export default function YorumlarPage() {
   const reviewCount = TESTIMONIALS.length;
@@ -31,42 +39,8 @@ export default function YorumlarPage() {
     SITE_CONFIG.neighborhoods.map((n) => [n.slug, n.name])
   );
 
-  const reviewSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${SITE_CONFIG.siteUrl}/#business`,
-    name: SITE_CONFIG.fullTitle,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue,
-      reviewCount,
-      bestRating: '5',
-      worstRating: '1',
-    },
-    review: TESTIMONIALS.map((t) => ({
-      '@type': 'Review',
-      author: {
-        '@type': 'Person',
-        name: t.name,
-      },
-      datePublished: t.date,
-      reviewBody: t.comment,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: String(t.rating),
-        bestRating: '5',
-        worstRating: '1',
-      },
-    })),
-  };
-
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
-      />
-
       {/* Üst Başlık ve Dinamik Ortalama Puan Özeti */}
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-celikpen-border pb-8">
         <div>

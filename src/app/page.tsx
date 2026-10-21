@@ -6,6 +6,7 @@ import { HeroSlider } from '../components/HeroSlider';
 import { InnovativeShowcase } from '../components/InnovativeShowcase';
 import { ArchitecturalVirtualTour } from '../components/ArchitecturalVirtualTour';
 import { CustomerReviews } from '../components/CustomerReviews';
+import { SeoGuide } from '../components/SeoGuide';
 
 /* ============================================================================
    HOMEPAGE CONTENT
@@ -588,6 +589,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <SeoGuide />
     </main>
   );
 }

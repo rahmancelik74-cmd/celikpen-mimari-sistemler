@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { generatePageMetadata } from '../../config/seo.config';
 import { GalleryGrid } from '../../components/GalleryGrid';
 
 const CONTENT = {
@@ -12,10 +13,17 @@ const CONTENT = {
     'Mahallenizdeki apartman ve teras tiplerine göre uyguladığımız antrasit, mat siyah ve kumlama buzlu cam balkon referanslarımız.',
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: CONTENT.metaTitle,
   description: CONTENT.metaDescription,
-};
+  path: '/galeri',
+  keywords: [
+    'Bahçelievler cam balkon galerisi',
+    'cam balkon projeleri İstanbul',
+    'Kocasinan cam balkon uygulama',
+    'giyotin cam balkon fotoğrafları',
+  ],
+});
 
 export default function GaleriPage() {
   return (

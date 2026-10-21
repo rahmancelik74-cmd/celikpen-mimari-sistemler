@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
 import { CELIKPEN_PRICING_CONFIG, SystemSeriesId } from '../../config/pricing.config';
+import { generatePageMetadata } from '../../config/seo.config';
 
 const CONTENT = {
   metaTitle: 'Çelikpen Cam Balkon Serileri Karşılaştırma Tablosu (2026 Net Fiyatlı)',
@@ -46,10 +47,18 @@ const CONTENT = {
 };
 
 export function generateMetadata(): Metadata {
-  return {
+  return generatePageMetadata({
     title: CONTENT.metaTitle,
     description: CONTENT.metaDescription,
-  };
+    path: '/karsilastir',
+    keywords: [
+      'cam balkon karşılaştırma',
+      'ısıcamlı cam balkon mu katlanır cam mı',
+      'giyotin cam balkon fiyat',
+      'sürme cam balkon fiyat',
+      'cam balkon ses yalıtımı',
+    ],
+  });
 }
 
 export default function KarsilastirPage() {

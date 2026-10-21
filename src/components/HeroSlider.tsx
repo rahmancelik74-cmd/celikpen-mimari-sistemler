@@ -289,6 +289,12 @@ export function HeroSlider() {
                 <span className="mt-1 block drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
                   Bak
                 </span>
+                <span className="sr-only">
+                  {' '}
+                  — Bahçelievler cam balkon, ısıcamlı cam balkon, katlanır cam
+                  balkon, sürme cam, giyotin cam, bioklimatik pergola ve kış
+                  bahçesi sistemleri
+                </span>
               </h1>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
