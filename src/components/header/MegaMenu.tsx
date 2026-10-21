@@ -58,10 +58,17 @@ const SERVICES: ServiceItem[] = [
   },
 ];
 
-const MAIN_NAV = [
+type NavItem = {
+  label: string;
+  href: string;
+  dropdown?: boolean;
+  disabled?: boolean;
+};
+
+const MAIN_NAV: NavItem[] = [
   { label: 'Anasayfa', href: '/' },
   { label: 'Hizmetler', href: '#hizmetler', dropdown: true },
-  { label: 'Mağaza', href: '/urunler' },
+  { label: 'Mağaza', href: '/urunler', disabled: true },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Galeri', href: '/galeri' },
@@ -128,48 +135,54 @@ export function MegaMenu() {
   const phoneHref = `tel:${SITE_CONFIG.phoneRaw}`;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-[100]">
       {/* ============================ ÜST BİLGİ BARI ============================ */}
       <div className="bg-[#0F172A] text-white">
-        <div className="container-shell flex h-9 items-center justify-between gap-4 text-[10.5px] font-medium sm:text-[11px]">
-          <div className="flex min-w-0 items-center gap-4 lg:gap-6">
+        <div className="container-shell flex h-9 items-center justify-between gap-3 text-[10px] font-medium sm:text-[11px]">
+          <div className="flex min-w-0 items-center gap-3.5 lg:gap-6">
             <a
               href={phoneHref}
               className="inline-flex shrink-0 items-center gap-1.5 text-slate-200 transition-colors hover:text-white"
             >
-              <IconPhone className="h-3 w-3 text-[#DDD6FE]" />
+              <IconPhone className="h-3 w-3 shrink-0 text-[#DDD6FE]" />
               <span className="hidden sm:inline">Bizi Arayın:</span>
-              <span className="font-semibold text-white">{SITE_CONFIG.phoneDisplay}</span>
+              <span className="whitespace-nowrap font-semibold text-white">
+                {SITE_CONFIG.phoneDisplay}
+              </span>
             </a>
             <a
               href="mailto:iletisim@celikpen.com"
-              className="hidden items-center gap-1.5 text-slate-300 transition-colors hover:text-white sm:inline-flex"
+              className="hidden items-center gap-1.5 text-slate-300 transition-colors hover:text-white md:inline-flex"
             >
               <IconMail className="h-3 w-3 text-[#DDD6FE]" />
               iletisim@celikpen.com
             </a>
-            <span className="hidden items-center gap-1.5 text-slate-300 lg:inline-flex">
-              <IconPin className="h-3 w-3 text-[#DDD6FE]" />
-              Bahçelievler / İstanbul
-            </span>
           </div>
 
-          <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-            <Link
-              href="/iletisim?form=kesif"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-[#10B981] px-2.5 py-1 text-[9.5px] font-bold tracking-wide text-white transition-colors hover:bg-[#059669] sm:px-3 sm:text-[10px]"
-            >
-              <IconSparkle className="h-3 w-3 transition-transform group-hover:rotate-12" />
-              <span className="hidden sm:inline">Yaz Sezonu</span> %15 İNDİRİM
-            </Link>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-3.5">
+            <span className="inline-flex items-center gap-1 text-[9px] text-slate-300 sm:text-[10px] md:text-[11px]">
+              <IconPin className="h-3 w-3 shrink-0 text-[#DDD6FE]" />
+              <span className="whitespace-nowrap md:hidden">Bahçelievler</span>
+              <span className="hidden whitespace-nowrap md:inline">Bahçelievler / İstanbul</span>
+            </span>
+            <span className="h-3.5 w-px bg-white/20" aria-hidden="true" />
             <a
               href="https://www.instagram.com/celikpen"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen Instagram"
-              className="text-slate-300 transition-colors hover:text-white"
+              className="relative flex h-7 w-7 items-center justify-center text-slate-300 transition-colors before:absolute before:-inset-2 before:content-[''] hover:text-white"
             >
               <IconInstagram className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="https://wa.me/902125550034"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Çelikpen WhatsApp hattı"
+              className="relative flex h-7 w-7 items-center justify-center text-[#86EFAC] transition-colors before:absolute before:-inset-2 before:content-[''] hover:text-white"
+            >
+              <IconWhatsApp className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
@@ -185,10 +198,10 @@ export function MegaMenu() {
       >
         <div className="container-shell flex h-[68px] items-center justify-between gap-3 lg:h-[74px] lg:gap-5">
           <Link href="/" className="group shrink-0" aria-label="Çelikpen anasayfa">
-            <CelikpenLogo size="md" className="transition-shadow duration-300 group-hover:shadow-md" />
+            <CelikpenLogo size="md" />
           </Link>
 
-          <nav aria-label="Ana menü" className="hidden items-center gap-1 lg:flex xl:gap-2">
+          <nav aria-label="Ana menü" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
             {MAIN_NAV.map((item) =>
               item.dropdown ? (
                 <div key={item.label} className="relative">
@@ -212,6 +225,18 @@ export function MegaMenu() {
                     />
                   </button>
                 </div>
+              ) : item.disabled ? (
+                <span
+                  key={item.label}
+                  aria-disabled="true"
+                  title="Mağaza kısa süre içinde hizmete açılacak"
+                  className="flex cursor-not-allowed select-none items-center gap-1.5 rounded-lg px-2.5 py-2 text-[12px] font-medium text-slate-400 opacity-55 xl:text-[12.5px]"
+                >
+                  {item.label}
+                  <span className="rounded bg-slate-200/80 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-slate-600">
+                    Yakında
+                  </span>
+                </span>
               ) : (
                 <Link
                   key={item.label}
@@ -241,7 +266,7 @@ export function MegaMenu() {
             <Link
               href="/iletisim?form=kesif"
               aria-label="Ücretsiz keşif iste"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[11px] font-semibold text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] sm:px-4 sm:text-[12px]"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[11px] font-semibold text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] sm:px-4 sm:text-[12px]"
             >
               <IconCalendar className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Keşif İste</span>
@@ -251,7 +276,7 @@ export function MegaMenu() {
               onClick={() => setMobileOpen(true)}
               aria-label="Mobil menüyü aç"
               aria-expanded={mobileOpen}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] lg:hidden"
             >
               <IconMenu className="h-5 w-5" />
             </button>
@@ -264,72 +289,48 @@ export function MegaMenu() {
             id="hizmetler-dropdown"
             className="absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
           >
-            <div className="container-shell grid grid-cols-12 gap-6 py-6">
-              <div className="col-span-8">
-                <div className="mb-4 flex items-baseline justify-between">
+            <div className="container-shell py-6">
+              <div className="mx-auto max-w-2xl">
+                <div className="mb-4 flex items-end justify-between gap-4">
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7C3AED]">
                       Hizmetlerimiz
                     </p>
-                    <p className="mt-1 text-sm font-medium text-slate-500">
+                    <p className="mt-1 text-[12.5px] font-medium text-slate-500">
                       Yaşam alanınıza uygun mimari cam sistemini seçin.
                     </p>
                   </div>
                   <Link
                     href="/urunler"
                     onClick={() => setServicesOpen(false)}
-                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+                    className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
                   >
                     Tüm sistemler
                     <IconArrowRight className="h-3 w-3" />
                   </Link>
                 </div>
-                <div className="grid grid-cols-2 gap-1.5">
+
+                <div className="grid grid-cols-2 gap-1">
                   {SERVICES.map((service) => (
                     <Link
                       key={service.title}
                       href={service.href}
                       onClick={() => setServicesOpen(false)}
-                      className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
+                      className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
                     >
-                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#7C3AED] transition-colors group-hover:border-[#DDD6FE] group-hover:bg-[#F5F3FF]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition-colors duration-200 group-hover:border-[#DDD6FE] group-hover:bg-[#F5F3FF] group-hover:text-[#7C3AED]">
                         {service.icon}
                       </span>
                       <span className="min-w-0">
-                        <span className="block text-[12.5px] font-semibold text-[#0F172A] group-hover:text-[#7C3AED]">
+                        <span className="block text-[12.5px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#7C3AED]">
                           {service.title}
                         </span>
-                        <span className="mt-0.5 block text-[10.5px] leading-relaxed text-slate-500">
+                        <span className="mt-1 block text-[10.5px] leading-snug text-slate-500">
                           {service.description}
                         </span>
                       </span>
                     </Link>
                   ))}
-                </div>
-              </div>
-
-              <div className="col-span-4">
-                <div className="relative h-full overflow-hidden rounded-2xl bg-[#0F172A] p-5 text-white">
-                  <span className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#7C3AED]/40 blur-2xl" />
-                  <span className="pointer-events-none absolute -bottom-10 -left-8 h-28 w-28 rounded-full bg-[#D91B24]/20 blur-2xl" />
-                  <span className="relative inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#DDD6FE]">
-                    <IconSparkle className="h-2.5 w-2.5" />
-                    Ücretsiz Keşif
-                  </span>
-                  <p className="relative mt-4 text-lg font-semibold leading-snug">
-                    Balkonunuzu birlikte planlayalım.
-                  </p>
-                  <p className="relative mt-2 text-[11px] leading-relaxed text-slate-300">
-                    Lazerli ölçü, renk danışmanlığı ve net fiyat teklifi aynı gün.
-                  </p>
-                  <Link
-                    href="/iletisim?form=kesif"
-                    onClick={() => setServicesOpen(false)}
-                    className="relative mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
-                  >
-                    Keşif Randevusu Al
-                    <IconArrowRight className="h-3 w-3" />
-                  </Link>
                 </div>
               </div>
             </div>
@@ -339,21 +340,21 @@ export function MegaMenu() {
 
       {/* ============================ MOBİL ÇEKMECE ============================ */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Mobil menü">
+        <div className="fixed inset-0 z-[100] lg:hidden" role="dialog" aria-modal="true" aria-label="Mobil menü">
           <button
             type="button"
             aria-label="Menüyü kapat"
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-[#0F172A]/55 backdrop-blur-sm"
           />
-          <div className="absolute inset-y-0 right-0 flex w-[min(90vw,390px)] flex-col overflow-y-auto bg-white shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3.5">
+          <div className="absolute inset-y-0 right-0 flex w-[min(92vw,390px)] flex-col overflow-y-auto overscroll-contain bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
               <CelikpenLogo size="sm" />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
                 aria-label="Menüyü kapat"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
+                className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
               >
                 <IconClose className="h-4 w-4" />
               </button>
@@ -363,7 +364,7 @@ export function MegaMenu() {
               <div className="space-y-1">
                 <Link
                   href="/"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
+                  className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
                 >
                   Anasayfa <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
                 </Link>
@@ -371,7 +372,7 @@ export function MegaMenu() {
                   type="button"
                   onClick={() => setMobileServicesOpen((open) => !open)}
                   aria-expanded={mobileServicesOpen}
-                  className="flex w-full items-center justify-between rounded-lg bg-[#F5F3FF] px-3 py-2.5 text-sm font-semibold text-[#6D28D9]"
+                  className="flex min-h-[44px] w-full items-center justify-between rounded-lg bg-[#F5F3FF] px-3 py-2.5 text-sm font-semibold text-[#6D28D9]"
                 >
                   Hizmetler
                   <IconChevron
@@ -379,32 +380,50 @@ export function MegaMenu() {
                   />
                 </button>
                 {mobileServicesOpen && (
-                  <div className="space-y-0.5 pb-1 pl-2">
+                  <div className="space-y-0.5 pb-1 pl-1">
                     {SERVICES.map((service) => (
                       <Link
                         key={service.title}
                         href={service.href}
                         onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[12.5px] text-slate-600 hover:bg-slate-50 hover:text-[#7C3AED]"
+                        className="flex min-h-[44px] items-center gap-2.5 rounded-lg px-2.5 py-2 text-[12px] text-slate-600 hover:bg-slate-50 hover:text-[#7C3AED]"
                       >
-                        <span className="text-[#7C3AED]">{service.icon}</span>
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#7C3AED]">
+                          {service.icon}
+                        </span>
                         {service.title}
                       </Link>
                     ))}
                   </div>
                 )}
                 {MAIN_NAV.filter((item) => item.label !== 'Anasayfa' && item.label !== 'Hizmetler').map(
-                  (item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
-                    >
-                      {item.label}
-                      <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
-                    </Link>
-                  )
+                  (item) =>
+                    item.disabled ? (
+                      <span
+                        key={item.label}
+                        aria-disabled="true"
+                        title="Mağaza kısa süre içinde hizmete açılacak"
+                        className="flex min-h-[44px] cursor-not-allowed select-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 opacity-55"
+                      >
+                        <span className="flex items-center gap-2">
+                          {item.label}
+                          <span className="rounded bg-slate-200/80 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-slate-600">
+                            Yakında
+                          </span>
+                        </span>
+                        <IconArrowRight className="h-3.5 w-3.5 text-slate-300" />
+                      </span>
+                    ) : (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
+                      >
+                        {item.label}
+                        <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                      </Link>
+                    )
                 )}
               </div>
 
@@ -418,28 +437,48 @@ export function MegaMenu() {
                 <Link
                   href="/iletisim?form=kesif"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-3 flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[12px] font-semibold text-white hover:bg-[#6D28D9]"
+                  className="mt-3 flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[12px] font-semibold text-white hover:bg-[#6D28D9]"
                 >
                   <IconCalendar className="h-3.5 w-3.5" /> Keşif İste
                 </Link>
               </div>
             </div>
 
-            <div className="border-t border-slate-100 px-4 py-4">
-              <a
-                href={phoneHref}
-                className="flex items-center gap-2.5 rounded-xl bg-[#0F172A] px-4 py-3 text-white"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
-                  <IconPhone className="h-4 w-4" />
-                </span>
-                <span>
-                  <span className="block text-[9px] font-medium uppercase tracking-[0.16em] text-slate-300">
-                    Hemen arayın
+            <div className="border-t border-slate-100 px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4">
+              <div className="grid grid-cols-1 gap-2">
+                <a
+                  href={phoneHref}
+                  className="flex min-h-[48px] items-center gap-2 rounded-xl bg-[#0F172A] px-3 py-2.5 text-white"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10">
+                    <IconPhone className="h-3.5 w-3.5" />
                   </span>
-                  <span className="block text-sm font-semibold">{SITE_CONFIG.phoneDisplay}</span>
-                </span>
-              </a>
+                  <span className="min-w-0">
+                    <span className="block text-[8.5px] font-medium uppercase tracking-[0.12em] text-slate-300">
+                      Hemen ara
+                    </span>
+                    <span className="block truncate text-[11.5px] font-semibold">
+                      {SITE_CONFIG.phoneDisplay}
+                    </span>
+                  </span>
+                </a>
+                <a
+                  href="https://wa.me/902125550034"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-[48px] items-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-white"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15">
+                    <IconWhatsApp className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[8.5px] font-medium uppercase tracking-[0.12em] text-white/80">
+                      WhatsApp
+                    </span>
+                    <span className="block truncate text-[11.5px] font-semibold">Hızlı yazın</span>
+                  </span>
+                </a>
+              </div>
               <p className="mt-3 flex items-start gap-1.5 text-[10.5px] leading-relaxed text-slate-500">
                 <IconPin className="mt-0.5 h-3 w-3 shrink-0 text-[#7C3AED]" />
                 {SITE_CONFIG.address}
@@ -462,7 +501,7 @@ export const SiteHeader: React.FC<{ children: React.ReactNode }> = ({ children }
   return (
     <>
       <MegaMenu />
-      <div className={isHome ? '' : 'pt-[104px] lg:pt-[110px]'}>{children}</div>
+      <div className={isHome ? '' : 'pt-[105px] lg:pt-[111px]'}>{children}</div>
     </>
   );
 };
@@ -500,10 +539,11 @@ function IconInstagram({ className = 'h-4 w-4' }: IconProps) {
     </svg>
   );
 }
-function IconSparkle({ className = 'h-3 w-3' }: IconProps) {
+function IconWhatsApp({ className = 'h-4 w-4' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="m12 3-1.9 5.1L5 10l5.1 1.9L12 17l1.9-5.1L19 10l-5.1-1.9L12 3Z" /><path d="M5 3v4M3 5h4M19 17v4M17 19h4" />
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+      <path d="M9 9.5c.3 2 2 3.7 4 4l1-1.2 1.8.9c-.2 1.2-1.2 1.8-2.3 1.7-2.8-.3-5.1-2.6-5.4-5.4-.1-1.1.5-2.1 1.7-2.3l.9 1.8L9 9.5Z" />
     </svg>
   );
 }
@@ -542,52 +582,68 @@ function IconCalendar({ className = 'h-4 w-4' }: IconProps) {
     </svg>
   );
 }
-function IconPanels({ className = 'h-4 w-4' }: IconProps) {
+/* Mimari dil: her hizmet için ayrı, ince çizgili ve 24px ızgarada dengeli ikonlar. */
+function IconPanels({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 12h18M12 3v18" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M3 21h18" />
+      <path d="M4.5 21V8h15v13" />
+      <path d="M4.5 11.5h15" />
+      <path d="M9.5 11.5V21M14.5 11.5V21" />
+      <path d="M4.5 8 7 3h10l2.5 5" />
     </svg>
   );
 }
-function IconArrowUpDown({ className = 'h-4 w-4' }: IconProps) {
+function IconArrowUpDown({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="m8 7 4-4 4 4M8 17l4 4 4-4M12 3v18" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="15" height="18" rx="1.5" />
+      <path d="M3 9.5h15M6.5 6.5h8" />
+      <path d="M21 9v6M19.5 10.5 21 9l1.5 1.5M19.5 13.5 21 15l1.5-1.5" />
     </svg>
   );
 }
-function IconSun({ className = 'h-4 w-4' }: IconProps) {
+function IconSun({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M3 5.5h18M5 5.5V20M19 5.5V20M3 20h18" />
+      <path d="M5 11h14" />
+      <path d="M6.5 5.5 8 2.5M10.5 5.5 12 2.5M14.5 5.5 16 2.5M18.5 5.5 20 2.5" />
     </svg>
   );
 }
-function IconHome({ className = 'h-4 w-4' }: IconProps) {
+function IconHome({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" /><path d="M9 21v-8h6v8" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M3 21h18" />
+      <path d="M5 21V10l7-6 7 6v11" />
+      <path d="M5 10h14M12 4v17M8.5 10v11M15.5 10v11" />
     </svg>
   );
 }
-function IconSliders({ className = 'h-4 w-4' }: IconProps) {
+function IconSliders({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M4 6h16M4 12h16M4 18h16" /><rect x="7" y="4" width="4" height="4" rx="1" fill="currentColor" stroke="none" /><rect x="14" y="16" width="4" height="4" rx="1" fill="currentColor" stroke="none" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="16" rx="1.5" />
+      <path d="M12 3v16M5.5 7.5h4M14.5 7.5h4M5.5 12h4M14.5 12h4" />
+      <path d="M4 19v2M20 19v2M3 21h18" />
     </svg>
   );
 }
-function IconLayers({ className = 'h-4 w-4' }: IconProps) {
+function IconLayers({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="4" y="3" width="16" height="15" rx="1" />
+      <path d="M12 3v15M4 10.5h16" />
+      <path d="M2 21h20M8 18v3M16 18v3" />
     </svg>
   );
 }
-function IconShield({ className = 'h-4 w-4' }: IconProps) {
+function IconShield({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M5 3v18M19 3v18" />
+      <path d="M19 6 5 9l14 3-14 3 14 3" />
     </svg>
   );
 }

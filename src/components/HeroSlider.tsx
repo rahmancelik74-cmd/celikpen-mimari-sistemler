@@ -232,7 +232,7 @@ export function HeroSlider() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-label="Çelikpen 3 Aşamalı Tam Ekran Mimari Vitrin"
-      className="relative h-screen h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[#070E1E] select-none"
+      className="relative h-screen h-[100dvh] min-h-[600px] w-full select-none overflow-hidden bg-[#070E1E] sm:min-h-[640px]"
     >
       {/* 3 SAHNELİ DİKEY SAHNE KONTEYNERİ — Tam 0%, -100% ve -200% GPU Dönüşümü */}
       <div
@@ -266,13 +266,13 @@ export function HeroSlider() {
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950/60 to-transparent" />
           </div>
 
-          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-28 sm:px-10">
-            <div className="ml-8 sm:ml-14 md:ml-20">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" aria-hidden="true" />
-                Kocasinan Merkez Üretim • Bahçelievler
+          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 pt-28 sm:px-10">
+            <div className="ml-6 sm:ml-14 md:ml-20">
+              <div className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[9px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur-sm min-[390px]:px-3.5 min-[390px]:text-[10px] min-[390px]:tracking-[0.18em]">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#10B981]" aria-hidden="true" />
+                <span className="truncate">Kocasinan Merkez Üretim • Bahçelievler</span>
               </div>
-              <h1 className="text-5xl font-black leading-[1.06] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[84px]">
+              <h1 className="text-[2.25rem] font-black leading-[1.06] tracking-tight text-white min-[390px]:text-5xl sm:text-6xl md:text-7xl lg:text-[84px]">
                 <span className="block drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
                   Hayata
                 </span>
@@ -294,13 +294,13 @@ export function HeroSlider() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#sanal-tur"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9]"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] min-[420px]:w-auto"
                 >
                   <span>SANAL TUR</span>
                 </a>
                 <Link
                   href="/urunler"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20 min-[420px]:w-auto"
                 >
                   <span>SİSTEMLERİ KEŞFET</span>
                 </Link>
@@ -345,9 +345,9 @@ export function HeroSlider() {
             </svg>
           </div>
 
-          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-28 sm:px-10">
-            <div className="ml-8 sm:ml-14 md:ml-20">
-              <h2 className="text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl">
+          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 pt-28 sm:px-10">
+            <div className="ml-6 sm:ml-14 md:ml-20">
+              <h2 className="text-[2rem] font-black leading-[1.08] tracking-tight text-white min-[360px]:text-4xl sm:text-6xl md:text-7xl">
                 <span className="relative mt-1 inline-block">
                   <span
                     className={`absolute bottom-[6%] left-0 h-[42%] bg-[#D91B24] transition-all duration-700 ease-out ${
@@ -363,13 +363,13 @@ export function HeroSlider() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href="/iletisim?form=kesif"
-                  className="inline-flex items-center justify-center rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9]"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] min-[420px]:w-auto"
                 >
                   KEŞİF İSTE
                 </Link>
                 <Link
                   href="/iletisim?form=kesif"
-                  className="inline-flex items-center justify-center rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20 min-[420px]:w-auto"
                 >
                   TEKLİF AL
                 </Link>
@@ -396,9 +396,9 @@ export function HeroSlider() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#050C1C]/90 via-[#0A1936]/70 to-[#050C1C]/50" />
           </div>
 
-          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-28 sm:px-10">
-            <div className="ml-8 w-full max-w-2xl sm:ml-14 md:ml-20">
-              <h2 className="text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl">
+          <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 pt-28 sm:px-10">
+            <div className="ml-6 w-full max-w-2xl sm:ml-14 md:ml-20">
+              <h2 className="text-[2rem] font-black leading-[1.08] tracking-tight text-white min-[360px]:text-4xl sm:text-6xl md:text-7xl">
                 <span className="relative inline-block">
                   <span
                     className={`absolute bottom-[6%] left-0 h-[42%] bg-[#D91B24] transition-all duration-700 ease-out ${
@@ -410,23 +410,23 @@ export function HeroSlider() {
                 <span className="drop-shadow-md">ile Yaşandı</span>
               </h2>
 
-              <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-5 text-white backdrop-blur-md transition-all duration-500">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-[#DDD6FE]">
-                  <span>{currentStory.location}</span>
-                  <span className="rounded-full bg-[#D91B24] px-3 py-0.5 text-[11px] font-black text-white">
+              <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-4 text-white backdrop-blur-md transition-all duration-500 sm:p-5">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-[#DDD6FE] sm:text-xs">
+                  <span className="min-w-0 break-words">{currentStory.location}</span>
+                  <span className="max-w-full rounded-full bg-[#D91B24] px-2.5 py-1 text-[9px] font-black leading-tight text-white sm:px-3 sm:text-[11px]">
                     {currentStory.metrics}
                   </span>
                 </div>
-                <h3 className="mt-2.5 text-lg font-extrabold text-white sm:text-xl">
+                <h3 className="mt-2.5 text-base font-extrabold leading-snug text-white sm:text-xl">
                   {currentStory.title}
                 </h3>
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-white/15 pt-3 text-xs">
-                  <span className="font-semibold text-slate-200">
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-white/15 pt-3 text-[11px] sm:text-xs">
+                  <span className="min-w-0 break-words font-semibold text-slate-200">
                     {currentStory.system}
                   </span>
                   <Link
                     href={currentStory.href}
-                    className="rounded-full bg-[#7C3AED] px-5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-[#6D28D9]"
+                    className="inline-flex min-h-[36px] items-center rounded-full bg-[#7C3AED] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-[#6D28D9] sm:px-5 sm:text-[11px]"
                   >
                     İNCELE →
                   </Link>
@@ -496,7 +496,7 @@ export function HeroSlider() {
             scrollBelowHero();
           }
         }}
-        className="group absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-white/90 transition-opacity hover:text-white focus:outline-none"
+        className="group absolute bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-white/90 transition-opacity hover:text-white focus:outline-none"
       >
         <span className="flex h-8 w-5 items-start justify-center rounded-full border-2 border-white/85 p-1 group-hover:border-[#D91B24]">
           <span className="h-2 w-1 animate-bounce rounded-full bg-white group-hover:bg-[#D91B24]" />

@@ -490,8 +490,8 @@ export const InnovativeShowcase: React.FC = () => {
         {/* Üst Başlık + 5 İnovatif Modül Seçici Bar */}
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#7C3AED]">
-              <span className="h-[1.5px] w-5 bg-[#7C3AED]" />
+            <div className="inline-flex max-w-full items-center gap-2 whitespace-nowrap text-[9px] font-extrabold uppercase tracking-[0.12em] text-[#7C3AED] min-[360px]:text-[10px] min-[360px]:tracking-[0.16em] sm:text-[11px] sm:tracking-[0.22em]">
+              <span className="h-[1.5px] w-4 shrink-0 bg-[#7C3AED] sm:w-5" />
               <span>İNTERAKTİF MİMARİ LABORATUVAR</span>
             </div>
             <h2
@@ -506,7 +506,7 @@ export const InnovativeShowcase: React.FC = () => {
           <div
             role="tablist"
             aria-label="İnteraktif Mimari Modüller"
-            className="flex flex-wrap gap-1.5 rounded-2xl border border-[#0F172A]/15 bg-white p-1.5 shadow-2xs"
+            className="no-scrollbar -mx-1 flex w-full max-w-full gap-1.5 overflow-x-auto rounded-2xl border border-[#0F172A]/15 bg-white p-1.5 shadow-2xs sm:mx-0 lg:w-auto lg:flex-wrap lg:overflow-visible"
           >
             {MODULE_TABS.map((tab, tabIndex) => {
               const isSelected = activeModule === tab.id;
@@ -524,7 +524,7 @@ export const InnovativeShowcase: React.FC = () => {
                   tabIndex={isSelected ? 0 : -1}
                   onClick={() => setActiveModule(tab.id)}
                   onKeyDown={(event) => handleModuleTabKeyDown(event, tabIndex)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2 ${
+                  className={`inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2 ${
                     isSelected
                       ? 'bg-[#0F172A] text-white shadow-xs'
                       : 'text-[#0F172A]/80 hover:bg-slate-100 hover:text-[#7C3AED]'

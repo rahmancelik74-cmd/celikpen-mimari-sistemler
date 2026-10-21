@@ -6,6 +6,7 @@ import { SeoSchema } from '../components/SeoSchema';
 import { SiteHeader } from '../components/header/MegaMenu';
 import { Footer } from '../components/Footer';
 import { PageTransitionBar } from '../components/PageTransitionBar';
+import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import './globals.css';
 
 const poppins = Poppins({
@@ -37,6 +38,9 @@ export default function RootLayout({
 
         {/* Mirabalkon ritminde çok kolonlu kurumsal footer */}
         <Footer />
+
+        {/* Tüm rotalarda sabit kalan hızlı WhatsApp hattı */}
+        <FloatingWhatsApp />
       </body>
     </html>
   );

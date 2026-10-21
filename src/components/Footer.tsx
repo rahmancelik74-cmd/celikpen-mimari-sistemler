@@ -31,7 +31,7 @@ const FOOTER_SOCIAL = [
   },
   {
     label: 'WhatsApp',
-    href: `https://wa.me/${SITE_CONFIG.whatsappNumber}`,
+    href: 'https://wa.me/902125550034',
     icon: <IconWhatsApp />,
   },
   {
@@ -49,7 +49,7 @@ export function Footer() {
           {/* Marka */}
           <div className="lg:col-span-4">
             <Link href="/" aria-label="Çelikpen anasayfa" className="inline-block">
-              <CelikpenLogo size="sm" />
+              <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
               Kocasinan Merkez üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon, kış
@@ -63,7 +63,7 @@ export function Footer() {
                   target={social.href.startsWith('http') ? '_blank' : undefined}
                   rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={`Çelikpen ${social.label}`}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/5 text-slate-300 transition-colors hover:border-[#7C3AED] hover:bg-[#7C3AED] hover:text-white"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-slate-300 transition-colors hover:border-[#7C3AED] hover:bg-[#7C3AED] hover:text-white"
                 >
                   {social.icon}
                 </a>
@@ -194,7 +194,7 @@ export function Footer() {
 
       {/* Alt bar */}
       <div className="border-t border-white/10">
-        <div className="container-shell flex flex-col items-center justify-between gap-3 py-4 sm:flex-row">
+        <div className="container-shell flex flex-col items-center justify-between gap-3 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:flex-row">
           <p className="text-center text-[9.5px] text-slate-500 sm:text-left">
             © {new Date().getFullYear()} Çelikpen Cam Balkon & Mimari Sistemler. Tüm hakları saklıdır.
           </p>

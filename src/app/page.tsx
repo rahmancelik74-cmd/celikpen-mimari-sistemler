@@ -5,6 +5,7 @@ import { SITE_CONFIG } from '../config/site.config';
 import { HeroSlider } from '../components/HeroSlider';
 import { InnovativeShowcase } from '../components/InnovativeShowcase';
 import { ArchitecturalVirtualTour } from '../components/ArchitecturalVirtualTour';
+import { CustomerReviews } from '../components/CustomerReviews';
 
 /* ============================================================================
    HOMEPAGE CONTENT
@@ -110,45 +111,6 @@ const PROJECTS = [
     image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
     tag: 'Kış Bahçesi',
-  },
-];
-
-const REVIEWS = [
-  {
-    name: 'Ayşe K.',
-    district: 'Kocasinan Merkez',
-    text: 'Balkonumuz kışın da evin en sıcak odası oldu. Ölçü, montaj ve temizlik beklentimizin üzerindeydi.',
-    system: 'Isıcamlı Cam Balkon',
-  },
-  {
-    name: 'Mehmet D.',
-    district: 'Şirinevler',
-    text: 'E-5 gürültüsü neredeyse tamamen kesildi. Ekip saatinde geldi, işini sessiz ve temiz yaptı.',
-    system: 'Akustik Isıcam',
-  },
-  {
-    name: 'Selin A.',
-    district: 'Siyavuşpaşa',
-    text: 'Dar balkonumuz sürme sistemle çok kullanışlı hale geldi. Renk danışmanlığı çok iyiydi.',
-    system: 'Eşiksiz Sürme',
-  },
-  {
-    name: 'Burak Y.',
-    district: 'Yenibosna',
-    text: 'Terasımız bioklimatik pergola ile gerçek bir yaşam alanına dönüştü. Tek tuşla açılıyor.',
-    system: 'Bioklimatik Pergola',
-  },
-  {
-    name: 'Fatma Ö.',
-    district: 'Hürriyet',
-    text: 'Fiyatı baştan net söylediler, montajda sürpriz olmadı. Garanti belgelerimizi de teslim ettiler.',
-    system: 'Katlanır Cam Balkon',
-  },
-  {
-    name: 'Emre T.',
-    district: 'Bahçelievler Merkez',
-    text: 'Giyotin cam sistemi çok sessiz çalışıyor; açıkken balkon ferahlığı, kapalıyken yağmur ve rüzgâr koruması tam istediğimiz gibi oldu.',
-    system: 'Giyotin Cam',
   },
 ];
 
@@ -466,49 +428,7 @@ export default function HomePage() {
       </section>
 
       {/* ============================ YORUMLAR ============================ */}
-      <section id="yorumlar" className="section-shell bg-white">
-        <div className="container-shell">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="section-kicker">Müşteri Deneyimi</span>
-            <h2 className="section-title">Müşterilerimiz Bizim İçin Ne Diyor?</h2>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAFC] px-3.5 py-1.5">
-              <span className="flex items-center gap-0.5 text-[#F59E0B]" aria-hidden="true">
-                {[0, 1, 2, 3, 4].map((star) => (
-                  <IconStar key={star} className="h-3 w-3" />
-                ))}
-              </span>
-              <span className="text-[10.5px] font-medium text-slate-600">4.9 / 5 • 500+ değerlendirme</span>
-            </div>
-          </div>
-
-          <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {REVIEWS.map((review, index) => (
-              <article
-                key={review.name}
-                className={`rounded-card border border-slate-200 bg-white p-5 shadow-xs ${
-                  index === 3 ? 'lg:col-start-1' : ''
-                } ${index === 4 ? 'lg:col-start-2' : ''}`}
-              >
-                <div className="flex items-center gap-0.5 text-[#F59E0B]" aria-label="5 yıldız">
-                  {[0, 1, 2, 3, 4].map((star) => (
-                    <IconStar key={star} className="h-3 w-3" />
-                  ))}
-                </div>
-                <p className="mt-3 text-[12px] leading-relaxed text-slate-600">“{review.text}”</p>
-                <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3">
-                  <div>
-                    <p className="text-[11.5px] font-semibold text-[#0F172A]">{review.name}</p>
-                    <p className="text-[9.5px] text-slate-500">{review.district}</p>
-                  </div>
-                  <span className="rounded-full bg-[#F5F3FF] px-2.5 py-1 text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[#6D28D9]">
-                    {review.system}
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CustomerReviews />
 
       {/* ============================ SSS ============================ */}
       <section id="sss" className="section-shell bg-[#F8FAFC]">
@@ -695,13 +615,6 @@ function IconPlus({ className = 'h-4 w-4' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
       <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-function IconStar({ className = 'h-4 w-4' }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="m12 2.5 2.9 6.1 6.6.9-4.8 4.7 1.2 6.6-5.9-3.2-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z" />
     </svg>
   );
 }
