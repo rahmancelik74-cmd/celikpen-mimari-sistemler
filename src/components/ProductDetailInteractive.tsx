@@ -84,7 +84,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
       {/* 2. İNTERAKTİF RENK KARTELASI PİLLERİ (Tıklanınca Görsel Çerçevesini Günceller) */}
       <div className="glass-card rounded-2xl p-4">
         <div className="mb-2.5 flex items-center justify-between text-xs">
-          <span className="font-extrabold uppercase tracking-wider text-[#0B1560]">
+          <span className="font-extrabold uppercase tracking-wider text-[#0F172A]">
             İnteraktif Renk &amp; Laminasyon Seçimi
           </span>
           <span className="text-[11px] font-semibold text-slate-500">
@@ -101,8 +101,8 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
                 onClick={() => setSelectedSwatch(swatch)}
                 className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold transition-all ${
                   isSelected
-                    ? 'border-[#D91B24] bg-[#0B1560] text-white shadow-xs'
-                    : 'border-slate-200 bg-white text-slate-700 hover:border-[#0B1560]'
+                    ? 'border-[#7C3AED] bg-[#0F172A] text-white shadow-xs'
+                    : 'border-slate-200 bg-white text-slate-700 hover:border-[#0F172A]'
                 }`}
               >
                 <span
@@ -125,7 +125,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
           <div className="mt-1.5 text-[10.5px] font-bold uppercase tracking-wider text-slate-400">
             Profil Genişliği
           </div>
-          <div className="mt-0.5 text-sm font-black text-[#0B1560]">
+          <div className="mt-0.5 text-sm font-black text-[#0F172A]">
             {product.technicalSpecs.profilGenisligi}
           </div>
         </div>
@@ -145,7 +145,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
           <div className="mt-1.5 text-[10.5px] font-bold uppercase tracking-wider text-slate-400">
             Ses İzolasyonu
           </div>
-          <div className="mt-0.5 text-sm font-black text-[#0B1560]">
+          <div className="mt-0.5 text-sm font-black text-[#0F172A]">
             {product.technicalSpecs.sesYalitimiDb}
           </div>
         </div>
@@ -169,8 +169,8 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
             onClick={() => setActiveTab('specs')}
             className={`rounded-xl px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
               activeTab === 'specs'
-                ? 'bg-[#0B1560] text-white shadow-xs'
-                : 'text-slate-600 hover:text-[#0B1560]'
+                ? 'bg-[#0F172A] text-white shadow-xs'
+                : 'text-slate-600 hover:text-[#0F172A]'
             }`}
           >
             Teknik Parametreler
@@ -180,8 +180,8 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
             onClick={() => setActiveTab('highlights')}
             className={`rounded-xl px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
               activeTab === 'highlights'
-                ? 'bg-[#0B1560] text-white shadow-xs'
-                : 'text-slate-600 hover:text-[#0B1560]'
+                ? 'bg-[#0F172A] text-white shadow-xs'
+                : 'text-slate-600 hover:text-[#0F172A]'
             }`}
           >
             Mühendislik Avantajları
@@ -191,8 +191,8 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
             onClick={() => setActiveTab('usage')}
             className={`rounded-xl px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition ${
               activeTab === 'usage'
-                ? 'bg-[#0B1560] text-white shadow-xs'
-                : 'text-slate-600 hover:text-[#0B1560]'
+                ? 'bg-[#0F172A] text-white shadow-xs'
+                : 'text-slate-600 hover:text-[#0F172A]'
             }`}
           >
             Mimari Kullanım Alanları
@@ -220,11 +220,11 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
               </div>
               <div className="flex items-center justify-between rounded-xl bg-slate-50 p-3">
                 <span className="font-semibold text-slate-500">Su Sızdırmazlık</span>
-                <strong className="text-[#0B1560]">{product.technicalSpecs.suSizdirmazlik}</strong>
+                <strong className="text-[#0F172A]">{product.technicalSpecs.suSizdirmazlik}</strong>
               </div>
               <div className="flex items-center justify-between rounded-xl bg-slate-50 p-3">
                 <span className="font-semibold text-slate-500">Rüzgar Yükü Direnci</span>
-                <strong className="text-[#0B1560]">{product.technicalSpecs.ruzgarDirenci}</strong>
+                <strong className="text-[#0F172A]">{product.technicalSpecs.ruzgarDirenci}</strong>
               </div>
             </div>
           )}
@@ -236,7 +236,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
                   key={hl}
                   className="flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 text-slate-700"
                 >
-                  <span className="font-black text-[#D91B24]">✓</span>
+                  <span className="font-black text-[#7C3AED]">✓</span>
                   <span>{hl}</span>
                 </li>
               ))}
@@ -250,7 +250,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
                   key={area}
                   className="flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 text-slate-700"
                 >
-                  <span className="font-black text-[#0B1560]">◆</span>
+                  <span className="font-black text-[#0F172A]">◆</span>
                   <span>{area}</span>
                 </li>
               ))}

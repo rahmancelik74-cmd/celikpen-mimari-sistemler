@@ -7,7 +7,7 @@ export function PrintDatasheetButton({ label = '🖨️ Teknik Föyü Yazdır / 
     <button
       type="button"
       onClick={() => window.print()}
-      className="inline-flex items-center gap-2 rounded-xl border border-[#0B1560] bg-white px-4 py-2.5 text-xs font-bold text-[#0B1560] shadow-sm transition hover:bg-[#0B1560] hover:text-white print:hidden"
+      className="inline-flex items-center gap-2 rounded-xl border border-[#0F172A] bg-white px-4 py-2.5 text-xs font-bold text-[#0F172A] shadow-sm transition hover:bg-[#0F172A] hover:text-white print:hidden"
     >
       <span>{label}</span>
     </button>

@@ -10,7 +10,7 @@ export interface HeroSlide {
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
-    badge: 'WİNSA & ÇELİKPEN MİMARİ STANDARTLARI • TS EN 14351-1',
+    badge: 'ÇELİKPEN MİMARİ STANDARTLARI • TS EN 14351-1',
     image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
     title: 'Geleceğin Mimarisinde Maksimum Yalıtım, Kusursuz Estetik',
     subtitle:

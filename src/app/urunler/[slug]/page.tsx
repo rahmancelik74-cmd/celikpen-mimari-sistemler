@@ -50,12 +50,12 @@ export default async function UrunDetayPage({
     description: prod.shortDescription,
     brand: {
       '@type': 'Brand',
-      name: `${SITE_CONFIG.brandName} & Winsa`,
+      name: `${SITE_CONFIG.brandName}`,
     },
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 text-slate-700 sm:px-6 print:py-2">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8 print:py-2">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
@@ -72,7 +72,7 @@ export default async function UrunDetayPage({
             <PrintDatasheetButton />
             <Link
               href="/iletisim"
-              className="rounded-lg bg-[#D91B24] px-4 py-2 text-xs font-bold text-white shadow-xs transition hover:bg-[#B31219]"
+              className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white shadow-xs transition hover:bg-[#6D28D9]"
             >
               Keşif &amp; Bilgi Al →
             </Link>
@@ -87,10 +87,10 @@ export default async function UrunDetayPage({
       {relatedProducts.length > 0 && (
         <section className="mt-10 border-t border-slate-200/80 pt-8 print:hidden">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-black text-[#0B1560]">
+            <h2 className="text-base font-black text-[#0F172A]">
               {prod.category} Grubundaki Diğer Seriler
             </h2>
-            <Link href="/urunler" className="text-xs font-bold text-[#D91B24] hover:underline">
+            <Link href="/urunler" className="text-xs font-bold text-[#7C3AED] hover:underline">
               Tüm Ürünler →
             </Link>
           </div>
@@ -101,10 +101,10 @@ export default async function UrunDetayPage({
                 href={`/urunler/${rel.slug}`}
                 className="hover-lift group rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs"
               >
-                <span className="rounded bg-[#0B1560]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#0B1560]">
+                <span className="rounded bg-[#0F172A]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#0F172A]">
                   {rel.code}
                 </span>
-                <h3 className="mt-2 text-sm font-black text-[#0B1560] group-hover:text-[#D91B24]">
+                <h3 className="mt-2 text-sm font-black text-[#0F172A] group-hover:text-[#7C3AED]">
                   {rel.name}
                 </h3>
                 <p className="mt-1 text-[11px] text-slate-500">

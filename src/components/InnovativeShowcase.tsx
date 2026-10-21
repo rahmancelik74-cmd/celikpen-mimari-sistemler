@@ -283,17 +283,17 @@ export const InteractiveLabPreview: React.FC = () => {
   return (
     <section
       aria-labelledby="interaktif-lab-preview-title"
-      className="overflow-hidden rounded-2xl border border-[#0B1560]/15 bg-white shadow-2xs"
+      className="overflow-hidden rounded-2xl border border-[#0F172A]/15 bg-white shadow-2xs"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12">
         <div className="flex flex-col justify-center p-6 sm:p-8 lg:col-span-5">
-          <div className="inline-flex items-center gap-2 text-[10.5px] font-extrabold uppercase tracking-[0.22em] text-[#D91B24]">
-            <span className="h-[1.5px] w-5 bg-[#D91B24]" />
+          <div className="inline-flex items-center gap-2 text-[10.5px] font-extrabold uppercase tracking-[0.22em] text-[#7C3AED]">
+            <span className="h-[1.5px] w-5 bg-[#7C3AED]" />
             <span>İNTERAKTİF MİMARİ LABORATUVAR</span>
           </div>
           <h2
             id="interaktif-lab-preview-title"
-            className="mt-1.5 text-xl font-black tracking-tight text-[#0B1560] sm:text-2xl"
+            className="mt-1.5 text-xl font-black tracking-tight text-[#0F172A] sm:text-2xl"
           >
             CAD Çizimden Gerçeğe, Renkten Dokuya
           </h2>
@@ -312,7 +312,7 @@ export const InteractiveLabPreview: React.FC = () => {
             ].map((label) => (
               <span
                 key={label}
-                className="rounded-md border border-[#0B1560]/12 bg-[#FAF9F5] px-2 py-1 text-[10px] font-bold text-[#0B1560]"
+                className="rounded-md border border-[#0F172A]/12 bg-[#F8FAFC] px-2 py-1 text-[10px] font-bold text-[#0F172A]"
               >
                 {label}
               </span>
@@ -321,7 +321,7 @@ export const InteractiveLabPreview: React.FC = () => {
 
           <Link
             href="/#mimari-inovasyon-merkezi"
-            className="mt-5 inline-flex w-fit items-center gap-2 rounded-xl bg-[#D91B24] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#B31219]"
+            className="mt-5 inline-flex w-fit items-center gap-2 rounded-xl bg-[#7C3AED] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#6D28D9]"
           >
             <span>5 Modülü Canlı Keşfet</span>
             <span aria-hidden="true">→</span>
@@ -370,13 +370,13 @@ export const InteractiveLabPreview: React.FC = () => {
             </svg>
           </div>
 
-          <div className="pointer-events-none absolute inset-y-0 left-[54%] z-10 w-0.5 bg-[#D91B24] shadow-[0_0_10px_#D91B24]">
-            <span className="absolute top-1/2 -left-3.5 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-[#D91B24] text-[10px] font-black text-white shadow-lg">
+          <div className="pointer-events-none absolute inset-y-0 left-[54%] z-10 w-0.5 bg-[#7C3AED] shadow-[0_0_10px_#7C3AED]">
+            <span className="absolute top-1/2 -left-3.5 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-[#7C3AED] text-[10px] font-black text-white shadow-lg">
               ↔
             </span>
           </div>
 
-          <span className="absolute bottom-3 left-3 rounded-md bg-[#0B1560] px-2.5 py-1 font-mono text-[10px] font-bold text-sky-300">
+          <span className="absolute bottom-3 left-3 rounded-md bg-[#0F172A] px-2.5 py-1 font-mono text-[10px] font-bold text-sky-300">
             📐 CAD TEKNİK KESİT
           </span>
           <span className="absolute bottom-3 right-3 rounded-md bg-slate-950/80 px-2.5 py-1 text-[10px] font-extrabold text-white backdrop-blur-xs">
@@ -484,19 +484,19 @@ export const InnovativeShowcase: React.FC = () => {
     <section
       id="mimari-inovasyon-merkezi"
       aria-labelledby="interaktif-lab-baslik"
-      className="marble-surface relative overflow-hidden border-y border-[#0B1560]/10 py-16 sm:py-20"
+      className="bg-[#F8FAFC] relative overflow-hidden border-y border-[#0F172A]/10 py-16 sm:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Üst Başlık + 5 İnovatif Modül Seçici Bar */}
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#D91B24]">
-              <span className="h-[1.5px] w-5 bg-[#D91B24]" />
+            <div className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#7C3AED]">
+              <span className="h-[1.5px] w-5 bg-[#7C3AED]" />
               <span>İNTERAKTİF MİMARİ LABORATUVAR</span>
             </div>
             <h2
               id="interaktif-lab-baslik"
-              className="mt-1.5 text-2xl font-black tracking-tight text-[#0B1560] sm:text-3xl"
+              className="mt-1.5 text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl"
             >
               Teknolojiyi ve Detayları Canlı Keşfedin
             </h2>
@@ -506,7 +506,7 @@ export const InnovativeShowcase: React.FC = () => {
           <div
             role="tablist"
             aria-label="İnteraktif Mimari Modüller"
-            className="flex flex-wrap gap-1.5 rounded-2xl border border-[#0B1560]/15 bg-white p-1.5 shadow-2xs"
+            className="flex flex-wrap gap-1.5 rounded-2xl border border-[#0F172A]/15 bg-white p-1.5 shadow-2xs"
           >
             {MODULE_TABS.map((tab, tabIndex) => {
               const isSelected = activeModule === tab.id;
@@ -524,15 +524,15 @@ export const InnovativeShowcase: React.FC = () => {
                   tabIndex={isSelected ? 0 : -1}
                   onClick={() => setActiveModule(tab.id)}
                   onKeyDown={(event) => handleModuleTabKeyDown(event, tabIndex)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D91B24] focus-visible:ring-offset-2 ${
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2 ${
                     isSelected
-                      ? 'bg-[#0B1560] text-white shadow-xs'
-                      : 'text-[#0B1560]/80 hover:bg-slate-100 hover:text-[#D91B24]'
+                      ? 'bg-[#0F172A] text-white shadow-xs'
+                      : 'text-[#0F172A]/80 hover:bg-slate-100 hover:text-[#7C3AED]'
                   }`}
                 >
                   <span
                     className={`rounded px-1.5 py-0.5 text-[10px] font-black ${
-                      isSelected ? 'bg-[#D91B24] text-white' : 'bg-slate-100 text-[#0B1560]'
+                      isSelected ? 'bg-[#7C3AED] text-white' : 'bg-slate-100 text-[#0F172A]'
                     }`}
                   >
                     {tab.badge}
@@ -556,7 +556,7 @@ export const InnovativeShowcase: React.FC = () => {
             className="animate-fade-up mt-8 grid grid-cols-1 gap-6 focus:outline-none lg:grid-cols-12 lg:items-center"
           >
             {/* Sol: Vektörel Mimari Cephe & Cam Balkon Kesiti + 5 Kırmızı '+' Pin */}
-            <div className="relative overflow-hidden rounded-2xl border border-[#0B1560]/20 bg-[#0B1560] p-4 shadow-xl lg:col-span-7">
+            <div className="relative overflow-hidden rounded-2xl border border-[#0F172A]/20 bg-[#0F172A] p-4 shadow-xl lg:col-span-7">
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#071126]">
                 {/* Vektörel Villa Cephesi & Panoramik Cam Balkon İllüstrasyonu */}
                 <svg
@@ -568,7 +568,7 @@ export const InnovativeShowcase: React.FC = () => {
                   <defs>
                     <linearGradient id="hsSky" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="#050A18" />
-                      <stop offset="55%" stopColor="#0B1560" />
+                      <stop offset="55%" stopColor="#0F172A" />
                       <stop offset="100%" stopColor="#132B5A" />
                     </linearGradient>
                     <linearGradient id="hsGlass" x1="0" y1="0" x2="1" y2="1">
@@ -582,7 +582,7 @@ export const InnovativeShowcase: React.FC = () => {
                       <stop offset="100%" stopColor="#0F172A" />
                     </linearGradient>
                     <linearGradient id="hsMarble" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#FAF9F5" stopOpacity="0.92" />
+                      <stop offset="0%" stopColor="#F8FAFC" stopOpacity="0.92" />
                       <stop offset="52%" stopColor="#E7E2D6" stopOpacity="0.78" />
                       <stop offset="100%" stopColor="#CFC6B4" stopOpacity="0.6" />
                     </linearGradient>
@@ -644,7 +644,7 @@ export const InnovativeShowcase: React.FC = () => {
                   <rect x="86" y="75" width="628" height="3" fill="#BAE6FD" opacity="0.4" />
                   <rect x="80" y="394" width="640" height="30" fill="url(#hsMetal)" stroke="#64748B" strokeWidth="1" />
                   <rect x="86" y="400" width="628" height="3" fill="#E2E8F0" opacity="0.22" />
-                  <rect x="86" y="418" width="628" height="3" fill="#D91B24" opacity="0.75" />
+                  <rect x="86" y="418" width="628" height="3" fill="#7C3AED" opacity="0.75" />
 
                   {/* Yan Dikmeler */}
                   <rect x="80" y="70" width="14" height="354" fill="#172554" stroke="#475569" strokeWidth="1" />
@@ -677,8 +677,8 @@ export const InnovativeShowcase: React.FC = () => {
                           opacity="0.05"
                         />
                         {/* Alt ve Üst Kanat Fitili */}
-                        <rect x={panelX + 3} y="97" width="142" height="4" fill="#0B1560" opacity="0.75" />
-                        <rect x={panelX + 3} y="387" width="142" height="4" fill="#0B1560" opacity="0.8" />
+                        <rect x={panelX + 3} y="97" width="142" height="4" fill="#0F172A" opacity="0.75" />
+                        <rect x={panelX + 3} y="387" width="142" height="4" fill="#0F172A" opacity="0.8" />
                       </g>
                     );
                   })}
@@ -698,8 +698,8 @@ export const InnovativeShowcase: React.FC = () => {
                   ))}
 
                   {/* İspanyolet Kilit Kolu */}
-                  <rect x="625" y="214" width="6" height="52" rx="2" fill="#D91B24" />
-                  <circle cx="628" cy="210" r="5" fill="#D91B24" stroke="#FCA5A5" strokeWidth="1" />
+                  <rect x="625" y="214" width="6" height="52" rx="2" fill="#7C3AED" />
+                  <circle cx="628" cy="210" r="5" fill="#7C3AED" stroke="#FCA5A5" strokeWidth="1" />
 
                   {/* Balkon Mermer Zemin */}
                   <path d="M62 424 H738 L704 482 H96 Z" fill="url(#hsMarble)" opacity="0.94" />
@@ -750,11 +750,11 @@ export const InnovativeShowcase: React.FC = () => {
                   </text>
 
                   {/* Kırmızı Mimari Köşe Braketleri */}
-                  <path d="M18 50 V28 H40" fill="none" stroke="#D91B24" strokeWidth="2" />
-                  <path d="M760 450 V472 H738" fill="none" stroke="#D91B24" strokeWidth="2" />
+                  <path d="M18 50 V28 H40" fill="none" stroke="#7C3AED" strokeWidth="2" />
+                  <path d="M760 450 V472 H738" fill="none" stroke="#7C3AED" strokeWidth="2" />
                 </svg>
 
-                {/* 5 Pulsing `#D91B24` Kırmızı `+` Hotspot Pinleri */}
+                {/* 5 Pulsing `#7C3AED` Kırmızı `+` Hotspot Pinleri */}
                 {HOTSPOT_PINS.map((pin) => {
                   const isActive = selectedPin.id === pin.id;
                   return (
@@ -769,15 +769,15 @@ export const InnovativeShowcase: React.FC = () => {
                       className="group absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none"
                     >
                       <span
-                        className={`absolute -inset-2 animate-ping rounded-full bg-[#D91B24] ${
+                        className={`absolute -inset-2 animate-ping rounded-full bg-[#7C3AED] ${
                           isActive ? 'opacity-80' : 'opacity-40'
                         }`}
                       />
                       <span
                         className={`relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-sm font-black text-white shadow-lg transition-transform duration-200 ${
                           isActive
-                            ? 'scale-125 bg-[#D91B24]'
-                            : 'bg-[#0B1560] group-hover:scale-110 group-hover:bg-[#D91B24]'
+                            ? 'scale-125 bg-[#7C3AED]'
+                            : 'bg-[#0F172A] group-hover:scale-110 group-hover:bg-[#7C3AED]'
                         }`}
                       >
                         +
@@ -796,7 +796,7 @@ export const InnovativeShowcase: React.FC = () => {
                     onClick={() => setSelectedPin(pin)}
                     className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition ${
                       selectedPin.id === pin.id
-                        ? 'bg-[#D91B24] text-white'
+                        ? 'bg-[#7C3AED] text-white'
                         : 'bg-white/10 text-white/75 hover:bg-white/20 hover:text-white'
                     }`}
                   >
@@ -810,13 +810,13 @@ export const InnovativeShowcase: React.FC = () => {
             <div className="lg:col-span-5">
               <div
                 key={selectedPin.id}
-                className="animate-fade-up relative overflow-hidden rounded-2xl border border-[#0B1560]/15 bg-white/95 p-6 shadow-2xl backdrop-blur-md"
+                className="animate-fade-up relative overflow-hidden rounded-2xl border border-[#0F172A]/15 bg-white/95 p-6 shadow-2xl backdrop-blur-md"
               >
-                <span className="pointer-events-none absolute top-3 left-3 h-4 w-4 border-t-2 border-l-2 border-[#D91B24]" />
-                <span className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#0B1560]/40" />
+                <span className="pointer-events-none absolute top-3 left-3 h-4 w-4 border-t-2 border-l-2 border-[#7C3AED]" />
+                <span className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#0F172A]/40" />
 
                 <div className="flex items-center justify-between gap-2">
-                  <span className="rounded-md bg-[#0B1560] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white">
+                  <span className="rounded-md bg-[#0F172A] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white">
                     {selectedPin.label}
                   </span>
                   <span className="font-mono text-[11px] font-bold text-slate-400">
@@ -826,17 +826,17 @@ export const InnovativeShowcase: React.FC = () => {
 
                 {/* Mini Vektörel CAD Kesit İkonu + Başlık */}
                 <div className="mt-4 flex items-center gap-3.5 rounded-xl border border-slate-100 bg-slate-50 p-3.5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0B1560] text-white">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0F172A] text-white">
                     <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect x="3" y="3" width="18" height="18" rx="2" />
                       <path d="M9 3v18M15 3v18M3 9h18M3 15h18" strokeOpacity="0.5" />
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                    <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                       {selectedPin.specBadge}
                     </div>
-                    <h3 className="mt-0.5 text-base font-black leading-snug text-[#0B1560]">
+                    <h3 className="mt-0.5 text-base font-black leading-snug text-[#0F172A]">
                       {selectedPin.title}
                     </h3>
                   </div>
@@ -852,7 +852,7 @@ export const InnovativeShowcase: React.FC = () => {
                   </span>
                   <Link
                     href="/urunler/vera-isicamli-cam-balkon"
-                    className="inline-flex items-center gap-1 text-xs font-extrabold text-[#D91B24] hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-extrabold text-[#7C3AED] hover:underline"
                   >
                     <span>Seriyi İncele</span>
                     <span>→</span>
@@ -872,15 +872,15 @@ export const InnovativeShowcase: React.FC = () => {
             id="showcase-panel-acoustic"
             aria-labelledby="showcase-tab-acoustic"
             tabIndex={0}
-            className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-sm focus:outline-none sm:p-8"
+            className="animate-fade-up mt-8 rounded-2xl border border-[#0F172A]/15 bg-white p-6 shadow-sm focus:outline-none sm:p-8"
           >
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
               {/* Sol: Açık / Kapalı Kontrolü ve Desibel Göstergesi */}
               <div className="space-y-4 lg:col-span-5">
-                <span className="inline-block rounded-full bg-[#0B1560]/10 px-3 py-1 text-[10.5px] font-extrabold uppercase tracking-wider text-[#0B1560]">
+                <span className="inline-block rounded-full bg-[#0F172A]/10 px-3 py-1 text-[10.5px] font-extrabold uppercase tracking-wider text-[#0F172A]">
                   EN ISO 140-3 AKUSTİK TEST SİMÜLASYONU
                 </span>
-                <h3 className="text-2xl font-black text-[#0B1560]">
+                <h3 className="text-2xl font-black text-[#0F172A]">
                   Canlı Ses Yalıtımı Deneyimi
                 </h3>
 
@@ -892,12 +892,12 @@ export const InnovativeShowcase: React.FC = () => {
                     aria-pressed={!isWindowClosed}
                     className={`flex flex-col items-start rounded-xl border p-3.5 text-left transition-all ${
                       !isWindowClosed
-                        ? 'border-[#D91B24] bg-rose-50/80 shadow-xs'
+                        ? 'border-[#7C3AED] bg-rose-50/80 shadow-xs'
                         : 'border-slate-200 bg-slate-50 opacity-75 hover:opacity-100'
                     }`}
                   >
                     <span className="text-base">🔓</span>
-                    <span className="mt-1 text-xs font-black text-[#D91B24]">
+                    <span className="mt-1 text-xs font-black text-[#7C3AED]">
                       Cam Balkon Açık
                     </span>
                     <span className="text-[11px] font-bold text-slate-600">
@@ -916,7 +916,7 @@ export const InnovativeShowcase: React.FC = () => {
                     }`}
                   >
                     <span className="text-base">🔒</span>
-                    <span className="mt-1 text-xs font-black text-[#0B1560]">
+                    <span className="mt-1 text-xs font-black text-[#0F172A]">
                       Çelikpen Isıcamlı Kapalı
                     </span>
                     <span className="text-[11px] font-bold text-emerald-700">
@@ -926,9 +926,9 @@ export const InnovativeShowcase: React.FC = () => {
                 </div>
 
                 {/* Canlı Desibel Fark Rozeti */}
-                <div className="flex items-center justify-between rounded-xl bg-[#0B1560] px-4 py-3 text-white">
+                <div className="flex items-center justify-between rounded-xl bg-[#0F172A] px-4 py-3 text-white">
                   <span className="text-xs font-bold">Akustik Gürültü Blokajı:</span>
-                  <span className="rounded-md bg-[#D91B24] px-2.5 py-1 text-xs font-black">
+                  <span className="rounded-md bg-[#7C3AED] px-2.5 py-1 text-xs font-black">
                     {isWindowClosed ? '34 dB Sessizlik Modu (%85 Yalıtım)' : '74 dB Cadde & Rüzgar Sesi'}
                   </span>
                 </div>
@@ -946,7 +946,7 @@ export const InnovativeShowcase: React.FC = () => {
                     className={`rounded-full px-3 py-0.5 text-xs font-black ${
                       isWindowClosed
                         ? 'bg-emerald-500/20 text-emerald-300'
-                        : 'bg-[#D91B24] text-white'
+                        : 'bg-[#7C3AED] text-white'
                     }`}
                   >
                     {isWindowClosed ? '34 dB' : '74 dB'}
@@ -954,7 +954,7 @@ export const InnovativeShowcase: React.FC = () => {
                 </div>
 
                 {/* Cam Kanat Kapanma Animasyonu — Açıkken ses dalgası, kapalıyken sızdırmaz cam cephe */}
-                <div className="relative mt-4 h-24 overflow-hidden rounded-xl border border-white/10 bg-[#0B1560]/70">
+                <div className="relative mt-4 h-24 overflow-hidden rounded-xl border border-white/10 bg-[#0F172A]/70">
                   {/* Dış Ortam Gürültüsü (Yalnızca camlar açıkken görünür) */}
                   <div
                     aria-hidden="true"
@@ -973,7 +973,7 @@ export const InnovativeShowcase: React.FC = () => {
                             width="6"
                             height={noiseHeight}
                             rx="3"
-                            fill="#D91B24"
+                            fill="#7C3AED"
                             opacity="0.55"
                           />
                         );
@@ -987,7 +987,7 @@ export const InnovativeShowcase: React.FC = () => {
                     {[0, 1, 2, 3].map((panel) => (
                       <div
                         key={panel}
-                        className="relative h-full flex-1 overflow-hidden rounded-sm border border-sky-200/40 bg-gradient-to-br from-sky-200/25 via-emerald-100/10 to-[#0B1560]/30 backdrop-blur-[1px] transition-all duration-700 ease-out"
+                        className="relative h-full flex-1 overflow-hidden rounded-sm border border-sky-200/40 bg-gradient-to-br from-sky-200/25 via-emerald-100/10 to-[#0F172A]/30 backdrop-blur-[1px] transition-all duration-700 ease-out"
                         style={{
                           transformOrigin: 'left center',
                           transform: isWindowClosed
@@ -997,7 +997,7 @@ export const InnovativeShowcase: React.FC = () => {
                         }}
                       >
                         <span className="absolute inset-y-0 left-1/3 w-1/4 skew-x-[-14deg] bg-white/20" />
-                        <span className="absolute inset-x-0 bottom-0 h-1.5 bg-[#0B1560]/70" />
+                        <span className="absolute inset-x-0 bottom-0 h-1.5 bg-[#0F172A]/70" />
                       </div>
                     ))}
                   </div>
@@ -1010,7 +1010,7 @@ export const InnovativeShowcase: React.FC = () => {
                     className={`absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-2.5 py-0.5 text-[9.5px] font-black uppercase tracking-wider transition-colors duration-300 ${
                       isWindowClosed
                         ? 'bg-emerald-500/90 text-[#052E1B]'
-                        : 'bg-[#D91B24] text-white'
+                        : 'bg-[#7C3AED] text-white'
                     }`}
                   >
                     {isWindowClosed ? 'Cam Cephe Kapalı • 34 dB' : 'Cam Cephe Açık • 74 dB'}
@@ -1043,7 +1043,7 @@ export const InnovativeShowcase: React.FC = () => {
                           width="10"
                           height={barHeight}
                           rx="5"
-                          fill={isWindowClosed ? '#10B981' : '#D91B24'}
+                          fill={isWindowClosed ? '#10B981' : '#7C3AED'}
                           className={`acoustic-wave-bar transition-all duration-500 ease-out ${
                             isWindowClosed ? '' : 'acoustic-wave-bar--active'
                           }`}
@@ -1075,7 +1075,7 @@ export const InnovativeShowcase: React.FC = () => {
                     className={`rounded-full px-2.5 py-0.5 font-black tabular-nums ${
                       isWindowClosed
                         ? 'bg-emerald-500/20 text-emerald-300'
-                        : 'bg-[#D91B24]/20 text-rose-300'
+                        : 'bg-[#7C3AED]/20 text-rose-300'
                     }`}
                   >
                     {isWindowClosed ? '34 dB Sessizlik Modu — %85 Akustik Yalıtım' : '74 dB Cadde & Rüzgar Sesi'}
@@ -1110,7 +1110,7 @@ export const InnovativeShowcase: React.FC = () => {
             {/* Sol: 2 Hızlı Seçim Adımı + 3. Tıkla İncele */}
             <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs lg:col-span-6">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                   ADIM 1 • UYGULAMA MEKANI SEÇİN
                 </span>
                 <div className="mt-2.5 grid grid-cols-3 gap-2.5">
@@ -1128,8 +1128,8 @@ export const InnovativeShowcase: React.FC = () => {
                         aria-pressed={active}
                         className={`flex flex-col items-center rounded-xl border p-3 text-center transition-all ${
                           active
-                            ? 'border-[#D91B24] bg-[#0B1560] text-white shadow-xs'
-                            : 'border-slate-200 bg-slate-50 text-[#0B1560] hover:border-[#0B1560]'
+                            ? 'border-[#7C3AED] bg-[#0F172A] text-white shadow-xs'
+                            : 'border-slate-200 bg-slate-50 text-[#0F172A] hover:border-[#0F172A]'
                         }`}
                       >
                         <span className="text-lg">{sp.icon}</span>
@@ -1141,7 +1141,7 @@ export const InnovativeShowcase: React.FC = () => {
               </div>
 
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                   ADIM 2 • ÖNCELİKLİ BEKLENTİNİZ
                 </span>
                 <div className="mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -1171,8 +1171,8 @@ export const InnovativeShowcase: React.FC = () => {
                         aria-pressed={active}
                         className={`flex flex-col items-center rounded-xl border p-3 text-center transition-all ${
                           active
-                            ? 'border-[#D91B24] bg-[#0B1560] text-white shadow-xs'
-                            : 'border-slate-200 bg-slate-50 text-[#0B1560] hover:border-[#0B1560]'
+                            ? 'border-[#7C3AED] bg-[#0F172A] text-white shadow-xs'
+                            : 'border-slate-200 bg-slate-50 text-[#0F172A] hover:border-[#0F172A]'
                         }`}
                       >
                         <span className="text-lg">{pr.icon}</span>
@@ -1188,9 +1188,9 @@ export const InnovativeShowcase: React.FC = () => {
 
             {/* Sağ: Eşleşen İdeal Sistem Kartı */}
             <div className="lg:col-span-6">
-              <div className="relative overflow-hidden rounded-2xl border border-[#0B1560]/20 bg-white p-5 shadow-md">
-                <span className="pointer-events-none absolute top-3 left-3 z-20 h-4 w-4 border-t-2 border-l-2 border-[#D91B24]" />
-                <span className="pointer-events-none absolute bottom-3 right-3 z-20 h-4 w-4 border-b-2 border-r-2 border-[#D91B24]" />
+              <div className="relative overflow-hidden rounded-2xl border border-[#0F172A]/20 bg-white p-5 shadow-md">
+                <span className="pointer-events-none absolute top-3 left-3 z-20 h-4 w-4 border-t-2 border-l-2 border-[#7C3AED]" />
+                <span className="pointer-events-none absolute bottom-3 right-3 z-20 h-4 w-4 border-b-2 border-r-2 border-[#7C3AED]" />
 
                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100">
                   <Image
@@ -1200,17 +1200,17 @@ export const InnovativeShowcase: React.FC = () => {
                     height={360}
                     className="h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1560]/80 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 rounded-md bg-[#D91B24] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 rounded-md bg-[#7C3AED] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-white">
                     ÖNERİLEN SİSTEM • {matchedSystem.code}
                   </span>
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                  <span className="text-[10.5px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                     {matchedSystem.category}
                   </span>
-                  <h3 className="mt-0.5 text-lg font-black text-[#0B1560]">
+                  <h3 className="mt-0.5 text-lg font-black text-[#0F172A]">
                     {matchedSystem.name}
                   </h3>
 
@@ -1218,7 +1218,7 @@ export const InnovativeShowcase: React.FC = () => {
                     {matchedSystem.badges.map((b) => (
                       <span
                         key={b}
-                        className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-bold text-[#0B1560]"
+                        className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-bold text-[#0F172A]"
                       >
                         ✓ {b}
                       </span>
@@ -1228,7 +1228,7 @@ export const InnovativeShowcase: React.FC = () => {
                   <div className="mt-4 flex items-center justify-end border-t border-slate-100 pt-3">
                     <Link
                       href={matchedSystem.href}
-                      className="inline-flex items-center gap-2 rounded-xl bg-[#D91B24] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#B31219]"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#7C3AED] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#6D28D9]"
                     >
                       <span>Sistemi İncele</span>
                       <span>→</span>
@@ -1338,7 +1338,7 @@ export const InnovativeShowcase: React.FC = () => {
                     width="6"
                     height="28"
                     rx="2"
-                    fill="#D91B24"
+                    fill="#7C3AED"
                   />
                 </svg>
               </div>
@@ -1352,14 +1352,14 @@ export const InnovativeShowcase: React.FC = () => {
             {/* Sağ: Yuvarlak Materyal ve Cam Tonu Seçiciler */}
             <div className="space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs lg:col-span-6">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                   1. PROFİL RENGİ SEÇİN (COOL COLORS &amp; RAL)
                 </span>
                 <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-5">
                   {PROFILE_FINISHES.map((pf) => {
                     const active = selectedProfile.id === pf.id;
                     const checkColor =
-                      pf.id === 'krem-beyaz' || pf.id === 'altin-mese' ? '#0B1560' : '#FFFFFF';
+                      pf.id === 'krem-beyaz' || pf.id === 'altin-mese' ? '#0F172A' : '#FFFFFF';
                     return (
                       <button
                         key={pf.id}
@@ -1368,14 +1368,14 @@ export const InnovativeShowcase: React.FC = () => {
                         onClick={() => setSelectedProfile(pf)}
                         className={`group flex flex-col items-center gap-1.5 rounded-xl border p-2.5 transition-all ${
                           active
-                            ? 'border-[#D91B24] bg-[#0B1560]/5 shadow-xs'
+                            ? 'border-[#7C3AED] bg-[#0F172A]/5 shadow-xs'
                             : 'border-transparent hover:border-slate-200 hover:bg-slate-50'
                         }`}
                       >
                         <span
                           className={`relative flex h-10 w-10 items-center justify-center rounded-full border-2 shadow-inner transition-transform duration-200 group-hover:scale-105 ${
                             active
-                              ? 'border-[#D91B24] ring-2 ring-[#D91B24]/20'
+                              ? 'border-[#7C3AED] ring-2 ring-[#7C3AED]/20'
                               : 'border-white'
                           }`}
                           style={{
@@ -1392,7 +1392,7 @@ export const InnovativeShowcase: React.FC = () => {
                             </span>
                           )}
                         </span>
-                        <span className="text-center text-[10.5px] font-bold leading-tight text-[#0B1560]">
+                        <span className="text-center text-[10.5px] font-bold leading-tight text-[#0F172A]">
                           {pf.name}
                           <span className="mt-0.5 block font-mono text-[8.5px] font-semibold text-slate-400">
                             {pf.code}
@@ -1405,7 +1405,7 @@ export const InnovativeShowcase: React.FC = () => {
               </div>
 
               <div className="border-t border-slate-100 pt-4">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#0B1560]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#0F172A]">
                   2. ŞİŞECAM TEMPERLİ CAM TONU SEÇİN
                 </span>
                 <div className="mt-3 grid grid-cols-2 gap-2.5">
@@ -1419,8 +1419,8 @@ export const InnovativeShowcase: React.FC = () => {
                         aria-pressed={active}
                         className={`flex items-center gap-2.5 rounded-xl border p-3 text-left transition-all ${
                           active
-                            ? 'border-[#D91B24] bg-[#0B1560] text-white shadow-xs'
-                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-[#0B1560]'
+                            ? 'border-[#7C3AED] bg-[#0F172A] text-white shadow-xs'
+                            : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-[#0F172A]'
                         }`}
                       >
                         <span
@@ -1458,14 +1458,14 @@ export const InnovativeShowcase: React.FC = () => {
             id="showcase-panel-blueprint"
             aria-labelledby="showcase-tab-blueprint"
             tabIndex={0}
-            className="animate-fade-up mt-8 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-2xs focus:outline-none"
+            className="animate-fade-up mt-8 rounded-2xl border border-[#0F172A]/15 bg-white p-6 shadow-2xs focus:outline-none"
           >
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D91B24]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
                   1:1 CAD KESİT &amp; GERÇEK UYGULAMA KARŞILAŞTIRMASI
                 </span>
-                <h3 className="text-lg font-black text-[#0B1560]">
+                <h3 className="text-lg font-black text-[#0F172A]">
                   Fareyi Görsel Üzerinde Gezdirerek CAD Çizimden Gerçeğe Geçiş Yapın
                 </h3>
               </div>
@@ -1476,7 +1476,7 @@ export const InnovativeShowcase: React.FC = () => {
                 value={lensPercent}
                 onChange={(e) => setLensPercent(Number(e.target.value))}
                 aria-label="CAD Çizim ve Gerçek Görsel Geçiş Oranı"
-                className="w-44 accent-[#D91B24]"
+                className="w-44 accent-[#7C3AED]"
               />
             </div>
 
@@ -1547,17 +1547,17 @@ export const InnovativeShowcase: React.FC = () => {
                   </text>
                 </svg>
 
-                <span className="absolute bottom-3 left-3 rounded-md bg-[#0B1560] px-3 py-1 font-mono text-[11px] font-bold text-sky-300">
+                <span className="absolute bottom-3 left-3 rounded-md bg-[#0F172A] px-3 py-1 font-mono text-[11px] font-bold text-sky-300">
                   📐 1:1 CAD TEKNİK KESİT
                 </span>
               </div>
 
               {/* Dikey Kırmızı Ayırıcı Lens Çizgisi */}
               <div
-                className="pointer-events-none absolute inset-y-0 z-20 w-0.5 bg-[#D91B24] shadow-[0_0_12px_#D91B24]"
+                className="pointer-events-none absolute inset-y-0 z-20 w-0.5 bg-[#7C3AED] shadow-[0_0_12px_#7C3AED]"
                 style={{ left: `${lensPercent}%` }}
               >
-                <span className="absolute top-1/2 -left-4 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-[#D91B24] text-xs font-black text-white shadow-lg">
+                <span className="absolute top-1/2 -left-4 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-[#7C3AED] text-xs font-black text-white shadow-lg">
                   ↔
                 </span>
               </div>

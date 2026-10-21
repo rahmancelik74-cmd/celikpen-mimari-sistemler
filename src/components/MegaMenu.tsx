@@ -1,1 +1,1 @@
-export { MegaMenu, SiteHeader, type MegaMenuProps } from './header/MegaMenu';
+export { MegaMenu, SiteHeader } from './header/MegaMenu';

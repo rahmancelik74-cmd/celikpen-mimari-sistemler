@@ -237,11 +237,11 @@ export function PriceCalculator({
                   width={568 / previewPanels - 4}
                   height="124"
                   fill="rgba(11, 59, 96, 0.14)"
-                  stroke="#D91B24"
+                  stroke="#7C3AED"
                   strokeWidth="1.5"
                   strokeDasharray="3 2"
                 />
-                <text x="26" y="136" fill="#D91B24" fontSize="9" fontWeight="bold">
+                <text x="26" y="136" fill="#7C3AED" fontSize="9" fontWeight="bold">
                   KEDİ TÜLÜ
                 </text>
               </g>

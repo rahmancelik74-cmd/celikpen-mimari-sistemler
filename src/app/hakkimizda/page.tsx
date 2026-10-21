@@ -88,7 +88,7 @@ export default function HakkimizdaPage() {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12 text-slate-700">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}

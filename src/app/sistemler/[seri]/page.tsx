@@ -73,7 +73,7 @@ export default async function SistemSeriPage({
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12 text-slate-700">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -149,7 +149,7 @@ export default async function SistemSeriPage({
         <div className="mt-8 overflow-hidden rounded-2xl border border-celikpen-border">
           <div className="flex flex-wrap items-center justify-between gap-2 bg-celikpen-brand px-5 py-3 text-white">
             <h2 className="text-sm font-extrabold uppercase tracking-wider">
-              📐 Winsa & Çelikpen Teknik Performans Föyü (TS EN 14351-1)
+              📐 Çelikpen Teknik Performans Föyü (TS EN 14351-1)
             </h2>
             <span className="text-xs font-semibold text-sky-200">
               {deepSpec.winsaEquivalentSeries}

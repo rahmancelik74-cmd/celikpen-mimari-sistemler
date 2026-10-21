@@ -19,44 +19,50 @@ export const MinimalSubpageHeader: React.FC<MinimalSubpageHeaderProps> = ({
   rightAction,
 }) => {
   return (
-    <header className="animate-fade-up relative mb-8 overflow-hidden rounded-2xl border border-[#0B1560]/12 bg-[#FAF9F5] px-6 py-9 shadow-xs sm:px-9">
-      {/* İnce Geometrik Köşe Çizgileri */}
+    <header className="animate-fade-up relative mb-8 overflow-hidden rounded-panel border border-slate-200 bg-gradient-to-br from-white via-[#F8FAFC] to-[#F5F3FF] px-6 py-8 shadow-xs sm:px-9 sm:py-10">
+      {/* İnce geometrik köşe vurguları */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute top-3.5 left-3.5 h-4 w-4 border-t-2 border-l-2 border-[#D91B24]"
+        className="pointer-events-none absolute left-4 top-4 h-4 w-4 border-l-2 border-t-2 border-[#7C3AED]"
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-3.5 right-3.5 h-4 w-4 border-b-2 border-r-2 border-[#0B1560]/35"
+        className="pointer-events-none absolute bottom-4 right-4 h-4 w-4 border-b-2 border-r-2 border-[#0F172A]/30"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-[#7C3AED]/10 blur-3xl"
       />
 
-      {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1.5 text-[11px] font-medium text-slate-500">
-        <Link href="/" className="transition hover:text-[#0B1560]">
+      <nav
+        aria-label="Breadcrumb"
+        className="relative mb-4 flex flex-wrap items-center gap-1.5 text-[10.5px] font-medium text-slate-500"
+      >
+        <Link href="/" className="transition-colors hover:text-[#7C3AED]">
           Anasayfa
         </Link>
         {parentBreadcrumb && (
           <>
-            <span>›</span>
-            <Link href={parentBreadcrumb.href} className="transition hover:text-[#0B1560]">
+            <span className="text-slate-300" aria-hidden="true">/</span>
+            <Link href={parentBreadcrumb.href} className="transition-colors hover:text-[#7C3AED]">
               {parentBreadcrumb.label}
             </Link>
           </>
         )}
-        <span>›</span>
-        <span className="font-bold text-[#0B1560]">{breadcrumbLabel}</span>
+        <span className="text-slate-300" aria-hidden="true">/</span>
+        <span className="font-semibold text-[#6D28D9]">{breadcrumbLabel}</span>
       </nav>
 
-      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+      <div className="relative flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 text-[10.5px] font-extrabold uppercase tracking-[0.22em] text-[#D91B24]">
-            <span className="h-[1.5px] w-5 bg-[#D91B24]" />
-            <span>{overline}</span>
+          <div className="section-kicker">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#7C3AED]" aria-hidden="true" />
+            {overline}
           </div>
-          <h1 className="mt-1.5 text-2xl font-black tracking-tight text-[#0B1560] sm:text-3xl">
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight text-[#0F172A] sm:text-3xl lg:text-[2.1rem]">
             {title}
           </h1>
-          <p className="mt-1.5 text-xs leading-relaxed text-slate-600 sm:text-sm">
+          <p className="mt-2 max-w-xl text-[12px] leading-relaxed text-slate-500 sm:text-[13px]">
             {subtitle}
           </p>
         </div>

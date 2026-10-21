@@ -30,7 +30,7 @@ export function WinsaColorShowcase() {
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-celikpen-border pb-6">
           <div>
             <span className="inline-block rounded-full bg-celikpen-brand/10 px-3 py-1 text-xs font-bold text-celikpen-brand">
-              Winsa Renk Dünyası • QUALICOAT & Renolit UV Laminasyon
+              Çelikpen Renk Dünyası • QUALICOAT & Renolit UV Laminasyon
             </span>
             <h2
               id="renk-kartelasi-baslik"

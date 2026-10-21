@@ -20,7 +20,7 @@ export async function generateMetadata({
   const { altSayfa } = await params;
   const pageData = CORPORATE_SUBPAGES.find((p) => p.slug === altSayfa);
   if (!pageData) {
-    return { title: 'Kurumsal | Çelikpen & Winsa' };
+    return { title: 'Kurumsal | Çelikpen' };
   }
   return {
     title: `${pageData.title} | Kurumsal — ${SITE_CONFIG.brandName}`,
@@ -41,7 +41,7 @@ export default async function KurumsalAltSayfa({
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 text-slate-700 sm:px-6">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8">
       <MinimalSubpageHeader
         breadcrumbLabel={currentData.title}
         parentBreadcrumb={{ label: 'Kurumsal', href: '/kurumsal' }}
@@ -54,7 +54,7 @@ export default async function KurumsalAltSayfa({
         {/* Sol Kompakt Sticky Sidebar (`w-60`) */}
         <aside className="lg:col-span-3">
           <div className="sticky top-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xs">
-            <div className="border-b border-slate-100 bg-[#0B1560] px-4 py-3 text-white">
+            <div className="border-b border-slate-100 bg-[#0F172A] px-4 py-3 text-white">
               <p className="text-[10px] font-extrabold uppercase tracking-wider text-sky-300">
                 KURUMSAL MENÜ
               </p>
@@ -70,8 +70,8 @@ export default async function KurumsalAltSayfa({
                         href={`/kurumsal/${item.slug}`}
                         className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                           active
-                            ? 'bg-[#D91B24] text-white'
-                            : 'text-[#0B1560] hover:bg-slate-100 hover:text-[#D91B24]'
+                            ? 'bg-[#7C3AED] text-white'
+                            : 'text-[#0F172A] hover:bg-slate-100 hover:text-[#7C3AED]'
                         }`}
                       >
                         <span>{item.title}</span>
@@ -94,7 +94,7 @@ export default async function KurumsalAltSayfa({
                 key={st.label}
                 className="glass-sheen hover-lift rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-2xs"
               >
-                <p className="text-xl font-black text-[#0B1560]">{st.value}</p>
+                <p className="text-xl font-black text-[#0F172A]">{st.value}</p>
                 <p className="mt-0.5 text-[11px] font-semibold text-slate-500">{st.label}</p>
               </div>
             ))}
@@ -113,9 +113,9 @@ export default async function KurumsalAltSayfa({
                   className="hover-lift rounded-xl border border-slate-200/80 bg-slate-50/70 p-4"
                 >
                   <div className="flex items-start gap-2.5">
-                    <span className="mt-0.5 text-xs font-black text-[#D91B24]">◆</span>
+                    <span className="mt-0.5 text-xs font-black text-[#7C3AED]">◆</span>
                     <div>
-                      <h3 className="text-xs font-black text-[#0B1560]">{hl.title}</h3>
+                      <h3 className="text-xs font-black text-[#0F172A]">{hl.title}</h3>
                       <p className="mt-1 text-xs leading-relaxed text-slate-600">{hl.desc}</p>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default async function KurumsalAltSayfa({
           </div>
 
           {/* Alt Kompakt Showroom & Katalog Çubuğu */}
-          <div className="flex flex-col items-start justify-between gap-4 rounded-2xl bg-[#0B1560] p-5 text-white sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-2xl bg-[#0F172A] p-5 text-white sm:flex-row sm:items-center">
             <div>
               <h3 className="text-sm font-black">
                 Kocasinan Merkez Showroom &amp; Dijital Katalog Merkezi
@@ -137,7 +137,7 @@ export default async function KurumsalAltSayfa({
             <div className="flex shrink-0 gap-2.5">
               <Link
                 href="/urunler"
-                className="rounded-lg bg-[#D91B24] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#B31219]"
+                className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#6D28D9]"
               >
                 Ürünleri İncele →
               </Link>

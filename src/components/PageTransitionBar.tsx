@@ -72,7 +72,7 @@ export const PageTransitionBar: React.FC = () => {
       className="pointer-events-none fixed top-0 left-0 right-0 z-[9999] h-[2.5px] overflow-hidden"
     >
       <div
-        className="h-full bg-gradient-to-r from-[#D91B24] via-[#E11D48] to-[#004A8F] shadow-[0_0_10px_#D91B24] transition-all duration-200 ease-out"
+        className="h-full bg-gradient-to-r from-[#7C3AED] via-[#A78BFA] to-[#10B981] shadow-[0_0_10px_#7C3AED] transition-all duration-200 ease-out"
         style={{
           width: `${progress}%`,
           opacity: visible ? 1 : 0,

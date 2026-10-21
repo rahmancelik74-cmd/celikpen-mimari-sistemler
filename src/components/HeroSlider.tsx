@@ -35,7 +35,7 @@ const SCENE_3_STORIES: Scene3Story[] = [
     system: 'Dorado 76 Antrasit & Somfy Motorlu Giyotin',
     title: 'Uzaktan Kumandalı Konfor ve Antrasit Estetik',
     metrics: '10 Yıl Garanti • TSE EN 12150 Temperli',
-    href: '/urunler/giyotin-motorlu-cam-balkon',
+    href: '/urunler/giyotin-motorlu-silinebilir-cam',
   },
 ];
 
@@ -67,7 +67,7 @@ export function HeroSlider() {
       lockWheel(cooldownMs);
       if (typeof window !== 'undefined') {
         window.dispatchEvent(
-          new CustomEvent('winsa-hero-scene', { detail: { scene: clamped } })
+          new CustomEvent('celikpen-hero-scene', { detail: { scene: clamped } })
         );
       }
     },
@@ -231,7 +231,7 @@ export function HeroSlider() {
       ref={containerRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      aria-label="Winsa & Çelikpen 3 Aşamalı Tam Ekran Mimari Vitrin"
+      aria-label="Çelikpen 3 Aşamalı Tam Ekran Mimari Vitrin"
       className="relative h-screen h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[#070E1E] select-none"
     >
       {/* 3 SAHNELİ DİKEY SAHNE KONTEYNERİ — Tam 0%, -100% ve -200% GPU Dönüşümü */}
@@ -243,8 +243,8 @@ export function HeroSlider() {
         }}
       >
         {/* =====================================================================
-            SAHNE 1 (Index 0 — image_9e2c81.jpg & 042608.png):
-            Şeffaf Header Arkasında Ferah Gökyüzü + "Hayata / Winsa'dan / Bak" + [SANAL TUR]
+            SAHNE 1 (Index 0):
+            Ferah gökyüzü + "Hayata / Çelikpen'den / Bak" + [SANAL TUR]
            ===================================================================== */}
         <div className="relative h-full w-full overflow-hidden">
           <div
@@ -255,7 +255,7 @@ export function HeroSlider() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/kocasinan-isicamli-cam-balkon-hero.jpg"
-              alt="Hayata Winsa'dan Bak — Modern Taş ve Antrasit Cam Cepheli Mimari Villa"
+              alt="Hayata Çelikpen'den Bak — Modern taş ve antrasit cam cepheli mimari villa"
               fetchPriority="high"
               className="h-full w-full object-cover object-center"
             />
@@ -268,6 +268,10 @@ export function HeroSlider() {
 
           <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-28 sm:px-10">
             <div className="ml-8 sm:ml-14 md:ml-20">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" aria-hidden="true" />
+                Kocasinan Merkez Üretim • Bahçelievler
+              </div>
               <h1 className="text-5xl font-black leading-[1.06] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[84px]">
                 <span className="block drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
                   Hayata
@@ -279,7 +283,7 @@ export function HeroSlider() {
                     }`}
                   />
                   <span className="relative z-10 drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
-                    Winsa&apos;dan
+                    Çelikpen&apos;den
                   </span>
                 </span>
                 <span className="mt-1 block drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
@@ -287,17 +291,16 @@ export function HeroSlider() {
                 </span>
               </h1>
 
-              {/* 042608.png Stilinde Yuvarlatılmış Kırmızı Hap Butonlar */}
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#sanal-tur"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#E11D2E] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-lg transition-all hover:scale-105 hover:bg-[#B31219]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9]"
                 >
                   <span>SANAL TUR</span>
                 </a>
                 <Link
                   href="/urunler"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
                 >
                   <span>SİSTEMLERİ KEŞFET</span>
                 </Link>
@@ -307,7 +310,7 @@ export function HeroSlider() {
         </div>
 
         {/* =====================================================================
-            SAHNE 2 (Index 1): "Geleceğin Mimarisinde / Kusursuz / Yalıtım" + [SİSTEMLERİ KEŞFET]
+            SAHNE 2 (Index 1): "Çelikpen'den / Ücretsiz / Keşif" + [KEŞİF İSTE] [TEKLİF AL]
            ===================================================================== */}
         <div className="relative h-full w-full overflow-hidden">
           <div
@@ -318,7 +321,7 @@ export function HeroSlider() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
-              alt="Geleceğin Mimarisinde Kusursuz Yalıtım — Lüks Teras ve Mimari Cam Sistemleri"
+              alt="Çelikpen'den ücretsiz keşif — lüks teras ve mimari cam sistemleri"
               className="h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#040B1A]/90 via-[#081838]/70 to-[#040B1A]/45" />
@@ -345,24 +348,30 @@ export function HeroSlider() {
           <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-28 sm:px-10">
             <div className="ml-8 sm:ml-14 md:ml-20">
               <h2 className="text-4xl font-black leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl">
-                <span className="block drop-shadow-md">Geleceğin Mimarisinde</span>
                 <span className="relative mt-1 inline-block">
                   <span
                     className={`absolute bottom-[6%] left-0 h-[42%] bg-[#D91B24] transition-all duration-700 ease-out ${
                       activeScene === 1 ? 'w-full' : 'w-0'
                     }`}
                   />
-                  <span className="relative z-10 drop-shadow-md">Kusursuz</span>
+                  <span className="relative z-10 drop-shadow-md">Çelikpen&apos;den</span>
                 </span>
-                <span className="mt-1 block drop-shadow-md">Yalıtım</span>
+                <span className="mt-1 block drop-shadow-md">Ücretsiz</span>
+                <span className="mt-1 block drop-shadow-md">Keşif</span>
               </h2>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/urunler"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#E11D2E] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-lg transition-all hover:scale-105 hover:bg-[#B31219]"
+                  href="/iletisim?form=kesif"
+                  className="inline-flex items-center justify-center rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9]"
                 >
-                  <span>SİSTEMLERİ KEŞFET</span>
+                  KEŞİF İSTE
+                </Link>
+                <Link
+                  href="/iletisim?form=kesif"
+                  className="inline-flex items-center justify-center rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                >
+                  TEKLİF AL
                 </Link>
               </div>
             </div>
@@ -370,7 +379,7 @@ export function HeroSlider() {
         </div>
 
         {/* =====================================================================
-            SAHNE 3 (Index 2): "Winsa ile Yaşandı — Panoramik Yaşam Alanları" + [<] [>]
+            SAHNE 3 (Index 2): "Çelikpen ile Yaşandı — Panoramik Yaşam Alanları" + [<] [>]
            ===================================================================== */}
         <div className="relative h-full w-full overflow-hidden">
           <div
@@ -381,7 +390,7 @@ export function HeroSlider() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/siyavuspasa-surme-cam-balkon.jpg"
-              alt="Winsa ile Yaşandı — Panoramik Yaşam Alanları"
+              alt="Çelikpen ile Yaşandı — panoramik yaşam alanları"
               className="h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#050C1C]/90 via-[#0A1936]/70 to-[#050C1C]/50" />
@@ -396,13 +405,13 @@ export function HeroSlider() {
                       activeScene === 2 ? 'w-full' : 'w-0'
                     }`}
                   />
-                  <span className="relative z-10 drop-shadow-md">Winsa</span>
+                  <span className="relative z-10 drop-shadow-md">Çelikpen</span>
                 </span>{' '}
                 <span className="drop-shadow-md">ile Yaşandı</span>
               </h2>
 
               <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-5 text-white backdrop-blur-md transition-all duration-500">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-sky-300">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-[#DDD6FE]">
                   <span>{currentStory.location}</span>
                   <span className="rounded-full bg-[#D91B24] px-3 py-0.5 text-[11px] font-black text-white">
                     {currentStory.metrics}
@@ -417,7 +426,7 @@ export function HeroSlider() {
                   </span>
                   <Link
                     href={currentStory.href}
-                    className="rounded-full bg-[#E11D2E] px-5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-[#B31219]"
+                    className="rounded-full bg-[#7C3AED] px-5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-[#6D28D9]"
                   >
                     İNCELE →
                   </Link>

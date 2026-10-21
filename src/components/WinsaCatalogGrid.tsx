@@ -31,7 +31,7 @@ export function WinsaCatalogGrid() {
   return (
     <div className="space-y-6">
       {/* Kompakt Kategori Sekmeleri ve Hızlı Arama */}
-      <div className="glass-card rounded-2xl p-3.5 shadow-2xs sm:p-4">
+      <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-xs sm:p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Ürün Kategorileri">
             <button
@@ -41,8 +41,8 @@ export function WinsaCatalogGrid() {
               onClick={() => setSelectedCategory('all')}
               className={`rounded-lg px-3.5 py-1.5 text-[11.5px] font-bold transition ${
                 selectedCategory === 'all'
-                  ? 'bg-[#0B1560] text-white shadow-xs'
-                  : 'border border-slate-200 bg-white text-[#0B1560] hover:border-[#D91B24] hover:text-[#D91B24]'
+                  ? 'bg-[#0F172A] text-white shadow-xs'
+                  : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED]'
               }`}
             >
               Tümü ({WINSA_PRODUCTS.length})
@@ -60,8 +60,8 @@ export function WinsaCatalogGrid() {
                   onClick={() => setSelectedCategory(cat.slug)}
                   className={`rounded-lg px-3.5 py-1.5 text-[11.5px] font-bold transition ${
                     isSelected
-                      ? 'bg-[#0B1560] text-white shadow-xs'
-                      : 'border border-slate-200 bg-white text-[#0B1560] hover:border-[#D91B24] hover:text-[#D91B24]'
+                      ? 'bg-[#0F172A] text-white shadow-xs'
+                      : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED]'
                   }`}
                 >
                   {cat.shortName} ({count})
@@ -76,7 +76,7 @@ export function WinsaCatalogGrid() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Seri ara (Dorado 76, Vera)..."
-              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-900 focus:border-[#0B1560] focus:outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
             />
           </div>
         </div>
@@ -88,16 +88,16 @@ export function WinsaCatalogGrid() {
           <Link
             key={prod.slug}
             href={`/urunler/${prod.slug}`}
-            className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-4 shadow-2xs"
+            className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-card border border-slate-200/90 bg-white p-4 shadow-xs transition-colors hover:border-[#DDD6FE]"
           >
             {/* Animasyonlu Köşe L-Bracket (`┌ ┘`) Çerçevesi */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute top-2.5 left-2.5 z-20 h-3.5 w-3.5 border-t-2 border-l-2 border-[#D91B24] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="pointer-events-none absolute top-2.5 left-2.5 z-20 h-3.5 w-3.5 border-t-2 border-l-2 border-[#7C3AED] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-2.5 right-2.5 z-20 h-3.5 w-3.5 border-b-2 border-r-2 border-[#D91B24] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="pointer-events-none absolute bottom-2.5 right-2.5 z-20 h-3.5 w-3.5 border-b-2 border-r-2 border-[#7C3AED] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
 
             {/* Görsel + Köşede 2 Minimal Glassmorphic Spec Pill */}
@@ -109,7 +109,7 @@ export function WinsaCatalogGrid() {
                 height={360}
                 className="aspect-[15/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1560]/35 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/35 via-transparent to-transparent" />
 
               {/* Köşede 2 Minimal Glassmorphic Spec Pill (Uw | dB) */}
               <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5">
@@ -121,7 +121,7 @@ export function WinsaCatalogGrid() {
                     {prod.technicalSpecs.sesYalitimiDb}
                   </span>
                 </div>
-                <span className="rounded-md bg-[#0B1560]/90 px-2 py-0.5 text-[9.5px] font-extrabold text-white">
+                <span className="rounded-md bg-[#0F172A]/90 px-2 py-0.5 text-[9.5px] font-extrabold text-white">
                   {prod.technicalSpecs.profilGenisligi}
                 </span>
               </div>
@@ -130,20 +130,38 @@ export function WinsaCatalogGrid() {
             {/* Kategori Etiketi & Ürün Başlığı */}
             <div className="mt-3.5 flex items-center justify-between gap-2 pt-0.5">
               <div>
-                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#D91B24]">
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-[#7C3AED]">
                   {prod.category}
                 </span>
-                <h2 className="mt-0.5 text-base font-black text-[#0B1560] transition-colors group-hover:text-[#D91B24]">
+                <h2 className="mt-0.5 text-base font-black text-[#0F172A] transition-colors group-hover:text-[#7C3AED]">
                   {prod.name}
                 </h2>
               </div>
 
-              <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-[#0B1560] transition-all duration-200 group-hover:translate-x-0.5 group-hover:bg-[#D91B24] group-hover:text-white">
-                →
-              </span>
-            </div>
-          </Link>
-        ))}
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F5F3FF] text-xs font-bold text-[#6D28D9] transition-all duration-200 group-hover:translate-x-0.5 group-hover:bg-[#7C3AED] group-hover:text-white">
+                  →
+                </span>
+              </div>
+            </Link>
+          ))}
+        {filteredProducts.length === 0 && (
+          <div className="col-span-full rounded-card border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+            <p className="text-sm font-semibold text-[#0F172A]">Aramanıza uygun seri bulunamadı.</p>
+            <p className="mt-1 text-xs text-slate-500">
+              Farklı bir kategori seçebilir veya arama kelimenizi kısaltabilirsiniz.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedCategory('all');
+                setQuery('');
+              }}
+              className="mt-4 rounded-lg bg-[#7C3AED] px-4 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-[#6D28D9]"
+            >
+              Tüm ürünleri göster
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

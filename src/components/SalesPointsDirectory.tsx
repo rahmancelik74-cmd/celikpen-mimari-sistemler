@@ -44,20 +44,20 @@ export function SalesPointsDirectory() {
   return (
     <div className="space-y-8">
       {/* 1. Merkez Fabrika & Showroom Kartı */}
-      <section className="rounded-2xl border border-[#0B1560]/20 bg-white p-6 shadow-2xs">
+      <section className="rounded-2xl border border-[#0F172A]/20 bg-white p-6 shadow-2xs">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <span className="rounded-md bg-[#D91B24] px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-white">
+            <span className="rounded-md bg-[#7C3AED] px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-white">
               MERKEZ SHOWROOM
             </span>
-            <h2 className="mt-1.5 text-xl font-black text-[#0B1560]">
+            <h2 className="mt-1.5 text-xl font-black text-[#0F172A]">
               Kocasinan Merkez Üretim Tesisi &amp; Deneyim Merkezi
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
             <a
               href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="rounded-lg bg-[#0B1560] px-3.5 py-2 text-xs font-bold text-white transition hover:bg-[#004A8F]"
+              className="rounded-lg bg-[#0F172A] px-3.5 py-2 text-xs font-bold text-white transition hover:bg-[#004A8F]"
             >
               📞 {SITE_CONFIG.phoneDisplay}
             </a>
@@ -80,7 +80,7 @@ export function SalesPointsDirectory() {
 
           <div className="rounded-xl bg-slate-50 p-4">
             <div className="text-[10.5px] font-bold uppercase text-slate-400">Çalışma Saatleri</div>
-            <div className="mt-1 text-xs font-bold text-[#0B1560]">{SITE_CONFIG.workingHours}</div>
+            <div className="mt-1 text-xs font-bold text-[#0F172A]">{SITE_CONFIG.workingHours}</div>
           </div>
 
           <div className="rounded-xl bg-slate-50 p-4">
@@ -95,7 +95,7 @@ export function SalesPointsDirectory() {
       {/* 2. Bahçelievler 11 Mahalle Hizmet Noktaları */}
       <section className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-black text-[#0B1560]">
+          <h2 className="text-lg font-black text-[#0F172A]">
             Bahçelievler 11 Mahalle Hizmet Ağı
           </h2>
 
@@ -103,7 +103,7 @@ export function SalesPointsDirectory() {
             aria-label="Mahalle Filtrele"
             value={selectedNeighborhoodSlug}
             onChange={(e) => setSelectedNeighborhoodSlug(e.target.value)}
-            className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-[#0B1560] focus:border-[#0B1560] focus:outline-none"
+            className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-[#0F172A] focus:border-[#0F172A] focus:outline-none"
           >
             <option value="all">Tüm Mahalleler (11)</option>
             {SITE_CONFIG.neighborhoods.map((n) => (
@@ -122,7 +122,7 @@ export function SalesPointsDirectory() {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-black text-[#0B1560]">{n.name}</h3>
+                  <h3 className="text-sm font-black text-[#0F172A]">{n.name}</h3>
                   <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
                     {n.completedProjectsCount}+ Proje
                   </span>
@@ -133,13 +133,13 @@ export function SalesPointsDirectory() {
               <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-2.5 text-xs">
                 <Link
                   href={`/bahcelievler/${n.slug}`}
-                  className="font-bold text-[#0B1560] hover:text-[#D91B24]"
+                  className="font-bold text-[#0F172A] hover:text-[#7C3AED]"
                 >
                   Bölge Detayı →
                 </Link>
                 <Link
                   href="/iletisim"
-                  className="rounded-md bg-[#D91B24] px-2.5 py-1 text-[11px] font-bold text-white hover:bg-[#B31219]"
+                  className="rounded-md bg-[#7C3AED] px-2.5 py-1 text-[11px] font-bold text-white hover:bg-[#6D28D9]"
                 >
                   Keşif İste
                 </Link>
@@ -157,7 +157,7 @@ export function SalesPointsDirectory() {
             className="hover-lift rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs"
           >
             <div className="flex items-center justify-between gap-2">
-              <h3 className="text-sm font-black text-[#0B1560]">{zone.district}</h3>
+              <h3 className="text-sm font-black text-[#0F172A]">{zone.district}</h3>
               <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10.5px] font-bold text-emerald-700">
                 {zone.serviceTime}
               </span>

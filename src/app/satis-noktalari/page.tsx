@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function SatisNoktalariPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 text-slate-700 sm:px-6">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-8 text-slate-700 sm:px-6 lg:px-8">
       <MinimalSubpageHeader
         breadcrumbLabel="Satış Noktaları"
         overline="FABRİKA SHOWROOM & HİZMET BÖLGELERİ"

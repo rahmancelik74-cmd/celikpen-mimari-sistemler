@@ -41,7 +41,7 @@ export default async function MahallePage({
   const discountPercent = Math.round(CELIKPEN_PRICING_CONFIG.bulkBuildingDiscountRate * 100);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12 text-slate-700">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
       {/* Üst Navigasyon */}
       <nav className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <div className="flex items-center gap-2">

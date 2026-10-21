@@ -1,728 +1,593 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { SITE_CONFIG } from '../../config/site.config';
-import { WINSA_PRODUCTS } from '../../config/winsa-products.config';
 import { CelikpenLogo } from '../CelikpenLogo';
 
-type DropdownKey = 'kurumsal' | 'hizmetlerimiz' | 'urunlerimiz' | 'profesyoneller' | null;
-
-interface DropdownItem {
-  label: string;
+type ServiceItem = {
+  title: string;
+  description: string;
   href: string;
-}
+  icon: React.ReactNode;
+};
 
-const HIZMETLERIMIZ_ITEMS: DropdownItem[] = [
-  { label: 'Cam Balkon Sistemleri', href: '/urunler?kategori=cam-balkon-sistemleri' },
-  { label: 'Kış Bahçesi Sistemleri', href: '/urunler/bioklimatik-kis-bahcesi' },
-  { label: 'Giyotin Sistemleri', href: '/urunler/giyotin-motorlu-cam-balkon' },
-  { label: 'Alüminyum Sistemleri', href: '/urunler?kategori=donanim-sistemleri' },
-  { label: 'Cephe Giydirme Sistemleri', href: '/profesyoneller/proje-hizmetleri' },
-  { label: 'Ofis Bölme Sistemleri', href: '/urunler/panorama-esiksiz-surme' },
-  { label: 'PVC Pencere, Kapılar', href: '/urunler?kategori=pencere-ve-kapi-sistemleri' },
-  { label: 'Sürme Sistemler', href: '/urunler?kategori=surme-sistemler' },
-  { label: 'Panjur & Kepenk', href: '/urunler?kategori=panjur-ve-kepenk-sistemleri' },
+const SERVICES: ServiceItem[] = [
+  {
+    title: 'Cam Balkon Sistemleri',
+    description: 'Isıcamlı, katlanır ve panoramik balkon çözümleri',
+    href: '/urunler?kategori=cam-balkon-sistemleri',
+    icon: <IconPanels />,
+  },
+  {
+    title: 'Giyotin Cam Sistemleri',
+    description: 'Motorlu, kumandalı dikey açılan cam cephe',
+    href: '/urunler/giyotin-motorlu-silinebilir-cam',
+    icon: <IconArrowUpDown />,
+  },
+  {
+    title: 'Bioklimatik Pergola',
+    description: 'Dört mevsim yaşayan teras ve tavan sistemleri',
+    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    icon: <IconSun />,
+  },
+  {
+    title: 'Kış Bahçesi',
+    description: 'Teras, bahçe ve ticari alanlar için cam mimari',
+    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    icon: <IconHome />,
+  },
+  {
+    title: 'Sürme Cam Sistemleri',
+    description: 'Eşiksiz, geniş açıklıklı ve sessiz sürme çözümleri',
+    href: '/urunler?kategori=surme-sistemler',
+    icon: <IconSliders />,
+  },
+  {
+    title: 'Alüminyum & PVC Sistemler',
+    description: 'Pencere, kapı, panjur ve cephe doğramaları',
+    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
+    icon: <IconLayers />,
+  },
+  {
+    title: 'Plise Perde & Sineklik',
+    description: 'Kedi tüllü sineklik ve plise perde entegrasyonu',
+    href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
+    icon: <IconShield />,
+  },
 ];
 
-const URUNLERIMIZ_ITEMS: DropdownItem[] = [
-  { label: 'Dorado 76 & Revotech Gold', href: '/urunler/dorado-76' },
-  { label: 'Safir 76 & Safir 70 Serisi', href: '/urunler/safir-76' },
-  { label: 'Panorama HS 76 Kaldır-Sür', href: '/urunler/panorama-hs-76' },
-  { label: 'Comfort Slide Plus & Lotus', href: '/urunler/comfort-slide-plus' },
-  { label: 'VBS 4+20+4 Isıcamlı Cam Balkon', href: '/urunler/vbs-isicamli-cam-balkon' },
-  { label: 'VNS Panoramik Katlanır Cam', href: '/urunler/vns-katlanir-cam-balkon' },
-  { label: 'Somfy Motorlu Giyotin Cam', href: '/urunler/giyotin-motorlu-cam-balkon' },
-  { label: 'Bioklimatik Kış Bahçesi', href: '/urunler/bioklimatik-kis-bahcesi' },
-  { label: 'Winstor & Winkepenk Panjur', href: '/urunler/winstor-monoblok-panjur' },
-  { label: 'Tüm Ürün Kataloğu (28 Seri)', href: '/urunler' },
-];
-
-const KURUMSAL_ITEMS: DropdownItem[] = [
+const MAIN_NAV = [
+  { label: 'Anasayfa', href: '/' },
+  { label: 'Hizmetler', href: '#hizmetler', dropdown: true },
+  { label: 'Mağaza', href: '/urunler' },
+  { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
-  { label: 'Vizyon ve Misyon', href: '/kurumsal/vizyon-misyon' },
-  { label: 'Neden PVC, Neden Winsa?', href: '/kurumsal/neden-winsa' },
-  { label: 'AR-GE Çalışmalarımız', href: '/kurumsal/ar-ge' },
-  { label: 'Çevre Dostu Pencere', href: '/kurumsal/cevre-dostu-pencere' },
-  { label: 'Kampanyalar', href: '/kurumsal/kampanyalar' },
-  { label: 'Basında Biz', href: '/kurumsal/basinda-winsa' },
-  { label: 'Satış Noktaları & Showroom', href: '/satis-noktalari' },
+  { label: 'Galeri', href: '/galeri' },
+  { label: 'Blog', href: '/blog' },
 ];
 
-const PROFESYONELLER_ITEMS: DropdownItem[] = [
-  { label: 'Proje Hizmetleri', href: '/profesyoneller/proje-hizmetleri' },
-  { label: 'Dijital Kataloglar (2026)', href: '/profesyoneller/kataloglar' },
-  { label: 'Teknik Şartnameler', href: '/profesyoneller/teknik-sartnameler' },
-  { label: 'Kalite Belgeleri (TSE / IFT)', href: '/profesyoneller/kalite-belgeleri' },
-  { label: 'Profesyonel Bakış', href: '/profesyoneller/profesyonel-bakis' },
-  { label: 'Montaj Kılavuzu', href: '/profesyoneller/montaj-kilavuzu' },
-  { label: 'Kullanım Kılavuzu', href: '/profesyoneller/kullanim-kilavuzu' },
-  { label: 'Açılım Seçenekleri', href: '/profesyoneller/acilim-secenekleri' },
-  { label: 'Mimari Blog', href: '/profesyoneller/blog' },
-];
-
-/** Keskin Vektörel Türk Bayrağı SVG (#E30A17 Ay-Yıldız) */
-const TurkishFlagSvg: React.FC<{ className?: string }> = ({ className = 'h-3 w-4' }) => (
-  <svg
-    viewBox="0 0 36 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={`shrink-0 rounded-[2px] ${className}`}
-    aria-hidden="true"
-  >
-    <rect width="36" height="24" rx="2" fill="#E30A17" />
-    <circle cx="13.5" cy="12" r="6" fill="#FFFFFF" />
-    <circle cx="15" cy="12" r="4.8" fill="#E30A17" />
-    <polygon
-      points="20.2,12 23.8,13.2 21.6,10.1 21.6,13.9 23.8,10.8"
-      fill="#FFFFFF"
-    />
-  </svg>
-);
-
-export interface MegaMenuProps {
-  isTransparent?: boolean;
-}
-
-export const MegaMenu: React.FC<MegaMenuProps> = ({ isTransparent = false }) => {
+export function MegaMenu() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [openMenu, setOpenMenu] = useState<DropdownKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileAccordion, setMobileAccordion] = useState<DropdownKey>('hizmetlerimiz');
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleMouseEnter = (menu: DropdownKey) => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-    setOpenMenu(menu);
-  };
-
-  const handleMouseLeave = () => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-    }
-    closeTimerRef.current = setTimeout(() => {
-      setOpenMenu(null);
-    }, 180);
-  };
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setOpenMenu(null);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     setMobileOpen(false);
-    setSearchOpen(false);
+    setServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    return () => {
-      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (!mobileOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
     };
-  }, []);
+    document.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
-  const handlePrefetch = (href: string) => {
-    try {
-      router.prefetch(href);
-    } catch {
-      // ignore prefetch errors in dev
-    }
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setServicesOpen(false);
+    };
+    const onPointerDown = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('mousedown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('mousedown', onPointerDown);
+    };
+  }, [servicesOpen]);
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    if (href.startsWith('#')) return false;
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const filteredProducts =
-    searchQuery.trim().length > 0
-      ? WINSA_PRODUCTS.filter(
-          (p) =>
-            p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.shortDescription.toLowerCase().includes(searchQuery.toLowerCase())
-        ).slice(0, 8)
-      : WINSA_PRODUCTS.slice(0, 6);
-
-  const isHomeActive = pathname === '/';
-  const isKurumsalActive = openMenu === 'kurumsal' || pathname.startsWith('/kurumsal');
-  const isHizmetlerimizActive = openMenu === 'hizmetlerimiz';
-  const isUrunlerimizActive =
-    openMenu === 'urunlerimiz' ||
-    pathname.startsWith('/urunler') ||
-    pathname.startsWith('/sistemler');
-  const isProfesyonellerActive =
-    openMenu === 'profesyoneller' ||
-    pathname === '/profesyoneller' ||
-    (pathname.startsWith('/profesyoneller/') && pathname !== '/profesyoneller/referanslar');
-  const isReferanslarActive =
-    pathname === '/profesyoneller/referanslar' || pathname === '/galeri';
-  const isIletisimActive = pathname.startsWith('/iletisim');
-
-  // Güngörpen L-Köşe Çerçeve (`┌`) Hover & Active Sınıfı — Kompakt 13px Tipografi
-  const getNavButtonClass = (isActive: boolean) =>
-    `relative inline-flex items-center gap-1 py-1 text-[13px] font-semibold uppercase tracking-wide transition-all duration-200 before:content-[''] before:absolute before:-top-1 before:-left-2 before:w-3 before:h-3 before:border-t-2 before:border-l-2 before:border-[#D91B24] before:transition-all before:duration-200 ${
-      isActive
-        ? 'text-[#D91B24] before:opacity-100'
-        : 'text-[#0B1560] before:opacity-0 hover:text-[#D91B24] hover:before:opacity-100'
-    }`;
-
-  // Tek Sütun Beyaz Kart Dropdown (`w-56 py-1.5`)
-  const renderSingleColumnDropdown = (items: DropdownItem[], menuKey: DropdownKey) => {
-    if (openMenu !== menuKey) return null;
-    return (
-      <div
-        onMouseEnter={() => handleMouseEnter(menuKey)}
-        onMouseLeave={handleMouseLeave}
-        className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 before:absolute before:-top-3 before:left-0 before:h-3 before:w-full before:content-['']"
-      >
-        <div className="relative w-56 overflow-visible rounded-md border border-gray-100 bg-white py-1.5 shadow-2xl">
-          {/* Üst Beyaz Ok İşaretçisi */}
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-gray-100 bg-white"
-          />
-
-          <ul className="relative z-10 flex flex-col">
-            {items.map((item) => (
-              <li key={item.href} className="border-b border-gray-100/80 last:border-none">
-                <Link
-                  href={item.href}
-                  onClick={() => setOpenMenu(null)}
-                  onMouseEnter={() => handlePrefetch(item.href)}
-                  className="group flex items-center gap-2 px-4 py-2.5 text-[13px] font-medium text-[#2D3748] transition-all duration-200 hover:bg-gray-50/90 hover:pl-5 hover:text-[#D91B24]"
-                >
-                  <span className="text-[11px] text-slate-400 transition-colors duration-200 group-hover:text-[#D91B24]">
-                    ▸
-                  </span>
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  };
+  const phoneHref = `tel:${SITE_CONFIG.phoneRaw}`;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* =====================================================================
-          1. KOMPAKT KOYU ÜST İLETİŞİM & KAMPANYA ŞERİDİ (`h-[34px] text-[11px]`, `max-w-6xl`)
-         ===================================================================== */}
-      <div className="bg-[#0D1322] text-[11px] text-white/90">
-        <div className="mx-auto flex h-[34px] max-w-6xl items-center justify-between px-4 sm:px-6">
-          {/* Sol: Telefon | E-posta | Konum */}
-          <div className="flex items-center gap-3 overflow-x-auto whitespace-nowrap">
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* ============================ ÜST BİLGİ BARI ============================ */}
+      <div className="bg-[#0F172A] text-white">
+        <div className="container-shell flex h-9 items-center justify-between gap-4 text-[10.5px] font-medium sm:text-[11px]">
+          <div className="flex min-w-0 items-center gap-4 lg:gap-6">
             <a
-              href={`tel:${SITE_CONFIG.phoneRaw}`}
-              className="inline-flex items-center gap-1 font-medium text-white/90 transition hover:text-white"
+              href={phoneHref}
+              className="inline-flex shrink-0 items-center gap-1.5 text-slate-200 transition-colors hover:text-white"
             >
-              <span className="text-emerald-400">📞</span>
-              <span>0 (212) 555 00 34</span>
+              <IconPhone className="h-3 w-3 text-[#DDD6FE]" />
+              <span className="hidden sm:inline">Bizi Arayın:</span>
+              <span className="font-semibold text-white">{SITE_CONFIG.phoneDisplay}</span>
             </a>
-            <span className="hidden text-white/20 sm:inline">|</span>
             <a
-              href="mailto:iletisim@celikpen.com.tr"
-              className="hidden items-center gap-1 text-white/80 transition hover:text-white sm:inline-flex"
+              href="mailto:iletisim@celikpen.com"
+              className="hidden items-center gap-1.5 text-slate-300 transition-colors hover:text-white sm:inline-flex"
             >
-              <span className="text-sky-400">✉️</span>
-              <span>iletisim@celikpen.com.tr</span>
+              <IconMail className="h-3 w-3 text-[#DDD6FE]" />
+              iletisim@celikpen.com
             </a>
-            <span className="hidden text-white/20 md:inline">|</span>
-            <Link
-              href="/satis-noktalari"
-              className="hidden items-center gap-1 text-white/80 transition hover:text-white md:inline-flex"
-            >
-              <span className="text-[#D91B24]">📍</span>
-              <span>Bahçelievler, İstanbul</span>
-            </Link>
+            <span className="hidden items-center gap-1.5 text-slate-300 lg:inline-flex">
+              <IconPin className="h-3 w-3 text-[#DDD6FE]" />
+              Bahçelievler / İstanbul
+            </span>
           </div>
 
-          {/* Sağ: Kompakt Yeşil Kampanya Rozeti + Instagram */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex shrink-0 items-center gap-3 sm:gap-4">
             <Link
-              href="/kurumsal/kampanyalar"
-              className="hidden items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/60 px-3 py-0.5 text-[10.5px] font-medium text-emerald-400 transition hover:border-emerald-400 hover:bg-emerald-900/70 lg:flex"
+              href="/iletisim?form=kesif"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-[#10B981] px-2.5 py-1 text-[9.5px] font-bold tracking-wide text-white transition-colors hover:bg-[#059669] sm:px-3 sm:text-[10px]"
             >
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-              <span>Sezona Özel Cam Balkon &amp; Teras Kapatmada %15 İndirim!</span>
+              <IconSparkle className="h-3 w-3 transition-transform group-hover:rotate-12" />
+              <span className="hidden sm:inline">Yaz Sezonu</span> %15 İNDİRİM
             </Link>
-
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/celikpen"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen Instagram"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 transition hover:border-white/40 hover:bg-white/15 hover:text-white"
+              className="text-slate-300 transition-colors hover:text-white"
             >
-              <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
+              <IconInstagram className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
       </div>
 
-      {/* =====================================================================
-          2. KOMPAKT ANA HEADER BARI (`h-[68px]`, `max-w-6xl mx-auto px-4 sm:px-6`)
-         ===================================================================== */}
+      {/* ============================ ANA MENÜ ============================ */}
       <div
-        className={`transition-all duration-300 ${
-          isTransparent
-            ? 'border-b border-transparent bg-gradient-to-b from-white/65 via-white/30 to-transparent shadow-none backdrop-blur-[1px]'
-            : 'border-b border-black/5 bg-[#F4F3EF]/95 shadow-sm backdrop-blur-md'
+        ref={dropdownRef}
+        className={`relative border-b border-slate-200/80 bg-white/95 backdrop-blur-xl transition-shadow duration-300 ${
+          scrolled ? 'shadow-header' : 'shadow-none'
         }`}
+        onMouseLeave={() => setServicesOpen(false)}
       >
-        <div className="mx-auto flex h-[68px] max-w-6xl items-center justify-between px-4 sm:px-6">
-          {/* Sol: Küçük, Zarif Butik Mimari ÇELİKPEN Logo (`h-8`) */}
-          <Link
-            href="/"
-            aria-label="Çelikpen Ana Sayfa"
-            onMouseEnter={() => handlePrefetch('/')}
-            className="group shrink-0"
-          >
-            <CelikpenLogo size="md" />
+        <div className="container-shell flex h-[68px] items-center justify-between gap-3 lg:h-[74px] lg:gap-5">
+          <Link href="/" className="group shrink-0" aria-label="Çelikpen anasayfa">
+            <CelikpenLogo size="md" className="transition-shadow duration-300 group-hover:shadow-md" />
           </Link>
 
-          {/* Orta: Dengeli & Kompakt Masaüstü Navigasyon (`gap-5 xl:gap-6`) */}
-          <nav
-            aria-label="Ana Navigasyon"
-            className="hidden items-center gap-5 lg:flex xl:gap-6"
-          >
-            {/* 1. ANASAYFA */}
-            <Link
-              href="/"
-              onMouseEnter={() => {
-                setOpenMenu(null);
-                handlePrefetch('/');
-              }}
-              className={getNavButtonClass(isHomeActive)}
-            >
-              ANASAYFA
-            </Link>
-
-            {/* 2. KURUMSAL ⌄ */}
-            <div
-              className="relative py-3"
-              onMouseEnter={() => {
-                handleMouseEnter('kurumsal');
-                handlePrefetch('/kurumsal');
-              }}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link href="/kurumsal" className={getNavButtonClass(isKurumsalActive)}>
-                <span>KURUMSAL</span>
-                <svg
-                  className={`h-3 w-3 transition-transform duration-200 ${
-                    openMenu === 'kurumsal' ? 'rotate-180 text-[#D91B24]' : ''
+          <nav aria-label="Ana menü" className="hidden items-center gap-1 lg:flex xl:gap-2">
+            {MAIN_NAV.map((item) =>
+              item.dropdown ? (
+                <div key={item.label} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((open) => !open)}
+                    onMouseEnter={() => setServicesOpen(true)}
+                    aria-expanded={servicesOpen}
+                    aria-controls="hizmetler-dropdown"
+                    className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
+                      servicesOpen
+                        ? 'bg-[#F5F3FF] text-[#7C3AED]'
+                        : 'text-[#1E293B] hover:bg-slate-50 hover:text-[#7C3AED]'
+                    }`}
+                  >
+                    {item.label}
+                    <IconChevron
+                      className={`h-3 w-3 transition-transform duration-200 ${
+                        servicesOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
+                    isActive(item.href)
+                      ? 'bg-[#F5F3FF] text-[#7C3AED]'
+                      : 'text-[#1E293B] hover:bg-slate-50 hover:text-[#7C3AED]'
                   }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
-              {renderSingleColumnDropdown(KURUMSAL_ITEMS, 'kurumsal')}
-            </div>
-
-            {/* 3. HİZMETLERİMİZ ⌄ */}
-            <div
-              className="relative py-3"
-              onMouseEnter={() => {
-                handleMouseEnter('hizmetlerimiz');
-                handlePrefetch('/urunler');
-              }}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link href="/urunler" className={getNavButtonClass(isHizmetlerimizActive)}>
-                <span>HİZMETLERİMİZ</span>
-                <svg
-                  className={`h-3 w-3 transition-transform duration-200 ${
-                    openMenu === 'hizmetlerimiz' ? 'rotate-180 text-[#D91B24]' : ''
-                  }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
-              {renderSingleColumnDropdown(HIZMETLERIMIZ_ITEMS, 'hizmetlerimiz')}
-            </div>
-
-            {/* 4. ÜRÜNLERİMİZ ⌄ */}
-            <div
-              className="relative py-3"
-              onMouseEnter={() => {
-                handleMouseEnter('urunlerimiz');
-                handlePrefetch('/urunler');
-              }}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link href="/urunler" className={getNavButtonClass(isUrunlerimizActive)}>
-                <span>ÜRÜNLERİMİZ</span>
-                <svg
-                  className={`h-3 w-3 transition-transform duration-200 ${
-                    openMenu === 'urunlerimiz' ? 'rotate-180 text-[#D91B24]' : ''
-                  }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
-              {renderSingleColumnDropdown(URUNLERIMIZ_ITEMS, 'urunlerimiz')}
-            </div>
-
-            {/* 5. PROFESYONELLER ⌄ */}
-            <div
-              className="relative py-3"
-              onMouseEnter={() => {
-                handleMouseEnter('profesyoneller');
-                handlePrefetch('/profesyoneller');
-              }}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link href="/profesyoneller" className={getNavButtonClass(isProfesyonellerActive)}>
-                <span>PROFESYONELLER</span>
-                <svg
-                  className={`h-3 w-3 transition-transform duration-200 ${
-                    openMenu === 'profesyoneller' ? 'rotate-180 text-[#D91B24]' : ''
-                  }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
-              {renderSingleColumnDropdown(PROFESYONELLER_ITEMS, 'profesyoneller')}
-            </div>
-
-            {/* 6. REFERANSLAR */}
-            <Link
-              href="/profesyoneller/referanslar"
-              onMouseEnter={() => {
-                setOpenMenu(null);
-                handlePrefetch('/profesyoneller/referanslar');
-              }}
-              className={getNavButtonClass(isReferanslarActive)}
-            >
-              REFERANSLAR
-            </Link>
-
-            {/* 7. İLETİŞİM */}
-            <Link
-              href="/iletisim"
-              onMouseEnter={() => {
-                setOpenMenu(null);
-                handlePrefetch('/iletisim');
-              }}
-              className={getNavButtonClass(isIletisimActive)}
-            >
-              İLETİŞİM
-            </Link>
+                  {item.label}
+                </Link>
+              )
+            )}
           </nav>
 
-          {/* Sağ Aksiyon Alanı: Kompakt "Keşif İste" Pill + 32x32px [TR] + [🔍] */}
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            <a
+              href={phoneHref}
+              className="hidden items-center gap-2 rounded-full border border-[#DDD6FE] bg-[#EBE9FE] px-3.5 py-2 text-[11.5px] font-semibold text-[#5B21B6] transition-colors hover:bg-[#DDD6FE] xl:inline-flex"
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/70 text-[#7C3AED]">
+                <IconPhone className="h-3.5 w-3.5" />
+              </span>
+              {SITE_CONFIG.phoneDisplay}
+            </a>
             <Link
-              href="/iletisim"
-              onMouseEnter={() => handlePrefetch('/iletisim')}
-              className="hidden items-center gap-1.5 rounded-lg bg-[#0B1560] px-3 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-[#D91B24] sm:inline-flex"
+              href="/iletisim?form=kesif"
+              aria-label="Ücretsiz keşif iste"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[11px] font-semibold text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] sm:px-4 sm:text-[12px]"
             >
-              <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              <span>Keşif İste</span>
+              <IconCalendar className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Keşif İste</span>
             </Link>
-
-            {/* 1. Vektörel Türk Bayraklı [TR] Butonu (`h-8`) */}
             <button
               type="button"
-              aria-label="Dil Seçimi: Türkçe"
-              className="inline-flex h-8 items-center gap-1 rounded-lg border border-[#0B1560]/25 bg-white/90 px-2 text-[11px] font-bold text-[#0B1560] transition hover:border-[#0B1560] hover:bg-white"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Mobil menüyü aç"
+              aria-expanded={mobileOpen}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] lg:hidden"
             >
-              <TurkishFlagSvg />
-              <span>TR</span>
-            </button>
-
-            {/* 2. Arama [🔍] Butonu (`w-8 h-8`) */}
-            <button
-              type="button"
-              onClick={() => setSearchOpen((prev) => !prev)}
-              aria-label="Ürün ve Sistem Ara"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#0B1560]/25 bg-white/90 text-[#0B1560] transition hover:border-[#D91B24] hover:bg-white hover:text-[#D91B24]"
-            >
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7" />
-                <path strokeLinecap="round" d="M20 20l-3.5-3.5" />
-              </svg>
-            </button>
-
-            {/* Mobil Menü Butonu (`w-8 h-8`) */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label="Mobil Menüyü Aç/Kapat"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#0B1560]/25 bg-white/90 text-xs text-[#0B1560] lg:hidden"
-            >
-              {mobileOpen ? '✕' : '☰'}
+              <IconMenu className="h-5 w-5" />
             </button>
           </div>
         </div>
+
+        {/* ============================ HİZMETLER MEGA MENÜ ============================ */}
+        {servicesOpen && (
+          <div
+            id="hizmetler-dropdown"
+            className="absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
+          >
+            <div className="container-shell grid grid-cols-12 gap-6 py-6">
+              <div className="col-span-8">
+                <div className="mb-4 flex items-baseline justify-between">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7C3AED]">
+                      Hizmetlerimiz
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-slate-500">
+                      Yaşam alanınıza uygun mimari cam sistemini seçin.
+                    </p>
+                  </div>
+                  <Link
+                    href="/urunler"
+                    onClick={() => setServicesOpen(false)}
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+                  >
+                    Tüm sistemler
+                    <IconArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {SERVICES.map((service) => (
+                    <Link
+                      key={service.title}
+                      href={service.href}
+                      onClick={() => setServicesOpen(false)}
+                      className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
+                    >
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#7C3AED] transition-colors group-hover:border-[#DDD6FE] group-hover:bg-[#F5F3FF]">
+                        {service.icon}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-[12.5px] font-semibold text-[#0F172A] group-hover:text-[#7C3AED]">
+                          {service.title}
+                        </span>
+                        <span className="mt-0.5 block text-[10.5px] leading-relaxed text-slate-500">
+                          {service.description}
+                        </span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="col-span-4">
+                <div className="relative h-full overflow-hidden rounded-2xl bg-[#0F172A] p-5 text-white">
+                  <span className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-[#7C3AED]/40 blur-2xl" />
+                  <span className="pointer-events-none absolute -bottom-10 -left-8 h-28 w-28 rounded-full bg-[#D91B24]/20 blur-2xl" />
+                  <span className="relative inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#DDD6FE]">
+                    <IconSparkle className="h-2.5 w-2.5" />
+                    Ücretsiz Keşif
+                  </span>
+                  <p className="relative mt-4 text-lg font-semibold leading-snug">
+                    Balkonunuzu birlikte planlayalım.
+                  </p>
+                  <p className="relative mt-2 text-[11px] leading-relaxed text-slate-300">
+                    Lazerli ölçü, renk danışmanlığı ve net fiyat teklifi aynı gün.
+                  </p>
+                  <Link
+                    href="/iletisim?form=kesif"
+                    onClick={() => setServicesOpen(false)}
+                    className="relative mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+                  >
+                    Keşif Randevusu Al
+                    <IconArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* =====================================================================
-          HIZLI ÜRÜN ARAMA MODALI ([🔍])
-         ===================================================================== */}
-      {searchOpen && (
-        <div className="border-b border-slate-200 bg-white px-4 py-5 shadow-2xl">
-          <div className="mx-auto max-w-4xl">
-            <div className="flex items-center justify-between gap-3">
-              <input
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Sistem veya seri adı yazın (Örn: Dorado 76, Giyotin, Cam Balkon)..."
-                className="w-full rounded-xl border border-[#0B1560]/30 px-4 py-2.5 text-xs font-medium text-slate-900 focus:border-[#0B1560] focus:outline-none"
-                autoFocus
-              />
-              <button
-                type="button"
-                onClick={() => setSearchOpen(false)}
-                className="rounded-xl bg-slate-100 px-3.5 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-200"
-              >
-                Kapat
-              </button>
-            </div>
-            <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-              {filteredProducts.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/urunler/${item.slug}`}
-                  onClick={() => setSearchOpen(false)}
-                  className="flex items-center justify-between rounded-lg border border-slate-200 p-2.5 text-xs transition hover:border-[#D91B24] hover:bg-slate-50"
-                >
-                  <div>
-                    <div className="font-bold text-[#0B1560]">{item.name}</div>
-                    <div className="text-[10px] text-slate-500">{item.category}</div>
-                  </div>
-                  <span className="font-bold text-[#D91B24]">→</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* =====================================================================
-          MOBİL MENÜ ÇEKMECESİ
-         ===================================================================== */}
+      {/* ============================ MOBİL ÇEKMECE ============================ */}
       {mobileOpen && (
-        <div className="max-h-[82vh] overflow-y-auto border-b border-slate-300 bg-white px-4 py-4 shadow-2xl lg:hidden">
-          <div className="space-y-1.5">
-            <Link
-              href="/"
-              onClick={() => setMobileOpen(false)}
-              className="block rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-            >
-              ANASAYFA
-            </Link>
-
-            {/* Mobil Hizmetlerimiz */}
-            <div>
+        <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Mobil menü">
+          <button
+            type="button"
+            aria-label="Menüyü kapat"
+            onClick={() => setMobileOpen(false)}
+            className="absolute inset-0 bg-[#0F172A]/55 backdrop-blur-sm"
+          />
+          <div className="absolute inset-y-0 right-0 flex w-[min(90vw,390px)] flex-col overflow-y-auto bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3.5">
+              <CelikpenLogo size="sm" />
               <button
                 type="button"
-                onClick={() =>
-                  setMobileAccordion(mobileAccordion === 'hizmetlerimiz' ? null : 'hizmetlerimiz')
-                }
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Menüyü kapat"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
               >
-                <span>HİZMETLERİMİZ</span>
-                <span>{mobileAccordion === 'hizmetlerimiz' ? '−' : '+'}</span>
+                <IconClose className="h-4 w-4" />
               </button>
-              {mobileAccordion === 'hizmetlerimiz' && (
-                <div className="mt-1 space-y-1 pl-4">
-                  {HIZMETLERIMIZ_ITEMS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-medium text-slate-700 hover:text-[#D91B24]"
-                    >
-                      ▸ {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
             </div>
 
-            {/* Mobil Ürünlerimiz */}
-            <div>
-              <button
-                type="button"
-                onClick={() =>
-                  setMobileAccordion(mobileAccordion === 'urunlerimiz' ? null : 'urunlerimiz')
-                }
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-              >
-                <span>ÜRÜNLERİMİZ</span>
-                <span>{mobileAccordion === 'urunlerimiz' ? '−' : '+'}</span>
-              </button>
-              {mobileAccordion === 'urunlerimiz' && (
-                <div className="mt-1 space-y-1 pl-4">
-                  {URUNLERIMIZ_ITEMS.map((item) => (
+            <div className="flex-1 px-4 py-4">
+              <div className="space-y-1">
+                <Link
+                  href="/"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
+                >
+                  Anasayfa <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen((open) => !open)}
+                  aria-expanded={mobileServicesOpen}
+                  className="flex w-full items-center justify-between rounded-lg bg-[#F5F3FF] px-3 py-2.5 text-sm font-semibold text-[#6D28D9]"
+                >
+                  Hizmetler
+                  <IconChevron
+                    className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {mobileServicesOpen && (
+                  <div className="space-y-0.5 pb-1 pl-2">
+                    {SERVICES.map((service) => (
+                      <Link
+                        key={service.title}
+                        href={service.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[12.5px] text-slate-600 hover:bg-slate-50 hover:text-[#7C3AED]"
+                      >
+                        <span className="text-[#7C3AED]">{service.icon}</span>
+                        {service.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {MAIN_NAV.filter((item) => item.label !== 'Anasayfa' && item.label !== 'Hizmetler').map(
+                  (item) => (
                     <Link
-                      key={item.href}
+                      key={item.label}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-medium text-slate-700 hover:text-[#D91B24]"
+                      className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
                     >
-                      ▸ {item.label}
+                      {item.label}
+                      <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
                     </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Mobil Kurumsal */}
-            <div>
-              <button
-                type="button"
-                onClick={() =>
-                  setMobileAccordion(mobileAccordion === 'kurumsal' ? null : 'kurumsal')
-                }
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-              >
-                <span>KURUMSAL</span>
-                <span>{mobileAccordion === 'kurumsal' ? '−' : '+'}</span>
-              </button>
-              {mobileAccordion === 'kurumsal' && (
-                <div className="mt-1 space-y-1 pl-4">
-                  {KURUMSAL_ITEMS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-medium text-slate-700 hover:text-[#D91B24]"
-                    >
-                      ▸ {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Mobil Profesyoneller */}
-            <div>
-              <button
-                type="button"
-                onClick={() =>
-                  setMobileAccordion(
-                    mobileAccordion === 'profesyoneller' ? null : 'profesyoneller'
                   )
-                }
-                className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-              >
-                <span>PROFESYONELLER</span>
-                <span>{mobileAccordion === 'profesyoneller' ? '−' : '+'}</span>
-              </button>
-              {mobileAccordion === 'profesyoneller' && (
-                <div className="mt-1 space-y-1 pl-4">
-                  {PROFESYONELLER_ITEMS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-medium text-slate-700 hover:text-[#D91B24]"
-                    >
-                      ▸ {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+                )}
+              </div>
+
+              <div className="mt-6 rounded-xl border border-[#DDD6FE] bg-[#F5F3FF] p-3.5">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7C3AED]">
+                  Bugün keşif, aynı gün teklif
+                </p>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-600">
+                  Ölçü ve danışmanlık ücretsiz. Balkonunuz için net fiyatı öğrenin.
+                </p>
+                <Link
+                  href="/iletisim?form=kesif"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-3 flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[12px] font-semibold text-white hover:bg-[#6D28D9]"
+                >
+                  <IconCalendar className="h-3.5 w-3.5" /> Keşif İste
+                </Link>
+              </div>
             </div>
 
-            <Link
-              href="/profesyoneller/referanslar"
-              onClick={() => setMobileOpen(false)}
-              className="block rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-            >
-              REFERANSLAR
-            </Link>
-
-            <Link
-              href="/iletisim"
-              onClick={() => setMobileOpen(false)}
-              className="block rounded-lg px-3 py-2 text-xs font-extrabold text-[#0B1560] hover:bg-slate-100"
-            >
-              İLETİŞİM
-            </Link>
+            <div className="border-t border-slate-100 px-4 py-4">
+              <a
+                href={phoneHref}
+                className="flex items-center gap-2.5 rounded-xl bg-[#0F172A] px-4 py-3 text-white"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
+                  <IconPhone className="h-4 w-4" />
+                </span>
+                <span>
+                  <span className="block text-[9px] font-medium uppercase tracking-[0.16em] text-slate-300">
+                    Hemen arayın
+                  </span>
+                  <span className="block text-sm font-semibold">{SITE_CONFIG.phoneDisplay}</span>
+                </span>
+              </a>
+              <p className="mt-3 flex items-start gap-1.5 text-[10.5px] leading-relaxed text-slate-500">
+                <IconPin className="mt-0.5 h-3 w-3 shrink-0 text-[#7C3AED]" />
+                {SITE_CONFIG.address}
+              </p>
+            </div>
           </div>
         </div>
       )}
     </header>
   );
-};
+}
 
-/**
- * Ana Sayfa İlk Konteynerde Şeffaf, Kaydırınca ve Alt Sayfalarda Kurumsal Header Wrapper
- */
+/* ============================================================================
+   SAYFA KABUĞU
+   ============================================================================ */
 export const SiteHeader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
-  const [scrollY, setScrollY] = useState(0);
-  const [heroScene, setHeroScene] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    const handleHeroScene = (e: Event) => {
-      const customEvent = e as CustomEvent<{ scene: number }>;
-      if (customEvent.detail && typeof customEvent.detail.scene === 'number') {
-        setHeroScene(customEvent.detail.scene);
-      }
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('winsa-hero-scene', handleHeroScene);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('winsa-hero-scene', handleHeroScene);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (pathname !== '/') {
-      setHeroScene(0);
-    }
-  }, [pathname]);
-
-  const isHomepage = pathname === '/';
-  const isTransparent = isHomepage && scrollY < 50 && heroScene === 0;
+  const isHome = pathname === '/';
 
   return (
     <>
-      <MegaMenu isTransparent={isTransparent} />
-      <div className={isHomepage ? 'pt-0' : 'pt-[102px]'}>{children}</div>
+      <MegaMenu />
+      <div className={isHome ? '' : 'pt-[104px] lg:pt-[110px]'}>{children}</div>
     </>
   );
 };
+
+/* ============================================================================
+   İKONLAR — 1.6px ince çizgi, mimari dil
+   ============================================================================ */
+type IconProps = { className?: string };
+
+function IconPhone({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+function IconMail({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  );
+}
+function IconPin({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+function IconInstagram({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+function IconSparkle({ className = 'h-3 w-3' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m12 3-1.9 5.1L5 10l5.1 1.9L12 17l1.9-5.1L19 10l-5.1-1.9L12 3Z" /><path d="M5 3v4M3 5h4M19 17v4M17 19h4" />
+    </svg>
+  );
+}
+function IconChevron({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+function IconMenu({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+function IconClose({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
+      <path d="m18 6-12 12M6 6l12 12" />
+    </svg>
+  );
+}
+function IconArrowRight({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+function IconCalendar({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+    </svg>
+  );
+}
+function IconPanels({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 12h18M12 3v18" />
+    </svg>
+  );
+}
+function IconArrowUpDown({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m8 7 4-4 4 4M8 17l4 4 4-4M12 3v18" />
+    </svg>
+  );
+}
+function IconSun({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+function IconHome({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" /><path d="M9 21v-8h6v8" />
+    </svg>
+  );
+}
+function IconSliders({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" /><rect x="7" y="4" width="4" height="4" rx="1" fill="currentColor" stroke="none" /><rect x="14" y="16" width="4" height="4" rx="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function IconLayers({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
+    </svg>
+  );
+}
+function IconShield({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}

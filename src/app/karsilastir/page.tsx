@@ -57,7 +57,7 @@ export default function KarsilastirPage() {
   const warrantyText = `${SITE_CONFIG.warranties.mechanicalWarrantyYears} Yıl Mekanik + Şişecam Sertifikası`;
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 text-slate-700">
+    <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">
       <div className="mb-8">
         <span className="inline-block rounded-full bg-celikpen-brand/10 px-3 py-1 text-xs font-bold text-celikpen-brand">
           {CONTENT.badge}

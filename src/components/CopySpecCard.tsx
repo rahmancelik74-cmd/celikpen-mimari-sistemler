@@ -31,11 +31,11 @@ export const CopySpecCard: React.FC<CopySpecCardProps> = ({
     <div className="hover-lift rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
         <div>
-          <span className="text-[11px] font-black text-[#D91B24]">{code}</span>
-          <h3 className="text-sm font-black text-[#0B1560]">{title}</h3>
+          <span className="text-[11px] font-black text-[#7C3AED]">{code}</span>
+          <h3 className="text-sm font-black text-[#0F172A]">{title}</h3>
         </div>
         <div className="flex items-center gap-2">
-          <span className="rounded-md bg-[#0B1560]/10 px-2.5 py-1 text-[11px] font-bold text-[#0B1560]">
+          <span className="rounded-md bg-[#0F172A]/10 px-2.5 py-1 text-[11px] font-bold text-[#0F172A]">
             {series}
           </span>
           <button
@@ -44,7 +44,7 @@ export const CopySpecCard: React.FC<CopySpecCardProps> = ({
             className={`rounded-lg px-3 py-1 text-[11px] font-bold transition ${
               copied
                 ? 'bg-emerald-600 text-white'
-                : 'border border-slate-200 bg-slate-50 text-[#0B1560] hover:border-[#D91B24] hover:text-[#D91B24]'
+                : 'border border-slate-200 bg-slate-50 text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED]'
             }`}
           >
             {copied ? '✓ Kopyalandı' : '📋 Metni Kopyala'}

@@ -6,212 +6,605 @@ import { HeroSlider } from '../components/HeroSlider';
 import { InnovativeShowcase } from '../components/InnovativeShowcase';
 import { ArchitecturalVirtualTour } from '../components/ArchitecturalVirtualTour';
 
-const MARQUEE_TERMS = [
-  'CAM BALKON SİSTEMLERİ',
-  'KIŞ BAHÇESİ',
-  'GİYOTİN CAM',
-  'ALÜMİNYUM & PVC DOĞRAMA',
-  'PANJUR & KEPENK',
-  'CEPHE GİYDİRME SİSTEMLERİ',
-  'OFİS BÖLME SİSTEMLERİ',
-  'KALDIR-SÜR SÜRME SİSTEMLER',
-];
+/* ============================================================================
+   HOMEPAGE CONTENT
+   ============================================================================ */
 
-const NINE_SERVICE_CATEGORIES = [
+type ServiceCard = {
+  title: string;
+  description: string;
+  href: string;
+  icon: React.ReactNode;
+};
+
+const SERVICE_CARDS: ServiceCard[] = [
   {
-    id: '01',
-    title: 'Cam Balkon Sistemleri',
-    tag: '4+20+4 ISICAM & KATLANIR',
-    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
-    href: '/urunler?kategori=cam-balkon-sistemleri',
+    title: 'Isıcamlı Cam Balkon',
+    description:
+      '4+20+4 argon gazlı temperli cam ve antrasit profil ile dört mevsim yaşayan balkonlar.',
+    href: '/urunler/vera-isicamli-cam-balkon',
+    icon: <IconGlass />,
   },
   {
-    id: '02',
+    title: 'Giyotin Cam Sistemleri',
+    description:
+      'Kumandalı, dikey açılan cam cephe; açıkken güvenli küpeşte, kapalıyken tam yalıtım.',
+    href: '/urunler/giyotin-motorlu-silinebilir-cam',
+    icon: <IconVertical />,
+  },
+  {
+    title: 'Bioklimatik Pergola',
+    description:
+      'Motorlu alüminyum lamelli tavan, gizli yağmur tahliyesi ve entegre LED aydınlatma.',
+    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    icon: <IconSun />,
+  },
+  {
     title: 'Kış Bahçesi Sistemleri',
-    tag: 'BİOKLİMATİK & TERAS',
+    description:
+      'Teras ve bahçe katlarını dört mevsim kullanılan ferah bir yaşam alanına dönüştürün.',
+    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    icon: <IconHome />,
+  },
+  {
+    title: 'Sürme Cam Sistemleri',
+    description:
+      'Eşiksiz alt ray, geniş açıklık ve tek parmakla sessiz kayma; dar balkonlarda alan kazancı.',
+    href: '/urunler?kategori=surme-sistemler',
+    icon: <IconSlide />,
+  },
+  {
+    title: 'Alüminyum & PVC Doğrama',
+    description:
+      'Revotech Gold, Dorado 76 ve Safir serileriyle yüksek yalıtımlı pencere ve kapı çözümleri.',
+    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
+    icon: <IconLayers />,
+  },
+  {
+    title: 'Plise Perde & Sineklik',
+    description:
+      'Kedi tüllü sineklik, plise perde ve panjur entegrasyonuyla temiz ve konforlu iç mekânlar.',
+    href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
+    icon: <IconShield />,
+  },
+];
+
+const TRUST_STATS = [
+  { value: '1.200+', label: 'Tamamlanan proje' },
+  { value: '11', label: 'Bahçelievler mahallesi' },
+  { value: '5 Yıl', label: 'Mekanik garanti' },
+  { value: '38 dB', label: 'Akustik konfor' },
+  { value: '%100', label: 'Ücretsiz keşif' },
+];
+
+const WHY_POINTS = [
+  {
+    title: 'Kocasinan Merkez Üretim',
+    text: 'Kendi atölyemizde CNC hassasiyetinde üretim, aracısız fabrika fiyatı.',
+  },
+  {
+    title: 'Lazerli Ücretsiz Keşif',
+    text: 'Milimetrik ölçü, renk danışmanlığı ve aynı gün net fiyat teklifi.',
+  },
+  {
+    title: 'TSE & CE Belgeli Sistemler',
+    text: 'Temperli cam, paslanmaz rulman ve TS EN 14351-1 uyumlu profil.',
+  },
+  {
+    title: '10 Yıl Kurumsal Güvence',
+    text: 'Montaj sonrası bakım, yedek parça ve ücretsiz servis desteği.',
+  },
+];
+
+const PROJECTS = [
+  {
+    title: 'Kocasinan Isıcamlı Balkon',
+    meta: 'Vera Termal • 4+20+4 Isıcam',
+    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
+    href: '/urunler/vera-isicamli-cam-balkon',
+    tag: 'Bahçelievler',
+  },
+  {
+    title: 'Giyotin & Bioklimatik Teras',
+    meta: 'Motorlu Giyotin • Pergola',
     image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-  },
-  {
-    id: '03',
-    title: 'Giyotin Sistemleri',
-    tag: 'SOMFY MOTORLU CAM',
-    image: '/images/products/cam-balkon-default.svg',
-    href: '/urunler/giyotin-motorlu-silinebilir-cam',
-  },
-  {
-    id: '04',
-    title: 'Alüminyum Sistemleri',
-    tag: 'MİMARİ DOĞRAMA & DONANIM',
-    image: '/images/products/donanim-aksesuar-default.svg',
-    href: '/urunler?kategori=donanim-sistemleri',
-  },
-  {
-    id: '05',
-    title: 'Cephe Giydirme Sistemleri',
-    tag: 'STRÜKTÜREL SİLİKON CEPHE',
-    image: '/images/siyavuspasa-surme-cam-balkon.jpg',
-    href: '/profesyoneller/proje-hizmetleri',
-  },
-  {
-    id: '06',
-    title: 'Ofis Bölme Sistemleri',
-    tag: 'AKUSTİK CAM BÖLME',
-    image: '/images/products/surme-sistem-default.svg',
-    href: '/urunler/panorama-esiksiz-surme-cam-balkon',
-  },
-  {
-    id: '07',
-    title: 'PVC Pencere, Kapılar',
-    tag: 'REVOTECH GOLD & DORADO 76',
-    image: '/images/products/pvc-pencere-default.svg',
-    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
-  },
-  {
-    id: '08',
-    title: 'Sürme Sistemler',
-    tag: 'PANORAMA HS 76 & LOTUS',
-    image: '/images/products/surme-sistem-default.svg',
-    href: '/urunler?kategori=surme-sistemler',
-  },
-  {
-    id: '09',
-    title: 'Panjur & Kepenk',
-    tag: 'WINSTOR & WINKEPENK',
-    image: '/images/products/panjur-kepenk-default.svg',
-    href: '/urunler?kategori=panjur-ve-kepenk-sistemleri',
+    tag: 'Kış Bahçesi',
   },
 ];
 
-const PANORAMIC_PROJECTS = [
+const REVIEWS = [
   {
-    title: 'Panoramik Villa Cephesi',
-    location: 'Bahçelievler • Kocasinan',
-    system: 'VBS 4+20+4 Isıcamlı Cam Balkon',
-    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
-    href: '/profesyoneller/referanslar',
+    name: 'Ayşe K.',
+    district: 'Kocasinan Merkez',
+    text: 'Balkonumuz kışın da evin en sıcak odası oldu. Ölçü, montaj ve temizlik beklentimizin üzerindeydi.',
+    system: 'Isıcamlı Cam Balkon',
   },
   {
-    title: 'Lüks Teras & Bahçe Geçişi',
-    location: 'Bakırköy • Yeşilköy',
-    system: 'Panorama HS 76 Kaldır-Sür',
-    image: '/images/siyavuspasa-surme-cam-balkon.jpg',
-    href: '/profesyoneller/referanslar',
+    name: 'Mehmet D.',
+    district: 'Şirinevler',
+    text: 'E-5 gürültüsü neredeyse tamamen kesildi. Ekip saatinde geldi, işini sessiz ve temiz yaptı.',
+    system: 'Akustik Isıcam',
   },
   {
-    title: 'Motorlu Giyotin & Kış Bahçesi',
-    location: 'Bahçelievler • Siyavuşpaşa',
-    system: 'Somfy Motorlu Giyotin Sistem',
-    image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
-    href: '/profesyoneller/referanslar',
+    name: 'Selin A.',
+    district: 'Siyavuşpaşa',
+    text: 'Dar balkonumuz sürme sistemle çok kullanışlı hale geldi. Renk danışmanlığı çok iyiydi.',
+    system: 'Eşiksiz Sürme',
   },
   {
-    title: 'Modern Rezidans Doğrama',
-    location: 'Florya & Ataköy',
-    system: 'Revotech Gold 84mm Antrasit',
-    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
-    href: '/profesyoneller/referanslar',
+    name: 'Burak Y.',
+    district: 'Yenibosna',
+    text: 'Terasımız bioklimatik pergola ile gerçek bir yaşam alanına dönüştü. Tek tuşla açılıyor.',
+    system: 'Bioklimatik Pergola',
+  },
+  {
+    name: 'Fatma Ö.',
+    district: 'Hürriyet',
+    text: 'Fiyatı baştan net söylediler, montajda sürpriz olmadı. Garanti belgelerimizi de teslim ettiler.',
+    system: 'Katlanır Cam Balkon',
+  },
+  {
+    name: 'Emre T.',
+    district: 'Bahçelievler Merkez',
+    text: 'Giyotin cam sistemi çok sessiz çalışıyor; açıkken balkon ferahlığı, kapalıyken yağmur ve rüzgâr koruması tam istediğimiz gibi oldu.',
+    system: 'Giyotin Cam',
   },
 ];
+
+const BLOG_POSTS = [
+  {
+    title: 'Isıcamlı cam balkon mu, katlanır tek cam mı?',
+    excerpt: 'Isı yalıtımı, bütçe ve kullanım alışkanlıklarına göre doğru sistemi karşılaştırın.',
+    category: 'Sistem Rehberi',
+    read: '6 dk okuma',
+    href: '/profesyoneller/isicamli-cam-balkon-mu-katlanir-tek-cam-mi',
+    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
+  },
+  {
+    title: '76 mm ve 84 mm PVC profil farkı nedir?',
+    excerpt: 'Odacık sayısı, conta yapısı ve ısı yalıtımı açısından profil seçimini anlatıyoruz.',
+    category: 'Teknik Bilgi',
+    read: '4 dk okuma',
+    href: '/profesyoneller/pvc-pencerede-76mm-ve-84mm-profil-farki',
+    image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
+  },
+  {
+    title: 'Apartmanda cam balkon için 4/5 muvafakatname rehberi',
+    excerpt: 'Yargıtay kararları, kat maliki onayı ve dış cephe uyumu hakkında pratik adımlar.',
+    category: 'Yasal Süreç',
+    read: '7 dk okuma',
+    href: '/profesyoneller/apartmanlarda-cam-balkon-yasal-muvafakatname-rehberi',
+    image: '/images/siyavuspasa-surme-cam-balkon.jpg',
+  },
+];
+
+const ADDITIONAL_LINKS = [
+  { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
+  { label: 'Proje Galerisi', href: '/galeri' },
+  { label: 'Müşteri Yorumları', href: '/yorumlar' },
+  { label: 'Karşılaştır', href: '/karsilastir' },
+];
+
+/* ============================================================================
+   PAGE
+   ============================================================================ */
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      {/* =====================================================================
-          1. TAM EKRAN 3 AŞAMALI MİMARİ HERO VİTRİNİ (100dvh, Şeffaf Header Arkasında)
-         ===================================================================== */}
+    <main className="min-h-screen bg-white">
       <HeroSlider />
 
-      {/* =====================================================================
-          2. DEKORATİF MİMARİ ŞERİT (INFINITE SMOOTH MARQUEE)
-         ===================================================================== */}
-      <div className="overflow-hidden border-y border-white/10 bg-[#0B1560] py-4 text-white/85">
-        <div className="animate-architectural-marquee flex items-center gap-8 whitespace-nowrap text-xs font-extrabold tracking-[0.22em]">
-          {[...MARQUEE_TERMS, ...MARQUEE_TERMS].map((term, idx) => (
-            <span key={`${term}-${idx}`} className="inline-flex items-center gap-8">
-              <span className="text-[#D91B24]">◆</span>
-              <span>{term}</span>
-            </span>
+      {/* ============================ GÜVEN BARI ============================ */}
+      <section aria-label="Çelikpen güven göstergeleri" className="border-b border-slate-200 bg-white">
+        <div className="container-shell grid grid-cols-2 gap-x-4 gap-y-6 py-7 sm:grid-cols-3 lg:grid-cols-5 lg:py-8">
+          {TRUST_STATS.map((stat) => (
+            <div key={stat.label} className="text-center lg:border-r lg:border-slate-200 lg:last:border-r-0">
+              <p className="text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl">{stat.value}</p>
+              <p className="mt-1 text-[10.5px] font-medium uppercase tracking-[0.13em] text-slate-500">
+                {stat.label}
+              </p>
+            </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* =====================================================================
-          3. HİZMETLERİMİZ & ÜRÜN GRUPLARIMIZ — 9'LU L-KÖŞE DEKORATİF VİTRİN
-         ===================================================================== */}
-      <section className="marble-surface relative py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col justify-between gap-4 border-b border-[#0B1560]/10 pb-8 md:flex-row md:items-end">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#D91B24]">
-                <span className="h-[2px] w-6 bg-[#D91B24]" />
-                <span>HİZMETLERİMİZ &amp; SİSTEM GRUPLARIMIZ</span>
+      {/* ============================ HİZMETLER ============================ */}
+      <section id="hizmetler" className="section-shell bg-[#F8FAFC]">
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="section-kicker">Hizmetlerimiz</span>
+            <h2 className="section-title">Balkonunuz için doğru cam sistemi</h2>
+            <p className="section-subtitle mx-auto">
+              Ölçüden montaja kadar tek elden; yaşam alanınıza, cephenize ve bütçenize uygun
+              mimari cam çözümleri.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_CARDS.map((service, index) => (
+              <Link
+                key={service.title}
+                href={service.href}
+                className="group relative flex flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#DDD6FE] hover:shadow-card sm:p-6"
+              >
+                <span className="absolute right-5 top-5 text-[10px] font-semibold tracking-[0.18em] text-slate-300">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#DDD6FE] bg-[#F5F3FF] text-[#7C3AED] transition-colors group-hover:bg-[#7C3AED] group-hover:text-white">
+                  {service.icon}
+                </span>
+                <h3 className="mt-5 text-[15px] font-semibold text-[#0F172A] group-hover:text-[#6D28D9]">
+                  {service.title}
+                </h3>
+                <p className="mt-2 flex-1 text-[12px] leading-relaxed text-slate-500">
+                  {service.description}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7C3AED]">
+                  Detayları incele
+                  <IconArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-card bg-[#0F172A] p-6 text-white">
+              <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#7C3AED]/45 blur-2xl" />
+              <div className="relative">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#DDD6FE]">
+                  Emin olamadınız mı?
+                </span>
+                <h3 className="mt-3 text-xl font-semibold leading-snug">
+                  Lazerli keşifte birlikte karar verelim.
+                </h3>
+                <p className="mt-2 text-[12px] leading-relaxed text-slate-300">
+                  Balkonunuzu ölçüp ihtiyacınıza en uygun sistemi, renk ve cam seçenekleriyle
+                  gösteriyoruz.
+                </p>
               </div>
-              <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0B1560] sm:text-4xl">
-                Mimari Cam ve Doğrama Çözümleri
-              </h2>
+              <Link
+                href="/iletisim?form=kesif"
+                className="relative mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+              >
+                Ücretsiz Keşif İste
+                <IconArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ NEDEN BİZ ============================ */}
+      <section className="section-shell bg-white">
+        <div className="container-shell grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-panel border border-slate-200 bg-slate-100 shadow-card">
+              <Image
+                src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
+                alt="Çelikpen bioklimatik pergola ve giyotin cam sistem uygulaması"
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/55 via-transparent to-transparent" />
+            </div>
+            <div className="absolute -bottom-5 left-4 right-4 rounded-xl border border-slate-200 bg-white p-4 shadow-soft sm:left-6 sm:right-auto sm:w-64">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5F3FF] text-[#7C3AED]">
+                  <IconBadge />
+                </span>
+                <div>
+                  <p className="text-[11px] font-semibold text-[#0F172A]">TSE EN 12150</p>
+                  <p className="text-[9.5px] text-slate-500">Temperli cam güvenliği</p>
+                </div>
+                <span className="ml-auto h-2 w-2 rounded-full bg-[#10B981]" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 lg:pt-0">
+            <span className="section-kicker">Neden Biz?</span>
+            <h2 className="section-title">İşin her adımında yanınızdayız</h2>
+            <p className="section-subtitle">
+              Çelikpen; Kocasinan Merkez üretim tesisi, kendi montaj ekibi ve kurumsal garanti
+              anlayışıyla Bahçelievler’in 11 mahallesinde hizmet veriyor.
+            </p>
+
+            <div className="mt-7 grid gap-4 sm:grid-cols-2">
+              {WHY_POINTS.map((point) => (
+                <div key={point.title} className="rounded-xl border border-slate-200 bg-[#F8FAFC] p-4">
+                  <div className="flex items-start gap-2.5">
+                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#10B981] text-white">
+                      <IconCheck className="h-2.5 w-2.5" />
+                    </span>
+                    <div>
+                      <h3 className="text-[12px] font-semibold text-[#0F172A]">{point.title}</h3>
+                      <p className="mt-1 text-[10.5px] leading-relaxed text-slate-500">{point.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <Link
+                href="/kurumsal/hakkimizda"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#0F172A] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1E293B]"
+              >
+                Kurumsal Hikâyemiz <IconArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/fiyat-hesapla"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+              >
+                Fiyat Hesapla
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ 5 İNTERAKTİF MODÜL ============================ */}
+      <InnovativeShowcase />
+
+      {/* ============================ SANAL TUR ============================ */}
+      <ArchitecturalVirtualTour />
+
+      {/* ============================ FİYAT / DÖNÜŞÜM BANDI ============================ */}
+      <section className="bg-white py-12 sm:py-16">
+        <div className="container-shell">
+          <div className="overflow-hidden rounded-panel border border-[#DDD6FE] bg-[#F5F3FF]">
+            <div className="grid items-center gap-6 p-6 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
+              <div>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7C3AED]">
+                  Şeffaf fiyatlandırma
+                </span>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#0F172A] sm:text-3xl">
+                  Balkonunuzun fiyatını 30 saniyede öğrenin.
+                </h2>
+                <p className="mt-2 max-w-xl text-[12.5px] leading-relaxed text-slate-600">
+                  Balkon tipini, genişliğini ve cam seçeneğini girin; tahmini metrekare fiyatını
+                  anında görün. Net teklif için lazerli keşif her zaman ücretsiz.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2.5 sm:flex-row lg:justify-end">
+                <Link
+                  href="/fiyat-hesapla"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
+                >
+                  Fiyat Hesapla <IconArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  href="/iletisim?form=kesif"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#DDD6FE] bg-white px-5 py-3 text-[12px] font-semibold text-[#5B21B6] transition-colors hover:bg-[#EDE9FE]"
+                >
+                  Keşif İste
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ PROJELER ============================ */}
+      <section id="projelerimiz" className="section-shell bg-[#F8FAFC]">
+        <div className="container-shell">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <span className="section-kicker">Uygulamalarımız</span>
+              <h2 className="section-title">Öne Çıkan Son Projelerimiz</h2>
+              <p className="section-subtitle">
+                Bahçelievler ve çevresinde tamamladığımız cam balkon, kış bahçesi ve sürme sistem
+                uygulamalarından bir seçki.
+              </p>
+            </div>
             <Link
-              href="/urunler"
-              className="group inline-flex items-center gap-2 self-start rounded-full border border-[#0B1560]/20 bg-white px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#0B1560] shadow-xs transition-all hover:border-[#D91B24] hover:bg-[#D91B24] hover:text-white"
+              href="/galeri"
+              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
             >
-              <span>Tüm Sistemleri Gör</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              Tüm projeleri incele <IconArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          {/* 9 Ana Hizmet & Ürün Kartı Grid (4 Köşe L-Bracket Hover Dekorasyonlu) */}
-          <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {NINE_SERVICE_CATEGORIES.map((item) => (
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {PROJECTS.map((project) => (
               <Link
-                key={item.id}
-                href={item.href}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0B1560]/30 hover:shadow-[0_22px_45px_-16px_rgba(11,21,96,0.16)] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-0 after:bg-[#D91B24] after:transition-all after:duration-500 hover:after:w-full"
+                key={project.title}
+                href={project.href}
+                className="group overflow-hidden rounded-card border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
               >
-                {/* Görsel + 4 Köşe Mimari L-Bracket (`┌ ┐ └ ┘`) Çerçeve */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100">
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                   <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={640}
-                    height={400}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1560]/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                  {/* 4 Köşe Kırmızı L-Brackets (`┌ ┐ └ ┘`) */}
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-3 left-3 h-4 w-4 border-t-2 border-l-2 border-[#D91B24] opacity-0 transition-all duration-300 group-hover:top-2.5 group-hover:left-2.5 group-hover:opacity-100"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-3 right-3 h-4 w-4 border-t-2 border-r-2 border-[#D91B24] opacity-0 transition-all duration-300 group-hover:top-2.5 group-hover:right-2.5 group-hover:opacity-100"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-[#D91B24] opacity-0 transition-all duration-300 group-hover:bottom-2.5 group-hover:left-2.5 group-hover:opacity-100"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b-2 border-r-2 border-[#D91B24] opacity-0 transition-all duration-300 group-hover:bottom-2.5 group-hover:right-2.5 group-hover:opacity-100"
-                  />
-
-                  <span className="absolute top-3 left-3 rounded-md bg-[#0B1560]/90 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white backdrop-blur-xs transition-opacity duration-200 group-hover:opacity-0">
-                    {item.tag}
+                  <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#6D28D9] backdrop-blur-sm">
+                    {project.tag}
                   </span>
                 </div>
-
-                {/* Minimalist Kart Alt Başlık & Kayar "İncele →" Rozeti */}
-                <div className="mt-4 flex items-center justify-between pt-1">
-                  <h3 className="text-lg font-black tracking-tight text-[#0B1560] transition-colors duration-300 group-hover:text-[#D91B24]">
-                    {item.title}
+                <div className="p-4">
+                  <h3 className="text-[13.5px] font-semibold text-[#0F172A] group-hover:text-[#6D28D9]">
+                    {project.title}
                   </h3>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold text-[#0B1560] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#D91B24] group-hover:text-white">
-                    <span>İncele</span>
-                    <span>→</span>
+                  <p className="mt-1 text-[10.5px] text-slate-500">{project.meta}</p>
+                </div>
+              </Link>
+            ))}
+
+            <Link
+              href="/galeri"
+              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-card border border-[#DDD6FE] bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#4C1D95] p-6 text-white shadow-xs transition-transform duration-300 hover:-translate-y-1"
+            >
+              <span className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/40 blur-2xl" />
+              <span className="pointer-events-none absolute -bottom-16 left-0 h-40 w-40 rounded-full bg-[#D91B24]/15 blur-2xl" />
+              <div className="relative flex items-center justify-between">
+                <span className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#DDD6FE]">
+                  Proje Arşivi
+                </span>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors group-hover:border-[#DDD6FE] group-hover:bg-white group-hover:text-[#6D28D9]">
+                  <IconArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+              <div className="relative mt-10">
+                <p className="text-4xl font-semibold tracking-tight">1.200+</p>
+                <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-300">
+                  Tamamlanan uygulama
+                </p>
+                <p className="mt-4 max-w-xs text-[11.5px] leading-relaxed text-slate-300">
+                  Bahçelievler ve çevresindeki gerçek uygulamalarımızı, ölçü ve sistem detaylarıyla
+                  birlikte inceleyin.
+                </p>
+              </div>
+              <span className="relative mt-6 inline-flex items-center gap-1.5 text-[11px] font-semibold text-white">
+                Galeriyi Aç <IconArrowRight className="h-3.5 w-3.5" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ YORUMLAR ============================ */}
+      <section id="yorumlar" className="section-shell bg-white">
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="section-kicker">Müşteri Deneyimi</span>
+            <h2 className="section-title">Müşterilerimiz Bizim İçin Ne Diyor?</h2>
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#F8FAFC] px-3.5 py-1.5">
+              <span className="flex items-center gap-0.5 text-[#F59E0B]" aria-hidden="true">
+                {[0, 1, 2, 3, 4].map((star) => (
+                  <IconStar key={star} className="h-3 w-3" />
+                ))}
+              </span>
+              <span className="text-[10.5px] font-medium text-slate-600">4.9 / 5 • 500+ değerlendirme</span>
+            </div>
+          </div>
+
+          <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {REVIEWS.map((review, index) => (
+              <article
+                key={review.name}
+                className={`rounded-card border border-slate-200 bg-white p-5 shadow-xs ${
+                  index === 3 ? 'lg:col-start-1' : ''
+                } ${index === 4 ? 'lg:col-start-2' : ''}`}
+              >
+                <div className="flex items-center gap-0.5 text-[#F59E0B]" aria-label="5 yıldız">
+                  {[0, 1, 2, 3, 4].map((star) => (
+                    <IconStar key={star} className="h-3 w-3" />
+                  ))}
+                </div>
+                <p className="mt-3 text-[12px] leading-relaxed text-slate-600">“{review.text}”</p>
+                <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3">
+                  <div>
+                    <p className="text-[11.5px] font-semibold text-[#0F172A]">{review.name}</p>
+                    <p className="text-[9.5px] text-slate-500">{review.district}</p>
+                  </div>
+                  <span className="rounded-full bg-[#F5F3FF] px-2.5 py-1 text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[#6D28D9]">
+                    {review.system}
                   </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ SSS ============================ */}
+      <section id="sss" className="section-shell bg-[#F8FAFC]">
+        <div className="container-shell grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12">
+          <div>
+            <span className="section-kicker">Sıkça Sorulan Sorular</span>
+            <h2 className="section-title">Aklınıza takılanlar</h2>
+            <p className="section-subtitle">
+              Cam balkon izni, ölçü, yalıtım ve garanti hakkında en sık aldığımız soruların
+              yanıtları.
+            </p>
+            <div className="mt-6 rounded-card border border-slate-200 bg-white p-5 shadow-xs">
+              <p className="text-[11px] font-semibold text-[#0F172A]">Başka bir sorunuz mu var?</p>
+              <p className="mt-1 text-[10.5px] leading-relaxed text-slate-500">
+                Teknik ekibimiz hafta içi 08:30 - 19:30 arasında yanınızda.
+              </p>
+              <a
+                href={`tel:${SITE_CONFIG.phoneRaw}`}
+                className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7C3AED]"
+              >
+                <IconPhone className="h-3.5 w-3.5" /> {SITE_CONFIG.phoneDisplay}
+              </a>
+            </div>
+          </div>
+
+          <div className="divide-y divide-slate-200 overflow-hidden rounded-card border border-slate-200 bg-white">
+            {SITE_CONFIG.faqs.map((faq) => (
+              <details key={faq.question} className="group">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[12px] font-semibold leading-relaxed text-[#0F172A] marker:hidden hover:bg-[#F8FAFC]">
+                  {faq.question}
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-transform group-open:rotate-45">
+                    <IconPlus className="h-3 w-3" />
+                  </span>
+                </summary>
+                <div className="px-5 pb-4 pr-12 text-[11px] leading-relaxed text-slate-500">
+                  {faq.answer}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ BLOG ============================ */}
+      <section id="blog" className="section-shell bg-white">
+        <div className="container-shell">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <span className="section-kicker">Bilgi Merkezi</span>
+              <h2 className="section-title">Blog & mimari rehberler</h2>
+              <p className="section-subtitle">
+                Doğru sistemi seçmenize yardımcı olacak teknik ve yasal içerikler.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+            >
+              Tüm yazılar <IconArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {BLOG_POSTS.map((post) => (
+              <Link
+                key={post.title}
+                href={post.href}
+                className="group flex flex-col overflow-hidden rounded-card border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span className="absolute left-3 top-3 rounded-full bg-[#0F172A]/85 px-2.5 py-1 text-[8.5px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-4">
+                  <h3 className="text-[13.5px] font-semibold leading-snug text-[#0F172A] group-hover:text-[#6D28D9]">
+                    {post.title}
+                  </h3>
+                  <p className="mt-1.5 flex-1 text-[10.5px] leading-relaxed text-slate-500">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
+                    <span className="text-[9px] font-medium uppercase tracking-[0.12em] text-slate-400">
+                      {post.read}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#7C3AED]">
+                      Oku <IconArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -219,112 +612,173 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* =====================================================================
-          3B. 5'Lİ İNTERAKTİF MİMARİ LABORATUVAR (HOTSPOT, -38dB SES, SİHİRBAZ, STÜDYO, CAD LENS)
-         ===================================================================== */}
-      <InnovativeShowcase />
-
-      {/* =====================================================================
-          4. İNTERAKTİF GÜNDÜZ/GECE & SİSTEM DENEYİM VİTRİNİ (SANAL TUR)
-         ===================================================================== */}
-      <ArchitecturalVirtualTour />
-
-      {/* =====================================================================
-          5. MİNİMALİST 4'LÜ PROJE GALERİSİ & SHOWROOM DAVET ŞERİDİ
-         ===================================================================== */}
-      <section className="marble-surface py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col justify-between gap-4 border-b border-[#0B1560]/10 pb-8 md:flex-row md:items-end">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#D91B24]">
-                <span className="h-[2px] w-6 bg-[#D91B24]" />
-                <span>SEÇKİN REFERANSLAR</span>
+      {/* ============================ SON DÖNÜŞÜM CTA ============================ */}
+      <section className="bg-white pb-14 sm:pb-20">
+        <div className="container-shell">
+          <div className="relative overflow-hidden rounded-panel bg-[#0F172A] px-6 py-10 text-white sm:px-10 sm:py-14">
+            <span className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#7C3AED]/35 blur-3xl" />
+            <span className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-[#D91B24]/15 blur-3xl" />
+            <div className="relative grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-[#DDD6FE]">
+                  <IconSparkle className="h-3 w-3" /> Aynı Gün Ücretsiz Keşif
+                </span>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                  Evinizde Ücretsiz Keşif Yapalım
+                </h2>
+                <p className="mt-3 max-w-xl text-[12.5px] leading-relaxed text-slate-300">
+                  Balkonunuzu ölçelim, ihtiyacınıza uygun sistemi ve cam seçeneklerini birlikte
+                  belirleyelim. Keşif ve fiyat teklifi tamamen ücretsiz.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10.5px] text-slate-300">
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconCheck className="h-3 w-3 text-[#10B981]" /> Lazerli ölçü
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconCheck className="h-3 w-3 text-[#10B981]" /> Renk danışmanlığı
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconCheck className="h-3 w-3 text-[#10B981]" /> Net fiyat
+                  </span>
+                </div>
               </div>
-              <h2 className="mt-2 text-3xl font-black tracking-tight text-[#0B1560] sm:text-4xl">
-                Panoramik Yaşam Alanları
-              </h2>
+              <div className="flex flex-col gap-2.5 sm:flex-row lg:flex-col lg:items-stretch">
+                <Link
+                  href="/iletisim?form=kesif"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3.5 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
+                >
+                  <IconCalendar className="h-4 w-4" /> Keşif Randevusu Al
+                </Link>
+                <a
+                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/25 bg-white/5 px-5 py-3.5 text-[12px] font-semibold text-white transition-colors hover:bg-white/10"
+                >
+                  <IconPhone className="h-4 w-4" /> {SITE_CONFIG.phoneDisplay}
+                </a>
+              </div>
             </div>
-
-            <Link
-              href="/profesyoneller/referanslar"
-              className="group inline-flex items-center gap-2 self-start rounded-full border border-[#0B1560]/20 bg-white px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#0B1560] transition-all hover:border-[#D91B24] hover:bg-[#D91B24] hover:text-white"
-            >
-              <span>Tüm Referanslar</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
           </div>
 
-          {/* 4 Büyük Panoramik Referans Kartı */}
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PANORAMIC_PROJECTS.map((proj) => (
-              <Link
-                key={proj.title}
-                href={proj.href}
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 shadow-md"
-              >
-                <Image
-                  src={proj.image}
-                  alt={proj.title}
-                  width={500}
-                  height={620}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                <div className="
-                  absolute inset-0 bg-gradient-to-t from-[#070E1E]/95 via-[#070E1E]/35 to-transparent
-                " />
-
-                {/* Köşe L-Bracket Hover */}
-                <span className="pointer-events-none absolute top-3 left-3 h-4 w-4 border-t-2 border-l-2 border-[#D91B24] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <span className="pointer-events-none absolute top-3 right-3 h-4 w-4 border-t-2 border-r-2 border-[#D91B24] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                  <span className="inline-block rounded-full bg-[#D91B24] px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-white">
-                    {proj.location}
-                  </span>
-                  <h3 className="mt-2 text-base font-black leading-snug text-white">
-                    {proj.title}
-                  </h3>
-                  <p className="mt-1 text-xs font-medium text-slate-300">
-                    {proj.system}
-                  </p>
-                </div>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] text-slate-500">
+            {ADDITIONAL_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-[#7C3AED]">
+                {link.label}
               </Link>
             ))}
-          </div>
-
-          {/* Minimalist Showroom & Katalog Davet Şeridi */}
-          <div className="mt-14 flex flex-col items-center justify-between gap-6 rounded-2xl border border-[#0B1560]/15 bg-white p-6 shadow-sm sm:flex-row sm:p-8">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0B1560] text-lg font-black text-white">
-                ◆
-              </div>
-              <div>
-                <h3 className="text-lg font-black text-[#0B1560]">
-                  Kocasinan Merkez Showroom &amp; Deneyim Merkezi
-                </h3>
-                <p className="text-xs font-medium text-slate-600">
-                  {SITE_CONFIG.address} • {SITE_CONFIG.workingHours}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/profesyoneller/kataloglar"
-                className="rounded-full bg-[#0B1560] px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-white transition hover:bg-[#D91B24]"
-              >
-                E-Kataloglar
-              </Link>
-              <Link
-                href="/iletisim"
-                className="rounded-full border border-[#0B1560]/25 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-[#0B1560] transition hover:border-[#D91B24] hover:text-[#D91B24]"
-              >
-                Showroom Konumu →
-              </Link>
-            </div>
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+/* ============================================================================
+   ICONS
+   ============================================================================ */
+type IconProps = { className?: string };
+
+function IconArrowRight({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+function IconCheck({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m5 12 4 4L19 6" />
+    </svg>
+  );
+}
+function IconPlus({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden="true">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+function IconStar({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="m12 2.5 2.9 6.1 6.6.9-4.8 4.7 1.2 6.6-5.9-3.2-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9L12 2.5Z" />
+    </svg>
+  );
+}
+function IconSparkle({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m12 3-1.9 5.1L5 10l5.1 1.9L12 17l1.9-5.1L19 10l-5.1-1.9L12 3Z" /><path d="M5 3v4M3 5h4M19 17v4M17 19h4" />
+    </svg>
+  );
+}
+function IconCalendar({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+    </svg>
+  );
+}
+function IconPhone({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+function IconBadge({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+function IconGlass({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 12h18M12 3v18" /><path d="m7 7 2 2" opacity=".45" />
+    </svg>
+  );
+}
+function IconVertical({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m8 7 4-4 4 4M8 17l4 4 4-4M12 3v18" />
+    </svg>
+  );
+}
+function IconSun({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+function IconHome({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" /><path d="M9 21v-8h6v8" />
+    </svg>
+  );
+}
+function IconSlide({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M12 3v18M8 8h2M14 16h2" />
+    </svg>
+  );
+}
+function IconLayers({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
+    </svg>
+  );
+}
+function IconShield({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" />
+    </svg>
   );
 }

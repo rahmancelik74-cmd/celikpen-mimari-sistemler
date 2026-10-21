@@ -100,13 +100,13 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
   },
   {
     slug: 'neden-winsa',
-    title: 'Neden PVC, Neden Çelikpen & Winsa?',
+    title: 'Neden PVC, Neden Çelikpen?',
     categoryGroup: 'KURUMSAL',
     heroBadge: 'MALZEME BİLİMİ & PERFORMANS KARŞILAŞTIRMASI',
     subtitle:
       'Neden modern mimaride çok odacıklı uPVC doğrama ve termal contalı ısıcamlı cam balkon sistemleri açık ara en yüksek fiyat/performans ve yalıtım değerini sunar?',
     seoDescription:
-      'Neden PVC, Neden Çelikpen & Winsa? PVC, ahşap ve standart alüminyum doğramaların ısı yalıtımı, akustik, ömür ve bakım maliyeti açısından teknik karşılaştırması.',
+      'Neden PVC, Neden Çelikpen? PVC, ahşap ve standart alüminyum doğramaların ısı yalıtımı, akustik, ömür ve bakım maliyeti açısından teknik karşılaştırması.',
     paragraphs: [
       'Pencere ve kapı doğramalarında kullanılan malzemenin ısıl iletkenlik katsayısı (λ - Lambda), binanın toplam enerji kimliğini doğrudan belirler. uPVC malzemenin doğal ısıl iletkenliği (0.16 W/mK), alüminyumdan yaklaşık 1.000 kat daha düşüktür; bu sayede yoğuşma (terleme) ve ısı köprüsü oluşumunu doğal olarak engeller.',
       'Winsa’nın 7 odacıklı 84 mm Revotech Gold ve 5 odacıklı 76 mm Dorado 76 serileri, içlerindeki durgun hava odacıkları ve merkezi 3. TPE contalarıyla hem ısı hem de akustik yalıtımda (45 dB) standart doğramalara göre rakipsiz bir bariyer oluşturur.',
@@ -253,13 +253,13 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
   },
   {
     slug: 'basinda-winsa',
-    title: 'Basında Winsa & Çelikpen',
+    title: 'Basında Çelikpen',
     categoryGroup: 'MEDYA',
     heroBadge: 'MEDYA YANSIMALARI & SEKTÖREL HABERLER',
     subtitle:
       'Mimari yapı dergileri, ulusal basın ve sektörel yayınlarda yer alan yeni ürün lansmanlarımız, enerji verimliliği röportajlarımız ve ödüllerimiz.',
     seoDescription:
-      'Basında Winsa & Çelikpen: Mimari yayınlar, yeni nesil Comfort Slide Plus ve Revotech Gold lansman haberleri.',
+      'Basında Çelikpen: Mimari yayınlar, yeni nesil Comfort Slide Plus ve Revotech Gold lansman haberleri.',
     paragraphs: [
       'Yapı teknolojileri ve mimari cephe basını, yüksek enerji maliyetlerine karşı geliştirdiğimiz 84 mm Revotech Gold ve 4+20+4 Argon gazlı VBS Isıcamlı Cam Balkon çözümlerimizi yakından takip etmektedir.',
       'Kentsel dönüşüm bölgelerinde akustik konfor (45 dB) ve sıfır enerjili bina kabuğu üzerine yayınlanan teknik makalelerimiz ve basın bültenlerimiz aşağıda yer almaktadır.',
