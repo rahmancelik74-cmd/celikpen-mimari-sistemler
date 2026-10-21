@@ -132,12 +132,14 @@ export function SalesPointsDirectory() {
 
               <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-2.5 text-xs">
                 <Link
+                  prefetch={true}
                   href={`/bahcelievler/${n.slug}`}
                   className="font-bold text-[#0F172A] hover:text-[#7C3AED]"
                 >
                   Bölge Detayı →
                 </Link>
                 <Link
+                  prefetch={true}
                   href="/iletisim"
                   className="rounded-md bg-[#7C3AED] px-2.5 py-1 text-[11px] font-bold text-white hover:bg-[#6D28D9]"
                 >

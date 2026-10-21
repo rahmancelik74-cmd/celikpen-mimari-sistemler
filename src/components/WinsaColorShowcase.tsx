@@ -44,6 +44,7 @@ export function WinsaColorShowcase() {
             </p>
           </div>
           <Link
+            prefetch={true}
             href="/fiyat-hesapla"
             className="rounded-lg bg-celikpen-brand px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-celikpen-brand-soft"
           >

@@ -196,6 +196,9 @@ export const ArchitecturalVirtualTour: React.FC = () => {
                 ))}
 
                 <Link
+
+                  prefetch={true}
+
                   href={current.href}
                   className="inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg transition hover:bg-[#6D28D9]"
                 >

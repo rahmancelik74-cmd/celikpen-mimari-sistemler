@@ -163,6 +163,7 @@ export default function KarsilastirPage() {
                   </td>
                   <td className="p-4 text-right">
                     <Link
+                      prefetch={true}
                       href={`/sistemler/${targetSlug}`}
                       className="inline-block rounded-lg border border-celikpen-brand bg-white px-3 py-1.5 text-xs font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
                     >
@@ -188,6 +189,7 @@ export default function KarsilastirPage() {
           </p>
         </div>
         <Link
+          prefetch={true}
           href="/fiyat-hesapla"
           className="rounded-lg bg-celikpen-cta px-5 py-3 text-sm font-bold text-white shadow transition hover:bg-rose-500"
         >

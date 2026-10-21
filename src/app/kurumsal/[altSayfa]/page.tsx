@@ -18,6 +18,8 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -100,6 +102,7 @@ export default async function KurumsalAltSayfa({
                   return (
                     <li key={item.slug}>
                       <Link
+                        prefetch={true}
                         href={`/kurumsal/${item.slug}`}
                         className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                           active
@@ -169,12 +172,14 @@ export default async function KurumsalAltSayfa({
             </div>
             <div className="flex shrink-0 gap-2.5">
               <Link
+                prefetch={true}
                 href="/urunler"
                 className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#6D28D9]"
               >
                 Ürünleri İncele →
               </Link>
               <Link
+                prefetch={true}
                 href="/iletisim"
                 className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20"
               >

@@ -11,6 +11,7 @@ import { SeoJsonLd } from '../components/SeoJsonLd';
 import { SiteHeader } from '../components/header/MegaMenu';
 import { Footer } from '../components/Footer';
 import { PageTransitionBar } from '../components/PageTransitionBar';
+import { InstantPrefetcher } from '../components/InstantPrefetcher';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import './globals.css';
 
@@ -18,6 +19,7 @@ const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
   weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
+  preload: true,
   variable: '--font-poppins',
 });
 
@@ -76,6 +78,7 @@ export default function RootLayout({
     <html lang="tr" className={poppins.variable}>
       <body className="bg-white font-sans text-slate-800 antialiased">
         <PageTransitionBar />
+        <InstantPrefetcher />
         <SeoJsonLd />
 
         {/* Sabit üst bar + ana menü; tüm sayfalarda aynı kurumsal kabuk */}

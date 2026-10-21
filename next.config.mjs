@@ -16,6 +16,24 @@ const nextConfig = {
   outputFileTracingRoot: projectRoot,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Next/image optimizasyon sonuçları bir yıl boyunca değişmez kabul edilir.
+    minimumCacheTTL: 31536000,
+  },
+  // Kamu görselleri, derlenmiş chunk'lar ve favicon tarayıcıda kalıcı önbelleğe alınır.
+  async headers() {
+    const immutable = [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable',
+      },
+    ];
+
+    return [
+      { source: '/images/:path*', headers: immutable },
+      { source: '/_next/static/:path*', headers: immutable },
+      { source: '/favicon.ico', headers: immutable },
+      { source: '/icon.svg', headers: immutable },
+    ];
   },
   // Eski ürün bağlantılarını güncel WINSA katalog slug'larına kalıcı olarak yönlendirir.
   async redirects() {

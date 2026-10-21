@@ -41,8 +41,8 @@ const WAF_PATTERNS: RegExp[] = [
 const CSP_DIRECTIVES = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com data:",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self' data:",
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https:",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
@@ -75,6 +75,11 @@ function applySecurityHeaders(response: NextResponse): NextResponse {
   for (const [key, value] of SECURITY_HEADERS) {
     response.headers.set(key, value);
   }
+  // Next'in otomatik font/asset preload Link başlığını ezmemek için append kullanılır.
+  response.headers.append(
+    'Link',
+    '</icon.svg>; rel=icon, </manifest.webmanifest>; rel=manifest'
+  );
   return response;
 }
 

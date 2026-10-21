@@ -162,6 +162,18 @@ h4 {
   color: #64748b;
 }
 
+/* Ağır, ekran dışı bölümlerin ilk boyamayı ve rota geçişini kilitlemesini engeller. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* Slider / mega menü katmanlarını tek GPU katmanına taşır. */
+.gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* -------------------------------------------------------------------------
    Reusable surfaces
    ------------------------------------------------------------------------- */

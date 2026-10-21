@@ -23,6 +23,8 @@ export function generateStaticParams() {
   return SITE_CONFIG.productSeries.map((p) => ({ seri: p.slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -103,7 +105,9 @@ export default async function SistemSeriPage({
       {/* Üst Navigasyon */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <div className="flex items-center gap-2">
-          <Link href="/" className="hover:text-celikpen-brand-soft">
+          <Link
+            prefetch={true}
+            href="/" className="hover:text-celikpen-brand-soft">
             Ana Sayfa
           </Link>
           <span>/</span>
@@ -112,6 +116,7 @@ export default async function SistemSeriPage({
           <span className="font-semibold text-slate-900">{prod.name}</span>
         </div>
         <Link
+          prefetch={true}
           href="/blog/eylul-2026-yargitay-cam-balkon-karari"
           className="font-semibold text-celikpen-cta hover:underline"
         >
@@ -266,6 +271,7 @@ export default async function SistemSeriPage({
               Bu Seride Uygulanabilen Standart RAL & Ahşap Laminasyon Renkleri
             </h3>
             <Link
+              prefetch={true}
               href="/#renk-kartelasi"
               className="text-xs font-bold text-celikpen-brand-soft hover:underline"
             >
@@ -296,6 +302,7 @@ export default async function SistemSeriPage({
         {/* Yakın Sistemlerle Karşılaştır Linki */}
         <div className="mt-4 flex justify-end">
           <Link
+            prefetch={true}
             href={`/karsilastir#${prod.slug}`}
             className="inline-flex items-center gap-1.5 rounded-lg border border-celikpen-brand bg-white px-4 py-2 text-xs font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
           >
@@ -363,6 +370,7 @@ export default async function SistemSeriPage({
         <div className="mt-3 flex flex-wrap gap-2">
           {SITE_CONFIG.productSeries.map((item) => (
             <Link
+              prefetch={true}
               key={item.slug}
               href={`/sistemler/${item.slug}`}
               className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${

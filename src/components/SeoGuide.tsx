@@ -44,6 +44,7 @@ export function SeoGuide() {
                 {SEO_SERVICE_GROUPS.map((service) => (
                   <li key={service.name}>
                     <Link
+                      prefetch={true}
                       href={service.href}
                       className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
                     >
@@ -54,6 +55,7 @@ export function SeoGuide() {
               </ul>
             </nav>
             <Link
+              prefetch={true}
               href="/urunler"
               className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
             >
@@ -70,6 +72,7 @@ export function SeoGuide() {
                 {SITE_CONFIG.neighborhoods.map((neighborhood) => (
                   <li key={neighborhood.slug}>
                     <Link
+                      prefetch={true}
                       href={`/bahcelievler/${neighborhood.slug}`}
                       className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
                     >
@@ -80,6 +83,7 @@ export function SeoGuide() {
               </ul>
             </nav>
             <Link
+              prefetch={true}
               href="/satis-noktalari"
               className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
             >

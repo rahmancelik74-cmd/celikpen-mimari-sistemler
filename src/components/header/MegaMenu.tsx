@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../../config/site.config';
 import { CelikpenLogo } from '../CelikpenLogo';
 
@@ -77,6 +77,7 @@ const MAIN_NAV: NavItem[] = [
 
 export function MegaMenu() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
@@ -130,6 +131,21 @@ export function MegaMenu() {
     if (href === '/') return pathname === '/';
     if (href.startsWith('#')) return false;
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const prefetchServices = () => {
+    SERVICES.forEach((service) => {
+      try {
+        router.prefetch(service.href);
+      } catch {
+        // Prefetch hatası gezinmeyi engellemez.
+      }
+    });
+  };
+
+  const openServices = () => {
+    prefetchServices();
+    setServicesOpen(true);
   };
 
   const phoneHref = `tel:${SITE_CONFIG.phoneRaw}`;
@@ -197,7 +213,7 @@ export function MegaMenu() {
         onMouseLeave={() => setServicesOpen(false)}
       >
         <div className="container-shell flex h-[68px] items-center justify-between gap-3 lg:h-[74px] lg:gap-5">
-          <Link href="/" className="group shrink-0" aria-label="Çelikpen anasayfa">
+          <Link href="/" prefetch={true} className="group shrink-0" aria-label="Çelikpen anasayfa">
             <CelikpenLogo size="md" />
           </Link>
 
@@ -207,8 +223,12 @@ export function MegaMenu() {
                 <div key={item.label} className="relative">
                   <button
                     type="button"
-                    onClick={() => setServicesOpen((open) => !open)}
-                    onMouseEnter={() => setServicesOpen(true)}
+                    onClick={() => {
+                      prefetchServices();
+                      setServicesOpen((open) => !open);
+                    }}
+                    onMouseEnter={openServices}
+                    onFocus={prefetchServices}
                     aria-expanded={servicesOpen}
                     aria-controls="hizmetler-dropdown"
                     className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
@@ -241,6 +261,7 @@ export function MegaMenu() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  prefetch={true}
                   className={`rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
                     isActive(item.href)
                       ? 'bg-[#F5F3FF] text-[#7C3AED]'
@@ -265,6 +286,7 @@ export function MegaMenu() {
             </a>
             <Link
               href="/iletisim?form=kesif"
+              prefetch={true}
               aria-label="Ücretsiz keşif iste"
               className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[11px] font-semibold text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] sm:px-4 sm:text-[12px]"
             >
@@ -287,7 +309,7 @@ export function MegaMenu() {
         {servicesOpen && (
           <div
             id="hizmetler-dropdown"
-            className="absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
+            className="gpu-layer absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
           >
             <div className="container-shell py-6">
               <div className="mx-auto max-w-2xl">
@@ -302,6 +324,7 @@ export function MegaMenu() {
                   </div>
                   <Link
                     href="/urunler"
+                    prefetch={true}
                     onClick={() => setServicesOpen(false)}
                     className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
                   >
@@ -315,6 +338,7 @@ export function MegaMenu() {
                     <Link
                       key={service.title}
                       href={service.href}
+                      prefetch={true}
                       onClick={() => setServicesOpen(false)}
                       className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
                     >
@@ -347,7 +371,7 @@ export function MegaMenu() {
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-[#0F172A]/55 backdrop-blur-sm"
           />
-          <div className="absolute inset-y-0 right-0 flex w-[min(92vw,390px)] flex-col overflow-y-auto overscroll-contain bg-white shadow-2xl">
+          <div className="gpu-layer absolute inset-y-0 right-0 flex w-[min(92vw,390px)] flex-col overflow-y-auto overscroll-contain bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
               <CelikpenLogo size="sm" />
               <button
@@ -364,13 +388,17 @@ export function MegaMenu() {
               <div className="space-y-1">
                 <Link
                   href="/"
+                  prefetch={true}
                   className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
                 >
                   Anasayfa <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
                 </Link>
                 <button
                   type="button"
-                  onClick={() => setMobileServicesOpen((open) => !open)}
+                  onClick={() => {
+                    prefetchServices();
+                    setMobileServicesOpen((open) => !open);
+                  }}
                   aria-expanded={mobileServicesOpen}
                   className="flex min-h-[44px] w-full items-center justify-between rounded-lg bg-[#F5F3FF] px-3 py-2.5 text-sm font-semibold text-[#6D28D9]"
                 >
@@ -385,6 +413,7 @@ export function MegaMenu() {
                       <Link
                         key={service.title}
                         href={service.href}
+                        prefetch={true}
                         onClick={() => setMobileOpen(false)}
                         className="flex min-h-[44px] items-center gap-2.5 rounded-lg px-2.5 py-2 text-[12px] text-slate-600 hover:bg-slate-50 hover:text-[#7C3AED]"
                       >
@@ -417,6 +446,7 @@ export function MegaMenu() {
                       <Link
                         key={item.label}
                         href={item.href}
+                        prefetch={true}
                         onClick={() => setMobileOpen(false)}
                         className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
                       >
@@ -436,6 +466,7 @@ export function MegaMenu() {
                 </p>
                 <Link
                   href="/iletisim?form=kesif"
+                  prefetch={true}
                   onClick={() => setMobileOpen(false)}
                   className="mt-3 flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-3 py-2.5 text-[12px] font-semibold text-white hover:bg-[#6D28D9]"
                 >

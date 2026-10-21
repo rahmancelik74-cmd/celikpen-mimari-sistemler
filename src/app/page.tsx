@@ -1,12 +1,28 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { SITE_CONFIG } from '../config/site.config';
 import { HeroSlider } from '../components/HeroSlider';
-import { InnovativeShowcase } from '../components/InnovativeShowcase';
-import { ArchitecturalVirtualTour } from '../components/ArchitecturalVirtualTour';
-import { CustomerReviews } from '../components/CustomerReviews';
 import { SeoGuide } from '../components/SeoGuide';
+
+/* Ağır etkileşimli bölümler ilk rota geçişini kilitlemesin diye ayrı chunk'lara
+   bölünür; SSR korunur, böylece SEO HTML'i ve görsel düzen değişmez. */
+const InnovativeShowcase = dynamic(
+  () => import('../components/InnovativeShowcase').then((module) => module.InnovativeShowcase),
+  { ssr: true }
+);
+const ArchitecturalVirtualTour = dynamic(
+  () =>
+    import('../components/ArchitecturalVirtualTour').then(
+      (module) => module.ArchitecturalVirtualTour
+    ),
+  { ssr: true }
+);
+const CustomerReviews = dynamic(
+  () => import('../components/CustomerReviews').then((module) => module.CustomerReviews),
+  { ssr: true }
+);
 
 /* ============================================================================
    HOMEPAGE CONTENT
@@ -187,6 +203,7 @@ export default function HomePage() {
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICE_CARDS.map((service, index) => (
               <Link
+                prefetch={true}
                 key={service.title}
                 href={service.href}
                 className="group relative flex flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#DDD6FE] hover:shadow-card sm:p-6"
@@ -225,6 +242,7 @@ export default function HomePage() {
                 </p>
               </div>
               <Link
+                prefetch={true}
                 href="/iletisim?form=kesif"
                 className="relative mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
               >
@@ -290,12 +308,14 @@ export default function HomePage() {
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
+                prefetch={true}
                 href="/kurumsal/hakkimizda"
                 className="inline-flex items-center gap-1.5 rounded-lg bg-[#0F172A] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1E293B]"
               >
                 Kurumsal Hikâyemiz <IconArrowRight className="h-3.5 w-3.5" />
               </Link>
               <Link
+                prefetch={true}
                 href="/fiyat-hesapla"
                 className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
               >
@@ -307,7 +327,9 @@ export default function HomePage() {
       </section>
 
       {/* ============================ 5 İNTERAKTİF MODÜL ============================ */}
-      <InnovativeShowcase />
+      <div className="cv-auto">
+        <InnovativeShowcase />
+      </div>
 
       {/* ============================ SANAL TUR ============================ */}
       <ArchitecturalVirtualTour />
@@ -331,12 +353,14 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row lg:justify-end">
                 <Link
+                  prefetch={true}
                   href="/fiyat-hesapla"
                   className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
                 >
                   Fiyat Hesapla <IconArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
+                  prefetch={true}
                   href="/iletisim?form=kesif"
                   className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#DDD6FE] bg-white px-5 py-3 text-[12px] font-semibold text-[#5B21B6] transition-colors hover:bg-[#EDE9FE]"
                 >
@@ -361,6 +385,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
+              prefetch={true}
               href="/galeri"
               className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
             >
@@ -371,6 +396,7 @@ export default function HomePage() {
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {PROJECTS.map((project) => (
               <Link
+                prefetch={true}
                 key={project.title}
                 href={project.href}
                 className="group overflow-hidden rounded-card border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
@@ -397,6 +423,9 @@ export default function HomePage() {
             ))}
 
             <Link
+
+              prefetch={true}
+
               href="/galeri"
               className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-card border border-[#DDD6FE] bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#4C1D95] p-6 text-white shadow-xs transition-transform duration-300 hover:-translate-y-1"
             >
@@ -429,7 +458,9 @@ export default function HomePage() {
       </section>
 
       {/* ============================ YORUMLAR ============================ */}
-      <CustomerReviews />
+      <div className="cv-auto">
+        <CustomerReviews />
+      </div>
 
       {/* ============================ SSS ============================ */}
       <section id="sss" className="section-shell bg-[#F8FAFC]">
@@ -485,6 +516,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
+              prefetch={true}
               href="/blog"
               className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
             >
@@ -495,6 +527,7 @@ export default function HomePage() {
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {BLOG_POSTS.map((post) => (
               <Link
+                prefetch={true}
                 key={post.title}
                 href={post.href}
                 className="group flex flex-col overflow-hidden rounded-card border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
@@ -565,6 +598,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row lg:flex-col lg:items-stretch">
                 <Link
+                  prefetch={true}
                   href="/iletisim?form=kesif"
                   className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3.5 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
                 >
@@ -582,7 +616,9 @@ export default function HomePage() {
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] text-slate-500">
             {ADDITIONAL_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="transition-colors hover:text-[#7C3AED]">
+              <Link
+                prefetch={true}
+                key={link.href} href={link.href} className="transition-colors hover:text-[#7C3AED]">
                 {link.label}
               </Link>
             ))}
@@ -590,7 +626,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SeoGuide />
+      <div className="cv-auto">
+        <SeoGuide />
+      </div>
     </main>
   );
 }

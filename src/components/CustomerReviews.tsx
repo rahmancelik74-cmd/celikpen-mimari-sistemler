@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { startTransition, useEffect, useMemo, useRef, useState } from 'react';
 
 /* ============================================================================
    MÜŞTERİ YORUMLARI — canlı puan özeti, yıldız dağılımı ve yorum formu
@@ -552,7 +552,7 @@ export function CustomerReviews() {
           <div className="mt-6 text-center">
             <button
               type="button"
-              onClick={() => setShowAll(true)}
+              onClick={() => startTransition(() => setShowAll(true))}
               className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:text-[#7C3AED]"
             >
               Tüm yorumları göster ({reviews.length})

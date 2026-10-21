@@ -32,6 +32,7 @@ export default function UrunlerHubPage() {
         subtitle="Yüksek ısı ve ses yalıtımlı PVC doğrama, Kaldır-Sür teras kapıları, temperli cam balkon ve panjur sistemlerimiz."
         rightAction={
           <Link
+            prefetch={true}
             href="/profesyoneller/kataloglar"
             className="inline-flex items-center gap-1.5 rounded-lg border border-[#DDD6FE] bg-white px-4 py-2.5 text-[11px] font-semibold text-[#6D28D9] shadow-xs transition-colors hover:bg-[#F5F3FF]"
           >

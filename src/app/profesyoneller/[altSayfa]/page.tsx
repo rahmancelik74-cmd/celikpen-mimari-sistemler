@@ -32,6 +32,8 @@ export function generateStaticParams() {
   }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -128,6 +130,7 @@ export default async function ProfesyonellerAltSayfa({
                   return (
                     <li key={item.slug}>
                       <Link
+                        prefetch={true}
                         href={`/profesyoneller/${item.slug}`}
                         className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                           active
@@ -254,12 +257,14 @@ export default async function ProfesyonellerAltSayfa({
 
                   <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-3">
                     <Link
+                      prefetch={true}
                       href={`/urunler/${doc.relatedSlug}`}
                       className="inline-flex flex-1 items-center justify-center rounded-lg bg-[#0F172A] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#7C3AED]"
                     >
                       📄 Kesit &amp; Seri Detayı
                     </Link>
                     <Link
+                      prefetch={true}
                       href="/iletisim?form=bilgi"
                       className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED]"
                     >
@@ -584,6 +589,7 @@ export default async function ProfesyonellerAltSayfa({
                   </div>
                   <div className="mt-4 border-t border-slate-100 pt-3">
                     <Link
+                      prefetch={true}
                       href={post.ctaHref}
                       className="inline-flex items-center gap-1 text-xs font-extrabold text-[#0F172A] hover:text-[#7C3AED]"
                     >

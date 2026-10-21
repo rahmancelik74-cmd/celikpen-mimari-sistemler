@@ -236,7 +236,7 @@ export function HeroSlider() {
     >
       {/* 3 SAHNELİ DİKEY SAHNE KONTEYNERİ — Tam 0%, -100% ve -200% GPU Dönüşümü */}
       <div
-        className="h-full w-full will-change-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="gpu-layer h-full w-full will-change-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
           transform: `translate3d(0, -${activeScene * 100}%, 0)`,
           transitionProperty: 'transform',
@@ -305,6 +305,7 @@ export function HeroSlider() {
                   <span>SANAL TUR</span>
                 </a>
                 <Link
+                  prefetch={true}
                   href="/urunler"
                   className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20 min-[420px]:w-auto"
                 >
@@ -368,12 +369,14 @@ export function HeroSlider() {
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
+                  prefetch={true}
                   href="/iletisim?form=kesif"
                   className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] min-[420px]:w-auto"
                 >
                   KEŞİF İSTE
                 </Link>
                 <Link
+                  prefetch={true}
                   href="/iletisim?form=kesif"
                   className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-white/45 bg-white/10 px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20 min-[420px]:w-auto"
                 >
@@ -431,6 +434,7 @@ export function HeroSlider() {
                     {currentStory.system}
                   </span>
                   <Link
+                    prefetch={true}
                     href={currentStory.href}
                     className="inline-flex min-h-[36px] items-center rounded-full bg-[#7C3AED] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-[#6D28D9] sm:px-5 sm:text-[11px]"
                   >

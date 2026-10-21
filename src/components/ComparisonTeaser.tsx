@@ -42,6 +42,7 @@ export function ComparisonTeaser() {
           <h2 className="mt-1 text-2xl font-bold text-slate-900">{CONTENT.heading}</h2>
         </div>
         <Link
+          prefetch={true}
           href="/karsilastir"
           className="rounded-lg border border-celikpen-brand bg-white px-4 py-2 text-xs font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
         >
@@ -84,12 +85,14 @@ export function ComparisonTeaser() {
 
               <div className="mt-4 flex items-center justify-between border-t border-celikpen-border pt-3 text-xs">
                 <Link
+                  prefetch={true}
                   href={`/sistemler/${col.slug}`}
                   className="font-semibold text-slate-600 hover:text-slate-900"
                 >
                   Seri Detayı
                 </Link>
                 <Link
+                  prefetch={true}
                   href={`/karsilastir#${col.slug}`}
                   className="font-bold text-celikpen-brand-soft hover:underline"
                 >

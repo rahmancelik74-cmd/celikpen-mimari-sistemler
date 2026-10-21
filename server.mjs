@@ -11,7 +11,9 @@ import next from 'next';
  * listeye ve WAF katmanına tabidir.
  */
 const dev = process.env.NODE_ENV === 'development';
-const hostname = process.env.HOSTNAME || '0.0.0.0';
+// Windows'ta localhost önce ::1'e çözümlenir. Çift yığın dinleme, IPv6/IPv4
+// arasındaki 200 ms'lik bağlantı fallback gecikmesini ortadan kaldırır.
+const hostname = process.env.HOSTNAME || '::';
 const port = Number.parseInt(process.env.PORT || '3000', 10);
 
 const SECURITY_HEADERS = {
@@ -26,7 +28,9 @@ const SECURITY_HEADERS = {
   'Permissions-Policy':
     'accelerometer=(), camera=(), geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()',
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'; upgrade-insecure-requests",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'; upgrade-insecure-requests",
+  'X-DNS-Prefetch-Control': 'on',
+  Link: '</icon.svg>; rel=icon, </manifest.webmanifest>; rel=manifest',
 };
 
 const app = next({ dev, hostname, port });

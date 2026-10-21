@@ -48,7 +48,7 @@ export function Footer() {
         <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Marka */}
           <div className="lg:col-span-4">
-            <Link href="/" aria-label="Çelikpen anasayfa" className="inline-block">
+            <Link href="/" prefetch={true} aria-label="Çelikpen anasayfa" className="inline-block">
               <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
@@ -87,6 +87,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
+                    prefetch={true}
                     className="group inline-flex items-center gap-1.5 text-[11.5px] text-slate-400 transition-colors hover:text-[#DDD6FE]"
                   >
                     <span className="h-px w-0 bg-[#7C3AED] transition-all duration-300 group-hover:w-2.5" />
@@ -107,6 +108,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
+                    prefetch={true}
                     className="group inline-flex items-center gap-1.5 text-[11.5px] text-slate-400 transition-colors hover:text-[#DDD6FE]"
                   >
                     <span className="h-px w-0 bg-[#7C3AED] transition-all duration-300 group-hover:w-2.5" />
@@ -164,6 +166,7 @@ export function Footer() {
             </ul>
             <Link
               href="/iletisim?form=kesif"
+              prefetch={true}
               className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[#7C3AED] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#6D28D9]"
             >
               Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
@@ -182,6 +185,7 @@ export function Footer() {
                 <Link
                   key={neighborhood.slug}
                   href={`/bahcelievler/${neighborhood.slug}`}
+                  prefetch={true}
                   className="text-[10px] text-slate-500 transition-colors hover:text-[#DDD6FE]"
                 >
                   {neighborhood.name}

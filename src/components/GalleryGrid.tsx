@@ -65,6 +65,7 @@ export function GalleryGrid() {
             {CONTENT.emptyDesc}
           </p>
           <Link
+            prefetch={true}
             href="/fiyat-hesapla"
             className="mt-5 inline-block rounded-lg bg-celikpen-cta px-5 py-2.5 text-xs font-bold text-white shadow transition hover:bg-rose-500"
           >

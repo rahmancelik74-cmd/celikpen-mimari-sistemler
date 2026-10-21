@@ -16,6 +16,8 @@ export function generateStaticParams() {
   return [...baseParams, { mahalle: 'kocasinan-merkez' }];
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -76,7 +78,9 @@ export default async function MahallePage({
       {/* Üst Navigasyon */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <div className="flex items-center gap-2">
-          <Link href="/" className="hover:text-celikpen-brand-soft">
+          <Link
+            prefetch={true}
+            href="/" className="hover:text-celikpen-brand-soft">
             Ana Sayfa
           </Link>
           <span>/</span>
@@ -85,6 +89,7 @@ export default async function MahallePage({
           <span className="font-semibold text-slate-900">{info.name}</span>
         </div>
         <Link
+          prefetch={true}
           href="/blog/eylul-2026-yargitay-cam-balkon-karari"
           className="font-semibold text-celikpen-cta hover:underline"
         >
@@ -228,6 +233,7 @@ export default async function MahallePage({
         <div className="mt-3 flex flex-wrap gap-2">
           {SITE_CONFIG.neighborhoods.map((n) => (
             <Link
+              prefetch={true}
               key={n.slug}
               href={`/bahcelievler/${n.slug}`}
               className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${

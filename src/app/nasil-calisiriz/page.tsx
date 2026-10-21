@@ -163,6 +163,9 @@ export default function NasilCalisirizPage() {
             </a>
 
             <Link
+
+              prefetch={true}
+
               href="/fiyat-hesapla"
               className="block w-full rounded-lg border border-celikpen-brand bg-white px-4 py-2.5 text-center text-xs font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
             >

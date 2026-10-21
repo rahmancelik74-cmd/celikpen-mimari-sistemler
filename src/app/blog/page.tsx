@@ -59,7 +59,9 @@ export default function BlogListPage() {
               </div>
 
               <h2 className="mt-3 text-xl font-bold text-slate-900">
-                <Link href={`/blog/${post.slug}`} className="hover:text-celikpen-brand-soft">
+                <Link
+                  prefetch={true}
+                  href={`/blog/${post.slug}`} className="hover:text-celikpen-brand-soft">
                   {post.title}
                 </Link>
               </h2>
@@ -69,6 +71,7 @@ export default function BlogListPage() {
 
             <div className="mt-5 border-t border-celikpen-border pt-4">
               <Link
+                prefetch={true}
                 href={`/blog/${post.slug}`}
                 className="text-xs font-bold text-celikpen-brand-soft hover:underline"
               >

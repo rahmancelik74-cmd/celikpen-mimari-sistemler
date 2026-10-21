@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { startTransition, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -320,6 +320,9 @@ export const InteractiveLabPreview: React.FC = () => {
           </div>
 
           <Link
+
+            prefetch={true}
+
             href="/#mimari-inovasyon-merkezi"
             className="mt-5 inline-flex w-fit items-center gap-2 rounded-xl bg-[#7C3AED] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#6D28D9]"
           >
@@ -329,6 +332,9 @@ export const InteractiveLabPreview: React.FC = () => {
         </div>
 
         <Link
+
+          prefetch={true}
+
           href="/#mimari-inovasyon-merkezi"
           aria-label="İnteraktif mimari laboratuvarı ana sayfada aç"
           className="group relative min-h-[300px] overflow-hidden bg-[#071126] lg:col-span-7"
@@ -476,7 +482,7 @@ export const InnovativeShowcase: React.FC = () => {
     if (nextIndex === null) return;
 
     event.preventDefault();
-    setActiveModule(MODULE_TABS[nextIndex].id);
+    startTransition(() => setActiveModule(MODULE_TABS[nextIndex].id));
     moduleTabRefs.current[nextIndex]?.focus();
   };
 
@@ -522,7 +528,7 @@ export const InnovativeShowcase: React.FC = () => {
                   aria-selected={isSelected}
                   aria-controls={`showcase-panel-${tab.id}`}
                   tabIndex={isSelected ? 0 : -1}
-                  onClick={() => setActiveModule(tab.id)}
+                  onClick={() => startTransition(() => setActiveModule(tab.id))}
                   onKeyDown={(event) => handleModuleTabKeyDown(event, tabIndex)}
                   className={`inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2 ${
                     isSelected
@@ -851,6 +857,7 @@ export const InnovativeShowcase: React.FC = () => {
                     Noktaların üzerine tıklayarak inceleyin
                   </span>
                   <Link
+                    prefetch={true}
                     href="/urunler/vera-isicamli-cam-balkon"
                     className="inline-flex items-center gap-1 text-xs font-extrabold text-[#7C3AED] hover:underline"
                   >
@@ -1085,6 +1092,7 @@ export const InnovativeShowcase: React.FC = () => {
                 <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-[11px] text-slate-300">
                   <span>IFT Rosenheim Akustik Test Standardı</span>
                   <Link
+                    prefetch={true}
                     href="/urunler/revotech-gold"
                     className="font-extrabold text-sky-300 hover:text-white"
                   >
@@ -1227,6 +1235,7 @@ export const InnovativeShowcase: React.FC = () => {
 
                   <div className="mt-4 flex items-center justify-end border-t border-slate-100 pt-3">
                     <Link
+                      prefetch={true}
                       href={matchedSystem.href}
                       className="inline-flex items-center gap-2 rounded-xl bg-[#7C3AED] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-xs transition hover:bg-[#6D28D9]"
                     >

@@ -251,12 +251,14 @@ export default function HakkimizdaPage() {
       {/* Alt Navigasyon CTA */}
       <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
         <Link
+          prefetch={true}
           href="/fiyat-hesapla"
           className="rounded-lg bg-celikpen-cta px-5 py-3 text-sm font-bold text-white shadow transition hover:bg-rose-500"
         >
           {CONTENT.ctaCalculator}
         </Link>
         <Link
+          prefetch={true}
           href="/iletisim"
           className="rounded-lg border border-celikpen-brand bg-white px-5 py-3 text-sm font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
         >

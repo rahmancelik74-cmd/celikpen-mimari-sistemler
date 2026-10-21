@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { startTransition, useDeferredValue, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -12,12 +12,13 @@ import {
 export function WinsaCatalogGrid() {
   const [selectedCategory, setSelectedCategory] = useState<'all' | WinsaCategorySlug>('all');
   const [query, setQuery] = useState('');
+  const deferredQuery = useDeferredValue(query);
 
   const filteredProducts = useMemo(() => {
     return WINSA_PRODUCTS.filter((p) => {
       const matchesCat =
         selectedCategory === 'all' ? true : p.categorySlug === selectedCategory;
-      const q = query.trim().toLowerCase();
+      const q = deferredQuery.trim().toLowerCase();
       const matchesQuery =
         !q ||
         p.name.toLowerCase().includes(q) ||
@@ -26,7 +27,7 @@ export function WinsaCatalogGrid() {
         p.technicalSpecs.profilGenisligi.toLowerCase().includes(q);
       return matchesCat && matchesQuery;
     });
-  }, [selectedCategory, query]);
+  }, [deferredQuery, selectedCategory]);
 
   return (
     <div className="space-y-6">
@@ -38,7 +39,7 @@ export function WinsaCatalogGrid() {
               type="button"
               role="tab"
               aria-selected={selectedCategory === 'all'}
-              onClick={() => setSelectedCategory('all')}
+              onClick={() => startTransition(() => setSelectedCategory('all'))}
               className={`rounded-lg px-3.5 py-1.5 text-[11.5px] font-bold transition ${
                 selectedCategory === 'all'
                   ? 'bg-[#0F172A] text-white shadow-xs'
@@ -57,7 +58,7 @@ export function WinsaCatalogGrid() {
                   type="button"
                   role="tab"
                   aria-selected={isSelected}
-                  onClick={() => setSelectedCategory(cat.slug)}
+                  onClick={() => startTransition(() => setSelectedCategory(cat.slug))}
                   className={`rounded-lg px-3.5 py-1.5 text-[11.5px] font-bold transition ${
                     isSelected
                       ? 'bg-[#0F172A] text-white shadow-xs'
@@ -88,6 +89,7 @@ export function WinsaCatalogGrid() {
           <Link
             key={prod.slug}
             href={`/urunler/${prod.slug}`}
+            prefetch={true}
             className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-card border border-slate-200/90 bg-white p-4 shadow-xs transition-colors hover:border-[#DDD6FE]"
           >
             {/* Animasyonlu Köşe L-Bracket (`┌ ┘`) Çerçevesi */}
@@ -107,6 +109,7 @@ export function WinsaCatalogGrid() {
                 alt={prod.name}
                 width={560}
                 height={360}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="aspect-[15/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/35 via-transparent to-transparent" />
@@ -153,8 +156,10 @@ export function WinsaCatalogGrid() {
             <button
               type="button"
               onClick={() => {
-                setSelectedCategory('all');
-                setQuery('');
+                startTransition(() => {
+                  setSelectedCategory('all');
+                  setQuery('');
+                });
               }}
               className="mt-4 rounded-lg bg-[#7C3AED] px-4 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-[#6D28D9]"
             >

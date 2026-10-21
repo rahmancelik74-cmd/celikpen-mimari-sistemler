@@ -73,6 +73,7 @@ export default function KurumsalPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CORPORATE_SUBPAGES.map((sub) => (
             <Link
+              prefetch={true}
               key={sub.slug}
               href={`/kurumsal/${sub.slug}`}
               className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-colors hover:border-[#DDD6FE]"

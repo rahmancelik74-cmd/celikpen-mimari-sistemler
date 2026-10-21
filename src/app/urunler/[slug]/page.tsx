@@ -22,6 +22,8 @@ export function generateStaticParams() {
   return getAllWinsaProductSlugs().map((slug) => ({ slug }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -87,6 +89,7 @@ export default async function UrunDetayPage({
           <div className="flex flex-wrap items-center gap-2 print:hidden">
             <PrintDatasheetButton />
             <Link
+              prefetch={true}
               href="/iletisim"
               className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white shadow-xs transition hover:bg-[#6D28D9]"
             >
@@ -106,13 +109,16 @@ export default async function UrunDetayPage({
             <h2 className="text-base font-black text-[#0F172A]">
               {prod.category} Grubundaki Diğer Seriler
             </h2>
-            <Link href="/urunler" className="text-xs font-bold text-[#7C3AED] hover:underline">
+            <Link
+              prefetch={true}
+              href="/urunler" className="text-xs font-bold text-[#7C3AED] hover:underline">
               Tüm Ürünler →
             </Link>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {relatedProducts.map((rel) => (
               <Link
+                prefetch={true}
                 key={rel.slug}
                 href={`/urunler/${rel.slug}`}
                 className="hover-lift group rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs"

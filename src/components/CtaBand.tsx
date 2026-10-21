@@ -31,6 +31,7 @@ export function CtaBand() {
 
         <div className="flex flex-wrap items-center gap-3">
           <Link
+            prefetch={true}
             href="/fiyat-hesapla"
             className="rounded-lg bg-celikpen-cta px-5 py-3 text-sm font-bold text-white shadow transition hover:bg-rose-500"
           >

@@ -73,10 +73,14 @@ export default function YargitayKarariBlogPage() {
       <JsonLd data={blogSchema} id="blogposting-jsonld" />
       <JsonLd data={breadcrumbSchema} id="blog-breadcrumb-jsonld" />
       <div className="mb-6 flex items-center justify-between text-xs text-slate-500 print:hidden">
-        <Link href="/" className="hover:text-celikpen-brand-soft">
+        <Link
+          prefetch={true}
+          href="/" className="hover:text-celikpen-brand-soft">
           ← Ana Sayfaya Dön
         </Link>
-        <Link href="/fiyat-hesapla" className="font-semibold text-celikpen-brand-soft hover:underline">
+        <Link
+          prefetch={true}
+          href="/fiyat-hesapla" className="font-semibold text-celikpen-brand-soft hover:underline">
           Canlı m² Fiyat Hesapla →
         </Link>
       </div>

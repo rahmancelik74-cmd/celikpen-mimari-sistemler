@@ -78,6 +78,7 @@ export default function YorumlarPage() {
               <div>
                 <div className="flex items-center justify-between gap-2">
                   <Link
+                    prefetch={true}
                     href={`/bahcelievler/${item.neighborhoodSlug}`}
                     className="rounded bg-celikpen-brand/10 px-2.5 py-0.5 text-xs font-bold text-celikpen-brand hover:underline"
                   >
@@ -108,6 +109,7 @@ export default function YorumlarPage() {
 
       <div className="mt-10 text-center">
         <Link
+          prefetch={true}
           href="/fiyat-hesapla"
           className="inline-block rounded-lg bg-celikpen-cta px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-rose-500"
         >

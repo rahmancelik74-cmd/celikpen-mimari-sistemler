@@ -38,13 +38,17 @@ export const MinimalSubpageHeader: React.FC<MinimalSubpageHeaderProps> = ({
         aria-label="Breadcrumb"
         className="relative mb-4 flex flex-wrap items-center gap-1.5 text-[10.5px] font-medium text-slate-500"
       >
-        <Link href="/" className="transition-colors hover:text-[#7C3AED]">
+        <Link
+          prefetch={true}
+          href="/" className="transition-colors hover:text-[#7C3AED]">
           Anasayfa
         </Link>
         {parentBreadcrumb && (
           <>
             <span className="text-slate-300" aria-hidden="true">/</span>
-            <Link href={parentBreadcrumb.href} className="transition-colors hover:text-[#7C3AED]">
+            <Link
+              prefetch={true}
+              href={parentBreadcrumb.href} className="transition-colors hover:text-[#7C3AED]">
               {parentBreadcrumb.label}
             </Link>
           </>

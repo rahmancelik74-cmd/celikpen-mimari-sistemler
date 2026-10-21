@@ -42,6 +42,7 @@ export function ProcessStrip() {
             <h2 className="mt-1 text-2xl font-bold text-slate-900">{CONTENT.heading}</h2>
           </div>
           <Link
+            prefetch={true}
             href="/nasil-calisiriz"
             className="text-xs font-bold text-celikpen-brand-soft hover:underline"
           >
@@ -52,6 +53,7 @@ export function ProcessStrip() {
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CONTENT.steps.map((step) => (
             <Link
+              prefetch={true}
               key={step.title}
               href="/nasil-calisiriz"
               className="rounded-xl border border-celikpen-border bg-white p-4 shadow-sm transition hover:border-celikpen-brand-soft hover:shadow-md"

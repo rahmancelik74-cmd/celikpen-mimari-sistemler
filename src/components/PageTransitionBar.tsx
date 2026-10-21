@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export const PageTransitionBar: React.FC = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -25,22 +24,6 @@ export const PageTransitionBar: React.FC = () => {
   }, [pathname]);
 
   useEffect(() => {
-    const prefetched = new Set<string>();
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement | null)?.closest('a');
-      if (!target) return;
-      const href = target.getAttribute('href');
-      if (!href || !href.startsWith('/') || href.startsWith('//')) return;
-      if (prefetched.has(href)) return;
-      prefetched.add(href);
-      try {
-        router.prefetch(href);
-      } catch {
-        // ignore prefetch error
-      }
-    };
-
     const handleClick = (e: MouseEvent) => {
       if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
         return;
@@ -58,13 +41,11 @@ export const PageTransitionBar: React.FC = () => {
       }
     };
 
-    document.addEventListener('mouseover', handleMouseOver, { passive: true });
     document.addEventListener('click', handleClick, { passive: true });
     return () => {
-      document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('click', handleClick);
     };
-  }, [pathname, router]);
+  }, [pathname]);
 
   return (
     <div
