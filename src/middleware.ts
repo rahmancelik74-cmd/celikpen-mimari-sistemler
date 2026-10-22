@@ -51,7 +51,6 @@ const CSP_DIRECTIVES = [
   "base-uri 'self'",
   "form-action 'self' https://wa.me",
   "frame-ancestors 'self'",
-  "upgrade-insecure-requests",
 ].join('; ');
 
 const SECURITY_HEADERS: ReadonlyArray<readonly [string, string]> = [
@@ -71,9 +70,27 @@ const SECURITY_HEADERS: ReadonlyArray<readonly [string, string]> = [
   ['X-DNS-Prefetch-Control', 'on'],
 ];
 
-function applySecurityHeaders(response: NextResponse): NextResponse {
+function isLocalhostHost(host: string): boolean {
+  const normalized = host.toLowerCase();
+  return (
+    normalized.startsWith('localhost') ||
+    normalized.startsWith('127.0.0.1') ||
+    normalized.startsWith('192.168.') ||
+    normalized.startsWith('[::1]')
+  );
+}
+
+function applySecurityHeaders(
+  response: NextResponse,
+  upgradeInsecureRequests = false
+): NextResponse {
   for (const [key, value] of SECURITY_HEADERS) {
-    response.headers.set(key, value);
+    response.headers.set(
+      key,
+      key === 'Content-Security-Policy' && upgradeInsecureRequests
+        ? `${value}; upgrade-insecure-requests`
+        : value
+    );
   }
   // Next'in otomatik font/asset preload Link başlığını ezmemek için append kullanılır.
   response.headers.append(
@@ -107,6 +124,16 @@ function hasMaliciousPayload(request: NextRequest): boolean {
 }
 
 export function middleware(request: NextRequest) {
+  const host = request.headers.get('host') || 'celikpen.com.tr';
+  const forwardedProto = request.headers.get('x-forwarded-proto');
+  const isLocalhost = isLocalhostHost(host);
+  const isHttpRequest = forwardedProto
+    ? forwardedProto !== 'https'
+    : request.nextUrl.protocol === 'http:';
+  // HTTP localhost geliştirmesinde alt kaynakları HTTPS'e yükseltmeyiz.
+  const shouldUpgradeInsecureRequests =
+    process.env.NODE_ENV === 'production' && !isLocalhost && !isHttpRequest;
+
   /* 1. HTTP metot beyaz listesi */
   if (!ALLOWED_METHODS.has(request.method.toUpperCase())) {
     return applySecurityHeaders(
@@ -117,7 +144,8 @@ export function middleware(request: NextRequest) {
           'Cache-Control': 'no-store',
           'Content-Type': 'text/plain; charset=utf-8',
         },
-      })
+      }),
+      shouldUpgradeInsecureRequests
     );
   }
 
@@ -130,7 +158,8 @@ export function middleware(request: NextRequest) {
           'Cache-Control': 'no-store',
           'Content-Type': 'text/plain; charset=utf-8',
         },
-      })
+      }),
+      shouldUpgradeInsecureRequests
     );
   }
 
@@ -143,31 +172,24 @@ export function middleware(request: NextRequest) {
           Allow: 'GET, HEAD, OPTIONS, POST',
           'Cache-Control': 'no-store',
         },
-      })
+      }),
+      shouldUpgradeInsecureRequests
     );
   }
 
   const { pathname, search } = request.nextUrl;
-  const host = request.headers.get('host') || 'celikpen.com.tr';
-  const forwardedProto = request.headers.get('x-forwarded-proto');
-  const isLocalhost =
-    host.startsWith('localhost') ||
-    host.startsWith('127.0.0.1') ||
-    host.startsWith('192.168.') ||
-    host.startsWith('[::1]');
 
   /* 4. Sondaki eğik çizgi normalizasyonu (WAF kontrolünden sonra) */
   if (pathname.length > 1 && pathname.endsWith('/')) {
     const normalizedUrl = request.nextUrl.clone();
     normalizedUrl.pathname = pathname.replace(/\/+$/, '') || '/';
-    return applySecurityHeaders(NextResponse.redirect(normalizedUrl, 308));
+    return applySecurityHeaders(
+      NextResponse.redirect(normalizedUrl, 308),
+      shouldUpgradeInsecureRequests
+    );
   }
 
-  /* 5. Üretimde HTTP -> HTTPS 308 kalıcı yönlendirme */
-  const isHttpRequest = forwardedProto
-    ? forwardedProto !== 'https'
-    : request.nextUrl.protocol === 'http:';
-
+  /* 5. Üretimde HTTP -> HTTPS 308 kalıcı yönlendirme (localhost hariç) */
   if (process.env.NODE_ENV === 'production' && !isLocalhost && isHttpRequest) {
     const httpsUrl = new URL(`https://${host}${pathname}${search}`);
     return applySecurityHeaders(NextResponse.redirect(httpsUrl, 308));
@@ -175,7 +197,7 @@ export function middleware(request: NextRequest) {
 
   /* 6. Güvenlik başlıkları */
   const response = NextResponse.next();
-  return applySecurityHeaders(response);
+  return applySecurityHeaders(response, shouldUpgradeInsecureRequests);
 }
 
 export const config = {

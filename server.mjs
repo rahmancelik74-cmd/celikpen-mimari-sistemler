@@ -28,7 +28,7 @@ const SECURITY_HEADERS = {
   'Permissions-Policy':
     'accelerometer=(), camera=(), geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()',
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'; upgrade-insecure-requests",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'",
   'X-DNS-Prefetch-Control': 'on',
   Link: '</icon.svg>; rel=icon, </manifest.webmanifest>; rel=manifest',
 };
@@ -50,6 +50,11 @@ const server = createServer((request, response) => {
   }
 
   handle(request, response);
+});
+
+server.on('error', (error) => {
+  console.error(`> Çelikpen server error: ${error.message}`);
+  process.exit(1);
 });
 
 // Node'un HTTP parser'ı TRACK metodunu geçersiz sayıp 400 üretebiliyor.
