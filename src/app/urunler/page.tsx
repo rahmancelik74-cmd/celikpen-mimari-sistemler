@@ -6,7 +6,6 @@ import { generatePageMetadata } from '../../config/seo.config';
 import { WINSA_PRODUCTS } from '../../config/winsa-products.config';
 import { WinsaCatalogGrid } from '../../components/WinsaCatalogGrid';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
-import { InteractiveLabPreview } from '../../components/InnovativeShowcase';
 
 export const metadata: Metadata = generatePageMetadata({
   title: `Ürünlerimiz — Cam Balkon, Kış Bahçesi, Giyotin ve PVC Sistemler | ${SITE_CONFIG.brandName}`,
@@ -34,7 +33,7 @@ export default function UrunlerHubPage() {
           <Link
             prefetch={true}
             href="/profesyoneller/kataloglar"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#DDD6FE] bg-white px-4 py-2.5 text-[11px] font-semibold text-[#6D28D9] shadow-xs transition-colors hover:bg-[#F5F3FF]"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#BFDBFE] bg-white px-4 py-2.5 text-[11px] font-semibold text-[#1D4ED8] shadow-xs transition-colors hover:bg-[#EFF6FF]"
           >
             <span>2026 Dijital Kataloglar</span>
             <span>→</span>
@@ -43,10 +42,6 @@ export default function UrunlerHubPage() {
       />
 
       <WinsaCatalogGrid />
-
-      <div className="mt-12">
-        <InteractiveLabPreview />
-      </div>
     </main>
   );
 }

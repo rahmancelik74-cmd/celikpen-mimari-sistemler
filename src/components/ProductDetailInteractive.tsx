@@ -101,7 +101,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
                 onClick={() => setSelectedSwatch(swatch)}
                 className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold transition-all ${
                   isSelected
-                    ? 'border-[#7C3AED] bg-[#0F172A] text-white shadow-xs'
+                    ? 'border-[#1E3A8A] bg-[#0F172A] text-white shadow-xs'
                     : 'border-slate-200 bg-white text-slate-700 hover:border-[#0F172A]'
                 }`}
               >
@@ -236,7 +236,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
                   key={hl}
                   className="flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 text-slate-700"
                 >
-                  <span className="font-black text-[#7C3AED]">✓</span>
+                  <span className="font-black text-[#1E3A8A]">✓</span>
                   <span>{hl}</span>
                 </li>
               ))}

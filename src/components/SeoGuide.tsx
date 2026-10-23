@@ -46,7 +46,7 @@ export function SeoGuide() {
                     <Link
                       prefetch={true}
                       href={service.href}
-                      className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+                      className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#BFDBFE] hover:bg-[#EFF6FF] hover:text-[#1D4ED8]"
                     >
                       {service.name}
                     </Link>
@@ -57,7 +57,7 @@ export function SeoGuide() {
             <Link
               prefetch={true}
               href="/urunler"
-              className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+              className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Tüm ürün kataloğunu incele <span aria-hidden="true">→</span>
             </Link>
@@ -74,7 +74,7 @@ export function SeoGuide() {
                     <Link
                       prefetch={true}
                       href={`/bahcelievler/${neighborhood.slug}`}
-                      className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+                      className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#BFDBFE] hover:bg-[#EFF6FF] hover:text-[#1D4ED8]"
                     >
                       {neighborhood.name} cam balkon
                     </Link>
@@ -85,7 +85,7 @@ export function SeoGuide() {
             <Link
               prefetch={true}
               href="/satis-noktalari"
-              className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+              className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Showroom ve keşif ağını görüntüle <span aria-hidden="true">→</span>
             </Link>
@@ -123,7 +123,7 @@ export function SeoGuide() {
           Bahçelievler / İstanbul •{' '}
           <a
             href={`tel:${SITE_CONFIG.phoneRaw}`}
-            className="font-semibold text-slate-500 hover:text-[#7C3AED]"
+            className="font-semibold text-slate-500 hover:text-[#1E3A8A]"
           >
             {SITE_CONFIG.phoneDisplay}
           </a>

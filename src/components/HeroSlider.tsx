@@ -300,7 +300,7 @@ export function HeroSlider() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#sanal-tur"
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] min-[420px]:w-auto"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-[#1E3A8A] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-navy transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] min-[420px]:w-auto"
                 >
                   <span>SANAL TUR</span>
                 </a>
@@ -371,7 +371,7 @@ export function HeroSlider() {
                 <Link
                   prefetch={true}
                   href="/iletisim?form=kesif"
-                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-[#7C3AED] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] min-[420px]:w-auto"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-[#1E3A8A] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-navy transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] min-[420px]:w-auto"
                 >
                   KEŞİF İSTE
                 </Link>
@@ -420,7 +420,7 @@ export function HeroSlider() {
               </h2>
 
               <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-4 text-white backdrop-blur-md transition-all duration-500 sm:p-5">
-                <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-[#DDD6FE] sm:text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-[#BFDBFE] sm:text-xs">
                   <span className="min-w-0 break-words">{currentStory.location}</span>
                   <span className="max-w-full rounded-full bg-[#D91B24] px-2.5 py-1 text-[9px] font-black leading-tight text-white sm:px-3 sm:text-[11px]">
                     {currentStory.metrics}
@@ -436,7 +436,7 @@ export function HeroSlider() {
                   <Link
                     prefetch={true}
                     href={currentStory.href}
-                    className="inline-flex min-h-[36px] items-center rounded-full bg-[#7C3AED] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-[#6D28D9] sm:px-5 sm:text-[11px]"
+                    className="inline-flex min-h-[36px] items-center rounded-full bg-[#1E3A8A] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-[#1D4ED8] sm:px-5 sm:text-[11px]"
                   >
                     İNCELE →
                   </Link>

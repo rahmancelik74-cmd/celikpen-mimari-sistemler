@@ -91,7 +91,7 @@ export default async function UrunDetayPage({
             <Link
               prefetch={true}
               href="/iletisim"
-              className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white shadow-xs transition hover:bg-[#6D28D9]"
+              className="rounded-lg bg-[#1E3A8A] px-4 py-2 text-xs font-bold text-white shadow-xs transition hover:bg-[#1D4ED8]"
             >
               Keşif &amp; Bilgi Al →
             </Link>
@@ -111,7 +111,7 @@ export default async function UrunDetayPage({
             </h2>
             <Link
               prefetch={true}
-              href="/urunler" className="text-xs font-bold text-[#7C3AED] hover:underline">
+              href="/urunler" className="text-xs font-bold text-[#1E3A8A] hover:underline">
               Tüm Ürünler →
             </Link>
           </div>
@@ -126,7 +126,7 @@ export default async function UrunDetayPage({
                 <span className="rounded bg-[#0F172A]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#0F172A]">
                   {rel.code}
                 </span>
-                <h3 className="mt-2 text-sm font-black text-[#0F172A] group-hover:text-[#7C3AED]">
+                <h3 className="mt-2 text-sm font-black text-[#0F172A] group-hover:text-[#1E3A8A]">
                   {rel.name}
                 </h3>
                 <p className="mt-1 text-[11px] text-slate-500">

@@ -134,8 +134,8 @@ export default async function ProfesyonellerAltSayfa({
                         href={`/profesyoneller/${item.slug}`}
                         className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                           active
-                            ? 'bg-[#7C3AED] text-white'
-                            : 'text-[#0F172A] hover:bg-slate-100 hover:text-[#7C3AED]'
+                            ? 'bg-[#1E3A8A] text-white'
+                            : 'text-[#0F172A] hover:bg-slate-100 hover:text-[#1E3A8A]'
                         }`}
                       >
                         <span>{item.title}</span>
@@ -181,7 +181,7 @@ export default async function ProfesyonellerAltSayfa({
                     key={card.step}
                     className="hover-lift rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs"
                   >
-                    <span className="inline-block rounded bg-[#7C3AED] px-2 py-0.5 text-[10px] font-black text-white">
+                    <span className="inline-block rounded bg-[#1E3A8A] px-2 py-0.5 text-[10px] font-black text-white">
                       ADIM {card.step}
                     </span>
                     <h3 className="mt-2.5 text-sm font-black text-[#0F172A]">{card.title}</h3>
@@ -259,14 +259,14 @@ export default async function ProfesyonellerAltSayfa({
                     <Link
                       prefetch={true}
                       href={`/urunler/${doc.relatedSlug}`}
-                      className="inline-flex flex-1 items-center justify-center rounded-lg bg-[#0F172A] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#7C3AED]"
+                      className="inline-flex flex-1 items-center justify-center rounded-lg bg-[#0F172A] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#1E3A8A]"
                     >
                       📄 Kesit &amp; Seri Detayı
                     </Link>
                     <Link
                       prefetch={true}
                       href="/iletisim?form=bilgi"
-                      className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED]"
+                      className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-[#0F172A] hover:border-[#1E3A8A] hover:text-[#1E3A8A]"
                     >
                       ⬇ DWG
                     </Link>
@@ -292,7 +292,7 @@ export default async function ProfesyonellerAltSayfa({
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#1E3A8A]">
                   KAT MÜLKİYETİ KANUNU UYUMLU BELGE
                 </span>
                 <h3 className="mt-1 text-base font-black text-[#0F172A]">
@@ -315,7 +315,7 @@ export default async function ProfesyonellerAltSayfa({
                 >
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-1 rounded-md bg-[#0F172A] px-2.5 py-1 text-[11px] font-black text-white">
-                      <span className="text-[#7C3AED]">★</span>
+                      <span className="text-[#1E3A8A]">★</span>
                       <span>{cert.code}</span>
                     </span>
                     <span className="text-[11px] font-bold text-emerald-700">{cert.validity}</span>
@@ -338,7 +338,7 @@ export default async function ProfesyonellerAltSayfa({
                   key={article.id}
                   className="hover-lift rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs"
                 >
-                  <span className="inline-block rounded bg-[#7C3AED]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#7C3AED]">
+                  <span className="inline-block rounded bg-[#1E3A8A]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#1E3A8A]">
                     {article.tag}
                   </span>
                   <h2 className="mt-2 text-base font-black text-[#0F172A]">{article.title}</h2>
@@ -409,8 +409,8 @@ export default async function ProfesyonellerAltSayfa({
                     <rect x="36" y="36" width="188" height="228" fill="#0F172A" stroke="#38BDF8" strokeWidth="3" />
                     <rect x="30" y="55" width="8" height="24" fill="#CBD5E1" />
                     <rect x="30" y="220" width="8" height="24" fill="#CBD5E1" />
-                    <rect x="216" y="135" width="8" height="30" rx="2" fill="#7C3AED" />
-                    <line x1="46" y1="254" x2="214" y2="46" stroke="#7C3AED" strokeWidth="2" strokeDasharray="6 4" />
+                    <rect x="216" y="135" width="8" height="30" rx="2" fill="#1E3A8A" />
+                    <line x1="46" y1="254" x2="214" y2="46" stroke="#1E3A8A" strokeWidth="2" strokeDasharray="6 4" />
                     <polyline points="44,44 216,150 44,256" fill="none" stroke="#64748B" strokeWidth="1.5" strokeDasharray="4 4" />
                     <rect x="52" y="260" width="28" height="7" fill="#EF4444" />
                     <rect x="220" y="55" width="7" height="28" fill="#EF4444" />
@@ -467,7 +467,7 @@ export default async function ProfesyonellerAltSayfa({
                   key={guide.title}
                   className="hover-lift rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs"
                 >
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#1E3A8A]">
                     {guide.badge}
                   </span>
                   <h3 className="mt-1.5 text-sm font-black text-[#0F172A]">{guide.title}</h3>
@@ -490,25 +490,25 @@ export default async function ProfesyonellerAltSayfa({
                       <span className="rounded bg-[#0F172A] px-2 py-0.5 text-[10px] font-black text-white">
                         {opt.code}
                       </span>
-                      <span className="text-[11px] font-bold text-[#7C3AED]">{opt.series}</span>
+                      <span className="text-[11px] font-bold text-[#1E3A8A]">{opt.series}</span>
                     </div>
 
                     <div className="my-3 flex h-24 items-center justify-center rounded-xl border border-slate-100 bg-slate-50 p-2">
                       <svg viewBox="0 0 180 90" className="h-18 w-36" aria-label={opt.name}>
                         <rect x="15" y="10" width="150" height="70" fill="#FFFFFF" stroke="#0F172A" strokeWidth="3" />
                         {opt.type === 'single-turn' && (
-                          <polyline points="15,10 165,45 15,80" fill="none" stroke="#7C3AED" strokeWidth="2" strokeDasharray="4 3" />
+                          <polyline points="15,10 165,45 15,80" fill="none" stroke="#1E3A8A" strokeWidth="2" strokeDasharray="4 3" />
                         )}
                         {opt.type === 'tilt-turn' && (
                           <>
-                            <polyline points="15,10 165,45 15,80" fill="none" stroke="#7C3AED" strokeWidth="2" strokeDasharray="4 3" />
+                            <polyline points="15,10 165,45 15,80" fill="none" stroke="#1E3A8A" strokeWidth="2" strokeDasharray="4 3" />
                             <polyline points="15,80 90,10 165,80" fill="none" stroke="#004A8F" strokeWidth="2" />
                           </>
                         )}
                         {(opt.type === 'lift-slide' || opt.type === 'axial-slide') && (
                           <>
                             <line x1="90" y1="10" x2="90" y2="80" stroke="#0F172A" strokeWidth="2.5" />
-                            <path d="M 35 45 L 75 45 M 65 37 L 75 45 L 65 53" fill="none" stroke="#7C3AED" strokeWidth="2.5" />
+                            <path d="M 35 45 L 75 45 M 65 37 L 75 45 L 65 53" fill="none" stroke="#1E3A8A" strokeWidth="2.5" />
                           </>
                         )}
                         {opt.type === 'folding-glass' && (
@@ -516,14 +516,14 @@ export default async function ProfesyonellerAltSayfa({
                             <line x1="52" y1="10" x2="52" y2="80" stroke="#004A8F" strokeWidth="1.5" />
                             <line x1="90" y1="10" x2="90" y2="80" stroke="#004A8F" strokeWidth="1.5" />
                             <line x1="128" y1="10" x2="128" y2="80" stroke="#004A8F" strokeWidth="1.5" />
-                            <path d="M 145 45 L 30 45 M 40 37 L 30 45 L 40 53" fill="none" stroke="#7C3AED" strokeWidth="2.5" />
+                            <path d="M 145 45 L 30 45 M 40 37 L 30 45 L 40 53" fill="none" stroke="#1E3A8A" strokeWidth="2.5" />
                           </>
                         )}
                         {opt.type === 'guillotine' && (
                           <>
                             <line x1="15" y1="35" x2="165" y2="35" stroke="#004A8F" strokeWidth="2" />
                             <line x1="15" y1="58" x2="165" y2="58" stroke="#004A8F" strokeWidth="2" />
-                            <path d="M 90 20 L 90 70 M 82 60 L 90 70 L 98 60" fill="none" stroke="#7C3AED" strokeWidth="2.5" />
+                            <path d="M 90 20 L 90 70 M 82 60 L 90 70 L 98 60" fill="none" stroke="#1E3A8A" strokeWidth="2.5" />
                           </>
                         )}
                       </svg>
@@ -550,7 +550,7 @@ export default async function ProfesyonellerAltSayfa({
                   className="hover-lift rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs"
                 >
                   <div className="flex items-center justify-between text-[11px] font-bold">
-                    <span className="text-[#7C3AED]">{ref.district}</span>
+                    <span className="text-[#1E3A8A]">{ref.district}</span>
                     <span className="rounded bg-slate-100 px-2 py-0.5 text-slate-600">
                       {ref.year} • {ref.area}
                     </span>
@@ -577,7 +577,7 @@ export default async function ProfesyonellerAltSayfa({
                 >
                   <div>
                     <div className="flex items-center justify-between text-[11px] font-bold">
-                      <span className="rounded bg-[#7C3AED]/10 px-2 py-0.5 text-[#7C3AED]">
+                      <span className="rounded bg-[#1E3A8A]/10 px-2 py-0.5 text-[#1E3A8A]">
                         {post.category}
                       </span>
                       <span className="text-slate-400">{post.readTime}</span>
@@ -591,7 +591,7 @@ export default async function ProfesyonellerAltSayfa({
                     <Link
                       prefetch={true}
                       href={post.ctaHref}
-                      className="inline-flex items-center gap-1 text-xs font-extrabold text-[#0F172A] hover:text-[#7C3AED]"
+                      className="inline-flex items-center gap-1 text-xs font-extrabold text-[#0F172A] hover:text-[#1E3A8A]"
                     >
                       <span>{post.ctaLabel}</span>
                       <span>→</span>

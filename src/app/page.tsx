@@ -4,14 +4,15 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { SITE_CONFIG } from '../config/site.config';
 import { HeroSlider } from '../components/HeroSlider';
+import {
+  CorporatePrestigeSection,
+  ProcessWorkflowBar,
+  ProductShowcaseStrip,
+} from '../components/CorporatePrestigeSection';
 import { SeoGuide } from '../components/SeoGuide';
 
 /* Ağır etkileşimli bölümler ilk rota geçişini kilitlemesin diye ayrı chunk'lara
    bölünür; SSR korunur, böylece SEO HTML'i ve görsel düzen değişmez. */
-const InnovativeShowcase = dynamic(
-  () => import('../components/InnovativeShowcase').then((module) => module.InnovativeShowcase),
-  { ssr: true }
-);
 const ArchitecturalVirtualTour = dynamic(
   () =>
     import('../components/ArchitecturalVirtualTour').then(
@@ -188,6 +189,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============================ KURUMSAL PRESTİJ ============================ */}
+      <CorporatePrestigeSection />
+
+      {/* ============================ ÜRÜN GRUPLARI VİTRİNİ ============================ */}
+      <ProductShowcaseStrip />
+
       {/* ============================ HİZMETLER ============================ */}
       <section id="hizmetler" className="section-shell bg-[#F8FAFC]">
         <div className="container-shell">
@@ -206,21 +213,21 @@ export default function HomePage() {
                 prefetch={true}
                 key={service.title}
                 href={service.href}
-                className="group relative flex flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#DDD6FE] hover:shadow-card sm:p-6"
+                className="group relative flex flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#BFDBFE] hover:shadow-card sm:p-6"
               >
                 <span className="absolute right-5 top-5 text-[10px] font-semibold tracking-[0.18em] text-slate-300">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#DDD6FE] bg-[#F5F3FF] text-[#7C3AED] transition-colors group-hover:bg-[#7C3AED] group-hover:text-white">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] text-[#1E3A8A] transition-colors group-hover:bg-[#1E3A8A] group-hover:text-white">
                   {service.icon}
                 </span>
-                <h3 className="mt-5 text-[15px] font-semibold text-[#0F172A] group-hover:text-[#6D28D9]">
+                <h3 className="mt-5 text-[15px] font-semibold text-[#0F172A] group-hover:text-[#1D4ED8]">
                   {service.title}
                 </h3>
                 <p className="mt-2 flex-1 text-[12px] leading-relaxed text-slate-500">
                   {service.description}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7C3AED]">
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1E3A8A]">
                   Detayları incele
                   <IconArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -228,9 +235,9 @@ export default function HomePage() {
             ))}
 
             <div className="relative flex flex-col justify-between overflow-hidden rounded-card bg-[#0F172A] p-6 text-white">
-              <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#7C3AED]/45 blur-2xl" />
+              <span className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#1E3A8A]/45 blur-2xl" />
               <div className="relative">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#DDD6FE]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#BFDBFE]">
                   Emin olamadınız mı?
                 </span>
                 <h3 className="mt-3 text-xl font-semibold leading-snug">
@@ -244,7 +251,7 @@ export default function HomePage() {
               <Link
                 prefetch={true}
                 href="/iletisim?form=kesif"
-                className="relative mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+                className="relative mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:bg-[#EFF6FF] hover:text-[#1D4ED8]"
               >
                 Ücretsiz Keşif İste
                 <IconArrowRight className="h-3.5 w-3.5" />
@@ -270,7 +277,7 @@ export default function HomePage() {
             </div>
             <div className="absolute -bottom-5 left-4 right-4 rounded-xl border border-slate-200 bg-white p-4 shadow-soft sm:left-6 sm:right-auto sm:w-64">
               <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5F3FF] text-[#7C3AED]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#EFF6FF] text-[#1E3A8A]">
                   <IconBadge />
                 </span>
                 <div>
@@ -317,7 +324,7 @@ export default function HomePage() {
               <Link
                 prefetch={true}
                 href="/fiyat-hesapla"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#BFDBFE] hover:bg-[#EFF6FF] hover:text-[#1D4ED8]"
               >
                 Fiyat Hesapla
               </Link>
@@ -326,10 +333,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================ 5 İNTERAKTİF MODÜL ============================ */}
-      <div className="cv-auto">
-        <InnovativeShowcase />
-      </div>
+      {/* ============================ 4 ADIMLI UYGULAMA SÜRECİ ============================ */}
+      <ProcessWorkflowBar />
 
       {/* ============================ SANAL TUR ============================ */}
       <ArchitecturalVirtualTour />
@@ -337,10 +342,10 @@ export default function HomePage() {
       {/* ============================ FİYAT / DÖNÜŞÜM BANDI ============================ */}
       <section className="bg-white py-12 sm:py-16">
         <div className="container-shell">
-          <div className="overflow-hidden rounded-panel border border-[#DDD6FE] bg-[#F5F3FF]">
+          <div className="overflow-hidden rounded-panel border border-[#BFDBFE] bg-[#EFF6FF]">
             <div className="grid items-center gap-6 p-6 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7C3AED]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1E3A8A]">
                   Şeffaf fiyatlandırma
                 </span>
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#0F172A] sm:text-3xl">
@@ -355,14 +360,14 @@ export default function HomePage() {
                 <Link
                   prefetch={true}
                   href="/fiyat-hesapla"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#1E3A8A] px-5 py-3 text-[12px] font-semibold text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
                 >
                   Fiyat Hesapla <IconArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   prefetch={true}
                   href="/iletisim?form=kesif"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#DDD6FE] bg-white px-5 py-3 text-[12px] font-semibold text-[#5B21B6] transition-colors hover:bg-[#EDE9FE]"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#BFDBFE] bg-white px-5 py-3 text-[12px] font-semibold text-[#1E3A8A] transition-colors hover:bg-[#DBEAFE]"
                 >
                   Keşif İste
                 </Link>
@@ -387,7 +392,7 @@ export default function HomePage() {
             <Link
               prefetch={true}
               href="/galeri"
-              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Tüm projeleri incele <IconArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -409,12 +414,12 @@ export default function HomePage() {
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#6D28D9] backdrop-blur-sm">
+                  <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#1D4ED8] backdrop-blur-sm">
                     {project.tag}
                   </span>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-[13.5px] font-semibold text-[#0F172A] group-hover:text-[#6D28D9]">
+                  <h3 className="text-[13.5px] font-semibold text-[#0F172A] group-hover:text-[#1D4ED8]">
                     {project.title}
                   </h3>
                   <p className="mt-1 text-[10.5px] text-slate-500">{project.meta}</p>
@@ -427,15 +432,15 @@ export default function HomePage() {
               prefetch={true}
 
               href="/galeri"
-              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-card border border-[#DDD6FE] bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#4C1D95] p-6 text-white shadow-xs transition-transform duration-300 hover:-translate-y-1"
+              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-card border border-[#BFDBFE] bg-gradient-to-br from-[#0F172A] via-[#172554] to-[#1D4ED8] p-6 text-white shadow-xs transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/40 blur-2xl" />
+              <span className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#1E3A8A]/40 blur-2xl" />
               <span className="pointer-events-none absolute -bottom-16 left-0 h-40 w-40 rounded-full bg-[#D91B24]/15 blur-2xl" />
               <div className="relative flex items-center justify-between">
-                <span className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#DDD6FE]">
+                <span className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#BFDBFE]">
                   Proje Arşivi
                 </span>
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors group-hover:border-[#DDD6FE] group-hover:bg-white group-hover:text-[#6D28D9]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors group-hover:border-[#BFDBFE] group-hover:bg-white group-hover:text-[#1D4ED8]">
                   <IconArrowRight className="h-4 w-4" />
                 </span>
               </div>
@@ -479,7 +484,7 @@ export default function HomePage() {
               </p>
               <a
                 href={`tel:${SITE_CONFIG.phoneRaw}`}
-                className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7C3AED]"
+                className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1E3A8A]"
               >
                 <IconPhone className="h-3.5 w-3.5" /> {SITE_CONFIG.phoneDisplay}
               </a>
@@ -518,7 +523,7 @@ export default function HomePage() {
             <Link
               prefetch={true}
               href="/blog"
-              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#7C3AED] hover:text-[#6D28D9]"
+              className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Tüm yazılar <IconArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -545,7 +550,7 @@ export default function HomePage() {
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-4">
-                  <h3 className="text-[13.5px] font-semibold leading-snug text-[#0F172A] group-hover:text-[#6D28D9]">
+                  <h3 className="text-[13.5px] font-semibold leading-snug text-[#0F172A] group-hover:text-[#1D4ED8]">
                     {post.title}
                   </h3>
                   <p className="mt-1.5 flex-1 text-[10.5px] leading-relaxed text-slate-500">
@@ -555,7 +560,7 @@ export default function HomePage() {
                     <span className="text-[9px] font-medium uppercase tracking-[0.12em] text-slate-400">
                       {post.read}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#7C3AED]">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#1E3A8A]">
                       Oku <IconArrowRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -570,11 +575,11 @@ export default function HomePage() {
       <section className="bg-white pb-14 sm:pb-20">
         <div className="container-shell">
           <div className="relative overflow-hidden rounded-panel bg-[#0F172A] px-6 py-10 text-white sm:px-10 sm:py-14">
-            <span className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#7C3AED]/35 blur-3xl" />
+            <span className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#1E3A8A]/35 blur-3xl" />
             <span className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-[#D91B24]/15 blur-3xl" />
             <div className="relative grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-[#DDD6FE]">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-[#BFDBFE]">
                   <IconSparkle className="h-3 w-3" /> Aynı Gün Ücretsiz Keşif
                 </span>
                 <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
@@ -600,7 +605,7 @@ export default function HomePage() {
                 <Link
                   prefetch={true}
                   href="/iletisim?form=kesif"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#7C3AED] px-5 py-3.5 text-[12px] font-semibold text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#1E3A8A] px-5 py-3.5 text-[12px] font-semibold text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
                 >
                   <IconCalendar className="h-4 w-4" /> Keşif Randevusu Al
                 </Link>
@@ -618,7 +623,7 @@ export default function HomePage() {
             {ADDITIONAL_LINKS.map((link) => (
               <Link
                 prefetch={true}
-                key={link.href} href={link.href} className="transition-colors hover:text-[#7C3AED]">
+                key={link.href} href={link.href} className="transition-colors hover:text-[#1E3A8A]">
                 {link.label}
               </Link>
             ))}

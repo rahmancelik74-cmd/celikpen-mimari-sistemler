@@ -174,8 +174,8 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               onClick={() => setActiveTab(tab.id)}
               className={`rounded-lg px-3 py-2 text-[10.5px] font-semibold transition-all ${
                 isSelected
-                  ? 'bg-[#7C3AED] text-white shadow-xs'
-                  : 'border border-slate-200 bg-[#F8FAFC] text-[#0F172A] hover:border-[#DDD6FE] hover:bg-[#F5F3FF] hover:text-[#6D28D9]'
+                  ? 'bg-[#1E3A8A] text-white shadow-xs'
+                  : 'border border-slate-200 bg-[#F8FAFC] text-[#0F172A] hover:border-[#BFDBFE] hover:bg-[#EFF6FF] hover:text-[#1D4ED8]'
               }`}
             >
               {tab.label}
@@ -207,7 +207,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               value={ad}
               onChange={(e) => setAd(e.target.value)}
               placeholder="Ahmet Yılmaz"
-              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
             />
             {errors.ad && (
               <p role="alert" className="mt-1 text-[11px] font-semibold text-[#D91B24]">
@@ -228,7 +228,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               value={telefon}
               onChange={(e) => setTelefon(e.target.value)}
               placeholder="05XX XXX XX XX"
-              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
             />
             {errors.telefon && (
               <p role="alert" className="mt-1 text-[11px] font-semibold text-[#D91B24]">
@@ -248,7 +248,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               name="mahalle"
               value={mahalle}
               onChange={(e) => setMahalle(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
             >
               {SITE_CONFIG.neighborhoods.map((n) => (
                 <option key={n.slug} value={n.name}>
@@ -267,7 +267,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               name="sistem"
               value={sistem}
               onChange={(e) => setSistem(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
             >
               {allSystemOptions.map((opt) => (
                 <option key={opt} value={opt}>
@@ -290,7 +290,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
             value={mesaj}
             onChange={(e) => setMesaj(e.target.value)}
             placeholder={currentTabConfig.placeholder}
-            className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DDD6FE]"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
           />
           {errors.mesaj && (
             <p role="alert" className="mt-1 text-[11px] font-semibold text-[#D91B24]">
@@ -301,7 +301,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#7C3AED] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-purple transition-colors hover:bg-[#6D28D9]"
+          className="w-full rounded-lg bg-[#1E3A8A] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
         >
           WhatsApp Üzerinden Gönder →
         </button>

@@ -269,14 +269,14 @@ export function CustomerReviews() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           {/* Canlı puan özeti */}
-          <div className="relative overflow-hidden rounded-card border border-slate-200 bg-gradient-to-br from-[#F5F3FF] via-white to-white p-5 shadow-xs sm:p-6">
+          <div className="relative overflow-hidden rounded-card border border-slate-200 bg-gradient-to-br from-[#EFF6FF] via-white to-white p-5 shadow-xs sm:p-6">
             <span
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#7C3AED]/10 blur-2xl"
+              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#1E3A8A]/10 blur-2xl"
               aria-hidden="true"
             />
             <div className="relative flex items-start justify-between gap-4">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7C3AED]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1E3A8A]">
                   Canlı Puan Özeti
                 </p>
                 <div className="mt-2 flex items-end gap-2">
@@ -292,7 +292,7 @@ export function CustomerReviews() {
                   </span>
                 </div>
               </div>
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#DDD6FE] bg-white text-[#7C3AED] shadow-xs">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#BFDBFE] bg-white text-[#1E3A8A] shadow-xs">
                 <IconSparkle className="h-5 w-5" />
               </span>
             </div>
@@ -326,14 +326,14 @@ export function CustomerReviews() {
           <div id="yorum-formu" className="scroll-mt-32 rounded-card border border-slate-200 bg-white p-5 shadow-xs sm:p-6">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7C3AED]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1E3A8A]">
                   Deneyiminizi Paylaşın
                 </p>
                 <h3 className="mt-1 text-lg font-bold tracking-tight text-[#0F172A]">
                   Yorum Yap
                 </h3>
               </div>
-              <span className="hidden rounded-full bg-[#F5F3FF] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-[#6D28D9] sm:inline-flex">
+              <span className="hidden rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-[#1D4ED8] sm:inline-flex">
                 Anında yayınlanır
               </span>
             </div>
@@ -369,7 +369,7 @@ export function CustomerReviews() {
                         onBlur={() => setHoverRating(0)}
                         aria-label={`${star} yıldız — ${RATING_LABELS[star]}`}
                         aria-pressed={rating === star}
-                        className="flex h-11 w-11 items-center justify-center rounded-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED]"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]"
                       >
                         <IconStar
                           className={`h-6 w-6 transition-colors ${
@@ -405,7 +405,7 @@ export function CustomerReviews() {
                     placeholder="Örn. Ayşe Yılmaz"
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? 'review-name-error' : undefined}
-                    className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-[#7C3AED]/15"
+                    className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:ring-2 focus:ring-[#1E3A8A]/15"
                   />
                   {errors.name && (
                     <span id="review-name-error" className="mt-1 block text-[10px] text-red-600">
@@ -425,7 +425,7 @@ export function CustomerReviews() {
                     maxLength={40}
                     autoComplete="address-level2"
                     placeholder="Örn. Bahçelievler"
-                    className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-[#7C3AED]/15"
+                    className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:ring-2 focus:ring-[#1E3A8A]/15"
                   />
                 </label>
               </div>
@@ -442,7 +442,7 @@ export function CustomerReviews() {
                   }}
                   aria-invalid={Boolean(errors.system)}
                   aria-describedby={errors.system ? 'review-system-error' : undefined}
-                  className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-[#7C3AED]/15"
+                  className="mt-1.5 min-h-[44px] w-full rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] text-[#0F172A] outline-none transition-colors focus:border-[#1E3A8A] focus:bg-white focus:ring-2 focus:ring-[#1E3A8A]/15"
                 >
                   <option value="">Uygulama seçin</option>
                   {SYSTEM_OPTIONS.map((option) => (
@@ -478,7 +478,7 @@ export function CustomerReviews() {
                   placeholder="Ölçü, montaj, kullanım ve ekip deneyiminizi kısaca anlatın."
                   aria-invalid={Boolean(errors.text)}
                   aria-describedby={errors.text ? 'review-text-error' : undefined}
-                  className="mt-1.5 w-full resize-y rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] leading-relaxed text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-[#7C3AED]/15"
+                  className="mt-1.5 w-full resize-y rounded-xl border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-[12px] leading-relaxed text-[#0F172A] outline-none transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:ring-2 focus:ring-[#1E3A8A]/15"
                 />
                 {errors.text && (
                   <span id="review-text-error" className="mt-1 block text-[10px] text-red-600">
@@ -489,7 +489,7 @@ export function CustomerReviews() {
 
               <button
                 type="submit"
-                className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#7C3AED] px-4 py-3 text-[12px] font-semibold text-white shadow-purple transition-all hover:-translate-y-0.5 hover:bg-[#6D28D9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED] focus-visible:ring-offset-2"
+                className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-4 py-3 text-[12px] font-semibold text-white shadow-navy transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2"
               >
                 <IconSend className="h-4 w-4" />
                 Yorumu Yayınla
@@ -506,7 +506,7 @@ export function CustomerReviews() {
           {visibleReviews.map((review) => (
             <article
               key={review.id}
-              className="flex h-full flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-[#DDD6FE] hover:shadow-md"
+              className="flex h-full flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-[#BFDBFE] hover:shadow-md"
             >
               <div className="flex items-center justify-between gap-2">
                 <Stars rating={review.rating} className="h-3.5 w-3.5" />
@@ -528,7 +528,7 @@ export function CustomerReviews() {
 
               <div className="mt-4 flex flex-col items-start gap-2.5 border-t border-slate-100 pt-3.5">
                 <div className="flex min-w-0 items-center gap-2.5">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F5F3FF] text-[11px] font-bold text-[#6D28D9]">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#EFF6FF] text-[11px] font-bold text-[#1D4ED8]">
                     {review.name.charAt(0).toLocaleUpperCase('tr-TR')}
                   </span>
                   <span className="min-w-0">
@@ -540,7 +540,7 @@ export function CustomerReviews() {
                     </span>
                   </span>
                 </div>
-                <span className="max-w-full rounded-full bg-[#F5F3FF] px-2.5 py-1 text-center text-[8.5px] font-semibold uppercase leading-tight tracking-[0.06em] text-[#6D28D9]">
+                <span className="max-w-full rounded-full bg-[#EFF6FF] px-2.5 py-1 text-center text-[8.5px] font-semibold uppercase leading-tight tracking-[0.06em] text-[#1D4ED8]">
                   {review.system}
                 </span>
               </div>
@@ -553,7 +553,7 @@ export function CustomerReviews() {
             <button
               type="button"
               onClick={() => startTransition(() => setShowAll(true))}
-              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#DDD6FE] hover:text-[#7C3AED]"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-[11px] font-semibold text-[#0F172A] transition-colors hover:border-[#BFDBFE] hover:text-[#1E3A8A]"
             >
               Tüm yorumları göster ({reviews.length})
               <IconChevronDown className="h-3.5 w-3.5" />

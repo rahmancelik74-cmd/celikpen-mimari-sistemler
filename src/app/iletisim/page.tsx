@@ -35,8 +35,8 @@ export default function IletisimPage() {
         {/* Sol: Kurumsal iletişim kartları */}
         <div className="space-y-4 lg:col-span-5">
           <div className="hover-lift rounded-card border border-slate-200 bg-white p-5 shadow-xs">
-            <span className="inline-flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6D28D9]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#7C3AED]" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#1D4ED8]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
               Showroom &amp; Üretim Adresi
             </span>
             <p className="mt-2 text-[13px] font-semibold leading-relaxed text-[#0F172A]">{SITE_CONFIG.address}</p>
@@ -45,7 +45,7 @@ export default function IletisimPage() {
                 href={directionsWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#7C3AED] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1E3A8A] hover:underline"
               >
                 <span>WhatsApp’tan Canlı Konum İste</span>
                 <span>→</span>
@@ -55,13 +55,13 @@ export default function IletisimPage() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <div className="hover-lift rounded-card border border-slate-200 bg-white p-5 shadow-xs">
-              <span className="inline-flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#6D28D9]">
+              <span className="inline-flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#1D4ED8]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" aria-hidden="true" />
                 Kurumsal Keşif Hattı
               </span>
               <a
                 href={`tel:${SITE_CONFIG.phoneRaw}`}
-                className="mt-2 block text-xl font-semibold tracking-tight text-[#0F172A] transition-colors hover:text-[#7C3AED]"
+                className="mt-2 block text-xl font-semibold tracking-tight text-[#0F172A] transition-colors hover:text-[#1E3A8A]"
               >
                 {SITE_CONFIG.phoneDisplay}
               </a>
@@ -80,13 +80,13 @@ export default function IletisimPage() {
             </div>
           </div>
 
-          <div className="rounded-card border border-[#DDD6FE] bg-[#F5F3FF] p-4">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D28D9]">
+          <div className="rounded-card border border-[#BFDBFE] bg-[#EFF6FF] p-4">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1D4ED8]">
               Hızlı İletişim
             </p>
             <a
               href="mailto:iletisim@celikpen.com"
-              className="mt-1.5 block text-[12px] font-semibold text-[#0F172A] hover:text-[#6D28D9]"
+              className="mt-1.5 block text-[12px] font-semibold text-[#0F172A] hover:text-[#1D4ED8]"
             >
               iletisim@celikpen.com
             </a>

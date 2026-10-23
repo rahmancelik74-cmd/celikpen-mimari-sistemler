@@ -65,8 +65,8 @@ export default function KurumsalPage() {
 
       {/* 8 Kurumsal Alt Sayfa Bento Grid */}
       <section className="mt-10">
-        <div className="mb-4 flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#7C3AED]">
-          <span className="h-[1.5px] w-5 bg-[#7C3AED]" />
+        <div className="mb-4 flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#1E3A8A]">
+          <span className="h-[1.5px] w-5 bg-[#1E3A8A]" />
           <span>KURUMSAL BÖLÜMLERİMİZ</span>
         </div>
 
@@ -76,21 +76,21 @@ export default function KurumsalPage() {
               prefetch={true}
               key={sub.slug}
               href={`/kurumsal/${sub.slug}`}
-              className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-colors hover:border-[#DDD6FE]"
+              className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-colors hover:border-[#BFDBFE]"
             >
-              <span className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l-2 border-t-2 border-[#7C3AED] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+              <span className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l-2 border-t-2 border-[#1E3A8A] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
               <div>
-                <span className="inline-block rounded-full bg-[#F5F3FF] px-2.5 py-1 text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[#6D28D9]">
+                <span className="inline-block rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[8.5px] font-semibold uppercase tracking-[0.1em] text-[#1D4ED8]">
                   {sub.categoryGroup}
                 </span>
-                <h2 className="mt-2.5 text-[14px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#7C3AED]">
+                <h2 className="mt-2.5 text-[14px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
                   {sub.title}
                 </h2>
                 <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-slate-500">
                   {sub.subtitle}
                 </p>
               </div>
-              <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-2.5 text-[10.5px] font-semibold text-[#6D28D9]">
+              <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-2.5 text-[10.5px] font-semibold text-[#1D4ED8]">
                 <span>İncele</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </div>
@@ -102,7 +102,7 @@ export default function KurumsalPage() {
       {/* 4 Adımlı Süreç Timeline & Kalite Sertifika Rozetleri */}
       <section className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="rounded-card border border-slate-200 bg-white p-6 shadow-xs lg:col-span-7">
-          <div className="text-[11px] font-extrabold uppercase tracking-wider text-[#7C3AED]">
+          <div className="text-[11px] font-extrabold uppercase tracking-wider text-[#1E3A8A]">
             ÜRETİM &amp; KURULUM PROTOKOLÜ
           </div>
           <h2 className="mt-1 text-lg font-black text-[#0F172A]">4 Adımda Kusursuz Süreç</h2>
@@ -125,7 +125,7 @@ export default function KurumsalPage() {
         </div>
 
         <div className="rounded-card border border-white/10 bg-[#0F172A] p-6 text-white shadow-card lg:col-span-5">
-          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#DDD6FE]">
+          <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#BFDBFE]">
             ULUSLARARASI AKREDİTASYON
           </div>
           <h2 className="mt-1 text-lg font-black text-white">Kalite Sertifikalarımız</h2>
@@ -136,7 +136,7 @@ export default function KurumsalPage() {
                 className="glass-sheen flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs"
               >
                 <span className="font-semibold text-slate-200">{cert.title}</span>
-                <span className="rounded-full bg-[#7C3AED] px-2.5 py-1 text-[9px] font-semibold text-white">
+                <span className="rounded-full bg-[#1E3A8A] px-2.5 py-1 text-[9px] font-semibold text-white">
                   {cert.code}
                 </span>
               </div>

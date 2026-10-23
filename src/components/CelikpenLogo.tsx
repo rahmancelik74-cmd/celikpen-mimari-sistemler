@@ -60,7 +60,7 @@ export const CelikpenLogo: React.FC<CelikpenLogoProps> = ({
           />
           <path
             d="M2 10.5V2H10.5"
-            stroke="#7C3AED"
+            stroke="#1E3A8A"
             strokeWidth="2.2"
             strokeLinecap="square"
           />

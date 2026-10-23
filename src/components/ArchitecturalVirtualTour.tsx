@@ -61,19 +61,19 @@ export const ArchitecturalVirtualTour: React.FC = () => {
       {/* Dekoratif Köşe Çizgileri */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-6 top-6 h-12 w-12 border-l-2 border-t-2 border-[#7C3AED]/50"
+        className="pointer-events-none absolute left-6 top-6 h-12 w-12 border-l-2 border-t-2 border-[#1E3A8A]/50"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-6 bottom-6 h-12 w-12 border-r-2 border-b-2 border-[#7C3AED]/50"
+        className="pointer-events-none absolute right-6 bottom-6 h-12 w-12 border-r-2 border-b-2 border-[#1E3A8A]/50"
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Üst Başlık ve İnteraktif Seçiciler */}
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#C4B5FD]">
-              <span className="h-[2px] w-6 bg-[#7C3AED]" />
+            <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#93C5FD]">
+              <span className="h-[2px] w-6 bg-[#1E3A8A]" />
               <span>SANAL TUR &amp; MİMARİ DENEYİM</span>
             </div>
             <h2 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">
@@ -95,7 +95,7 @@ export const ArchitecturalVirtualTour: React.FC = () => {
                     onClick={() => setSelectedSystem(key)}
                     className={`rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all ${
                       active
-                        ? 'bg-[#7C3AED] text-white shadow-md'
+                        ? 'bg-[#1E3A8A] text-white shadow-md'
                         : 'text-white/75 hover:text-white'
                     }`}
                   >
@@ -138,10 +138,10 @@ export const ArchitecturalVirtualTour: React.FC = () => {
         {/* Ana Panoramik Sahne Vitrini */}
         <div className="relative mt-8 overflow-hidden rounded-3xl border border-white/15 bg-slate-950 shadow-2xl">
           {/* 4 Köşe Mimari L-Bracket Dekorasyonu */}
-          <span className="pointer-events-none absolute top-4 left-4 z-20 h-6 w-6 border-t-2 border-l-2 border-[#7C3AED]" />
-          <span className="pointer-events-none absolute top-4 right-4 z-20 h-6 w-6 border-t-2 border-r-2 border-[#7C3AED]" />
-          <span className="pointer-events-none absolute bottom-4 left-4 z-20 h-6 w-6 border-b-2 border-l-2 border-[#7C3AED]" />
-          <span className="pointer-events-none absolute bottom-4 right-4 z-20 h-6 w-6 border-b-2 border-r-2 border-[#7C3AED]" />
+          <span className="pointer-events-none absolute top-4 left-4 z-20 h-6 w-6 border-t-2 border-l-2 border-[#1E3A8A]" />
+          <span className="pointer-events-none absolute top-4 right-4 z-20 h-6 w-6 border-t-2 border-r-2 border-[#1E3A8A]" />
+          <span className="pointer-events-none absolute bottom-4 left-4 z-20 h-6 w-6 border-b-2 border-l-2 border-[#1E3A8A]" />
+          <span className="pointer-events-none absolute bottom-4 right-4 z-20 h-6 w-6 border-b-2 border-r-2 border-[#1E3A8A]" />
 
           <div className="relative aspect-[16/9] max-h-[520px] w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -175,7 +175,7 @@ export const ArchitecturalVirtualTour: React.FC = () => {
             {/* Alt Overlay Bilgi ve 3 İkon Rozeti */}
             <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-between gap-4 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-6 sm:p-8 lg:flex-row lg:items-end">
               <div>
-                <span className="inline-block rounded-full bg-[#7C3AED] px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white">
+                <span className="inline-block rounded-full bg-[#1E3A8A] px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white">
                   {current.tag}
                 </span>
                 <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
@@ -200,7 +200,7 @@ export const ArchitecturalVirtualTour: React.FC = () => {
                   prefetch={true}
 
                   href={current.href}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#7C3AED] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg transition hover:bg-[#6D28D9]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#1E3A8A] px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-white shadow-lg transition hover:bg-[#1D4ED8]"
                 >
                   <span>SİSTEMİ İNCELE</span>
                   <span>→</span>

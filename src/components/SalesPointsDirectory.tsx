@@ -47,7 +47,7 @@ export function SalesPointsDirectory() {
       <section className="rounded-2xl border border-[#0F172A]/20 bg-white p-6 shadow-2xs">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <span className="rounded-md bg-[#7C3AED] px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-white">
+            <span className="rounded-md bg-[#1E3A8A] px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-white">
               MERKEZ SHOWROOM
             </span>
             <h2 className="mt-1.5 text-xl font-black text-[#0F172A]">
@@ -134,14 +134,14 @@ export function SalesPointsDirectory() {
                 <Link
                   prefetch={true}
                   href={`/bahcelievler/${n.slug}`}
-                  className="font-bold text-[#0F172A] hover:text-[#7C3AED]"
+                  className="font-bold text-[#0F172A] hover:text-[#1E3A8A]"
                 >
                   Bölge Detayı →
                 </Link>
                 <Link
                   prefetch={true}
                   href="/iletisim"
-                  className="rounded-md bg-[#7C3AED] px-2.5 py-1 text-[11px] font-bold text-white hover:bg-[#6D28D9]"
+                  className="rounded-md bg-[#1E3A8A] px-2.5 py-1 text-[11px] font-bold text-white hover:bg-[#1D4ED8]"
                 >
                   Keşif İste
                 </Link>

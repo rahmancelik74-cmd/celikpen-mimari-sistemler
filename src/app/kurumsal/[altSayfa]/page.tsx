@@ -106,8 +106,8 @@ export default async function KurumsalAltSayfa({
                         href={`/kurumsal/${item.slug}`}
                         className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                           active
-                            ? 'bg-[#7C3AED] text-white'
-                            : 'text-[#0F172A] hover:bg-slate-100 hover:text-[#7C3AED]'
+                            ? 'bg-[#1E3A8A] text-white'
+                            : 'text-[#0F172A] hover:bg-slate-100 hover:text-[#1E3A8A]'
                         }`}
                       >
                         <span>{item.title}</span>
@@ -149,7 +149,7 @@ export default async function KurumsalAltSayfa({
                   className="hover-lift rounded-xl border border-slate-200/80 bg-slate-50/70 p-4"
                 >
                   <div className="flex items-start gap-2.5">
-                    <span className="mt-0.5 text-xs font-black text-[#7C3AED]">◆</span>
+                    <span className="mt-0.5 text-xs font-black text-[#1E3A8A]">◆</span>
                     <div>
                       <h3 className="text-xs font-black text-[#0F172A]">{hl.title}</h3>
                       <p className="mt-1 text-xs leading-relaxed text-slate-600">{hl.desc}</p>
@@ -174,7 +174,7 @@ export default async function KurumsalAltSayfa({
               <Link
                 prefetch={true}
                 href="/urunler"
-                className="rounded-lg bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#6D28D9]"
+                className="rounded-lg bg-[#1E3A8A] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#1D4ED8]"
               >
                 Ürünleri İncele →
               </Link>
