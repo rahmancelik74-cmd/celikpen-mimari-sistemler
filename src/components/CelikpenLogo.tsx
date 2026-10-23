@@ -9,6 +9,8 @@ interface CelikpenLogoProps {
 /**
  * Çelikpen kurumsal kelime markası.
  * Header ve footer yüzeylerinde arka plan kutusu olmadan, tamamen şeffaf kullanılır.
+ * Yeni marka işareti; açık sağ kenarıyla "C" harfini andıran mimari cephe
+ * konturu, cam bölmeleri ve kırmızı eşik/çengel vurgusundan oluşur.
  */
 export const CelikpenLogo: React.FC<CelikpenLogoProps> = ({
   className = '',
@@ -19,52 +21,69 @@ export const CelikpenLogo: React.FC<CelikpenLogoProps> = ({
   const isLight = variant === 'light';
   const iconSize = isCompact ? 'h-7 w-7' : 'h-8 w-8';
   const wordmarkSize = isCompact
-    ? 'text-[13px] tracking-[0.2em]'
-    : 'text-[15.5px] tracking-[0.22em]';
+    ? 'text-[12.5px] tracking-[0.17em]'
+    : 'text-[15px] tracking-[0.19em]';
   const descriptorSize = isCompact
-    ? 'text-[6.5px] tracking-[0.22em]'
-    : 'text-[7.5px] tracking-[0.25em]';
+    ? 'text-[6.2px] tracking-[0.2em]'
+    : 'text-[7px] tracking-[0.22em]';
 
   const stroke = isLight ? '#FFFFFF' : '#0F172A';
+  const accent = isLight ? '#93C5FD' : '#1E3A8A';
+  const glass = isLight ? '#93C5FD' : '#BFDBFE';
+  const sill = isLight ? '#F87171' : '#D91B24';
   const wordmarkColor = isLight ? 'text-white' : 'text-[#0F172A]';
   const descriptorColor = isLight ? 'text-slate-300' : 'text-slate-500';
-  const lineColor = isLight ? 'bg-white/30' : 'bg-slate-300';
-  const registeredColor = isLight ? 'text-slate-400' : 'text-slate-400';
+  const lineColor = isLight ? 'bg-white/40' : 'bg-[#BFDBFE]';
+  const registeredColor = isLight ? 'text-[#93C5FD]' : 'text-[#1E3A8A]';
 
   return (
     <span
       className={`inline-flex shrink-0 items-center gap-2.5 border-none bg-transparent p-0 shadow-none select-none sm:gap-3 ${className}`}
-      aria-label="Çelikpen Cam Balkon Sistemleri"
+      aria-label="Çelikpen Mimari Cam Sistemleri"
     >
       <span className={`relative shrink-0 ${iconSize}`} aria-hidden="true">
         <svg
-          viewBox="0 0 32 32"
+          viewBox="0 0 40 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="h-full w-full overflow-visible"
         >
-          <rect
-            x="5.25"
-            y="5.25"
-            width="21.5"
-            height="21.5"
-            rx="1.25"
-            stroke={stroke}
-            strokeWidth="1.4"
-          />
+          {/* Açık sağ kenarlı mimari "C" cephe konturu */}
           <path
-            d="M21 5.25V26.75M5.25 21H26.75"
+            d="M33.5 7.5H10A2.5 2.5 0 0 0 7.5 10v20a2.5 2.5 0 0 0 2.5 2.5h23.5"
             stroke={stroke}
-            strokeWidth="1.15"
-            strokeOpacity={isLight ? '0.38' : '0.38'}
-          />
-          <path
-            d="M2 10.5V2H10.5"
-            stroke="#1E3A8A"
-            strokeWidth="2.2"
+            strokeWidth="2.4"
             strokeLinecap="square"
           />
-          <rect x="22.4" y="22.4" width="4.2" height="4.2" rx="0.6" fill="#D91B24" />
+          {/* Dikey cam bölmeleri */}
+          <path
+            d="M16.5 7.5v25M24 7.5v25"
+            stroke={accent}
+            strokeWidth="1.4"
+            strokeLinecap="square"
+          />
+          {/* Yatay travers */}
+          <path
+            d="M7.5 20h20.5"
+            stroke={accent}
+            strokeWidth="1"
+            strokeOpacity="0.55"
+          />
+          {/* Cam yansıması */}
+          <path
+            d="M10.5 25 16 10.5"
+            stroke={glass}
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeOpacity="0.9"
+          />
+          {/* Kırmızı eşik / çengel vurgusu */}
+          <path
+            d="M18 35h7"
+            stroke={sill}
+            strokeWidth="2.6"
+            strokeLinecap="square"
+          />
         </svg>
       </span>
 
@@ -72,7 +91,7 @@ export const CelikpenLogo: React.FC<CelikpenLogoProps> = ({
         <span className="flex items-start">
           <span
             className={`whitespace-nowrap uppercase leading-none ${
-              isLight ? 'font-normal' : 'font-light'
+              isLight ? 'font-normal' : 'font-medium'
             } ${wordmarkColor} ${wordmarkSize}`}
           >
             ÇELİKPEN
@@ -89,7 +108,7 @@ export const CelikpenLogo: React.FC<CelikpenLogoProps> = ({
           className={`mt-1.5 flex items-center gap-1.5 whitespace-nowrap font-medium uppercase leading-none ${descriptorColor} ${descriptorSize}`}
         >
           <span className={`h-px w-2 ${lineColor}`} aria-hidden="true" />
-          CAM BALKON SİSTEMLERİ
+          MİMARİ CAM SİSTEMLERİ
           <span className={`h-px w-2 ${lineColor}`} aria-hidden="true" />
         </span>
       </span>
