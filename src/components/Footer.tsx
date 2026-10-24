@@ -19,7 +19,7 @@ const FOOTER_QUICK = [
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Galeri', href: '/galeri' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: '/profesyoneller/blog' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
 ];
@@ -53,13 +53,13 @@ export function Footer() {
               <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
-              1991’den bugüne 35 yıllık üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon,
+              1996’dan bugüne 30 yıllık üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon,
               kış bahçesi, giyotin, sürme cam, PVC doğrama ve mimari alüminyum çözümleri sunuyoruz.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 border-l-2 border-[#38BDF8] pl-3">
-              <span className="text-[10px] font-extrabold tracking-[0.08em] text-white">35. YIL</span>
+              <span className="text-[10px] font-extrabold tracking-[0.08em] text-white">30. YIL</span>
               <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                1991 — 2026
+                1996 — 2026
               </span>
             </div>
             <div className="mt-5 flex items-center gap-2">

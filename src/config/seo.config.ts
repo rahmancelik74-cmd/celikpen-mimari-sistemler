@@ -34,8 +34,8 @@ export const LOCAL_KEYWORDS = [
   'Yenibosna cam balkon',
   'Avrupa Yakası cam balkon üretici',
   'Çelikpen cam balkon',
-  '35 yıllık cam balkon firması',
-  '1991’den bugüne cam balkon',
+  '30 yıllık cam balkon firması',
+  '1996’dan bugüne cam balkon',
 ] as const;
 
 export const LONG_TAIL_KEYWORDS = [
@@ -59,7 +59,7 @@ export const SEO_FAQS = [
   {
     question: 'Isıcamlı cam balkon ısı yalıtımı sağlar mı?',
     answer:
-      'Evet. Çelikpen VBS serisinde kullanılan 4+20+4 mm argon gazlı Konfor Isıcam, tek cama göre yaklaşık %72 daha yüksek termal bariyer oluşturur. Kışın balkonda terleme ve buğulanma azalır, yazın güneş ısısı daha kontrollü içeri girer; balkon dört mevsim yaşam alanı olarak kullanılabilir.',
+      'Evet. Çelikpen Vera Termal serisinde kullanılan 4+20+4 mm argon gazlı Konfor Isıcam, tek cama göre yaklaşık %72 daha yüksek termal bariyer oluşturur. Kışın balkonda terleme ve buğulanma azalır, yazın güneş ısısı daha kontrollü içeri girer; balkon dört mevsim yaşam alanı olarak kullanılabilir.',
   },
   {
     question: 'Cam balkon m² fiyatları neye göre belirlenir?',
@@ -186,10 +186,10 @@ export const SEO_BUSINESS = {
   name: 'Çelikpen Mimari Cam & Doğrama Sistemleri',
   shortName: SITE_CONFIG.brandName,
   description:
-    '1991’den bugüne 35 yıllık mühendislik birikimiyle Bahçelievler Kocasinan Merkez merkezli cam balkon üreticisi. Isıcamlı cam balkon, giyotin cam, bioklimatik pergola, kış bahçesi, sürme cam, alüminyum & PVC doğrama ve plise perde sistemleri.',
-  foundingDate: '1991',
+    '1996’dan bugüne 30 yıllık mühendislik birikimiyle Bahçelievler Kocasinan Merkez merkezli cam balkon üreticisi. Isıcamlı cam balkon, giyotin cam, bioklimatik pergola, kış bahçesi, sürme cam, alüminyum & PVC doğrama ve plise perde sistemleri.',
+  foundingDate: '1996',
   slogan:
-    '35 Yıllık Deneyimle İstanbul’un Öncü Cam Balkon ve Mimari Doğrama Sistemleri Markası',
+    '30 Yıllık Tecrübeyle İstanbul’un Güvenilir Cam Balkon ve PVC Sistemleri Firması',
   foundingLocation: {
     '@type': 'Place',
     name: 'Bahçelievler, İstanbul',
@@ -217,7 +217,7 @@ export const SEO_BUSINESS = {
 } as const;
 
 export const SEO_DEFAULT_IMAGE = '/images/kocasinan-isicamli-cam-balkon-hero.jpg';
-export const SEO_ICON = '/icon.svg?v=35';
+export const SEO_ICON = '/icon.svg?v=30';
 
 export function absoluteUrl(path = '/'): string {
   const normalized = path.startsWith('/') ? path : `/${path}`;

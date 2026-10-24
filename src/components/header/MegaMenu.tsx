@@ -6,6 +6,25 @@ import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../../config/site.config';
 import { CelikpenLogo } from '../CelikpenLogo';
 
+/**
+ * Mağaza menüsü şu anda ziyaretçiye gösterilmez. Tüm navigasyon nesnesi ve
+ * masaüstü/mobil görünüm korunur; ileride tek satırla tekrar açılabilir.
+ */
+const SHOW_MAGAZA_MENU = false;
+
+type NavItem = {
+  label: string;
+  href: string;
+  dropdown?: boolean;
+  disabled?: boolean;
+};
+
+const MAGAZA_NAV_ITEM: NavItem = {
+  label: 'Mağaza',
+  href: '/urunler',
+  disabled: true,
+};
+
 type ServiceItem = {
   title: string;
   description: string;
@@ -58,21 +77,14 @@ const SERVICES: ServiceItem[] = [
   },
 ];
 
-type NavItem = {
-  label: string;
-  href: string;
-  dropdown?: boolean;
-  disabled?: boolean;
-};
-
 const MAIN_NAV: NavItem[] = [
   { label: 'Anasayfa', href: '/' },
   { label: 'Hizmetler', href: '#hizmetler', dropdown: true },
-  { label: 'Mağaza', href: '/urunler', disabled: true },
+  ...(SHOW_MAGAZA_MENU ? [MAGAZA_NAV_ITEM] : []),
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Kurumsal', href: '/kurumsal' },
   { label: 'Galeri', href: '/galeri' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Blog', href: '/profesyoneller/blog' },
 ];
 
 export function MegaMenu() {

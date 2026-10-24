@@ -26,10 +26,15 @@ import { CopySpecCard } from '../../../components/CopySpecCard';
 import { PrintDatasheetButton } from '../../../components/PrintDatasheetButton';
 import { MuvafakatnameForm } from '../../../components/MuvafakatnameForm';
 
+/** Blog ve referanslar kendi zengin static route'larına sahiptir. */
+const DEDICATED_SUBPAGE_SLUGS = new Set(['blog', 'referanslar']);
+
 export function generateStaticParams() {
-  return PROFESSIONAL_SUBPAGES.map((item) => ({
-    altSayfa: item.slug,
-  }));
+  return PROFESSIONAL_SUBPAGES.filter((item) => !DEDICATED_SUBPAGE_SLUGS.has(item.slug)).map(
+    (item) => ({
+      altSayfa: item.slug,
+    })
+  );
 }
 
 export const dynamicParams = false;
@@ -209,19 +214,19 @@ export default async function ProfesyonellerAltSayfa({
                         <td className="px-4 py-3 font-bold">0 – 8m (1 - 3. Kat)</td>
                         <td className="px-4 py-3">800 Pa</td>
                         <td className="px-4 py-3">Safir 76 / Dorado 76 / Lotus</td>
-                        <td className="px-4 py-3">VNS Katlanır / VDS Sürme</td>
+                        <td className="px-4 py-3">Vera Katlanır / Vera Slide Sürme</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 font-bold">8 – 20m (4 - 7. Kat)</td>
                         <td className="px-4 py-3">1100 Pa</td>
                         <td className="px-4 py-3">Dorado 76 / Comfort Slide Plus</td>
-                        <td className="px-4 py-3">VBS 4+20+4 Isıcamlı</td>
+                        <td className="px-4 py-3">Winsa Vera Termal 4+20+4 Isıcamlı</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 font-bold">20 – 100m (8+ Kat)</td>
                         <td className="px-4 py-3">1300 – 1600 Pa</td>
                         <td className="px-4 py-3">Revotech Gold / Panorama HS 76</td>
-                        <td className="px-4 py-3">VBS Isıcamlı (3mm Alüminyum)</td>
+                        <td className="px-4 py-3">Winsa Vera Termal Isıcamlı (3mm Alüminyum)</td>
                       </tr>
                     </tbody>
                   </table>

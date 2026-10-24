@@ -9,7 +9,7 @@ interface CorporateStatsProps {
 }
 
 /**
- * Rakamlarla Çelikpen: 35+ yıl, 15.000+ proje, lazer hassasiyeti ve sistem garantisi.
+ * Rakamlarla Çelikpen: 30 yıl, 15.000+ proje, lazer hassasiyeti ve sistem garantisi.
  */
 export function CorporateStats({ stats, tone = 'light', className = '' }: CorporateStatsProps) {
   const dark = tone === 'dark';

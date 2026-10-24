@@ -4,28 +4,28 @@ import React, { useState } from 'react';
 
 const MILESTONES = [
   {
-    year: '1991',
+    year: '1996',
     title: 'Bahçelievler’de Temel',
     summary:
       'İstanbul / Bahçelievler’de aile atölyesinde alüminyum doğrama üretimi başladı. İlk yıllarda balkon kapatma ve özel ölçü doğrama işleri yapıldı.',
     details: ['Aile atölyesi ve ilk usta kadrosu', 'Özel ölçü alüminyum doğrama', 'Bahçelievler ve çevresinde saha tecrübesi'],
   },
   {
-    year: '1998',
+    year: '2002',
     title: 'Kurumsal Atölye',
     summary:
       'Büyüyen taleple birlikte üretim alanı genişletildi; cam balkon sistemleri ve seri üretim disiplini kurumsal kimliğin parçası oldu.',
     details: ['Daha geniş üretim alanı', 'Cam balkon sistemlerine geçiş', 'Kendi montaj ekibinin oluşturulması'],
   },
   {
-    year: '2005',
+    year: '2008',
     title: 'Isıcam ve Temperli Cam',
     summary:
       'Enerji verimliliği ve güvenlik öne çıktı. Temperli cam ve ısıcam konfigürasyonları ürün gamına eklendi; yalıtım odaklı projeler hızlandı.',
     details: ['TSE EN 12150 temperli cam', 'Isıcam ve argon dolum', 'Dört mevsim kullanılabilir balkonlar'],
   },
   {
-    year: '2012',
+    year: '2014',
     title: 'CNC ve Lazer Ölçüm',
     summary:
       'CNC profil işleme hattı ve lazerli saha ölçümü devreye alındı. Toleranslar milimetrik seviyeye indirildi, montaj revizyonları azaltıldı.',
@@ -47,10 +47,10 @@ const MILESTONES = [
   },
   {
     year: '2026',
-    title: '35. Yıl',
+    title: '30. Yıl',
     summary:
-      'Çelikpen 35. yılında 15.000’den fazla projeyi geride bıraktı. Mimari cam, PVC doğrama ve yalıtım teknolojilerinde İstanbul’un referans markalarından biri olmayı sürdürüyor.',
-    details: ['35 yıllık kesintisiz üretim', '15.000+ tamamlanan proje', 'Yeni nesil mimari sistemler'],
+      'Çelikpen 30. yılında 15.000’den fazla projeyi geride bıraktı. Mimari cam, PVC doğrama ve yalıtım teknolojilerinde İstanbul’un referans markalarından biri olmayı sürdürüyor.',
+    details: ['30 yıllık kesintisiz üretim', '15.000+ tamamlanan proje', 'Yeni nesil mimari sistemler'],
   },
 ];
 
@@ -74,7 +74,7 @@ export function CorporateTimeline() {
             id="kurumsal-tarihce-baslik"
             className="mt-2 text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl"
           >
-            35 Yıllık Kurumsal Miras (1991–2026)
+            30 Yıllık Kurumsal Miras (1996–2026)
           </h2>
           <p className="mt-2 text-[12px] leading-relaxed text-slate-500">
             Bir atölyeden İstanbul’un mimari cam ve doğrama markasına uzanan yolculukta her dönüm
@@ -82,7 +82,7 @@ export function CorporateTimeline() {
           </p>
         </div>
         <div className="inline-flex w-fit items-baseline gap-1 rounded-sm border border-[#1E3A8A]/25 bg-[#EFF6FF] px-3 py-2 text-[#1E3A8A]">
-          <span className="text-2xl font-extrabold leading-none">35</span>
+          <span className="text-2xl font-extrabold leading-none">30</span>
           <span className="text-[10px] font-bold uppercase tracking-[0.12em]">Yıl</span>
         </div>
       </div>

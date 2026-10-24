@@ -10,7 +10,7 @@ export const SYSTEM_FAQS: Record<string, FaqItem[]> = {
     {
       question: 'L ve U tipi balkonlarda köşe direği görüntüyü kapatır mı?',
       answer:
-        'ÇP-VNS serisinde hareketli köşe profili kullanıldığı için kanatlar köşeden dönerek tek bir noktada toplanır; sabit köşe direği kalmaz ve balkon tamamen açılır.',
+        'Winsa Vera serisinde hareketli köşe profili kullanıldığı için kanatlar köşeden dönerek tek bir noktada toplanır; sabit köşe direği kalmaz ve balkon tamamen açılır.',
     },
     {
       question: 'Katlanır cam balkon kanatları nasıl temizlenir?',
@@ -27,7 +27,7 @@ export const SYSTEM_FAQS: Record<string, FaqItem[]> = {
     {
       question: 'Isıcamlı cam balkonun her iki camı da temperli (güvenlikli) midir?',
       answer:
-        'Evet. ÇP-VBS serisinde hem iç hem dış 4mm plakalar TSE EN 12150 Şişecam temperli olarak üretilir; darbe dayanımı standart düz cama göre 5 kat yüksektir.',
+        'Evet. Winsa Vera Termal serisinde hem iç hem dış 4mm plakalar TSE EN 12150 Şişecam temperli olarak üretilir; darbe dayanımı standart düz cama göre 5 kat yüksektir.',
     },
     {
       question: 'Şirinevler ve E-5 gibi gürültülü caddelerde ne kadar ses keser?',
@@ -83,7 +83,7 @@ export const SYSTEM_FAQS: Record<string, FaqItem[]> = {
     {
       question: 'Bioklimatik tavanın altına hangi cam balkon serisi uygulanır?',
       answer:
-        'Kullanım amacına göre cephelere ÇP-VBS Isıcamlı Katlanır, ÇP-VDS Eşiksiz Sürme veya ÇP-VGS Motorlu Giyotin cam sistemleri tam uyumlu olarak entegre edilir.',
+        'Kullanım amacına göre cephelere Winsa Vera Termal Isıcamlı Katlanır, Winsa Vera Slide Eşiksiz Sürme veya Winsa Vera Vertical Motorlu Giyotin cam sistemleri tam uyumlu olarak entegre edilir.',
     },
   ],
 };

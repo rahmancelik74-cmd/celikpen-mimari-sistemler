@@ -23,7 +23,7 @@ const SYSTEM_PRESETS: Record<SystemKey, SystemPreset> = {
     tag: '4+20+4 Argonlu Isıcam & Panoramik Katlanır',
     title: 'Kesintisiz Panoramik Manzara',
     image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
-    href: '/urunler/vbs-isicamli-cam-balkon',
+    href: '/urunler/vera-isicamli-cam-balkon',
     badges: ['%65 Isı Yalıtımı', '38 dB Akustik Konfor', 'TSE EN 12150 Güvenlik'],
   },
   giyotin: {
@@ -32,7 +32,7 @@ const SYSTEM_PRESETS: Record<SystemKey, SystemPreset> = {
     tag: 'Somfy Motorlu Silinebilir Hareketli Küpeşte',
     title: 'Tek Tuşla Dikey Açılan Cam Cephe',
     image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
-    href: '/urunler/giyotin-motorlu-cam-balkon',
+    href: '/urunler/giyotin-motorlu-silinebilir-cam',
     badges: ['%65 Isı Yalıtımı', '38 dB Akustik Konfor', 'TSE EN 12150 Güvenlik'],
   },
   bioklimatik: {
@@ -41,7 +41,7 @@ const SYSTEM_PRESETS: Record<SystemKey, SystemPreset> = {
     tag: 'Eksenel Döner Alüminyum Lamel & LED Tavan',
     title: 'Dört Mevsim İklimlendirilebilir Teras',
     image: '/images/siyavuspasa-surme-cam-balkon.jpg',
-    href: '/urunler/bioklimatik-kis-bahcesi',
+    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
     badges: ['%65 Isı Yalıtımı', '38 dB Akustik Konfor', 'TSE EN 12150 Güvenlik'],
   },
 };

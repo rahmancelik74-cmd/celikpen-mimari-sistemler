@@ -134,13 +134,13 @@ export const CATALOG_DOCUMENTS = [
   },
   {
     id: 'cat-cambalkon',
-    title: 'Çelikpen VBS Isıcamlı, VNS Katlanır & Vera Giyotin Kataloğu',
+    title: 'Çelikpen Winsa Vera Termal Isıcamlı, Vera Katlanır & Vera Giyotin Kataloğu',
     category: 'Cam Balkon Sistemleri',
     pages: '48 Sayfa',
     size: '9.6 MB',
     format: 'PDF + Statik Föy',
     code: 'CLK-CAT-2026-03',
-    relatedSlug: 'vbs-isicamli-cam-balkon',
+    relatedSlug: 'vera-isicamli-cam-balkon',
   },
   {
     id: 'cat-panjur',
@@ -160,7 +160,7 @@ export const CATALOG_DOCUMENTS = [
     size: '8.1 MB',
     format: 'PDF Kartela',
     code: 'WNS-CAT-2026-05',
-    relatedSlug: 'winsa-renk-dunyasi',
+    relatedSlug: 'antrasit-ve-metalik-dis-cephe-renkleri',
   },
   {
     id: 'cat-statik',
@@ -197,9 +197,9 @@ export const TECHNICAL_SPEC_TEXTS = [
   },
   {
     id: 'spec-cambalkon-vbs',
-    code: 'POZ NO: CLK-VBS-ISI28',
+    code: 'POZ NO: CLK-Vera Termal-ISI28',
     title: 'Isıcamlı (4+20+4 mm Argon Gazlı + Temperli) Katlanır Cam Balkon Şartnamesi',
-    series: 'Çelikpen VBS Isıcamlı Seri (38 mm Kanat)',
+    series: 'Çelikpen Winsa Vera Termal Isıcamlı Seri (38 mm Kanat)',
     content: `1. ALÜMİNYUM PROFİL: Tüm taşıyıcı kasa ve kanat profilleri 6063-T6 (EN AW-6063) mimari alaşımlı birincil alüminyumdan çekilmiş, minimum 3.0 mm et kalınlığında ve elektrostatik toz boya (QUALICOAT belgeli RAL 7016 Antrasit / Mat Siyah) veya eloksal kaplamalı olacaktır.
 2. CAM ÜNİTESİ: Her iki yüzü de TS EN 12150-1 standardına göre tam temperli (güvenlik camı) 4 mm + 20 mm ara boşluk (Argon gaz dolumlu) + 4 mm Low-E/Sinerji kaplamalı toplam 28 mm çift cam ünitesi kullanılacaktır.
 3. TEKERLEK VE RULMAN: Her kanatta üstte 4, altta 4 olmak üzere toplam 8 adet paslanmaz çelik gövdeli, çift sıralı bilyalı rulman sistemi kullanılacak; plastik ara kapak yerine alüminyum etek ve dikey EPDM/manyetik fitil kullanılacaktır.`,
@@ -261,7 +261,7 @@ export const PROFESSIONAL_INSIGHT_ARTICLES = [
     metrics: [
       { label: 'Revotech Gold Uw', value: '0.79 W/m²K' },
       { label: 'Dorado 76 Uw', value: '0.98 W/m²K' },
-      { label: 'VBS Isıcamlı Cam Balkon', value: '1.10 W/m²K' },
+      { label: 'Winsa Vera Termal Isıcamlı Cam Balkon', value: '1.10 W/m²K' },
     ],
     body: `Yapı kabuğundaki ısı kayıplarının %35 ila %40'ı pencere ve balkon açıklıklarından gerçekleşir. EN ISO 10077-1 denkleminde toplam ısıl geçirgenlik (Uw); profil alanı ve Uf değeri, cam alanı ve Ug değeri ile cam çıtası birleşim hattındaki doğrusal ısı köprüsü kaybının (Psi - Ψ) ağırlıklı ortalamasıdır. 84 mm genişliğinde 7 odacıklı ve 3 contalı Revotech Gold profil sistemi, 52 mm üçlü Low-E argon gazlı cam ünitesi ve sıcak kenar (warm-edge) çıtası ile birleştiğinde Uw değerini 0.79 W/m²K seviyesine indirerek Pasif Ev (Passive House) kriterlerini karşılar.`,
   },
@@ -333,7 +333,7 @@ export const OPENING_OPTIONS_DATA = [
   {
     code: 'AÇILIM-05',
     name: 'Katlanır Cam Balkon (8 Tekerlekli)',
-    series: 'VBS Isıcamlı Cam Balkon, VNS Katlanır',
+    series: 'Winsa Vera Termal Isıcamlı Cam Balkon, Vera Katlanır',
     type: 'folding-glass',
     description:
       'Bağımsız kanatların alüminyum ray üzerinde kayarak köşe park alanında kitap gibi katlandığı, balkonu %100 açık veya %100 kapalı odaya dönüştüren sistem.',
@@ -355,7 +355,7 @@ export const REFERENCE_PROJECTS = [
     id: 'ref-01',
     title: 'Kocasinan Merkez Mah. Panoramik Dubleks Teras & Cephe Dönüşümü',
     district: 'Bahçelievler / Kocasinan Merkez',
-    systemUsed: 'Revotech Gold (84mm) + VBS 4+20+4 Isıcamlı Cam Balkon',
+    systemUsed: 'Revotech Gold (84mm) + Winsa Vera Termal 4+20+4 Isıcamlı Cam Balkon',
     color: 'Antrasit Gri (RAL 7016) & Füme Reflekte Cam',
     area: '48 m² Doğrama & Cam Balkon',
     year: '2026',
@@ -375,7 +375,7 @@ export const REFERENCE_PROJECTS = [
     id: 'ref-03',
     title: 'Siyavuşpaşa Çamlık Caddesi Köşe L-Balkon Isıcamlı Kapatma',
     district: 'Bahçelievler / Siyavuşpaşa',
-    systemUsed: 'VBS Isıcamlı Cam Balkon + Kedi Tüllü Plise Sineklik',
+    systemUsed: 'Winsa Vera Termal Isıcamlı Cam Balkon + Kedi Tüllü Plise Sineklik',
     color: 'Mat Siyah Eloksal + Şeffaf Konfor Cam',
     area: '18.5 m² Köşe Balkon',
     year: '2026',
@@ -421,14 +421,14 @@ export const BLOG_POSTS = [
     readTime: '5 dk okuma',
     title: '4+20+4 Argon Gazlı Isıcamlı Cam Balkon mu, 8mm Tek Cam Katlanır mı?',
     excerpt:
-      'Balkonunuzu kışın da aktif bir oda (çalışma odası, kış bahçesi veya yemek alanı) olarak kullanmak istiyorsanız 28 mm Isıcamlı VBS serisi ile standart 8 mm tek cam arasındaki 3.5 katlık ısı yalıtım farkını inceleyin.',
+      'Balkonunuzu kışın da aktif bir oda (çalışma odası, kış bahçesi veya yemek alanı) olarak kullanmak istiyorsanız 28 mm Isıcamlı Vera Termal serisi ile standart 8 mm tek cam arasındaki 3.5 katlık ısı yalıtım farkını inceleyin.',
     keyTakeaways: [
-      'Isıcamlı VBS serisinde Uw değeri 1.1 W/m²K iken tek camda 5.2 W/m²K seviyesindedir.',
+      'Isıcamlı Vera Termal serisinde Uw değeri 1.1 W/m²K iken tek camda 5.2 W/m²K seviyesindedir.',
       'Kış aylarında cam yüzeyinde oluşan yoğuşma (terleme) ısıcamlı sistemde %90 oranında engellenir.',
       'Her iki yüzeyin temperli olması maksimum darbe ve rüzgar güvenliği sağlar.',
     ],
-    ctaHref: '/urunler/vbs-isicamli-cam-balkon',
-    ctaLabel: 'VBS Isıcamlı Sistem Teknik Detayları',
+    ctaHref: '/urunler/vera-isicamli-cam-balkon',
+    ctaLabel: 'Winsa Vera Termal Isıcamlı Sistem Teknik Detayları',
   },
   {
     slug: 'pvc-pencerede-76mm-ve-84mm-profil-farki',
@@ -475,7 +475,7 @@ export const BLOG_POSTS = [
       'Hem PVC pencerelere hem de katlanır/sürme cam balkon kasalarına tam entegre olur.',
       'Güneş UV ışınlarında gevreme veya sarkma yapmaz.',
     ],
-    ctaHref: '/urunler/kedi-tullu-plise-sineklik',
+    ctaHref: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
     ctaLabel: 'Kedi Tüllü Sineklik Detayları',
   },
 ];

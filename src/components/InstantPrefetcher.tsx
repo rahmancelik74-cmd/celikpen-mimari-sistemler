@@ -35,9 +35,7 @@ const SERVICE_ROUTES = [
 const PRODUCT_ROUTES = [
   '/urunler/vera-isicamli-cam-balkon',
   '/urunler/vera-katlanir-cam-balkon',
-  '/urunler/giyotin-motorlu-cam-balkon',
   '/urunler/giyotin-motorlu-silinebilir-cam',
-  '/urunler/bioklimatik-kis-bahcesi',
   '/urunler/bioklimatik-kis-bahcesi-sistemleri',
   '/urunler/panorama-hs-76',
   '/urunler/comfort-slide-plus',
@@ -49,6 +47,8 @@ const PRODUCT_ROUTES = [
 const SECONDARY_ROUTES = [
   '/galeri',
   '/blog',
+  '/profesyoneller/blog',
+  '/profesyoneller/referanslar',
   '/fiyat-hesapla',
   '/yorumlar',
   '/karsilastir',

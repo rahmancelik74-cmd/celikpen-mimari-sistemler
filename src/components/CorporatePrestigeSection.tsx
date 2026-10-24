@@ -5,7 +5,7 @@ import Link from 'next/link';
 /* ============================================================================
    ÇELİKPEN — KURUMSAL PRESTİJ, ÜRÜN GRUPLARI VE UYGULAMA SÜRECİ
    GüngörPen kurumsal vitrininden ilham alan; çift çerçeveli mimari görsel,
-   editoryal marka anlatımı, 35. yıl rozeti ve net dönüşüm aksiyonları.
+   editoryal marka anlatımı, 30. yıl rozeti ve net dönüşüm aksiyonları.
    ========================================================================== */
 
 const PRODUCT_GROUPS = [
@@ -13,48 +13,56 @@ const PRODUCT_GROUPS = [
     title: 'Cam Balkon Sistemleri',
     note: 'Isıcamlı, katlanır ve panoramik balkon çözümleri',
     href: '/urunler?kategori=cam-balkon-sistemleri',
+    image: '/images/products/vera-termal.jpg',
     icon: <IconPanels />,
   },
   {
     title: 'Katlanır Cam Balkon',
     note: 'Tam açılım, geniş manzara ve sessiz kanat hareketi',
     href: '/urunler/vera-katlanir-cam-balkon',
+    image: '/images/products/vera-katlanir.jpg',
     icon: <IconFold />,
   },
   {
     title: 'Sürme Cam Sistemleri',
     note: 'Eşiksiz ray, geniş açıklık ve kesintisiz kullanım',
     href: '/urunler?kategori=surme-sistemler',
+    image: '/images/products/vera-slide.jpg',
     icon: <IconSlide />,
   },
   {
     title: 'Kış Bahçesi',
     note: 'Teras ve bahçeler için dört mevsim cam mimari',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    image: '/images/products/kis-bahcesi.jpg',
     icon: <IconWinterGarden />,
   },
   {
     title: 'Giyotin Cam Sistemleri',
     note: 'Motorlu, kumandalı ve güvenli dikey cam cephe',
     href: '/urunler/giyotin-motorlu-silinebilir-cam',
+    image: '/images/products/vera-vertical.jpg',
     icon: <IconGiyotin />,
   },
   {
     title: 'Pergola Sistemleri',
     note: 'Motorlu lamel tavan, LED ve yağmur tahliyesi',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
+    image: '/images/products/pergola.jpg',
     icon: <IconPergola />,
   },
   {
     title: 'PVC Pencere & Kapı',
     note: '76 ve 84 mm yüksek yalıtımlı profil serileri',
     href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
+    image: '/images/products/pvc-pencere.jpg',
     icon: <IconWindow />,
   },
   {
     title: 'Panjur & Sineklik',
     note: 'Panjur, plise perde ve kedi tüllü sineklik',
     href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
+    image: '/images/products/winstor-panjur.jpg',
     icon: <IconShutter />,
   },
 ];
@@ -185,15 +193,14 @@ export function CorporatePrestigeSection() {
               id="kurumsal-prestij-baslik"
               className="mt-2 text-2xl font-extrabold leading-[1.22] text-[#0F172A] sm:text-3xl lg:text-[32px]"
             >
-              35 Yıllık Deneyimle İstanbul&apos;un Öncü Cam Balkon ve Mimari Doğrama Sistemleri
-              Markası
+              30 Yıllık Tecrübeyle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri Firması
             </h2>
 
             <div className="mt-5 space-y-4 text-[12.5px] leading-7 text-slate-600 sm:text-[13px]">
               <p>
-                Temelleri 35 yıl önce{' '}
+                Temelleri 30 yıl önce{' '}
                 <strong className="font-semibold text-[#0F172A]">İstanbul / Bahçelievler</strong>&apos;de atılan{' '}
-                <strong className="font-semibold text-[#0F172A]">Çelikpen</strong>, çeyrek asrı aşan
+                <strong className="font-semibold text-[#0F172A]">Çelikpen</strong>, otuz yıllık
                 mühendislik tecrübesiyle{' '}
                 <strong className="font-semibold text-[#0F172A]">
                   ısıcamlı cam balkon, katlanır cam balkon, sürme seri sistemler, motorlu giyotin
@@ -224,16 +231,16 @@ export function CorporatePrestigeSection() {
                   aria-hidden="true"
                 />
                 <span className="relative text-4xl font-black leading-none tracking-tighter sm:text-5xl">
-                  35
+                  30
                 </span>
                 <span className="relative text-sm font-extrabold">. YIL</span>
               </div>
               <div>
                 <h3 className="text-sm font-bold tracking-tight text-[#0F172A]">
-                  35 Yıllık Deneyimle Güven, Mühendislik ve Prestij
+                  30 Yıllık Deneyimle Güven, Mühendislik ve Prestij
                 </h3>
                 <p className="mt-1.5 text-[11.5px] leading-relaxed text-slate-600">
-                  35 yıllık köklü geçmişimizle ücretsiz mimari keşiften statik projelendirmeye,
+                  30 yıllık köklü geçmişimizle ücretsiz mimari keşiften statik projelendirmeye,
                   hassas üretimden anahtar teslim montaja kadar her aşamada tam güvence sunuyoruz.
                   Sertifikalı malzeme kalitemiz ve satış sonrası kesintisiz destek anlayışımızla
                   mekanlarınıza değer katıyoruz.
@@ -242,7 +249,7 @@ export function CorporatePrestigeSection() {
             </div>
 
             <p className="mt-4 text-sm font-bold text-[#0F172A]">
-              Çelikpen – 35 Yıllık Tecrübeyle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri
+              Çelikpen – 30 Yıllık Tecrübeyle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri
               Uzmanı
             </p>
 
@@ -321,22 +328,38 @@ export function ProductShowcaseStrip() {
               key={product.title}
               href={product.href}
               prefetch={true}
-              className="group relative overflow-hidden border border-white/10 bg-white/[0.045] p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#93C5FD]/[0.45] hover:bg-[#1E3A8A]"
+              className="group relative flex flex-col overflow-hidden border border-white/10 bg-white/[0.045] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#93C5FD]/[0.45] hover:bg-[#1E3A8A]"
             >
-              <span className="absolute right-3 top-3 text-[9px] font-bold tracking-[0.18em] text-white/25">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="flex h-9 w-9 items-center justify-center border border-white/[0.15] bg-white/5 text-[#93C5FD] transition-colors group-hover:border-white/25 group-hover:bg-white/10 group-hover:text-white">
-                {product.icon}
-              </span>
-              <h3 className="mt-4 text-[12.5px] font-semibold text-white">{product.title}</h3>
-              <p className="mt-1.5 min-h-[32px] text-[10px] leading-relaxed text-slate-400 transition-colors group-hover:text-blue-100">
-                {product.note}
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#93C5FD] transition-colors group-hover:text-white">
-                İncele
-                <IconArrowRight />
-              </span>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-800">
+                <Image
+                  src={product.image}
+                  alt={`${product.title} — Çelikpen gerçek uygulama fotoğrafı`}
+                  width={640}
+                  height={360}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/25 to-transparent" />
+                <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center border border-white/20 bg-slate-950/55 text-[#93C5FD] backdrop-blur-md transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
+                  {product.icon}
+                </span>
+                <span className="absolute right-3 top-3 text-[9px] font-bold tracking-[0.18em] text-white/60">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="absolute bottom-3 left-3 rounded-sm border border-white/20 bg-slate-950/60 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-sky-100 backdrop-blur-md">
+                  Gerçek Uygulama
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="text-[12.5px] font-semibold text-white">{product.title}</h3>
+                <p className="mt-1.5 min-h-[32px] text-[10px] leading-relaxed text-slate-400 transition-colors group-hover:text-blue-100">
+                  {product.note}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#93C5FD] transition-colors group-hover:text-white">
+                  İncele
+                  <IconArrowRight />
+                </span>
+              </div>
             </Link>
           ))}
         </div>

@@ -5,26 +5,26 @@ import { CELIKPEN_PRICING_CONFIG, SystemSeriesId } from '../config/pricing.confi
 const CONTENT = {
   badge: 'Hızlı Sistem Seçim Rehberi',
   heading: 'Hangi Çelikpen Cam Balkon Serisi Balkonunuza Uygun?',
-  ctaAll: '5 Seriyi Yan Yana Karşılaştır →',
+  ctaAll: '10 Resmi Winsa Serisini Karşılaştır →',
   columns: [
     {
       systemId: 'vns_10mm' as SystemSeriesId,
       slug: 'vns-katlanir-cam-balkon',
-      title: 'Katlanır Seri (ÇP-VNS)',
+      title: 'Katlanır Seri (Winsa Vera Pro 10)',
       mechanism: 'Tam Açılır Katlanır Kanat',
       highlight: 'Rüzgar, yağmur ve toz koruması arayan standart apartman balkonları için ideal.',
     },
     {
       systemId: 'vbs_isicam' as SystemSeriesId,
-      slug: 'vbs-isicamli-cam-balkon',
-      title: 'Isıcamlı Seri (ÇP-VBS)',
+      slug: 'vera-isicamli-cam-balkon',
+      title: 'Isıcamlı Seri (Winsa Vera Termal)',
       mechanism: '4+20+4 Argon Gazlı Termal',
       highlight: 'Kışın sıcak oda konforu ve E-5 / Şirinevler trafik gürültüsüne karşı maksimum yalıtım.',
     },
     {
       systemId: 'vgs_giyotin' as SystemSeriesId,
       slug: 'vgs-motorlu-giyotin-cam',
-      title: 'Motorlu Giyotin (ÇP-VGS)',
+      title: 'Motorlu Giyotin (Winsa Vera Vertical)',
       mechanism: 'Kumandalı Dikey Açılım',
       highlight: 'Teraslar, dubleks daireler ve ticari mekanlar için otomatik cam küpeşte teknolojisi.',
     },

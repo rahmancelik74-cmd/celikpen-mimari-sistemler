@@ -51,8 +51,8 @@ export interface CorporateSubpageData {
 }
 
 /* ============================================================================
-   ÇELİKPEN — 35 YILLIK KURUMSAL MİRAS
-   1991–2026 kurumsal anlatısı, Avrupa performans standartları ve Winsa
+   ÇELİKPEN — 30 YILLIK KURUMSAL MİRAS
+   1996–2026 kurumsal anlatısı, Avrupa performans standartları ve Winsa
    yetkili üretim modeli tek veri kaynağından beslenir. Slugs, static params,
    sitemap, hub kartları ve alt sayfa navigasyonu bu liste üzerinden üretilir.
    ========================================================================== */
@@ -124,7 +124,7 @@ export const CORPORATE_CERTIFICATES: CorporateStandard[] = [
 ];
 
 export const CORPORATE_COUNTERS = [
-  { value: '35+ Yıl', label: 'Deneyim', detail: '1991’den bugüne' },
+  { value: '30 Yıl', label: 'Deneyim', detail: '1996’dan bugüne' },
   { value: '15.000+', label: 'Tamamlanan Proje', detail: 'Konut ve ticari uygulama' },
   { value: '%100', label: 'Lazer Ölçüm Hassasiyeti', detail: 'Milimetrik keşif ve üretim' },
   { value: '10 Yıl', label: 'Sistem Garantisi', detail: 'Yazılı ve devredilebilir güvence' },
@@ -135,21 +135,21 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
     slug: 'hakkimizda',
     title: 'Hakkımızda',
     categoryGroup: 'KURUMSAL',
-    heroBadge: '1991’DEN BUGÜNE 35 YILLIK MİMARİ MİRAS',
+    heroBadge: '1996’DAN BUGÜNE 30 YILLIK MİMARİ MİRAS',
     subtitle:
-      'Bahçelievler’de başlayan atölye üretiminden İstanbul’un mimari cam ve doğrama markasına uzanan 35 yıllık mühendislik hikâyesi.',
+      'Bahçelievler’de başlayan atölye üretiminden İstanbul’un mimari cam ve doğrama markasına uzanan 30 yıllık mühendislik hikâyesi.',
     seoDescription:
-      'Çelikpen Hakkımızda: 1991’den bugüne 35 yıllık deneyim, 15.000+ tamamlanan proje, kendi CNC üretim tesisi ve Winsa çözüm ortaklığı.',
+      'Çelikpen Hakkımızda: 1996’dan bugüne 30 yıllık deneyim, 15.000+ tamamlanan proje, kendi CNC üretim tesisi ve Winsa çözüm ortaklığı.',
     visual: 'heritage',
     paragraphs: [
-      'Temelleri 1991 yılında İstanbul / Bahçelievler’de atılan Çelikpen, 35 yıllık birikimini ısıcamlı cam balkon, katlanır cam balkon, sürme seri sistemler, motorlu giyotin cam, bioklimatik pergola, kış bahçesi, PVC pencere & kapı, panjur ve mimari alüminyum sistemleriyle bugünün yaşam alanlarına taşıyor.',
+      'Temelleri 1996 yılında İstanbul / Bahçelievler’de atılan Çelikpen, 30 yıllık birikimini ısıcamlı cam balkon, katlanır cam balkon, sürme seri sistemler, motorlu giyotin cam, bioklimatik pergola, kış bahçesi, PVC pencere & kapı, panjur ve mimari alüminyum sistemleriyle bugünün yaşam alanlarına taşıyor.',
       'Kendi üretim tesisi, lazer ölçüm teknolojisi ve kadrolu montaj ekibiyle keşiften anahtar teslim montaja kadar tek muhatap olarak çalışıyor; konut ve prestijli ticari projelerde dört mevsim konforlu, yüksek yalıtımlı ve estetik çözümler üretiyoruz.',
-      '1991–2026 aralığında 15.000’den fazla projeyi tamamlayan markamız; Winsa kalitesini temperli/ısıcam teknolojileriyle birleştirerek 10 yıl sistem garantisiyle İstanbul’un referans markalarından biri olmayı sürdürüyor.',
+      '1996–2026 aralığında 15.000’den fazla projeyi tamamlayan markamız; Winsa kalitesini temperli/ısıcam teknolojileriyle birleştirerek 10 yıl sistem garantisiyle İstanbul’un referans markalarından biri olmayı sürdürüyor.',
     ],
     highlights: [
       {
-        title: '1991’den Bugüne',
-        desc: '35 yıllık kesintisiz üretim, saha tecrübesi ve kurumsal hafıza.',
+        title: '1996’dan Bugüne',
+        desc: '30 yıllık kesintisiz üretim, saha tecrübesi ve kurumsal hafıza.',
       },
       {
         title: 'Kendi Üretim ve Montaj',
@@ -165,13 +165,13 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
       },
     ],
     stats: [
-      { value: '35+ Yıl', label: 'Deneyim' },
+      { value: '30 Yıl', label: 'Deneyim' },
       { value: '15.000+', label: 'Tamamlanan Proje' },
-      { value: '1991', label: 'Kuruluş Yılı' },
+      { value: '1996', label: 'Kuruluş Yılı' },
       { value: '10 Yıl', label: 'Sistem Garantisi' },
     ],
     cta: {
-      title: '35 Yıllık Hikâyeyi Yakından Tanıyın',
+      title: '30 Yıllık Hikâyeyi Yakından Tanıyın',
       description:
         'Kocasinan Merkez üretim tesisimizi ve mimari sistem showroomumuzu ziyaret edin; projenize özel mühendislik yaklaşımımızı yerinde görün.',
       label: 'Showroom Randevusu',
@@ -335,7 +335,7 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
     paragraphs: [
       'Bir binanın enerji performansı, cephesinde kullandığı cam ve doğrama sistemleriyle başlar. Çelikpen; 4+20+4 argonlu ısıcam, low-e kaplama ve sıcak kenar adaptörü kombinasyonlarıyla ısı kaybını azaltan, dört mevsim konforlu cepheler üretir.',
       'Alüminyum profil sonsuz dönüştürülebilir bir malzemedir; PVC doğramalar ise uzun servis ömrü ve düşük bakım ihtiyacıyla kaynak verimliliği sağlar. Üretim tesisimizde kesim artıkları ayrıştırılır, cam ve profil atıkları yetkili geri dönüşüm kanallarına yönlendirilir.',
-      'Lazerli ölçüm ve dijital üretim, malzeme firelerini azaltırken montaj öncesi planlama da saha kaybını en aza indirir. Amacımız; 35 yıllık deneyimi düşük karbonlu, uzun ömürlü ve bakımı kolay yapı bileşenlerine dönüştürmektir.',
+      'Lazerli ölçüm ve dijital üretim, malzeme firelerini azaltırken montaj öncesi planlama da saha kaybını en aza indirir. Amacımız; 30 yıllık deneyimi düşük karbonlu, uzun ömürlü ve bakımı kolay yapı bileşenlerine dönüştürmektir.',
     ],
     highlights: [
       {
@@ -375,12 +375,12 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
     categoryGroup: 'KURUMSAL',
     heroBadge: 'USTALIK, MÜHENDİSLİK VE EĞİTİM KÜLTÜRÜ',
     subtitle:
-      '35 yıllık marka hafızasını geleceğe taşıyan; sahada ustalık, ofiste mühendislik ve her gün öğrenme disipliniyle çalışan ekipler.',
+      '30 yıllık marka hafızasını geleceğe taşıyan; sahada ustalık, ofiste mühendislik ve her gün öğrenme disipliniyle çalışan ekipler.',
     seoDescription:
       'Çelikpen İnsan Kaynakları: kadrolu montaj ekipleri, mühendislik ve CNC üretim kadrosu, iş sağlığı güvenliği, teknik eğitim ve kariyer fırsatları.',
     visual: 'careers',
     paragraphs: [
-      'Çelikpen’de üretim, mühendislik ve montaj ekipleri aynı proje masasında çalışır. Keşiften teslimata kadar her aşamada bilgi paylaşımı ve saha geri bildirimi vardır; bu kültür 35 yıllık marka hafızasını canlı tutar.',
+      'Çelikpen’de üretim, mühendislik ve montaj ekipleri aynı proje masasında çalışır. Keşiften teslimata kadar her aşamada bilgi paylaşımı ve saha geri bildirimi vardır; bu kültür 30 yıllık marka hafızasını canlı tutar.',
       'Kadrolu ekiplerle çalışır, iş sağlığı ve güvenliği eğitimlerini düzenli olarak yenileriz. CNC operatörlerinden montaj ustalarına, mimari proje uzmanlarından mühendislere kadar her rol; teknik eğitim ve saha deneyimiyle gelişir.',
       'Yeni mezunlar ve deneyimli adaylar için mimari cam, PVC doğrama, üretim planlama ve proje yönetimi alanlarında başvuru kabul ediyoruz. Başvurular, ilgili departman yöneticileri ve insan kaynakları ekibi tarafından birlikte değerlendirilir.',
     ],
@@ -403,7 +403,7 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
       },
     ],
     stats: [
-      { value: '35+ Yıl', label: 'Kurumsal Deneyim' },
+      { value: '30 Yıl', label: 'Kurumsal Deneyim' },
       { value: '0', label: 'Taşeron Montaj' },
       { value: '10 Yıl', label: 'Sistem Garantisi' },
       { value: '6 Gün', label: 'Haftalık Showroom' },
@@ -486,21 +486,21 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
     slug: 'basinda-celikpen',
     title: 'Basında Çelikpen',
     categoryGroup: 'MEDYA',
-    heroBadge: '35 YILLIK MARKA HAFIZASI, GÜNCEL MİMARİ GÜNDEM',
+    heroBadge: '30 YILLIK MARKA HAFIZASI, GÜNCEL MİMARİ GÜNDEM',
     subtitle:
-      'Çelikpen’in 1991’den bugüne uzanan hikâyesi, saha uzmanlığı ve mimari cam teknolojileri üzerine basın ve yayın çalışmaları.',
+      'Çelikpen’in 1996’dan bugüne uzanan hikâyesi, saha uzmanlığı ve mimari cam teknolojileri üzerine basın ve yayın çalışmaları.',
     seoDescription:
-      'Basında Çelikpen: 35 yıllık mimari cam ve doğrama deneyimi, cam balkon teknolojileri, PVC doğrama ve yalıtım standartları üzerine basın içerikleri.',
+      'Basında Çelikpen: 30 yıllık mimari cam ve doğrama deneyimi, cam balkon teknolojileri, PVC doğrama ve yalıtım standartları üzerine basın içerikleri.',
     visual: 'press',
     paragraphs: [
-      'Çelikpen’in 35 yıllık hikâyesi; Bahçelievler’de başlayan bir atölyenin İstanbul’un mimari cam ve doğrama markasına dönüşmesini anlatır. Basın çalışmalarımızda marka mirasını, saha tecrübesini ve mühendislik yaklaşımımızı şeffaf biçimde paylaşıyoruz.',
+      'Çelikpen’in 30 yıllık hikâyesi; Bahçelievler’de başlayan bir atölyenin İstanbul’un mimari cam ve doğrama markasına dönüşmesini anlatır. Basın çalışmalarımızda marka mirasını, saha tecrübesini ve mühendislik yaklaşımımızı şeffaf biçimde paylaşıyoruz.',
       'Cam balkon, motorlu giyotin cam, bioklimatik pergola, kış bahçesi, PVC pencere-kapı ve panjur sistemlerinde uzman görüşlerimiz; yapı fiziği, enerji verimliliği ve güvenli montaj başlıklarında yayınlanır.',
       'Basın mensupları için teknik bilgi, proje referansları ve görsel arşiv taleplerini iletişim ekibimiz üzerinden iletebilirsiniz. Röportaj ve saha ziyareti talepleri, uygunluk durumuna göre planlanır.',
     ],
     highlights: [
       {
         title: 'Marka Hikâyesi',
-        desc: '1991–2026 arası kurumsal dönüm noktaları ve 35 yıllık üretim mirası.',
+        desc: '1996–2026 arası kurumsal dönüm noktaları ve 30 yıllık üretim mirası.',
       },
       {
         title: 'Uzman Görüşü',
@@ -516,7 +516,7 @@ export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
       },
     ],
     stats: [
-      { value: '35 Yıl', label: 'Marka Hikâyesi' },
+      { value: '30 Yıl', label: 'Marka Hikâyesi' },
       { value: '15.000+', label: 'Tamamlanan Proje' },
       { value: '2026', label: 'Güncel Dönem' },
       { value: '4', label: 'Uluslararası Fuar' },

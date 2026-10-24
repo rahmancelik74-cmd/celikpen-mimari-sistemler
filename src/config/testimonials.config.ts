@@ -12,7 +12,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'M. Kaya',
     neighborhoodSlug: 'kocasinan',
-    systemCode: 'ÇP-VBS Termal',
+    systemCode: 'Winsa Vera Termal',
     rating: 5,
     comment:
       "Keşif ekibi sabah geldi, öğleden sonra fiyatı WhatsApp'tan aldım. Montaj 1 günde bitti, temizlik yaptılar.",
@@ -21,7 +21,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'A. Demir',
     neighborhoodSlug: 'sirinevler',
-    systemCode: 'ÇP-VBS Termal',
+    systemCode: 'Winsa Vera Termal',
     rating: 5,
     comment:
       'Caddeye bakan balkonumuzda trafik sesi belirgin şekilde azaldı. 4+20+4 ısıcamlı seri kışın terleme yapmadı.',
@@ -30,7 +30,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'S. Yılmaz',
     neighborhoodSlug: 'siyavuspasa',
-    systemCode: 'ÇP-VNS 8 / 10',
+    systemCode: 'Winsa Vera 8 / Vera Pro 10',
     rating: 5,
     comment:
       'Karşı bina yakın olduğu için alt %40 kumlama buzlu cam seçtik. Gündüz ışığı kesmeden mahremiyet sağladı.',
@@ -39,7 +39,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'H. Çelik',
     neighborhoodSlug: 'soganli',
-    systemCode: 'ÇP-VNS 8 / 10',
+    systemCode: 'Winsa Vera 8 / Vera Pro 10',
     rating: 5,
     comment:
       'Apartman olarak 7 daire birlikte yaptırdık. Hem %15 toplu bina indirimi uygulandı hem de 4/5 muvafakatname sürecinde yardımcı oldular.',
@@ -48,7 +48,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'E. Arslan',
     neighborhoodSlug: 'hurriyet',
-    systemCode: 'ÇP-VDS Slide',
+    systemCode: 'Winsa Vera Slide',
     rating: 4,
     comment:
       'Dar balkonumuzda katlanır kanat yer kaplamasın diye eşiksiz sürme tercih ettik. Kedi sinekliği de gayet sağlam oldu.',
@@ -57,7 +57,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'B. Öztürk',
     neighborhoodSlug: 'yenibosna',
-    systemCode: 'ÇP-VGS Auto',
+    systemCode: 'Winsa Vera Vertical',
     rating: 5,
     comment:
       'Teras katımız için kumandalı giyotin sistem kuruldu. Rüzgarlı havalarda ıslık sesi yok, motor çalışması sessiz.',

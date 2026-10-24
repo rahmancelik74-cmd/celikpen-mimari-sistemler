@@ -8,7 +8,7 @@ const EUROPEAN_SIDE_ZONES = [
   {
     district: 'Bakırköy • Ataköy • Florya',
     serviceTime: '20 dk • Aynı Gün Keşif',
-    focus: 'Panorama HS 76 Kaldır-Sür ve VBS 4+20+4 Isıcamlı Cam Balkon sistemleri.',
+    focus: 'Panorama HS 76 Kaldır-Sür ve Winsa Vera Termal 4+20+4 Isıcamlı Cam Balkon sistemleri.',
   },
   {
     district: 'Güngören • Merter • Tozkoparan',

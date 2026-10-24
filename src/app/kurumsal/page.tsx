@@ -25,9 +25,9 @@ import {
 } from '../../components/SeoJsonLd';
 
 const PAGE_PATH = '/kurumsal';
-const PAGE_TITLE = 'Kurumsal — 35 Yıllık Deneyim, Üretim ve Kalite | Çelikpen';
+const PAGE_TITLE = 'Kurumsal — 30 Yıllık Deneyim, Üretim ve Kalite | Çelikpen';
 const PAGE_DESCRIPTION =
-  'Çelikpen kurumsal yapısı: 1991–2026 arasında 35 yıllık deneyim, Kocasinan Merkez CNC üretim tesisi, EN 12207 / EN 12208 / EN 12210 performansı, TSE & CE sertifikaları ve Winsa yetkili üretim.';
+  'Çelikpen kurumsal yapısı: 1996–2026 arasında 30 yıllık deneyim, Kocasinan Merkez CNC üretim tesisi, EN 12207 / EN 12208 / EN 12210 performansı, TSE & CE sertifikaları ve Winsa yetkili üretim.';
 
 export const metadata: Metadata = generatePageMetadata({
   title: PAGE_TITLE,
@@ -35,8 +35,8 @@ export const metadata: Metadata = generatePageMetadata({
   path: PAGE_PATH,
   keywords: [
     'Çelikpen kurumsal',
-    '35 yıllık cam balkon firması',
-    '1991’den bugüne cam balkon',
+    '30 yıllık cam balkon firması',
+    '1996’dan bugüne cam balkon',
     'Winsa yetkili üretici',
     'CNC alüminyum üretim İstanbul',
     'EN 12207 EN 12208 EN 12210',
@@ -95,24 +95,24 @@ export default function KurumsalPage() {
               <div className="inline-flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center gap-2 rounded-sm border border-[#38BDF8]/35 bg-[#38BDF8]/10 px-3 py-1.5">
                   <span className="text-[13px] font-extrabold leading-none tracking-tight text-white">
-                    35.
+                    30.
                   </span>
                   <span className="text-[8px] font-semibold uppercase tracking-[0.2em] text-[#7DD3FC]">
                     Yıl
                   </span>
                 </span>
                 <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  1991 — 2026
+                  1996 — 2026
                 </span>
               </div>
 
               <h1 className="mt-5 max-w-3xl text-[2rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-[2.45rem] lg:text-[2.85rem]">
-                35 Yıllık Mühendislik Mirası,{' '}
+                30 Yıllık Mühendislik Mirası,{' '}
                 <span className="mt-1 block text-[#7DD3FC]">Geleceğe Bakan Mimari Vizyon</span>
               </h1>
 
               <p className="mt-5 max-w-2xl text-[12.5px] leading-7 text-slate-300 sm:text-[13px]">
-                1991’den bugüne İstanbul’un cam balkon ve mimari doğrama sistemleri alanında
+                1996’dan bugüne İstanbul’un cam balkon ve mimari doğrama sistemleri alanında
                 üretiyoruz. Kendi CNC tesisimiz, lazer ölçüm ekiplerimiz, Winsa profil
                 teknolojilerimiz ve 10 yıl sistem garantimizle konut ve ticari projelere uçtan uca
                 değer katıyoruz.
@@ -140,7 +140,7 @@ export default function KurumsalPage() {
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/10 pt-5 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                 <span className="inline-flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#38BDF8]" aria-hidden="true" />
-                  1991’den beri üretim
+                  1996’dan beri üretim
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#38BDF8]" aria-hidden="true" />
@@ -162,7 +162,7 @@ export default function KurumsalPage() {
                 <p className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[#93C5FD]">
                   Kurumsal Hafıza
                 </p>
-                <p className="mt-1 text-[11px] font-bold text-white">1991 — 2026 / 35 Yıl</p>
+                <p className="mt-1 text-[11px] font-bold text-white">1996 — 2026 / 30 Yıl</p>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default function KurumsalPage() {
                 id="rakamlarla-celikpen-baslik"
                 className="mt-2 text-xl font-bold tracking-tight text-[#0F172A] sm:text-2xl"
               >
-                35 yılın ölçülebilir özeti.
+                30 yılın ölçülebilir özeti.
               </h2>
             </div>
             <p className="max-w-md text-[11px] leading-relaxed text-slate-500">
@@ -198,7 +198,7 @@ export default function KurumsalPage() {
         </div>
       </section>
 
-      {/* ============================ 35 YILLIK TARİHÇE ============================ */}
+      {/* ============================ 30 YILLIK TARİHÇE ============================ */}
       <section className="bg-[#F8FAFC] py-10 sm:py-12">
         <div className="container-shell">
           <CorporateTimeline />
@@ -222,7 +222,7 @@ export default function KurumsalPage() {
               </h2>
               <p className="mt-2 max-w-2xl text-[12px] leading-relaxed text-slate-500">
                 Hakkımızdan kalite politikamıza, üretim teknolojimizden sürdürülebilirliğe kadar
-                Çelikpen’in 35 yıllık yaklaşımını dokuz başlıkta keşfedin.
+                Çelikpen’in 30 yıllık yaklaşımını dokuz başlıkta keşfedin.
               </p>
             </div>
             <Link
@@ -473,10 +473,10 @@ export default function KurumsalPage() {
             <div className="relative flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
                 <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#BFDBFE]">
-                  Çelikpen · 35. Yıl
+                  Çelikpen · 30. Yıl
                 </p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-                  Projenizi 35 yıllık deneyimle planlayalım.
+                  Projenizi 30 yıllık deneyimle planlayalım.
                 </h2>
                 <p className="mt-2 text-[12px] leading-relaxed text-[#DBEAFE]">
                   Ücretsiz mimari keşif, lazer ölçüm, statik projelendirme ve anahtar teslim montaj

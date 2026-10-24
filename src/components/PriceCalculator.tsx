@@ -16,6 +16,49 @@ export interface PriceCalculatorProps {
   defaultSystemId?: SystemSeriesId;
 }
 
+const WIDTH_PRESETS_M = [1.5, 2.25, 2.6, 3.4, 4.25] as const;
+const HEIGHT_PRESETS_M = [1.6, 1.9, 2.2, 2.6] as const;
+
+/**
+ * Metre veya santimetre girilen ondalıklı ölçüleri santimetreye çevirir.
+ * "2,45", "2.45 m", "245.5 cm" ve "245,5" gibi tüm yaygın yazımları destekler.
+ * 20 ve altındaki değerler metre, üzerindeki değerler santimetre kabul edilir.
+ */
+function parseMeasureToCm(raw: string): number | null {
+  const normalized = raw
+    .toLocaleLowerCase('tr-TR')
+    .replace(/cm|m/g, '')
+    .replace(/\s/g, '')
+    .replace(',', '.');
+
+  if (!normalized || !/^\d*\.?\d+$/.test(normalized)) return null;
+
+  const value = Number.parseFloat(normalized);
+  if (!Number.isFinite(value) || value <= 0) return null;
+
+  const cm = value <= 20 ? value * 100 : value;
+  return Number(cm.toFixed(2));
+}
+
+function formatMeters(cm: number): string {
+  return (cm / 100).toLocaleString('tr-TR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 3,
+  });
+}
+
+function formatArea(area: number): string {
+  return area.toFixed(2).replace('.', ',');
+}
+
+function clampWidth(cm: number): number {
+  return Number(Math.min(2000, Math.max(50, cm)).toFixed(2));
+}
+
+function clampHeight(cm: number): number {
+  return Number(Math.min(500, Math.max(100, cm)).toFixed(2));
+}
+
 export function PriceCalculator({
   defaultNeighborhood = 'Kocasinan Merkez',
   defaultSystemId = 'vbs_isicam',
@@ -23,6 +66,12 @@ export function PriceCalculator({
   const [geometry, setGeometry] = useState<BalconyGeometryId>('duz');
   const [widthsCm, setWidthsCm] = useState<[number, number, number]>([420, 160, 160]);
   const [heightCm, setHeightCm] = useState<number>(190);
+  const [widthDrafts, setWidthDrafts] = useState<[string, string, string]>([
+    '4,20',
+    '1,60',
+    '1,60',
+  ]);
+  const [heightDraft, setHeightDraft] = useState<string>('1,90');
   const [systemId, setSystemId] = useState<SystemSeriesId>(defaultSystemId);
   const [glassId, setGlassId] = useState<GlassOptionId>('seffaf');
   const [profileId, setProfileId] = useState<ProfileColorId>('antrasit');
@@ -60,6 +109,67 @@ export function PriceCalculator({
   const selectedSystem = CELIKPEN_PRICING_CONFIG.systems[systemId];
   const selectedGlass = CELIKPEN_PRICING_CONFIG.glassOptions[glassId];
   const selectedProfile = CELIKPEN_PRICING_CONFIG.profileColors[profileId];
+  const activeFronts = geometry === 'duz' ? 1 : geometry === 'l_tipi' ? 2 : 3;
+  const exactTotalWidthCm = widthsCm
+    .slice(0, activeFronts)
+    .reduce((total, width) => total + width, 0);
+  const exactHeightCm = Math.max(100, heightCm);
+
+  const updateWidthDraft = (index: 0 | 1 | 2, raw: string) => {
+    setWidthDrafts((prev) => {
+      const next = [...prev] as [string, string, string];
+      next[index] = raw;
+      return next;
+    });
+
+    const parsed = parseMeasureToCm(raw);
+    if (parsed === null) return;
+    const safeWidth = clampWidth(parsed);
+    setWidthsCm((prev) => {
+      const next = [...prev] as [number, number, number];
+      next[index] = safeWidth;
+      return next;
+    });
+  };
+
+  const applyWidthPreset = (meters: number) => {
+    const cm = Math.round(meters * 100);
+    setWidthsCm((prev) => [cm, prev[1], prev[2]]);
+    setWidthDrafts((prev) => [formatMeters(cm), prev[1], prev[2]]);
+  };
+
+  const updateWidthSlider = (index: 0 | 1 | 2, meters: number) => {
+    const cm = Number((meters * 100).toFixed(2));
+    setWidthsCm((prev) => {
+      const next = [...prev] as [number, number, number];
+      next[index] = cm;
+      return next;
+    });
+    setWidthDrafts((prev) => {
+      const next = [...prev] as [string, string, string];
+      next[index] = formatMeters(cm);
+      return next;
+    });
+  };
+
+  const updateHeightDraft = (raw: string) => {
+    setHeightDraft(raw);
+    const parsed = parseMeasureToCm(raw);
+    if (parsed === null) return;
+    setHeightCm(clampHeight(parsed));
+  };
+
+  const applyHeightPreset = (meters: number) => {
+    const cm = Math.round(meters * 100);
+    setHeightCm(cm);
+    setHeightDraft(formatMeters(cm));
+  };
+
+  const updateHeightSlider = (meters: number) => {
+    const cm = Number((meters * 100).toFixed(2));
+    setHeightCm(cm);
+    setHeightDraft(formatMeters(cm));
+  };
 
   const glassStyle = useMemo(() => {
     switch (glassId) {
@@ -94,7 +204,7 @@ export function PriceCalculator({
     const text = [
       `Merhaba Çelikpen (${SITE_CONFIG.headquartersNeighborhood}), web sitenizdeki Canlı Hesaplama aracından fiyat teklifi ve ücretsiz keşif randevusu rica ediyorum:`,
       `• Mahalle: ${selectedNeighborhood}`,
-      `• Balkon Tipi: ${geometry.toUpperCase()} (${quote.totalWidthMeters}m En x ${quote.heightMeters}m Yükseklik = ${quote.billableAreaM2} m²)`,
+      `• Balkon Tipi: ${geometry.toUpperCase()} (${formatMeters(exactTotalWidthCm)} m En x ${formatMeters(exactHeightCm)} m Yükseklik = ${formatArea(quote.billableAreaM2)} m²)`,
       `• Seçilen Sistem: ${selectedSystem.code} - ${selectedSystem.name} (${quote.effectiveUnitPricePerM2.toLocaleString('tr-TR')} TL/m²)`,
       `• Cam & Profil: ${selectedGlass.name} / ${selectedProfile.name}`,
       `• Ek Donanım: ${includeCatScreen ? 'Kedi Sinekliği Var, ' : ''}${includePleatedBlind ? 'Plise Perde Var, ' : ''}${isBulkBuilding ? '5+ Daire Toplu Bina (%15 İndirim)' : 'Bireysel Daire'}`,
@@ -105,6 +215,8 @@ export function PriceCalculator({
     selectedNeighborhood,
     geometry,
     quote,
+    exactTotalWidthCm,
+    exactHeightCm,
     selectedSystem,
     selectedGlass,
     selectedProfile,
@@ -129,7 +241,7 @@ export function PriceCalculator({
         <div className="text-right">
           <div className="text-xs text-slate-500">Net Alan</div>
           <div className="text-lg font-extrabold text-celikpen-brand-soft">
-            {quote.billableAreaM2} m²
+            {formatArea(quote.billableAreaM2)} m²
           </div>
         </div>
       </div>
@@ -256,8 +368,8 @@ export function PriceCalculator({
               fontSize="10"
               fontWeight="bold"
             >
-              Toplam Cephe: {quote.totalWidthMeters}m × Yükseklik: {quote.heightMeters}m = Net{' '}
-              {quote.billableAreaM2} m²
+              Toplam Cephe: {formatMeters(exactTotalWidthCm)} m × Yükseklik:{' '}
+              {formatMeters(exactHeightCm)} m = Net {formatArea(quote.billableAreaM2)} m²
             </text>
           </svg>
         </div>
@@ -311,87 +423,211 @@ export function PriceCalculator({
         </div>
       </div>
 
-      {/* 2. Ölçü Kaydırıcıları */}
-      <div className="mt-4 space-y-3 rounded-xl border border-celikpen-border bg-celikpen-subtle p-3.5">
-        <div>
-          <div className="flex justify-between text-xs">
-            <span className="font-medium text-slate-700">1. Cephe Genişliği (cm)</span>
-            <span className="font-bold text-celikpen-brand-soft">{widthsCm[0]} cm</span>
+      {/* 2. Ondalıklı Ölçü Girişleri ve Presetler */}
+      <div className="mt-4 space-y-4 rounded-xl border border-celikpen-border bg-celikpen-subtle p-3.5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              2. Ölçüler (ondalık destekli)
+            </div>
+            <p className="mt-0.5 text-[11px] leading-4 text-slate-500">
+              Metre veya santimetre girin: <strong>2,45</strong> · <strong>2.45 m</strong> ·{' '}
+              <strong>245,5 cm</strong> aynı ölçüyü ifade eder.
+            </p>
           </div>
-          <input
-            type="range"
-            min={150}
-            max={900}
-            step={10}
-            value={widthsCm[0]}
-            onChange={(e) =>
-              setWidthsCm([Number(e.target.value), widthsCm[1], widthsCm[2]])
-            }
-            className="mt-1 w-full accent-celikpen-brand"
-          />
+          <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-celikpen-brand ring-1 ring-celikpen-border">
+            adım 0,05 m
+          </span>
         </div>
 
-        {geometry !== 'duz' && (
-          <div>
-            <div className="flex justify-between text-xs">
-              <span className="font-medium text-slate-700">2. Yan Cephe Genişliği (cm)</span>
-              <span className="font-bold text-celikpen-brand-soft">{widthsCm[1]} cm</span>
+        {(
+          [
+            [0, '1. Cephe Eni', 1.5, 9],
+            [1, '2. Yan Cephe Eni', 0.8, 5],
+            [2, '3. Yan Cephe Eni', 0.8, 5],
+          ] as const
+        ).map(([index, label, sliderMin, sliderMax]) =>
+          index === 1 && geometry === 'duz' ? null : index === 2 && geometry !== 'u_tipi' ? null : (
+            <div key={label} className="rounded-lg border border-celikpen-border bg-white p-3">
+              <div className="flex flex-wrap items-end justify-between gap-2">
+                <label
+                  htmlFor={`width-${index}`}
+                  className="text-xs font-semibold text-slate-700"
+                >
+                  {label}
+                </label>
+                <span className="text-[11px] font-bold text-celikpen-brand-soft">
+                  {widthsCm[index]} cm · {formatMeters(widthsCm[index])} m
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-center gap-2">
+                <input
+                  id={`width-${index}`}
+                  type="text"
+                  inputMode="decimal"
+                  step="0.01"
+                  autoComplete="off"
+                  value={widthDrafts[index]}
+                  onChange={(e) => updateWidthDraft(index, e.target.value)}
+                  onBlur={() => {
+                    const parsed = parseMeasureToCm(widthDrafts[index]);
+                    if (parsed === null) {
+                      setWidthDrafts((prev) => {
+                        const next = [...prev] as [string, string, string];
+                        next[index] = formatMeters(widthsCm[index]);
+                        return next;
+                      });
+                    } else {
+                      setWidthDrafts((prev) => {
+                        const next = [...prev] as [string, string, string];
+                        next[index] = formatMeters(clampWidth(parsed));
+                        return next;
+                      });
+                    }
+                  }}
+                  aria-label={`${label} metre veya santimetre cinsinden`}
+                  aria-invalid={
+                    widthDrafts[index].trim() !== '' &&
+                    parseMeasureToCm(widthDrafts[index]) === null
+                  }
+                  className={`w-full rounded-lg border px-3 py-2 text-sm font-semibold text-slate-900 outline-none transition focus:border-celikpen-brand-soft focus:ring-2 focus:ring-celikpen-brand/20 ${
+                    widthDrafts[index].trim() !== '' &&
+                    parseMeasureToCm(widthDrafts[index]) === null
+                      ? 'border-rose-400 bg-rose-50'
+                      : 'border-slate-300 bg-white'
+                  }`}
+                  placeholder="Örn. 4,20 veya 420"
+                />
+                <span className="shrink-0 rounded-md bg-celikpen-subtle px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  m / cm
+                </span>
+              </div>
+
+              <input
+                type="range"
+                min={sliderMin}
+                max={sliderMax}
+                step={0.05}
+                value={Math.min(sliderMax, Math.max(sliderMin, widthsCm[index] / 100))}
+                onChange={(e) => updateWidthSlider(index, Number(e.target.value))}
+                aria-label={`${label} kaydırıcı`}
+                className="mt-2 w-full accent-celikpen-brand"
+              />
+
+              {index === 0 && (
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    Hızlı En:
+                  </span>
+                  {WIDTH_PRESETS_M.map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => applyWidthPreset(preset)}
+                      className={`rounded-full border px-2.5 py-1 text-[11px] font-bold transition ${
+                        Math.abs(widthsCm[0] - preset * 100) < 0.01
+                          ? 'border-celikpen-brand bg-celikpen-brand text-white'
+                          : 'border-slate-300 bg-white text-slate-700 hover:border-celikpen-brand hover:text-celikpen-brand'
+                      }`}
+                    >
+                      {preset.toFixed(2)}m
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-            <input
-              type="range"
-              min={80}
-              max={500}
-              step={10}
-              value={widthsCm[1]}
-              onChange={(e) =>
-                setWidthsCm([widthsCm[0], Number(e.target.value), widthsCm[2]])
-              }
-              className="mt-1 w-full accent-celikpen-brand"
-            />
-          </div>
+          )
         )}
 
-        {geometry === 'u_tipi' && (
-          <div>
-            <div className="flex justify-between text-xs">
-              <span className="font-medium text-slate-700">3. Yan Cephe Genişliği (cm)</span>
-              <span className="font-bold text-celikpen-brand-soft">{widthsCm[2]} cm</span>
-            </div>
+        <div className="rounded-lg border border-celikpen-border bg-white p-3">
+          <div className="flex flex-wrap items-end justify-between gap-2">
+            <label htmlFor="height-input" className="text-xs font-semibold text-slate-700">
+              Balkon Yüksekliği
+            </label>
+            <span className="text-[11px] font-bold text-celikpen-brand-soft">
+              {heightCm} cm · {formatMeters(heightCm)} m
+            </span>
+          </div>
+          <div className="mt-1.5 flex items-center gap-2">
             <input
-              type="range"
-              min={80}
-              max={500}
-              step={10}
-              value={widthsCm[2]}
-              onChange={(e) =>
-                setWidthsCm([widthsCm[0], widthsCm[1], Number(e.target.value)])
+              id="height-input"
+              type="text"
+              inputMode="decimal"
+              step="0.01"
+              autoComplete="off"
+              value={heightDraft}
+              onChange={(e) => updateHeightDraft(e.target.value)}
+              onBlur={() => {
+                const parsed = parseMeasureToCm(heightDraft);
+                if (parsed === null) {
+                  setHeightDraft(formatMeters(heightCm));
+                } else {
+                  setHeightDraft(formatMeters(clampHeight(parsed)));
+                }
+              }}
+              aria-label="Balkon yüksekliği metre veya santimetre cinsinden"
+              aria-invalid={
+                heightDraft.trim() !== '' && parseMeasureToCm(heightDraft) === null
               }
-              className="mt-1 w-full accent-celikpen-brand"
+              className={`w-full rounded-lg border px-3 py-2 text-sm font-semibold text-slate-900 outline-none transition focus:border-celikpen-brand-soft focus:ring-2 focus:ring-celikpen-brand/20 ${
+                heightDraft.trim() !== '' && parseMeasureToCm(heightDraft) === null
+                  ? 'border-rose-400 bg-rose-50'
+                  : 'border-slate-300 bg-white'
+              }`}
+              placeholder="Örn. 1,90 veya 190"
             />
+            <span className="shrink-0 rounded-md bg-celikpen-subtle px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+              m / cm
+            </span>
           </div>
-        )}
 
-        <div>
-          <div className="flex justify-between text-xs">
-            <span className="font-medium text-slate-700">Balkon Yüksekliği (cm)</span>
-            <span className="font-bold text-celikpen-brand-soft">{heightCm} cm</span>
-          </div>
           <input
             type="range"
-            min={140}
-            max={280}
-            step={5}
-            value={heightCm}
-            onChange={(e) => setHeightCm(Number(e.target.value))}
-            className="mt-1 w-full accent-celikpen-brand"
+            min={1.4}
+            max={2.8}
+            step={0.05}
+            value={Math.min(2.8, Math.max(1.4, heightCm / 100))}
+            onChange={(e) => updateHeightSlider(Number(e.target.value))}
+            aria-label="Balkon yüksekliği kaydırıcı"
+            className="mt-2 w-full accent-celikpen-brand"
           />
+
+          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              Hızlı Boy:
+            </span>
+            {HEIGHT_PRESETS_M.map((preset) => (
+              <button
+                key={preset}
+                type="button"
+                onClick={() => applyHeightPreset(preset)}
+                className={`rounded-full border px-2.5 py-1 text-[11px] font-bold transition ${
+                  Math.abs(heightCm - preset * 100) < 0.01
+                    ? 'border-celikpen-brand bg-celikpen-brand text-white'
+                    : 'border-slate-300 bg-white text-slate-700 hover:border-celikpen-brand hover:text-celikpen-brand'
+                }`}
+              >
+                {preset.toFixed(2)}m
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-[#1E3A8A]/5 px-3 py-2 text-[11px] text-slate-600">
+          <span>
+            Ham alan: <strong>{formatArea(quote.rawAreaM2)} m²</strong> · Faturalanabilir alan:{' '}
+            <strong>{formatArea(quote.billableAreaM2)} m²</strong>
+          </span>
+          <span className="font-semibold text-celikpen-brand">
+            {formatMeters(exactTotalWidthCm)} m × {formatMeters(exactHeightCm)} m
+          </span>
         </div>
       </div>
 
       {/* 3. Sistem Seçimi */}
       <div className="mt-4">
         <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
-          3. Çelikpen Sistem Serisi (Net m² Birim Fiyatlı)
+          3. Resmi Winsa Sistem Serisi (2026 Net m² Birim Fiyatlı)
         </label>
         <div className="mt-1.5 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {Object.values(CELIKPEN_PRICING_CONFIG.systems).map((sys) => (
@@ -498,7 +734,7 @@ export function PriceCalculator({
           <div>
             <div className="text-xs text-slate-500">
               Çelikpen Net Hesaplanan Tutar ({quote.panelCountEstimate} Kanat /{' '}
-              {quote.billableAreaM2} m²)
+              {formatArea(quote.billableAreaM2)} m²)
             </div>
             <div className="text-2xl font-black text-celikpen-brand">
               {quote.netTotal.toLocaleString('tr-TR')} ₺

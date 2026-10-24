@@ -2,7 +2,7 @@ import React from 'react';
 import type { CorporateVisualVariant } from '../../config/winsa-corporate.config';
 
 const VISUAL_LABELS: Record<CorporateVisualVariant, string> = {
-  heritage: '35 Yıllık Kurumsal Miras',
+  heritage: '30 Yıllık Kurumsal Miras',
   quality: 'Termal & Akustik Laboratuvar',
   certificates: 'Uluslararası Sertifikasyon',
   production: 'CNC Profil Üretim Hattı',
@@ -55,7 +55,7 @@ export function CorporateVisual({ variant, className = '', bare = false }: Corpo
         <div className="flex items-start justify-between gap-3">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-[#BFDBFE] backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#38BDF8]" aria-hidden="true" />
-            Çelikpen · 35. Yıl
+            Çelikpen · 30. Yıl
           </span>
           <span
             className="h-6 w-6 border-r border-t border-[#38BDF8]"
@@ -68,7 +68,7 @@ export function CorporateVisual({ variant, className = '', bare = false }: Corpo
             {VISUAL_LABELS[variant]}
           </span>
           <span className="whitespace-nowrap text-[8px] font-medium uppercase tracking-[0.14em] text-[#93C5FD]">
-            1991 — 2026
+            1996 — 2026
           </span>
         </div>
       </div>
@@ -91,7 +91,7 @@ const svgProps = {
 const font = 'Poppins, ui-sans-serif, system-ui, sans-serif';
 
 /* ============================================================================
-   1. 35 YILLIK MİRAS / MİMARİ CEPHE
+   1. 30 YILLIK MİRAS / MİMARİ CEPHE
    ========================================================================== */
 
 function HeritageArt() {
@@ -148,7 +148,7 @@ function HeritageArt() {
         letterSpacing="-14"
         opacity="0.92"
       >
-        35
+        30
       </text>
       <text x="54" y="362" fill="#93C5FD" fontFamily={font} fontSize="19" fontWeight="700" letterSpacing="14">
         YIL
@@ -170,13 +170,13 @@ function HeritageArt() {
         <circle cx="470" cy="420" r="5.5" fill="#38BDF8" />
         <circle cx="702" cy="420" r="5.5" fill="#FFFFFF" />
         <text x="470" y="450" fill="#93C5FD" fontFamily={font} fontSize="15" fontWeight="600" textAnchor="middle">
-          1991
+          1996
         </text>
         <text x="702" y="450" fill="#FFFFFF" fontFamily={font} fontSize="15" fontWeight="600" textAnchor="middle">
           2026
         </text>
         <text x="586" y="400" fill="#BFDBFE" fontFamily={font} fontSize="10" fontWeight="500" letterSpacing="3.5" textAnchor="middle">
-          35 YILLIK KESİNTİSİZ ÜRETİM
+          30 YILLIK KESİNTİSİZ ÜRETİM
         </text>
       </g>
 
@@ -272,7 +272,7 @@ function ProductionArt() {
           AKTİF İŞ EMRİ
         </text>
         <text x="580" y="112" fill="#FFFFFF" fontFamily={font} fontSize="13" fontWeight="700">
-          ÇP-VBS / 4+20+4
+          Winsa Vera Termal / 4+20+4
         </text>
       </g>
 
@@ -631,7 +631,7 @@ function CareersArt() {
       <g>
         <path d="M92 92h128v38H92z" fill="#0B1220" stroke="#38BDF8" strokeOpacity="0.4" />
         <text x="106" y="116" fill="#93C5FD" fontFamily={font} fontSize="9" fontWeight="600" letterSpacing="2">
-          35 YILLIK EKİP KÜLTÜRÜ
+          30 YILLIK EKİP KÜLTÜRÜ
         </text>
         <path d="M690 90h28v28M718 90l-46 46M638 124h28v28" fill="none" stroke="#38BDF8" strokeWidth="2.4" />
         <text x="688" y="174" fill="#BFDBFE" fontFamily={font} fontSize="9" fontWeight="600" textAnchor="end" letterSpacing="2">
@@ -748,7 +748,7 @@ function PressArt() {
         <path d="M284 182h110M284 200h94M284 218h110M284 236h82M284 254h102M284 272h70" stroke="#64748B" strokeWidth="5" strokeLinecap="round" />
         <path d="M118 316h300M118 334h246M118 352h276M118 370h198M118 388h250" stroke="#94A3B8" strokeWidth="5" strokeLinecap="round" />
         <text x="118" y="422" fill="#1E3A8A" fontFamily={font} fontSize="9" fontWeight="700" letterSpacing="2">
-          35 YILLIK MARKA HİKÂYESİ
+          30 YILLIK MARKA HİKÂYESİ
         </text>
       </g>
 
@@ -757,7 +757,7 @@ function PressArt() {
           “
         </text>
         <text x="8" y="152" fill="#FFFFFF" fontFamily={font} fontSize="24" fontWeight="700">
-          35 yıl,
+          30 yıl,
         </text>
         <text x="8" y="184" fill="#BFDBFE" fontFamily={font} fontSize="18" fontWeight="500">
           kesintisiz üretim

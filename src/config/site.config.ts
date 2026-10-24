@@ -11,7 +11,17 @@ export interface ProductSeriesInfo {
   slug: string;
   code: string;
   name: string;
-  pricingSystemId: 'vns_8mm' | 'vns_10mm' | 'vbs_isicam' | 'vds_surme' | 'vgs_giyotin';
+  pricingSystemId:
+    | 'vns_8mm'
+    | 'vns_10mm'
+    | 'vbs_isicam'
+    | 'vds_surme'
+    | 'vds_isicamli'
+    | 'vgs_giyotin'
+    | 'pvc_dograma'
+    | 'hs_surme'
+    | 'comfort_slide'
+    | 'pergola';
   image?: string; // Opsiyonel: public/systems/{slug}.jpg eklendiğinde doldurulur
   tagline: string;
   description: string;
@@ -27,10 +37,10 @@ export interface FaqItem {
 
 export const SITE_CONFIG = {
   brandName: 'Çelikpen',
-  fullTitle: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri | 35 Yıl | Kocasinan, Bahçelievler',
-  slogan: '1991’den Bugüne 35 Yıllık Mühendislikle Bahçelievler’de Mimari Cam Teknolojisi',
-  foundingYear: 1991,
-  yearsOfExperience: 35,
+  fullTitle: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri | 30 Yıl | Kocasinan, Bahçelievler',
+  slogan: '1996’dan Bugüne 30 Yıllık Mühendislikle Bahçelievler’de Mimari Cam Teknolojisi',
+  foundingYear: 1996,
+  yearsOfExperience: 30,
   completedProjects: 15000,
   siteUrl: 'https://celikpen.com.tr',
   district: 'Bahçelievler',
@@ -52,10 +62,10 @@ export const SITE_CONFIG = {
   productSeries: [
     {
       slug: 'vns-katlanir-cam-balkon',
-      code: 'ÇP-VNS 8 / 10',
-      name: 'VNS 8mm & 10mm Temperli Katlanır Cam Balkon',
+      code: 'Winsa Vera 8 / Vera Pro 10',
+      name: 'Winsa Vera 8mm & Vera Pro 10mm Temperli Katlanır Cam Balkon',
       pricingSystemId: 'vns_10mm',
-      image: '/images/products/cam-balkon-default.svg',
+      image: '/images/products/vera-katlanir.jpg',
       tagline: 'Tam açılır panoramik cephe, çift sıra paslanmaz rulman ve rüzgar kilidi.',
       description:
         'Bahçelievler ara sokak ve standart apartman balkonlarında rüzgar, yağmur, toz ve kuş girişini %100 kesen; yazın tüm kanatları köşeye toplanarak balkonu tamamen açık hale getiren klasik ve yüksek dayanımlı katlanır seri.',
@@ -75,10 +85,10 @@ export const SITE_CONFIG = {
     },
     {
       slug: 'vbs-isicamli-cam-balkon',
-      code: 'ÇP-VBS Termal',
-      name: 'VBS 4+20+4 Argon Gazlı Isıcamlı Cam Balkon',
+      code: 'Winsa Vera Termal',
+      name: 'Winsa Vera Termal 4+20+4 Argon Gazlı Isıcamlı Cam Balkon',
       pricingSystemId: 'vbs_isicam',
-      image: '/images/products/cam-balkon-default.svg',
+      image: '/images/products/vera-termal.jpg',
       tagline: '%72 ısı tasarrufu ve -38 dB trafik gürültüsü kesici termal seri.',
       description:
         'Balkonunu kışın da evin sıcak bir odası gibi kullanmak isteyenler ve Şirinevler, E-5, Mahmutbey Caddesi gibi yoğun gürültülü akslarda oturanlar için her iki camı da temperli 28mm (4+20+4) Argon gazlı Konfor Isıcam serisi.',
@@ -98,10 +108,10 @@ export const SITE_CONFIG = {
     },
     {
       slug: 'vds-esiksiz-surme-cam-balkon',
-      code: 'ÇP-VDS Slide',
-      name: 'VDS Eşiksiz Sürme (Sürgülü) Cam Balkon',
+      code: 'Winsa Vera Slide',
+      name: 'Winsa Vera Slide Eşiksiz Sürme (Sürgülü) Cam Balkon',
       pricingSystemId: 'vds_surme',
-      image: '/images/products/surme-sistem-default.svg',
+      image: '/images/products/vera-slide.jpg',
       tagline: 'İçe kanat açılma payı sıfır; dar balkonlar için masa-sandalye dostu ray sistemi.',
       description:
         'Kanatlar içeriye doğru katlanmadığı için balkon içindeki masa, sandalye, çamaşırlık veya çiçeklik alanını hiç daraltmaz. Alt eşiksiz (takılma yapmayan) 3 veya 5 raylı alüminyum kasa üzerinde tek parmakla kayarak açılır.',
@@ -121,10 +131,10 @@ export const SITE_CONFIG = {
     },
     {
       slug: 'vgs-motorlu-giyotin-cam',
-      code: 'ÇP-VGS Auto',
-      name: 'VGS Motorlu Giyotin (Kumandalı Küpeşte) Cam',
+      code: 'Winsa Vera Vertical',
+      name: 'Winsa Vera Vertical Motorlu Giyotin (Kumandalı Küpeşte) Cam',
       pricingSystemId: 'vgs_giyotin',
-      image: '/images/products/cam-balkon-default.svg',
+      image: '/images/products/vera-vertical.jpg',
       tagline: 'Uzaktan kumandalı dikey açılım; açıkken güvenli cam korkuluk, kapalıyken tam yalıtım.',
       description:
         'Somfy veya Becker tüp motorlu, çelik zincir/kayış tahrikli dikey hareketli sistem. Açıldığında en alt sabit cam panel 110 cm yüksekliğinde güvenli küpeşte (korkuluk) görevi görür; teraslar, dubleks daireler ve ticari işletmeler için zirve teknolojidir.',
@@ -144,13 +154,13 @@ export const SITE_CONFIG = {
     },
     {
       slug: 'kis-bahcesi-ve-bioklimatik-tavan',
-      code: 'ÇP-WB Bioklimatik',
-      name: 'Kış Bahçesi & Bioklimatik Pergola Cam Sistemleri',
-      pricingSystemId: 'vgs_giyotin',
-      image: '/images/products/cam-balkon-default.svg',
+      code: 'Winsa Vela & Lotus Bioklimatik',
+      name: 'Winsa Vela & Lotus Bioklimatik Pergola & Kış Bahçesi',
+      pricingSystemId: 'pergola',
+      image: '/images/products/pergola.jpg',
       tagline: 'Teras ve bahçe katlarını dört mevsim yaşam alanına dönüştüren tavan + cephe entegrasyonu.',
       description:
-        'Bahçelievler’deki çatı terasları, bahçe katı daireler ve ticari mekanlar için kendi ekseninde dönerek havalandırma sağlayan ve geriye toplanan Bioklimatik alüminyum tavan veya 4+16+4 lamine ısıcam tavan ile VBS Isıcamlı / VGS Giyotin cephe kombinasyonu.',
+        'Bahçelievler’deki çatı terasları, bahçe katı daireler ve ticari mekanlar için kendi ekseninde dönerek havalandırma sağlayan ve geriye toplanan Bioklimatik alüminyum tavan veya 4+16+4 lamine ısıcam tavan ile Winsa Vera Termal Isıcamlı / Vera Vertical Giyotin cephe kombinasyonu.',
       idealFor: [
         'Bahçelievler Merkez, Kocasinan ve Siyavuşpaşa çatı dubleks terasları',
         'Bahçe katı daire verandaları ve müstakil kış bahçesi projeleri',
@@ -158,7 +168,7 @@ export const SITE_CONFIG = {
       ],
       technicalSpecs: [
         { label: 'Tavan Seçenekleri', value: 'Motorlu Bioklimatik Alüminyum Lamelli veya Lamine Isıcam Tavan' },
-        { label: 'Cephe Entegrasyonu', value: 'ÇP-VBS Isıcamlı Katlanır, ÇP-VDS Sürme veya ÇP-VGS Giyotin' },
+        { label: 'Cephe Entegrasyonu', value: 'Winsa Vera Termal Isıcamlı Katlanır, Winsa Vera Slide Sürme veya Winsa Vera Vertical Giyotin' },
         { label: 'Su Tahliyesi', value: 'Taşıyıcı Dikme İçinden Gizli Yağmur Suyu Deşarj Sistemi' },
         { label: 'Aydınlatma', value: 'Entegre Dimmerli Günışığı / RGB Samsung LED Spot ve Şerit' },
       ],
@@ -198,7 +208,7 @@ export const SITE_CONFIG = {
       slug: 'kocasinan',
       name: 'Kocasinan Merkez',
       urbanFocus: 'Atölye Merkezimiz & Yeni Kentsel Dönüşüm Konutları',
-      recommendedSystem: 'ÇP-VBS 4+20+4 Argon Gazlı Isıcamlı Sistem',
+      recommendedSystem: 'Winsa Vera Termal 4+20+4 Argon Gazlı Isıcamlı Sistem',
       highlightProblem: 'Mahmutbey Caddesi aksı gürültü izolasyonu ve yeni binalarda cephe bütünlüğü.',
       completedProjectsCount: 145,
     },
@@ -206,7 +216,7 @@ export const SITE_CONFIG = {
       slug: 'siyavuspasa',
       name: 'Siyavuşpaşa',
       urbanFocus: 'Adnan Kahveci Bulvarı & Çamlık Cad. Aile Konutları',
-      recommendedSystem: 'ÇP-VBS Isıcamlı + Alt %40 Buzlu Mahremiyet Camı',
+      recommendedSystem: 'Winsa Vera Termal Isıcamlı + Alt %40 Buzlu Mahremiyet Camı',
       highlightProblem: 'Bitişik nizam apartmanlarda karşı cepheden görünme ve kışın ısı kaybı.',
       completedProjectsCount: 118,
     },
@@ -222,7 +232,7 @@ export const SITE_CONFIG = {
       slug: 'sirinevler',
       name: 'Şirinevler',
       urbanFocus: 'E-5, Metrobüs ve Meydan Aksı Yüksek Gürültü Bölgesi',
-      recommendedSystem: 'ÇP-VBS 28mm Argon Gazlı Akustik Isıcam (38 dB Ses Kesici)',
+      recommendedSystem: 'Winsa Vera Termal 28mm Argon Gazlı Akustik Isıcam (38 dB Ses Kesici)',
       highlightProblem: 'Yoğun trafik gürültüsü, egzoz tozu ve rüzgar ıslığı.',
       completedProjectsCount: 164,
     },
@@ -230,7 +240,7 @@ export const SITE_CONFIG = {
       slug: 'yenibosna',
       name: 'Yenibosna Merkez',
       urbanFocus: 'Basın Ekspres Rezidansları & Ticari Kafe/Restoran Cepheleri',
-      recommendedSystem: 'ÇP-VGS Motorlu Giyotin & 10mm Yüksek Kat Katlanır Sistem',
+      recommendedSystem: 'Winsa Vera Vertical Motorlu Giyotin & 10mm Yüksek Kat Katlanır Sistem',
       highlightProblem: 'Yüksek kat rüzgar yükü dayanımı ve ticari işletmeler için kumandalı giyotin cam.',
       completedProjectsCount: 96,
     },
@@ -238,7 +248,7 @@ export const SITE_CONFIG = {
       slug: 'hurriyet',
       name: 'Hürriyet',
       urbanFocus: 'Merkezi Sokaklar & Köşe Cephe L Tipi Balkonlar',
-      recommendedSystem: 'ÇP-VDS Eşiksiz Sürme & Köşe Açılır L Balkon Sistemi',
+      recommendedSystem: 'Winsa Vera Slide Eşiksiz Sürme & Köşe Açılır L Balkon Sistemi',
       highlightProblem: 'Dar balkonlarda kanat açılma alanı kazanımı ve kedi tüllü sineklik entegrasyonu.',
       completedProjectsCount: 84,
     },
@@ -246,7 +256,7 @@ export const SITE_CONFIG = {
       slug: 'zafer',
       name: 'Zafer',
       urbanFocus: 'Yeni Teslim Binalar & Aile Apartmanları',
-      recommendedSystem: 'ÇP-VNS 10mm Füme/Bronz Güneş Kontrol Camlı Sistem',
+      recommendedSystem: 'Winsa Vera Pro 10mm Füme/Bronz Güneş Kontrol Camlı Sistem',
       highlightProblem: 'Yaz güneşi kontrolü, mahremiyet ve çocuk emniyet kilidi güvenliği.',
       completedProjectsCount: 79,
     },
@@ -254,7 +264,7 @@ export const SITE_CONFIG = {
       slug: 'cobancesme',
       name: 'Çobançeşme',
       urbanFocus: 'E-5 Yan Yol, Kuyumcukent Aksı & Rüzgar Yükü Yüksek Cepheler',
-      recommendedSystem: 'ÇP-VBS 28mm Argon Gazlı Akustik Isıcam (38 dB Ses Kesici)',
+      recommendedSystem: 'Winsa Vera Termal 28mm Argon Gazlı Akustik Isıcam (38 dB Ses Kesici)',
       highlightProblem: 'Ana arter trafik gürültüsü, yüksek kat rüzgar basıncı ve toz yalıtımı.',
       completedProjectsCount: 72,
     },
@@ -262,7 +272,7 @@ export const SITE_CONFIG = {
       slug: 'cumhuriyet',
       name: 'Cumhuriyet',
       urbanFocus: 'Kentsel Dönüşüm Apartmanları & Meydan Çevresi Konutları',
-      recommendedSystem: 'ÇP-VBS Isıcamlı + Antrasit Gri (RAL 7016) Cephe Uyumlu Seri',
+      recommendedSystem: 'Winsa Vera Termal Isıcamlı + Antrasit Gri (RAL 7016) Cephe Uyumlu Seri',
       highlightProblem: 'Yeni kentsel dönüşüm binalarında 4/5 kat maliki muvafakatname ve renk bütünlüğü.',
       completedProjectsCount: 91,
     },
@@ -270,7 +280,7 @@ export const SITE_CONFIG = {
       slug: 'fevzi-cakmak',
       name: 'Fevzi Çakmak',
       urbanFocus: 'Merkezi Aile Apartmanları & Bitişik Nizam Sokaklar',
-      recommendedSystem: 'ÇP-VNS 10mm Katlanır + Alt %40 Kumlama (Buzlu) Mahremiyet Camı',
+      recommendedSystem: 'Winsa Vera Pro 10mm Katlanır + Alt %40 Kumlama (Buzlu) Mahremiyet Camı',
       highlightProblem: 'Karşı apartman cephesinden görünme sorunu ve kombi dolabı/bacası geçişi.',
       completedProjectsCount: 88,
     },
@@ -278,7 +288,7 @@ export const SITE_CONFIG = {
       slug: 'bahcelievler-merkez',
       name: 'Bahçelievler Merkez',
       urbanFocus: 'Talatpaşa Bulvarı, Yayalaştırılmış Cadde & Prestij Konutları',
-      recommendedSystem: 'ÇP-VBS 4+20+4 Konfor Isıcam & ÇP-VGS Motorlu Giyotin Seri',
+      recommendedSystem: 'Winsa Vera Termal 4+20+4 Konfor Isıcam & Winsa Vera Vertical Motorlu Giyotin Seri',
       highlightProblem: 'Estetik dış cephe standardı, dört mevsim balkon kullanımı ve maksimum ısı tasarrufu.',
       completedProjectsCount: 156,
     },

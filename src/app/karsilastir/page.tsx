@@ -12,7 +12,7 @@ const CONTENT = {
   badge: 'Kocasinan Fabrika Satış • Teknik Karşılaştırma Matrisi',
   heading: 'Çelikpen Cam Balkon Serileri Karşılaştırma Tablosu (2026 Net Fiyatlı)',
   subheading:
-    'Balkonunuzun cephe yönü, cadde gürültüsü ve kullanım amacına göre 5 mimari cam serimizi teknik verileri ve net m² birim fiyatlarıyla karşılaştırın.',
+    'Balkonunuzun cephe yönü, cadde gürültüsü ve kullanım amacına göre 10 resmi Winsa cam balkon ve PVC doğrama serimizi teknik verileri ve net m² birim fiyatlarıyla karşılaştırın.',
   tableCaption:
     'Çelikpen 2026 cam balkon sistemleri teknik özellik, ısı/ses yalıtımı ve net m² fiyat karşılaştırma tablosu',
   headers: {
@@ -29,18 +29,28 @@ const CONTENT = {
     detail: 'Detay',
   },
   mechanisms: {
-    vns_8mm: 'Katlanır (8 Rulmanlı)',
-    vns_10mm: 'Katlanır Pro (Çift Sıra Rulman)',
-    vbs_isicam: 'Katlanır Termal (Mıknatıslı Fitil)',
-    vds_surme: 'Eşiksiz Sürme (3/5 Raylı)',
-    vgs_giyotin: 'Motorlu Dikey Giyotin (Kumandalı)',
+    vns_8mm: 'Katlanır (8mm Temperli)',
+    vns_10mm: 'Katlanır Pro (10mm Temperli)',
+    vbs_isicam: 'Katlanır Termal (4+20+4 Argon)',
+    vds_surme: 'Eşiksiz Sürme (Paslanmaz Rulman)',
+    vds_isicamli: 'Eşiksiz Sürme (Isıcamlı)',
+    vgs_giyotin: 'Motorlu Dikey Giyotin',
+    pvc_dograma: 'PVC Pencere & Kapı (76/84mm)',
+    hs_surme: 'Kaldır-Sür (Hebeschiebe)',
+    comfort_slide: 'Eksenel Kilitli PVC Sürme',
+    pergola: 'Motorlu Bioklimatik Tavan',
   } satisfies Record<SystemSeriesId, string>,
-  seriesSlugBySystemId: {
-    vns_8mm: 'vns-katlanir-cam-balkon',
-    vns_10mm: 'vns-katlanir-cam-balkon',
-    vbs_isicam: 'vbs-isicamli-cam-balkon',
-    vds_surme: 'vds-esiksiz-surme-cam-balkon',
-    vgs_giyotin: 'vgs-motorlu-giyotin-cam',
+  detailHrefBySystemId: {
+    vns_8mm: '/sistemler/vns-katlanir-cam-balkon',
+    vns_10mm: '/sistemler/vns-katlanir-cam-balkon',
+    vbs_isicam: '/sistemler/vbs-isicamli-cam-balkon',
+    vds_surme: '/sistemler/vds-esiksiz-surme-cam-balkon',
+    vds_isicamli: '/urunler/panorama-esiksiz-surme-cam-balkon',
+    vgs_giyotin: '/sistemler/vgs-motorlu-giyotin-cam',
+    pvc_dograma: '/urunler/dorado-76',
+    hs_surme: '/urunler/panorama-hs-76',
+    comfort_slide: '/urunler/comfort-slide-plus',
+    pergola: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
   } satisfies Record<SystemSeriesId, string>,
   ctaCalculator: 'Seçtiğiniz Seriyle Canlı m² Fiyat Hesapla →',
   detailLinkLabel: 'İncele →',
@@ -121,15 +131,12 @@ export default function KarsilastirPage() {
           </thead>
           <tbody className="divide-y divide-celikpen-border">
             {systems.map((sys) => {
-              const targetSlug = CONTENT.seriesSlugBySystemId[sys.id];
-              const prodSeries =
-                SITE_CONFIG.productSeries.find((p) => p.slug === targetSlug) ||
-                SITE_CONFIG.productSeries[0];
+              const detailHref = CONTENT.detailHrefBySystemId[sys.id];
 
               return (
                 <tr
                   key={sys.id}
-                  id={targetSlug}
+                  id={sys.id}
                   className="transition hover:bg-celikpen-subtle"
                 >
                   <th
@@ -158,13 +165,13 @@ export default function KarsilastirPage() {
                   <td className="p-4 text-slate-700">{CONTENT.mechanisms[sys.id]}</td>
                   <td className="p-4 text-slate-600">{warrantyText}</td>
                   <td className="max-w-xs p-4 text-xs text-slate-600">
-                    <strong className="block text-slate-900">{prodSeries.tagline}</strong>
-                    <span className="mt-1 block text-slate-500">{sys.shortDesc}</span>
+                    <strong className="block text-slate-900">{sys.shortDesc}</strong>
+                    <span className="mt-1 block text-slate-500">{sys.glassSpec}</span>
                   </td>
                   <td className="p-4 text-right">
                     <Link
                       prefetch={true}
-                      href={`/sistemler/${targetSlug}`}
+                      href={detailHref}
                       className="inline-block rounded-lg border border-celikpen-brand bg-white px-3 py-1.5 text-xs font-bold text-celikpen-brand transition hover:bg-celikpen-subtle"
                     >
                       {CONTENT.detailLinkLabel}

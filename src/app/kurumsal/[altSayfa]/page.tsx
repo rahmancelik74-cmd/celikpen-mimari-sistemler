@@ -43,20 +43,20 @@ export async function generateMetadata({
     return generatePageMetadata({
       title: 'Kurumsal | Çelikpen',
       description:
-        'Çelikpen kurumsal sayfaları: 35 yıllık deneyim, üretim teknolojisi, kalite standartları ve sertifikalar.',
+        'Çelikpen kurumsal sayfaları: 30 yıllık deneyim, üretim teknolojisi, kalite standartları ve sertifikalar.',
       path: `/kurumsal/${altSayfa}`,
       noIndex: true,
     });
   }
 
   return generatePageMetadata({
-    title: `${pageData.title} | 35 Yıllık Çelikpen Kurumsal`,
+    title: `${pageData.title} | 30 Yıllık Çelikpen Kurumsal`,
     description: pageData.seoDescription,
     path: `/kurumsal/${pageData.slug}`,
     keywords: [
       pageData.title,
       'Çelikpen kurumsal',
-      '35 yıllık cam balkon firması',
+      '30 yıllık cam balkon firması',
       'Winsa yetkili üretici',
     ],
   });
@@ -76,7 +76,7 @@ export default async function KurumsalAltSayfa({
   const pageIndex = CORPORATE_SUBPAGES.findIndex((p) => p.slug === currentData.slug);
   const cta =
     currentData.cta ?? {
-      title: 'Projenizi 35 yıllık deneyimle planlayalım.',
+      title: 'Projenizi 30 yıllık deneyimle planlayalım.',
       description:
         'Ücretsiz mimari keşif, lazer ölçüm ve anahtar teslim montaj için ekibimizle görüşün.',
       label: 'Ücretsiz Keşif',
@@ -90,7 +90,7 @@ export default async function KurumsalAltSayfa({
   ]);
 
   const webPageSchema = buildWebPageSchema({
-    name: `${currentData.title} | 35 Yıllık Çelikpen Kurumsal`,
+    name: `${currentData.title} | 30 Yıllık Çelikpen Kurumsal`,
     description: currentData.seoDescription,
     path: `/kurumsal/${currentData.slug}`,
     type: 'AboutPage',
@@ -158,7 +158,7 @@ export default async function KurumsalAltSayfa({
                   {currentData.heroBadge}
                 </span>
                 <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  1991 — 2026
+                  1996 — 2026
                 </span>
               </div>
 
@@ -212,7 +212,7 @@ export default async function KurumsalAltSayfa({
                   <p className="text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#7DD3FC]">
                     Kurumsal Menü
                   </p>
-                  <p className="mt-1 text-[11px] font-semibold text-white/90">35 Yıllık Deneyim</p>
+                  <p className="mt-1 text-[11px] font-semibold text-white/90">30 Yıllık Deneyim</p>
                 </div>
                 <nav aria-label="Kurumsal alt sayfalar" className="p-2">
                   {CORPORATE_SUBPAGES.map((page) => {
@@ -259,7 +259,7 @@ export default async function KurumsalAltSayfa({
                   <span className="text-[9px] font-bold uppercase tracking-[0.12em]">Yıl</span>
                 </div>
                 <p className="mt-2 text-[10.5px] leading-relaxed text-slate-600">
-                  1991’den bugüne kesintisiz üretim, saha tecrübesi ve mühendislik birikimi.
+                  1996’dan bugüne kesintisiz üretim, saha tecrübesi ve mühendislik birikimi.
                 </p>
                 <a
                   href={`tel:${SITE_CONFIG.phoneRaw}`}
@@ -425,7 +425,7 @@ export default async function KurumsalAltSayfa({
               <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
                 <div className="max-w-xl">
                   <p className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[#7DD3FC]">
-                    Çelikpen · 35. Yıl
+                    Çelikpen · 30. Yıl
                   </p>
                   <h2 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl">{cta.title}</h2>
                   <p className="mt-2 text-[11px] leading-relaxed text-slate-300">{cta.description}</p>

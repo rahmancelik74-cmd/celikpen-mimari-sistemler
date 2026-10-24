@@ -549,7 +549,7 @@ export const WINSA_CONTENT_CONFIG = {
         '110° kendi ekseninde dönerek doğal baca etkisiyle havalandırma sağlayan ve geriye toplanan bioklimatik lameller',
         'Sabit cam tavan tercihinde kırıldığında dağılmayan 4+4 lamine + 16 mm argon + 6 mm temperli güneş kontrol camı',
         'Dört bir yanından geçen gizli dere oluğu ve taşıyıcı dikme içinden zemine görünmez su tahliyesi',
-        'ÇP-VBS Isıcamlı Katlanır, ÇP-VDS Sürme veya ÇP-VGS Giyotin cephelerle %100 modüler birleşim',
+        'Winsa Vera Termal Isıcamlı Katlanır, Winsa Vera Slide Sürme veya Winsa Vera Vertical Giyotin cephelerle %100 modüler birleşim',
       ],
       hardwareFeatures: [
         'Uzaktan kumandalı Somfy/Becker lineer piston ve kayışlı tavan tahrik otomasyonu',

@@ -1,5 +1,15 @@
 export type BalconyGeometryId = 'duz' | 'l_tipi' | 'u_tipi';
-export type SystemSeriesId = 'vns_8mm' | 'vns_10mm' | 'vbs_isicam' | 'vds_surme' | 'vgs_giyotin';
+export type SystemSeriesId =
+  | 'vns_8mm'
+  | 'vns_10mm'
+  | 'vbs_isicam'
+  | 'vds_surme'
+  | 'vds_isicamli'
+  | 'vgs_giyotin'
+  | 'pvc_dograma'
+  | 'hs_surme'
+  | 'comfort_slide'
+  | 'pergola';
 export type GlassOptionId = 'seffaf' | 'fume' | 'bronz' | 'alt_buzlu';
 export type ProfileColorId = 'antrasit' | 'mat_siyah' | 'eloksal' | 'ahsap_desen';
 
@@ -52,62 +62,112 @@ export interface PricingConfig {
  */
 export const CELIKPEN_PRICING_CONFIG: PricingConfig = {
   currency: 'TRY',
-  lastUpdated: '2026-10-18',
+  lastUpdated: '2026-10-25',
   minBillableAreaM2: 3.5,
   bulkBuildingDiscountRate: 0.15,
   quoteTolerancePercent: 5,
   systems: {
     vns_8mm: {
       id: 'vns_8mm',
-      code: 'ÇP-VNS 8',
-      name: '8mm Temperli Katlanır Sistem',
-      shortDesc: 'Standart rüzgar, toz ve yağmur koruması sağlayan ekonomik katlanır seri.',
-      netPricePerM2: 3800,
+      code: 'Winsa Vera 8',
+      name: 'Winsa Vera 8mm Katlanır Cam Balkon',
+      shortDesc: '8mm Şişecam temperli katlanır sistem; standart balkonlarda ekonomik ve panoramik çözüm.',
+      netPricePerM2: 5150,
       thermalSavingPercent: 35,
       acousticReductionDb: 18,
       glassSpec: '8mm Şişecam Temperli Tek Cam',
     },
     vns_10mm: {
       id: 'vns_10mm',
-      code: 'ÇP-VNS 10',
-      name: '10mm Temperli Pro Katlanır Sistem',
-      shortDesc: 'Yüksek katlar ve rüzgar yükü yüksek cepheler için güçlendirilmiş 10mm seri.',
-      netPricePerM2: 4500,
+      code: 'Winsa Vera Pro 10',
+      name: 'Winsa Vera Pro 10mm Katlanır Cam Balkon',
+      shortDesc: '10mm Şişecam temperli tam yalıtımlı sistem; yüksek kat ve rüzgar yüküne dayanıklı.',
+      netPricePerM2: 5720,
       thermalSavingPercent: 42,
       acousticReductionDb: 24,
       glassSpec: '10mm Şişecam Temperli Tek Cam',
     },
     vbs_isicam: {
       id: 'vbs_isicam',
-      code: 'ÇP-VBS Termal',
-      name: '4+20+4 Argon Gazlı Isıcamlı Katlanır Sistem',
-      shortDesc: 'Bahçelievler kış soğuğuna ve E-5/Şirinevler gürültüsüne karşı maksimum yalıtım.',
+      code: 'Winsa Vera Termal',
+      name: 'Winsa Vera Termal Isıcamlı Cam Balkon',
+      shortDesc: '4+20+4 Argon gazlı Sinerji Isıcamlı sistem; dört mevsim maksimum ısı ve ses yalıtımı.',
       badge: 'En Çok Tercih Edilen',
-      netPricePerM2: 6400,
+      netPricePerM2: 9150,
       thermalSavingPercent: 72,
       acousticReductionDb: 38,
       glassSpec: '28mm (4+20+4) Argon Gazlı Konfor Isıcam (Her İki Cam Temperli)',
     },
     vds_surme: {
       id: 'vds_surme',
-      code: 'ÇP-VDS Slide',
-      name: 'Eşiksiz Sürme (Sürgülü) Cam Balkon',
-      shortDesc: 'Dar balkonlarda kanat açılma alanı kaplamayan, takılma yapmayan eşiksiz ray sistemi.',
-      netPricePerM2: 5200,
+      code: 'Winsa Vera Slide',
+      name: 'Winsa Vera Slide Eşiksiz Sürme Sistem',
+      shortDesc: 'Paslanmaz rulmanlı eşiksiz sürme cam balkon; dar balkonda alan kazandıran sessiz ray.',
+      netPricePerM2: 5900,
       thermalSavingPercent: 50,
       acousticReductionDb: 26,
-      glassSpec: '8mm / Isıcam Opsiyonlu Rulmanlı Sürme',
+      glassSpec: '8mm / 10mm Temperli Rulmanlı Sürme',
+    },
+    vds_isicamli: {
+      id: 'vds_isicamli',
+      code: 'Winsa Vera Slide Isıcamlı',
+      name: 'Winsa Vera Slide Isıcamlı Sürme Sistem',
+      shortDesc: 'Eşiksiz sürme konforunu 4+16+4 ısıcam yalıtımıyla birleştiren premium sürme sistem.',
+      netPricePerM2: 8650,
+      thermalSavingPercent: 68,
+      acousticReductionDb: 34,
+      glassSpec: '4+16+4 Argon Gazlı Isıcam',
     },
     vgs_giyotin: {
       id: 'vgs_giyotin',
-      code: 'ÇP-VGS Auto',
-      name: 'Motorlu Giyotin (Kumandalı Küpeşte) Cam',
-      shortDesc: 'Uzaktan kumandalı, zincir/kayış tahrikli, sabit korkuluklu dikey açılır panoramik sistem.',
+      code: 'Winsa Vera Vertical',
+      name: 'Winsa Vera Vertical Motorlu Giyotin',
+      shortDesc: 'Kumandalı zincirli/motorlu giyotin cam sistemi; açıkken güvenli cam küpeşte.',
       badge: 'Premium Seri',
-      netPricePerM2: 8900,
+      netPricePerM2: 9400,
       thermalSavingPercent: 68,
       acousticReductionDb: 35,
       glassSpec: '4+16+4 Isıcamlı + Somfy / Becker Motorlu',
+    },
+    pvc_dograma: {
+      id: 'pvc_dograma',
+      code: 'Winsa Dorado 76 & Revotech Gold',
+      name: 'Winsa Dorado 76 & Revotech Gold PVC Doğrama',
+      shortDesc: '76mm / 84mm 6-7 odacıklı premium PVC pencere; üç contalı sessiz ve yalıtımlı doğrama.',
+      netPricePerM2: 6200,
+      thermalSavingPercent: 76,
+      acousticReductionDb: 43,
+      glassSpec: '52mm Üçlü Low-E / Argon Isıcam Opsiyonlu',
+    },
+    hs_surme: {
+      id: 'hs_surme',
+      code: 'Winsa Panorama HS 76',
+      name: 'Winsa Panorama HS 76 Hebeschiebe',
+      shortDesc: 'Yüksek yalıtımlı kaldır-sür sürme sistem; 300 kg kanat kapasitesi ve engelsiz eşik.',
+      netPricePerM2: 8600,
+      thermalSavingPercent: 70,
+      acousticReductionDb: 36,
+      glassSpec: 'Çift / Üçlü Isıcam Uyumlu (Panorama HS 76)',
+    },
+    comfort_slide: {
+      id: 'comfort_slide',
+      code: 'Winsa Comfort Slide Plus',
+      name: 'Winsa Comfort Slide Plus PVC Sürme',
+      shortDesc: 'Yüksek sızdırmazlıklı PVC sürme sistem; eksenel kilit ve tam çevre EPDM conta.',
+      netPricePerM2: 8600,
+      thermalSavingPercent: 72,
+      acousticReductionDb: 38,
+      glassSpec: '4+16+4 / 4+18+4+18+4 Isıcam Uyumlu',
+    },
+    pergola: {
+      id: 'pergola',
+      code: 'Winsa Vela & Lotus',
+      name: 'Winsa Vela & Lotus Bioklimatik Pergola',
+      shortDesc: 'Motorlu alüminyum bioklimatik tavan; gizli yağmur tahliyesi ve LED aydınlatma.',
+      netPricePerM2: 11800,
+      thermalSavingPercent: 65,
+      acousticReductionDb: 30,
+      glassSpec: 'Lamine Isıcam Tavan + Motorlu Lamel',
     },
   },
   glassOptions: {
@@ -207,9 +267,12 @@ export function calculateBalconyQuote(
     .slice(0, activeFronts)
     .reduce((acc, val) => acc + Math.max(0, val), 0);
 
+  const safeHeightCm = Math.max(100, input.heightCm);
   const totalWidthMeters = Number((totalWidthCm / 100).toFixed(2));
-  const heightMeters = Number((Math.max(100, input.heightCm) / 100).toFixed(2));
-  const rawAreaM2 = Number((totalWidthMeters * heightMeters).toFixed(2));
+  const heightMeters = Number((safeHeightCm / 100).toFixed(2));
+  // Alan, yuvarlanmış metre değerleri yerine ham cm ölçülerinden tek seferde
+  // 2 ondalığa yuvarlanır; 2,45 m gibi ondalıklı girişlerde sapma oluşmaz.
+  const rawAreaM2 = Number(((totalWidthCm * safeHeightCm) / 10000).toFixed(2));
   const billableAreaM2 = Number(
     Math.max(config.minBillableAreaM2, rawAreaM2).toFixed(2)
   );

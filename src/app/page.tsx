@@ -522,7 +522,7 @@ export default function HomePage() {
             </div>
             <Link
               prefetch={true}
-              href="/blog"
+              href="/profesyoneller/blog"
               className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Tüm yazılar <IconArrowRight className="h-3.5 w-3.5" />

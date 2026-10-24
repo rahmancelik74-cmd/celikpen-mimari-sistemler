@@ -359,7 +359,7 @@ export function buildProductSchema({
     sku,
     category,
     description,
-    image: [image ? absoluteUrl(image) : absoluteUrl('/images/products/cam-balkon-default.svg')],
+    image: [image ? absoluteUrl(image) : absoluteUrl('/images/products/vera-termal.jpg')],
     brand: {
       '@type': 'Brand',
       name: SEO_BUSINESS.name,

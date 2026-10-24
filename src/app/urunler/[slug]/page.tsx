@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
@@ -121,17 +122,29 @@ export default async function UrunDetayPage({
                 prefetch={true}
                 key={rel.slug}
                 href={`/urunler/${rel.slug}`}
-                className="hover-lift group rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs"
+                className="hover-lift group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xs"
               >
-                <span className="rounded bg-[#0F172A]/10 px-2 py-0.5 text-[10px] font-extrabold text-[#0F172A]">
-                  {rel.code}
-                </span>
-                <h3 className="mt-2 text-sm font-black text-[#0F172A] group-hover:text-[#1E3A8A]">
-                  {rel.name}
-                </h3>
-                <p className="mt-1 text-[11px] text-slate-500">
-                  {rel.technicalSpecs.profilGenisligi} • Uw: {rel.technicalSpecs.isiYalitimiUw}
-                </p>
+                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                  <Image
+                    src={rel.defaultImage}
+                    alt={`${rel.name} gerçek uygulama fotoğrafı`}
+                    width={480}
+                    height={300}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute left-2.5 top-2.5 rounded bg-slate-950/75 px-2 py-0.5 text-[9.5px] font-extrabold text-white backdrop-blur-sm">
+                    {rel.code}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-sm font-black text-[#0F172A] group-hover:text-[#1E3A8A]">
+                    {rel.name}
+                  </h3>
+                  <p className="mt-1 text-[11px] text-slate-500">
+                    {rel.technicalSpecs.profilGenisligi} • Uw: {rel.technicalSpecs.isiYalitimiUw}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
