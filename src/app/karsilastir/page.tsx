@@ -63,7 +63,7 @@ export function generateMetadata(): Metadata {
 
 export default function KarsilastirPage() {
   const systems = Object.values(CELIKPEN_PRICING_CONFIG.systems);
-  const warrantyText = `${SITE_CONFIG.warranties.mechanicalWarrantyYears} Yıl Mekanik + Şişecam Sertifikası`;
+  const warrantyText = `${SITE_CONFIG.warranties.mechanicalWarrantyYears} Yıl Sistem + Şişecam Sertifikası`;
 
   return (
     <main className="mx-auto max-w-container px-4 pb-14 pt-10 text-slate-700">

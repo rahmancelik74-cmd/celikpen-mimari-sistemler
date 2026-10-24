@@ -15,6 +15,7 @@ const FOOTER_SERVICES = [
 
 const FOOTER_QUICK = [
   { label: 'Anasayfa', href: '/' },
+  { label: 'Kurumsal', href: '/kurumsal' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Galeri', href: '/galeri' },
@@ -52,9 +53,15 @@ export function Footer() {
               <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
-              Kocasinan Merkez üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon, kış
-              bahçesi, giyotin, sürme cam ve alüminyum doğrama çözümleri sunuyoruz.
+              1991’den bugüne 35 yıllık üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon,
+              kış bahçesi, giyotin, sürme cam, PVC doğrama ve mimari alüminyum çözümleri sunuyoruz.
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 border-l-2 border-[#38BDF8] pl-3">
+              <span className="text-[10px] font-extrabold tracking-[0.08em] text-white">35. YIL</span>
+              <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                1991 — 2026
+              </span>
+            </div>
             <div className="mt-5 flex items-center gap-2">
               {FOOTER_SOCIAL.map((social) => (
                 <a

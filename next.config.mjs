@@ -93,6 +93,42 @@ const nextConfig = {
         destination: '/urunler/winstor-monoblok-panjur',
         permanent: true,
       },
+      // 35. yıl kurumsal yapılandırmasında birleştirilen eski alt sayfalar.
+      {
+        source: '/kurumsal/vizyon-misyon',
+        destination: '/kurumsal/hakkimizda#kurumsal-tarihce',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/neden-winsa',
+        destination: '/kurumsal/kalite-politikamiz',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/ar-ge',
+        destination: '/kurumsal/uretim-teknolojimiz',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/cevre-dostu-pencere',
+        destination: '/kurumsal/surdurulebilirlik',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/kampanyalar',
+        destination: '/kurumsal',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/basinda-winsa',
+        destination: '/kurumsal/basinda-celikpen',
+        permanent: true,
+      },
+      {
+        source: '/kurumsal/fuarlar-etkinlikleri',
+        destination: '/kurumsal/fuarlar-etkinlikler',
+        permanent: true,
+      },
     ];
   },
 };

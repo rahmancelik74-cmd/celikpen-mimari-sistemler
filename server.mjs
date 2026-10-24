@@ -30,7 +30,7 @@ const SECURITY_HEADERS = {
   'Content-Security-Policy':
     "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'",
   'X-DNS-Prefetch-Control': 'on',
-  Link: '</icon.svg>; rel=icon, </manifest.webmanifest>; rel=manifest',
+  Link: '</icon.svg?v=35>; rel=icon, </manifest.webmanifest>; rel=manifest',
 };
 
 const app = next({ dev, hostname, port });

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
 import {
+  SEO_ICON,
   absoluteUrl,
   generatePageMetadata,
 } from '../../../config/seo.config';
@@ -53,7 +54,7 @@ export default function YargitayKarariBlogPage() {
       name: 'Çelikpen Mimari Cam & Doğrama Sistemleri',
       logo: {
         '@type': 'ImageObject',
-        url: absoluteUrl('/icon.svg'),
+        url: absoluteUrl(SEO_ICON),
       },
     },
     mainEntityOfPage: {

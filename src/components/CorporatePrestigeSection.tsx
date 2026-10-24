@@ -5,7 +5,7 @@ import Link from 'next/link';
 /* ============================================================================
    ÇELİKPEN — KURUMSAL PRESTİJ, ÜRÜN GRUPLARI VE UYGULAMA SÜRECİ
    GüngörPen kurumsal vitrininden ilham alan; çift çerçeveli mimari görsel,
-   editoryal marka anlatımı, 25. yıl rozeti ve net dönüşüm aksiyonları.
+   editoryal marka anlatımı, 35. yıl rozeti ve net dönüşüm aksiyonları.
    ========================================================================== */
 
 const PRODUCT_GROUPS = [
@@ -183,33 +183,37 @@ export function CorporatePrestigeSection() {
 
             <h2
               id="kurumsal-prestij-baslik"
-              className="mt-2 text-2xl font-extrabold leading-[1.22] text-[#0F172A] sm:text-3xl lg:text-[34px]"
+              className="mt-2 text-2xl font-extrabold leading-[1.22] text-[#0F172A] sm:text-3xl lg:text-[32px]"
             >
-              25 Yıllık Deneyimle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri
-              Firması
+              35 Yıllık Deneyimle İstanbul&apos;un Öncü Cam Balkon ve Mimari Doğrama Sistemleri
+              Markası
             </h2>
 
             <div className="mt-5 space-y-4 text-[12.5px] leading-7 text-slate-600 sm:text-[13px]">
               <p>
-                2000 yılında <strong className="font-semibold text-[#0F172A]">İstanbul / Bahçelievler</strong>&apos;de
-                kurulan <strong className="font-semibold text-[#0F172A]">Çelikpen</strong>, 25 yıllık
-                deneyimiyle{' '}
+                Temelleri 35 yıl önce{' '}
+                <strong className="font-semibold text-[#0F172A]">İstanbul / Bahçelievler</strong>&apos;de atılan{' '}
+                <strong className="font-semibold text-[#0F172A]">Çelikpen</strong>, çeyrek asrı aşan
+                mühendislik tecrübesiyle{' '}
                 <strong className="font-semibold text-[#0F172A]">
-                  cam balkon, katlanır cam balkon, sürme cam balkon, kış bahçesi, giyotin, pergola,
-                  PVC pencere, PVC kapı, panjur, kepenk ve alüminyum sistemleri
+                  ısıcamlı cam balkon, katlanır cam balkon, sürme seri sistemler, motorlu giyotin
+                  cam, bioklimatik pergola, kış bahçesi, PVC pencere &amp; kapı, panjur ve mimari
+                  alüminyum sistemleri
                 </strong>{' '}
-                alanında sektörün öncü firmalarından biridir. Kaliteli üretim anlayışı ve yenilikçi
-                yaklaşımıyla, konut ve ticari projelerde yüksek memnuniyet sağlamaktadır.
+                üretiminde İstanbul&apos;un referans markalarından biridir. Yüksek yalıtım
+                standartları, kusursuz işçilik ve estetik mimari yaklaşımıyla hem konut hem de
+                prestijli ticari projelerde dört mevsim konforlu yaşam alanları inşa etmektedir.
               </p>
               <p>
-                Modern üretim parkuru ve geniş showroom alanıyla hizmet kapasitesini sürekli
-                genişleten Çelikpen, sektörün lider sistemlerini portföyüne katarak;{' '}
+                Gelişmiş üretim altyapısı, lazer ölçüm teknolojisi ve kendi bünyesindeki uzman montaj
+                kadrosuyla uçtan uca çözüm sunan Çelikpen;{' '}
+                <strong className="font-semibold text-[#0F172A]">Winsa</strong> kalitesi ve yüksek
+                nitelikli temperli/ısıcam teknolojilerini bir araya getirerek{' '}
                 <strong className="font-semibold text-[#0F172A]">
-                  cam balkon, katlanır cam balkon, sürme cam balkon, giyotin sistemleri, kış bahçesi,
-                  pergola sistemleri ve PVC Pencere / Kapı
+                  ısıcamlı cam balkon, giyotin cam, kış bahçesi, bioklimatik tavan ve yeni nesil PVC
+                  doğrama
                 </strong>{' '}
-                gibi geniş ürün yelpazesiyle hem bireysel hem kurumsal müşterilere modern çözümler
-                sunmaktadır.
+                çözümlerini 10 yıl sistem garantisiyle yaşam alanlarınıza taşır.
               </p>
             </div>
 
@@ -220,26 +224,26 @@ export function CorporatePrestigeSection() {
                   aria-hidden="true"
                 />
                 <span className="relative text-4xl font-black leading-none tracking-tighter sm:text-5xl">
-                  25
+                  35
                 </span>
-                <span className="relative text-sm font-extrabold">.YIL</span>
+                <span className="relative text-sm font-extrabold">. YIL</span>
               </div>
               <div>
                 <h3 className="text-sm font-bold tracking-tight text-[#0F172A]">
-                  25 Yıllık Deneyimle Güven ve Prestij
+                  35 Yıllık Deneyimle Güven, Mühendislik ve Prestij
                 </h3>
                 <p className="mt-1.5 text-[11.5px] leading-relaxed text-slate-600">
-                  Çeyrek asırlık tecrübemizle proje öncesinden montaj sonrasına kadar tam hizmet
-                  anlayışını benimsiyoruz. Uzman montaj ekibimiz, profesyonel uygulamalarımız ve
-                  kaliteli malzeme standartlarımızla sizlere yalnızca konfor değil,{' '}
-                  <strong className="font-semibold text-[#0F172A]">uzun ömürlü prestijli yaşam alanları</strong>{' '}
-                  sunuyoruz.
+                  35 yıllık köklü geçmişimizle ücretsiz mimari keşiften statik projelendirmeye,
+                  hassas üretimden anahtar teslim montaja kadar her aşamada tam güvence sunuyoruz.
+                  Sertifikalı malzeme kalitemiz ve satış sonrası kesintisiz destek anlayışımızla
+                  mekanlarınıza değer katıyoruz.
                 </p>
               </div>
             </div>
 
             <p className="mt-4 text-sm font-bold text-[#0F172A]">
-              Çelikpen – İstanbul&apos;un Güvenilir Cam Balkon ve PVC Pencere / Kapı Uzmanı
+              Çelikpen – 35 Yıllık Tecrübeyle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri
+              Uzmanı
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -348,7 +352,7 @@ export function ProductShowcaseStrip() {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[#93C5FD]" aria-hidden="true" />
-            5 yıl mekanik garanti
+            10 Yıl Sistem Garantisi
           </span>
         </div>
       </div>

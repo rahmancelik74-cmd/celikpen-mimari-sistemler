@@ -89,9 +89,9 @@ const SERVICE_CARDS: ServiceCard[] = [
 ];
 
 const TRUST_STATS = [
-  { value: '1.200+', label: 'Tamamlanan proje' },
+  { value: '15.000+', label: 'Tamamlanan proje' },
   { value: '11', label: 'Bahçelievler mahallesi' },
-  { value: '5 Yıl', label: 'Mekanik garanti' },
+  { value: '10 Yıl', label: 'Sistem garantisi' },
   { value: '38 dB', label: 'Akustik konfor' },
   { value: '%100', label: 'Ücretsiz keşif' },
 ];
@@ -445,7 +445,7 @@ export default function HomePage() {
                 </span>
               </div>
               <div className="relative mt-10">
-                <p className="text-4xl font-semibold tracking-tight">1.200+</p>
+                <p className="text-4xl font-semibold tracking-tight">15.000+</p>
                 <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-300">
                   Tamamlanan uygulama
                 </p>

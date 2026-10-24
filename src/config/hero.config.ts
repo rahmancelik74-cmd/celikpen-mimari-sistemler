@@ -10,12 +10,12 @@ export interface HeroSlide {
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
-    badge: 'ÇELİKPEN MİMARİ STANDARTLARI • TS EN 14351-1',
+    badge: '1991’DEN BUGÜNE 35 YIL • TS EN 14351-1',
     image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
     title: 'Geleceğin Mimarisinde Maksimum Yalıtım, Kusursuz Estetik',
     subtitle:
-      'Kocasinan Merkez üretim tesisimizden tüm Bahçelievler’e aracısız fabrika fiyatlarıyla 4+20+4 Argon Gazlı Konfor Isıcamlı, Katlanır, Eşiksiz Sürme, Motorlu Giyotin ve 76/84 mm PVC Pencere Sistemleri.',
-    specs: ['Uw = 1.1 W/(m²K) Isı Yalıtımı', '-38 dB Akustik Konfor', '10 Yıl Mekanik Garanti'],
+      '35 yıllık mühendislik birikimiyle Kocasinan Merkez üretim tesisimizden tüm Bahçelievler’e aracısız fabrika fiyatlarıyla 4+20+4 Argon Gazlı Konfor Isıcamlı, Katlanır, Eşiksiz Sürme, Motorlu Giyotin ve 76/84 mm PVC Pencere Sistemleri.',
+    specs: ['Uw = 1.1 W/(m²K) Isı Yalıtımı', '-38 dB Akustik Konfor', '10 Yıl Sistem Garantisi'],
     ctaPrimary: { label: 'Canlı m² Fiyat Hesapla', href: '/fiyat-hesapla' },
     ctaSecondary: { label: '5 Seriyi Karşılaştır', href: '/karsilastir' },
   },

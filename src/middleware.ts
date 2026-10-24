@@ -95,7 +95,7 @@ function applySecurityHeaders(
   // Next'in otomatik font/asset preload Link başlığını ezmemek için append kullanılır.
   response.headers.append(
     'Link',
-    '</icon.svg>; rel=icon, </manifest.webmanifest>; rel=manifest'
+    '</icon.svg?v=35>; rel=icon, </manifest.webmanifest>; rel=manifest'
   );
   return response;
 }

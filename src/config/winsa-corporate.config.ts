@@ -1,330 +1,587 @@
 export type CorporateSubpageSlug =
   | 'hakkimizda'
-  | 'vizyon-misyon'
-  | 'neden-winsa'
-  | 'ar-ge'
-  | 'cevre-dostu-pencere'
-  | 'kampanyalar'
-  | 'basinda-winsa'
+  | 'kalite-politikamiz'
+  | 'sertifikalarimiz'
+  | 'uretim-teknolojimiz'
+  | 'surdurulebilirlik'
+  | 'insan-kaynaklari'
+  | 'kvkk'
+  | 'basinda-celikpen'
   | 'fuarlar-etkinlikler';
+
+export type CorporateVisualVariant =
+  | 'heritage'
+  | 'quality'
+  | 'certificates'
+  | 'production'
+  | 'sustainability'
+  | 'careers'
+  | 'privacy'
+  | 'press'
+  | 'events';
+
+export interface CorporateStandard {
+  code: string;
+  title: string;
+  description: string;
+}
+
+export interface CorporateCta {
+  title: string;
+  description: string;
+  label: string;
+  href: string;
+}
 
 export interface CorporateSubpageData {
   slug: CorporateSubpageSlug;
   title: string;
-  categoryGroup: 'KURUMSAL' | 'MEDYA';
+  categoryGroup: 'KURUMSAL' | 'KALİTE' | 'MEDYA';
   heroBadge: string;
   subtitle: string;
   seoDescription: string;
+  visual: CorporateVisualVariant;
   paragraphs: string[];
   highlights: { title: string; desc: string }[];
   stats: { label: string; value: string }[];
+  standards?: CorporateStandard[];
+  listTitle?: string;
+  list?: string[];
+  cta?: CorporateCta;
 }
+
+/* ============================================================================
+   ÇELİKPEN — 35 YILLIK KURUMSAL MİRAS
+   1991–2026 kurumsal anlatısı, Avrupa performans standartları ve Winsa
+   yetkili üretim modeli tek veri kaynağından beslenir. Slugs, static params,
+   sitemap, hub kartları ve alt sayfa navigasyonu bu liste üzerinden üretilir.
+   ========================================================================== */
+
+export const CORPORATE_STANDARDS: CorporateStandard[] = [
+  {
+    code: 'EN 12207',
+    title: 'Hava Geçirimsizliği',
+    description:
+      'Kanat-kasa birleşimlerinde sınıf 4 hava sızdırmazlığı; rüzgâr, toz ve ısı kaybına karşı ölçülebilir bariyer.',
+  },
+  {
+    code: 'EN 12208',
+    title: 'Su Sızdırmazlığı',
+    description:
+      'Sürme ve açılır sistemlerde 9A seviyesine kadar su sızdırmazlığı; gizli tahliye kanalı ve EPDM conta disiplini.',
+  },
+  {
+    code: 'EN 12210',
+    title: 'Rüzgâr Yükü Direnci',
+    description:
+      'C5/B5 sınıfına kadar 2000 Pa yük altında statik performans; cephe geometrisine göre mühendislik hesabı.',
+  },
+  {
+    code: 'Uw',
+    title: 'Isı İletim Katsayısı',
+    description:
+      'Sistem konfigürasyonuna göre Uw 0,8–1,1 W/(m²K); argon dolum, low-e kaplama ve sıcak kenar adaptörü.',
+  },
+];
+
+export const CORPORATE_CERTIFICATES: CorporateStandard[] = [
+  {
+    code: 'TSE EN 12150',
+    title: 'Temperli Güvenlik Camı',
+    description:
+      'Isıl işlemli temperli cam üretimi, kırılma güvenliği ve Şişecam kalite belgeleriyle doğrulanır.',
+  },
+  {
+    code: 'EN 14351-1',
+    title: 'Pencere ve Kapı Ürün Standardı',
+    description:
+      'Avrupa performans beyanı, CE işareti ve dış cephe doğramaları için harmonize ürün standardı.',
+  },
+  {
+    code: 'CE',
+    title: 'Avrupa Uygunluk Beyanı',
+    description:
+      'AB pazarına sunulan cam, doğrama ve yalıtım sistemleri için teknik dosya ve uygunluk işareti.',
+  },
+  {
+    code: 'ISO 9001:2015',
+    title: 'Kalite Yönetim Sistemi',
+    description:
+      'Tasarımdan sevkiyata, montajdan satış sonrası desteğe kadar tüm süreçlerin uluslararası yönetimi.',
+  },
+  {
+    code: 'TS EN 12608-1',
+    title: 'PVC Profil Sınıfı',
+    description:
+      'Winsa PVC profillerinde A sınıfı duvar kalınlığı, iklim dayanımı ve çok odacıklı gövde standardı.',
+  },
+  {
+    code: 'QUALICOAT',
+    title: 'Alüminyum Yüzey Kaplama',
+    description:
+      'Elektrostatik toz boya, ön işlem ve yüzey dayanımı için uluslararası kaplama kalite standardı.',
+  },
+];
+
+export const CORPORATE_COUNTERS = [
+  { value: '35+ Yıl', label: 'Deneyim', detail: '1991’den bugüne' },
+  { value: '15.000+', label: 'Tamamlanan Proje', detail: 'Konut ve ticari uygulama' },
+  { value: '%100', label: 'Lazer Ölçüm Hassasiyeti', detail: 'Milimetrik keşif ve üretim' },
+  { value: '10 Yıl', label: 'Sistem Garantisi', detail: 'Yazılı ve devredilebilir güvence' },
+];
 
 export const CORPORATE_SUBPAGES: CorporateSubpageData[] = [
   {
     slug: 'hakkimizda',
     title: 'Hakkımızda',
     categoryGroup: 'KURUMSAL',
-    heroBadge: 'MİMARİ MÜHENDİSLİK & ÜRETİM GÜCÜ',
+    heroBadge: '1991’DEN BUGÜNE 35 YILLIK MİMARİ MİRAS',
     subtitle:
-      'Egeprofil / Deceuninck küresel teknoloji mirasıyla şekillenen Winsa PVC sistemleri ve İstanbul Bahçelievler Kocasinan Merkez üssümüzde faaliyet gösteren Çelikpen Mimari Cam Sistemleri entegrasyonu.',
+      'Bahçelievler’de başlayan atölye üretiminden İstanbul’un mimari cam ve doğrama markasına uzanan 35 yıllık mühendislik hikâyesi.',
     seoDescription:
-      'Çelikpen & Winsa Hakkımızda: Bahçelievler Kocasinan merkezli PVC pencere, kaldır-sür ve 4+20+4 ısıcamlı cam balkon üretim ve mühendislik merkezi.',
+      'Çelikpen Hakkımızda: 1991’den bugüne 35 yıllık deneyim, 15.000+ tamamlanan proje, kendi CNC üretim tesisi ve Winsa çözüm ortaklığı.',
+    visual: 'heritage',
     paragraphs: [
-      'Winsa, Türkiye’de PVC pencere, kapı ve panjur sistemleri sektörünün en köklü ve yenilikçi markalarından biri olarak yüksek yalıtım teknolojilerini mimari estetikle buluşturmaktadır. Uluslararası profil teknolojisi devleriyle entegre AR-GE altyapısı sayesinde S-Sınıfı (Şiddetli İklim) kriterlerinde %100 kurşunsuz uPVC profiller geliştirmektedir.',
-      'İstanbul Bahçelievler (Kocasinan Merkez Mahallesi) merkezli Çelikpen Cam Balkon & Mimari Cam Sistemleri ise Winsa’nın üst segment PVC pencere ve Kaldır-Sür (Hebeschiebe) sistemlerini, kendi CNC alüminyum işleme ve temperli ısıcamlı cam balkon (VBS 4+20+4 Argon Gazlı, VNS Katlanır, Vera Motorlu Giyotin) uzmanlığıyla tek çatı altında birleştirmektedir.',
-      'Ücretsiz lazerli şantiye rölevesi, TS EN 1991-1-4 rüzgar yükü statik analizi ve kadrolu montaj ekiplerimizle Bahçelievler’in 11 mahallesi başta olmak üzere tüm İstanbul’da sıfır taşeron prensibiyle anahtar teslim hizmet sunuyoruz.',
+      'Temelleri 1991 yılında İstanbul / Bahçelievler’de atılan Çelikpen, 35 yıllık birikimini ısıcamlı cam balkon, katlanır cam balkon, sürme seri sistemler, motorlu giyotin cam, bioklimatik pergola, kış bahçesi, PVC pencere & kapı, panjur ve mimari alüminyum sistemleriyle bugünün yaşam alanlarına taşıyor.',
+      'Kendi üretim tesisi, lazer ölçüm teknolojisi ve kadrolu montaj ekibiyle keşiften anahtar teslim montaja kadar tek muhatap olarak çalışıyor; konut ve prestijli ticari projelerde dört mevsim konforlu, yüksek yalıtımlı ve estetik çözümler üretiyoruz.',
+      '1991–2026 aralığında 15.000’den fazla projeyi tamamlayan markamız; Winsa kalitesini temperli/ısıcam teknolojileriyle birleştirerek 10 yıl sistem garantisiyle İstanbul’un referans markalarından biri olmayı sürdürüyor.',
     ],
     highlights: [
       {
-        title: 'Sıfır Taşeron — Kadrolu Montaj Mühendisliği',
-        desc: 'Keşiften üretime ve son silikon/EPDM sızdırmazlık kontrolüne kadar tüm süreç kendi sigortalı uzman ekibimizce yürütülür.',
+        title: '1991’den Bugüne',
+        desc: '35 yıllık kesintisiz üretim, saha tecrübesi ve kurumsal hafıza.',
       },
       {
-        title: 'TS EN 12608-1 & Şişecam Temperli Isıcam Güvencesi',
-        desc: 'Tüm doğrama ve cam balkon serilerimizde sertifikalı hammaddeler ve 2.0 mm galvanizli çelik destek sacları kullanılır.',
+        title: 'Kendi Üretim ve Montaj',
+        desc: 'CNC atölyesi, lazer ölçüm ve kadrolu montaj ekibi; süreçte taşeron yok.',
       },
       {
-        title: 'Kocasinan Merkez Showroom & Hızlı Servis',
-        desc: 'Mahmutbey Caddesi aksındaki merkezimizden Bahçelievler ve çevresine aynı gün ücretsiz keşif ve satış sonrası servis desteği.',
+        title: 'Winsa Çözüm Ortaklığı',
+        desc: 'Winsa PVC profil ve yalıtım teknolojileriyle uyumlu mühendislik ve üretim.',
       },
       {
-        title: 'Şeffaf m² Birim Fiyat Politikası',
-        desc: 'Dijital hesaplama modülümüzle sürpriz maliyet olmadan net m² ve donanım fiyatlarını anında görebilirsiniz.',
+        title: '10 Yıl Sistem Garantisi',
+        desc: 'Profil, mekanizma ve montaj bütünlüğü için yazılı güvence.',
       },
     ],
     stats: [
-      { label: 'Profil & Yüzey Garantisi', value: '10 Yıl' },
-      { label: 'Maksimum Isı Yalıtımı (Uw)', value: '0.79 W/m²K' },
-      { label: 'Akustik Ses Yalıtımı', value: '45 dB' },
-      { label: 'Tamamlanan Konut & Teras', value: '4.800+' },
+      { value: '35+ Yıl', label: 'Deneyim' },
+      { value: '15.000+', label: 'Tamamlanan Proje' },
+      { value: '1991', label: 'Kuruluş Yılı' },
+      { value: '10 Yıl', label: 'Sistem Garantisi' },
     ],
+    cta: {
+      title: '35 Yıllık Hikâyeyi Yakından Tanıyın',
+      description:
+        'Kocasinan Merkez üretim tesisimizi ve mimari sistem showroomumuzu ziyaret edin; projenize özel mühendislik yaklaşımımızı yerinde görün.',
+      label: 'Showroom Randevusu',
+      href: '/iletisim?form=kesif',
+    },
   },
   {
-    slug: 'vizyon-misyon',
-    title: 'Vizyon Misyon',
+    slug: 'kalite-politikamiz',
+    title: 'Kalite Politikamız',
+    categoryGroup: 'KALİTE',
+    heroBadge: 'ÖLÇÜLEBİLİR KALİTE, BELGELİ ÜRETİM',
+    subtitle:
+      'Hammadde girişinden montaj sonrası teslimata kadar her aşama; ölçülebilir kontrol noktaları ve Avrupa performans standartlarıyla yönetilir.',
+    seoDescription:
+      'Çelikpen Kalite Politikası: EN 12207 hava geçirimsizliği, EN 12208 su sızdırmazlığı, EN 12210 rüzgâr yükü ve Uw ısı iletim katsayısı standartlarında üretim.',
+    visual: 'quality',
+    paragraphs: [
+      'Çelikpen kalite politikası; alüminyum profil, PVC doğrama, temperli cam, ısıcam ve donanım bileşenlerinin giriş kalite kontrolünden başlar. Her partide boyut, yüzey, sertlik, renk ve tolerans değerleri kayıt altına alınır.',
+      'Üretimde 0,1 mm hassasiyetli CNC işleme, kontrollü temperleme, argon dolum ve EPDM conta uygulamaları standarttır. Montaj öncesinde hava geçirimsizliği, su sızdırmazlığı ve rüzgâr yükü performansı proje detaylarına göre doğrulanır.',
+      'Her teslimat; ölçü kontrolü, kanat hareketi, kilit ve ispanyolet testi, su deşarj testi ve garanti belgesiyle tamamlanır. Amacımız yalnızca ilk gün değil, 10 yıl sonra da aynı performansı koruyan sistemler teslim etmektir.',
+    ],
+    highlights: [
+      {
+        title: 'Hammadde Giriş Kontrolü',
+        desc: 'Profil, cam, conta ve donanım partileri üretime girmeden önce belgeli kontrol sürecinden geçer.',
+      },
+      {
+        title: 'Ölçülebilir Üretim',
+        desc: 'CNC toleransları, kesim listeleri ve montaj numaraları dijital iş emriyle eşleştirilir.',
+      },
+      {
+        title: 'Performans Doğrulama',
+        desc: 'Hava, su, rüzgâr ve ısı performansı proje konfigürasyonuna göre hesaplanır ve raporlanır.',
+      },
+      {
+        title: 'Teslim Sonrası Takip',
+        desc: 'Garanti kapsamı, kullanım talimatı ve periyodik bakım planı teslimat dosyasında yer alır.',
+      },
+    ],
+    stats: [
+      { value: '%100', label: 'Giriş Kalite Kontrolü' },
+      { value: '0,1 mm', label: 'CNC Toleransı' },
+      { value: '9A', label: 'Su Sızdırmazlığı' },
+      { value: '10 Yıl', label: 'Sistem Garantisi' },
+    ],
+    standards: CORPORATE_STANDARDS,
+    cta: {
+      title: 'Teknik Dosyayı İnceleyin',
+      description:
+        'Projeniz için performans sınıfları, cam konfigürasyonu ve garanti kapsamını birlikte netleştirelim.',
+      label: 'Teknik Görüşme Planla',
+      href: '/iletisim?form=bilgi',
+    },
+  },
+  {
+    slug: 'sertifikalarimiz',
+    title: 'Sertifikalarımız',
+    categoryGroup: 'KALİTE',
+    heroBadge: 'TSE • CE • EN 14351-1 • ISO 9001',
+    subtitle:
+      'Ürün güvenliği, yalıtım performansı ve üretim disiplinini belgeleyen ulusal ve uluslararası sertifikasyon altyapısı.',
+    seoDescription:
+      'Çelikpen sertifikaları: TSE EN 12150 temperli cam, EN 14351-1, CE uygunluk beyanı, ISO 9001:2015, TS EN 12608-1 ve QUALICOAT kalite belgeleri.',
+    visual: 'certificates',
+    paragraphs: [
+      'Çelikpen’in üretim ve uygulama süreçleri; TSE EN 12150 temperli cam, EN 14351-1 pencere ve kapı standardı, CE uygunluk beyanı ve ISO 9001:2015 kalite yönetim sistemi ile belgelenir.',
+      'Winsa PVC profil teknolojileri TS EN 12608-1 kapsamında değerlendirilir; alüminyum yüzeylerde QUALICOAT uyumlu ön işlem ve elektrostatik toz boya kullanılır. Cam tedarikinde Şişecam Temper ve Isıcam Konfor belgeleri esas alınır.',
+      'Sertifikasyon yalnızca bir dosya değil, süreklilik taahhüdüdür. Her yeni seri ve tedarikçi, mevcut kalite sistemine eklenmeden önce teknik dosya ve numune kontrolünden geçirilir.',
+    ],
+    highlights: [
+      {
+        title: 'Ürün Güvenliği',
+        desc: 'Temperli cam, lamine cam ve korkuluk bileşenlerinde kırılma güvenliği belgeleri.',
+      },
+      {
+        title: 'Avrupa Performansı',
+        desc: 'EN 14351-1 kapsamında hava, su, rüzgâr, ısı ve akustik performans beyanı.',
+      },
+      {
+        title: 'Süreç Belgelendirme',
+        desc: 'ISO 9001:2015 ile tasarım, üretim, montaj ve satış sonrası süreçlerin izlenebilirliği.',
+      },
+      {
+        title: 'Yüzey ve Profil Kalitesi',
+        desc: 'QUALICOAT uyumlu alüminyum kaplama ve TS EN 12608-1 PVC profil sınıfı.',
+      },
+    ],
+    stats: [
+      { value: 'TSE', label: 'Türk Standartları' },
+      { value: 'CE', label: 'Avrupa Uygunluğu' },
+      { value: 'EN 14351-1', label: 'Ürün Standardı' },
+      { value: 'ISO 9001', label: 'Kalite Yönetimi' },
+    ],
+    standards: CORPORATE_CERTIFICATES,
+    cta: {
+      title: 'Belge ve Teknik Dosya Talebi',
+      description:
+        'Proje dosyanız için güncel sertifika kopyalarını ve teknik şartname eklerini paylaşabiliriz.',
+      label: 'Belge Talep Et',
+      href: '/iletisim?form=bilgi',
+    },
+  },
+  {
+    slug: 'uretim-teknolojimiz',
+    title: 'Üretim Teknolojimiz',
+    categoryGroup: 'KALİTE',
+    heroBadge: 'CNC • LAZER ÖLÇÜM • TERMAL LABORATUVAR',
+    subtitle:
+      'Kocasinan Merkez üretim tesisinde dijital ölçüm, CNC işleme ve performans doğrulama tek akışta birleşir.',
+    seoDescription:
+      'Çelikpen üretim teknolojisi: CNC alüminyum ve PVC profil işleme, lazer ölçüm, temperli/ısıcam konfigürasyonu, termal ve akustik test yaklaşımı.',
+    visual: 'production',
+    paragraphs: [
+      'Kocasinan Merkez üretim tesisimizde alüminyum ve PVC profiller CNC işleme merkezlerinde kesilir, frezelenir ve delinir. Lazer ölçüm ekipleri cephe geometrisini milimetrik olarak projeye aktarır; üretim ve montaj aynı dijital dosya üzerinden ilerler.',
+      'Temperli cam, 4+20+4 argonlu ısıcam, low-e kaplama, lamine güvenlik camı ve motorlu giyotin mekanizmaları proje bazlı konfigüre edilir. Winsa PVC profil teknolojileri; çok odacıklı gövde ve çelik takviye ile rüzgâr ve ısı yüküne karşı boyutlandırılır.',
+      'Termal ve akustik laboratuvar yaklaşımımız; Uw değeri, hava-su sızdırmazlığı ve mekanizma çevrim testlerini kapsar. Üretim sonrası her ünite, sevkiyat öncesi son kalite kontrolünden geçer.',
+    ],
+    highlights: [
+      {
+        title: 'CNC Profil İşleme',
+        desc: '0,1 mm toleranslı kesim, freze ve delme; tekrar edilebilir üretim kalitesi.',
+      },
+      {
+        title: 'Lazerli Keşif',
+        desc: 'Cephe, teras ve balkon geometrisinin milimetrik ölçümü; statik yük analizi.',
+      },
+      {
+        title: 'Termal & Akustik Doğrulama',
+        desc: 'Uw, EN 12207, EN 12208 ve EN 12210 performanslarının proje bazlı kontrolü.',
+      },
+      {
+        title: 'Kadrolu Montaj',
+        desc: 'Eğitimli, sigortalı ve kendi bünyemizdeki montaj ekipleriyle anahtar teslim uygulama.',
+      },
+    ],
+    stats: [
+      { value: '0,1 mm', label: 'CNC Toleransı' },
+      { value: '15.000+', label: 'Tamamlanan Proje' },
+      { value: '4+20+4', label: 'Argon Isıcam' },
+      { value: '10 Yıl', label: 'Sistem Garantisi' },
+    ],
+    standards: CORPORATE_STANDARDS,
+    cta: {
+      title: 'Üretim Tesisimizi Ziyaret Edin',
+      description:
+        'CNC hattımızı, cam konfigürasyon laboratuvarımızı ve Winsa profil sistemlerini yerinde inceleyin.',
+      label: 'Tesis Randevusu',
+      href: '/iletisim?form=kesif',
+    },
+  },
+  {
+    slug: 'surdurulebilirlik',
+    title: 'Sürdürülebilirlik',
+    categoryGroup: 'KALİTE',
+    heroBadge: 'DÖRT MEVSİM KONFOR, DÜŞÜK KARBON',
+    subtitle:
+      'Enerji verimli cam, uzun ömürlü doğrama ve geri dönüştürülebilir malzeme seçimiyle yapıların karbon ayak izini azaltıyoruz.',
+    seoDescription:
+      'Çelikpen sürdürülebilirlik: Uw 0,8–1,1 W/(m²K) ısıcam, %72 ısı tasarrufu, -38 dB akustik konfor, geri dönüştürülebilir alüminyum ve PVC profil.',
+    visual: 'sustainability',
+    paragraphs: [
+      'Bir binanın enerji performansı, cephesinde kullandığı cam ve doğrama sistemleriyle başlar. Çelikpen; 4+20+4 argonlu ısıcam, low-e kaplama ve sıcak kenar adaptörü kombinasyonlarıyla ısı kaybını azaltan, dört mevsim konforlu cepheler üretir.',
+      'Alüminyum profil sonsuz dönüştürülebilir bir malzemedir; PVC doğramalar ise uzun servis ömrü ve düşük bakım ihtiyacıyla kaynak verimliliği sağlar. Üretim tesisimizde kesim artıkları ayrıştırılır, cam ve profil atıkları yetkili geri dönüşüm kanallarına yönlendirilir.',
+      'Lazerli ölçüm ve dijital üretim, malzeme firelerini azaltırken montaj öncesi planlama da saha kaybını en aza indirir. Amacımız; 35 yıllık deneyimi düşük karbonlu, uzun ömürlü ve bakımı kolay yapı bileşenlerine dönüştürmektir.',
+    ],
+    highlights: [
+      {
+        title: 'Enerji Verimli Cam',
+        desc: 'Argon dolum, low-e kaplama ve ısı yalıtımlı çerçeveyle ısıtma-soğutma yükü azalır.',
+      },
+      {
+        title: 'Geri Dönüştürülebilir Profil',
+        desc: 'Alüminyum sonsuz dönüştürülebilir; PVC ve cam atıkları yetkili kanallarda toplanır.',
+      },
+      {
+        title: 'Su ve Hava Yönetimi',
+        desc: 'Gizli tahliye, eğimli damlalık ve EPDM conta ile su sızdırmazlığı ve hava geçirimsizliği.',
+      },
+      {
+        title: 'Dijital Ölçüm',
+        desc: 'Lazer ölçüm ve CNC üretim, malzeme firesini ve saha revizyonlarını azaltır.',
+      },
+    ],
+    stats: [
+      { value: '%72', label: 'Isı Tasarrufu' },
+      { value: '-38 dB', label: 'Akustik Konfor' },
+      { value: '1,2 Ton', label: 'Yıllık CO₂ Azaltımı / Daire' },
+      { value: '4+20+4', label: 'Argon Isıcam' },
+    ],
+    cta: {
+      title: 'Enerji Performansınızı Hesaplayalım',
+      description:
+        'Mevcut cephenizi ve kullanım alışkanlıklarınızı değerlendirerek uygun cam ve doğrama konfigürasyonunu birlikte belirleyelim.',
+      label: 'Enerji Danışmanlığı',
+      href: '/iletisim?form=bilgi',
+    },
+  },
+  {
+    slug: 'insan-kaynaklari',
+    title: 'İnsan Kaynakları',
     categoryGroup: 'KURUMSAL',
-    heroBadge: 'GELECEĞİN MİMARİ VİZYONU',
+    heroBadge: 'USTALIK, MÜHENDİSLİK VE EĞİTİM KÜLTÜRÜ',
     subtitle:
-      'Sıfır enerjili binalar (nZEB) ve pasif ev standartlarına uygun, karbon ayak izini minimize eden yüksek yalıtımlı pencere ve cam balkon sistemleriyle yaşam kalitesini yükseltmek.',
+      '35 yıllık marka hafızasını geleceğe taşıyan; sahada ustalık, ofiste mühendislik ve her gün öğrenme disipliniyle çalışan ekipler.',
     seoDescription:
-      'Çelikpen & Winsa Vizyon ve Misyonumuz: Sürdürülebilir mimari, yüksek enerji tasarrufu ve koşulsuz müşteri memnuniyeti ilkelerimiz.',
+      'Çelikpen İnsan Kaynakları: kadrolu montaj ekipleri, mühendislik ve CNC üretim kadrosu, iş sağlığı güvenliği, teknik eğitim ve kariyer fırsatları.',
+    visual: 'careers',
     paragraphs: [
-      'VİZYONUMUZ: Değişen iklim koşulları ve yükselen enerji maliyetleri karşısında, binaların dış kabuğunu sadece kapatan değil; ısı, ses ve güneş enerjisini akıllıca yöneten mimari doğrama ve cam balkon teknolojilerinde Türkiye’nin en güvenilir referans noktası olmaktır.',
-      'MİSYONUMUZ: Mimarların tasarım özgürlüğünü kısıtlamayan ince kesitli, yüksek statik mukavemetli (Dorado 76, Revotech Gold, Panorama HS 76, VBS Isıcamlı) sistemleri; dürüst fiyatlandırma, milimetrik montaj disiplini ve kesintisiz satış sonrası destekle her konuta ulaştırmaktır.',
+      'Çelikpen’de üretim, mühendislik ve montaj ekipleri aynı proje masasında çalışır. Keşiften teslimata kadar her aşamada bilgi paylaşımı ve saha geri bildirimi vardır; bu kültür 35 yıllık marka hafızasını canlı tutar.',
+      'Kadrolu ekiplerle çalışır, iş sağlığı ve güvenliği eğitimlerini düzenli olarak yenileriz. CNC operatörlerinden montaj ustalarına, mimari proje uzmanlarından mühendislere kadar her rol; teknik eğitim ve saha deneyimiyle gelişir.',
+      'Yeni mezunlar ve deneyimli adaylar için mimari cam, PVC doğrama, üretim planlama ve proje yönetimi alanlarında başvuru kabul ediyoruz. Başvurular, ilgili departman yöneticileri ve insan kaynakları ekibi tarafından birlikte değerlendirilir.',
     ],
     highlights: [
       {
-        title: 'Enerji Verimliliği Odaklı Tasarım',
-        desc: 'Her yeni projede ısıtma ve soğutma giderlerini minimum %40 düşüren Low-E ve Argon gazlı kombinasyonları standartlaştırıyoruz.',
+        title: 'Kadrolu Ekipler',
+        desc: 'Montaj ve üretimde taşeron değil; eğitimli, sigortalı ve uzun vadeli ekip arkadaşları.',
       },
       {
-        title: 'Estetik ve Fonksiyonel Bütünlük',
-        desc: '23+ Cool Colors lamine renk seçeneği ve gizli menteşe/kol tasarımlarıyla modern cephe mimarisine değer katıyoruz.',
+        title: 'Teknik Eğitim',
+        desc: 'CNC, cam teknolojisi, yalıtım standartları ve montaj güvenliği düzenli eğitim programları.',
       },
       {
-        title: 'Sürdürülebilir Ekoloji',
-        desc: '%100 geri dönüştürülebilir kurşunsuz uPVC ve birincil alüminyum alaşımlarla doğaya saygılı üretim yapıyoruz.',
+        title: 'İş Sağlığı & Güvenliği',
+        desc: 'Saha risk analizi, kişisel koruyucu donanım ve sürekli iyileştirme kültürü.',
       },
       {
-        title: 'Mühendislik Etiği',
-        desc: 'Rüzgar yükü statiğine uygun olmayan hiçbir kesiti veya eksik et kalınlıklı destek sacını şantiyeye sokmuyoruz.',
+        title: 'Kariyer Yolu',
+        desc: 'Ustalık ve mühendislik rollerinde performans, eğitim ve sorumlulukla ilerleme imkânı.',
       },
     ],
     stats: [
-      { label: 'Enerji Tasarruf Oranı', value: '%46' },
-      { label: 'Kurşunsuz Yeşil Üretim', value: '%100' },
-      { label: 'Müşteri Memnuniyet Skoru', value: '4.9 / 5' },
-      { label: 'Yedek Parça Bulunurluğu', value: '15 Yıl' },
+      { value: '35+ Yıl', label: 'Kurumsal Deneyim' },
+      { value: '0', label: 'Taşeron Montaj' },
+      { value: '10 Yıl', label: 'Sistem Garantisi' },
+      { value: '6 Gün', label: 'Haftalık Showroom' },
     ],
+    listTitle: 'Başvuru Alanları',
+    list: [
+      'Mimari proje satış ve teknik danışmanlık',
+      'CNC alüminyum / PVC profil operatörlüğü',
+      'Cam balkon ve doğrama montaj ustalığı',
+      'Üretim planlama, kalite kontrol ve lojistik',
+      'Mimarlık, inşaat ve makine mühendisliği stajları',
+    ],
+    cta: {
+      title: 'Ekibimize Katılın',
+      description:
+        'Özgeçmişinizi ve ilgilendiğiniz pozisyonu insan kaynakları formumuz üzerinden bize iletin. Tüm başvurular gizlilikle değerlendirilir.',
+      label: 'İnsan Kaynakları Formu',
+      href: '/iletisim?form=ik',
+    },
   },
   {
-    slug: 'neden-winsa',
-    title: 'Neden PVC, Neden Çelikpen?',
+    slug: 'kvkk',
+    title: 'KVKK',
     categoryGroup: 'KURUMSAL',
-    heroBadge: 'MALZEME BİLİMİ & PERFORMANS KARŞILAŞTIRMASI',
+    heroBadge: 'KİŞİSEL VERİLERİN KORUNMASI',
     subtitle:
-      'Neden modern mimaride çok odacıklı uPVC doğrama ve termal contalı ısıcamlı cam balkon sistemleri açık ara en yüksek fiyat/performans ve yalıtım değerini sunar?',
+      '6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında veri sorumlusu olarak kişisel verilerinizi şeffaf, sınırlı ve güvenli biçimde işliyoruz.',
     seoDescription:
-      'Neden PVC, Neden Çelikpen? PVC, ahşap ve standart alüminyum doğramaların ısı yalıtımı, akustik, ömür ve bakım maliyeti açısından teknik karşılaştırması.',
+      'Çelikpen KVKK Aydınlatma Metni: veri sorumlusu, kişisel veri işleme amaçları, hukuki sebepler, saklama süreleri, veri güvenliği ve ilgili kişi hakları.',
+    visual: 'privacy',
     paragraphs: [
-      'Pencere ve kapı doğramalarında kullanılan malzemenin ısıl iletkenlik katsayısı (λ - Lambda), binanın toplam enerji kimliğini doğrudan belirler. uPVC malzemenin doğal ısıl iletkenliği (0.16 W/mK), alüminyumdan yaklaşık 1.000 kat daha düşüktür; bu sayede yoğuşma (terleme) ve ısı köprüsü oluşumunu doğal olarak engeller.',
-      'Winsa’nın 7 odacıklı 84 mm Revotech Gold ve 5 odacıklı 76 mm Dorado 76 serileri, içlerindeki durgun hava odacıkları ve merkezi 3. TPE contalarıyla hem ısı hem de akustik yalıtımda (45 dB) standart doğramalara göre rakipsiz bir bariyer oluşturur.',
-      'Balkon kapatma tarafında ise Çelikpen VBS Isıcamlı Cam Balkon serisi, klasik tek camlı balkonların aksine 4+20+4 mm Argon gazlı çift cam ve EPDM/alüminyum fitil teknolojisi kullanarak balkonunuzu kışın da evin sıcak bir odasına dönüştürür.',
+      'Çelikpen Mimari Cam ve Doğrama Sistemleri olarak 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) kapsamında veri sorumlusu sıfatıyla hareket ediyoruz. Keşif, teklif, ölçüm, üretim, montaj ve satış sonrası hizmet süreçlerinde paylaştığınız kişisel verileri hukuka uygun olarak işliyoruz.',
+      'Ad, soyad, iletişim bilgileri, proje adresi, bina/balkon ölçüleri ve talep içeriği; hizmetin ifası, teklif hazırlanması, sözleşme yönetimi, garanti takibi ve yasal yükümlülüklerin yerine getirilmesi amacıyla kullanılır. Verileriniz pazarlama amacıyla üçüncü kişilerle paylaşılmaz.',
+      'Kişisel veriler; işleme amacının gerektirdiği süre ve yasal saklama süreleri boyunca tutulur. Yetkisiz erişime, kayba ve hukuka aykırı işlemeye karşı idari ve teknik güvenlik tedbirleri uygulanır. Başvurularınızı yazılı olarak showroom adresimize veya iletişim kanallarımız üzerinden iletebilirsiniz.',
     ],
     highlights: [
       {
-        title: 'Maksimum Termal Yalıtım (Uw: 0.79 W/m²K)',
-        desc: 'Kışın kombi doğalgaz faturanızı, yazın ise klima elektrik tüketiminizi ilk aydan itibaren gözle görülür şekilde düşürür.',
+        title: 'Veri Sorumlusu',
+        desc: 'Çelikpen Mimari Cam ve Doğrama Sistemleri; işleme amaçları ve hukuki sebepler aydınlatma metninde belirtilir.',
       },
       {
-        title: 'Sıfır Boya ve Vernik Maliyeti',
-        desc: 'Ahşap doğramalar gibi her 3 yılda bir zımpara ve vernik gerektirmez; korozyona, çürümeye ve asit yağmurlarına tam dayanıklıdır.',
+        title: 'İşleme Amaçları',
+        desc: 'Keşif, teklif, sözleşme, montaj, garanti, servis ve yasal yükümlülüklerle sınırlı veri işleme.',
       },
       {
-        title: '45 dB Akustik Sessizlik',
-        desc: 'Çok odacıklı profil geometrisi ve üçlü cam opsiyonu ile trafik, uçak ve şehir gürültüsünü %80 oranında keser.',
+        title: 'Saklama ve Güvenlik',
+        desc: 'Yetkisiz erişime karşı teknik-idari tedbirler; amaç ve yasal süre sonunda silme, yok etme veya anonimleştirme.',
       },
       {
-        title: 'Yüksek Yangın Güvenliği (B1 Sınıfı)',
-        desc: 'uPVC hammaddesi zor alev alır ve alev kaynağı uzaklaştırıldığında kendiliğinden sönen (self-extinguishing) moleküler yapıya sahiptir.',
+        title: 'İlgili Kişi Hakları',
+        desc: 'Verilerinize erişme, düzeltme, silme, işlemeye itiraz etme ve zararın giderilmesini talep etme hakları.',
       },
     ],
     stats: [
-      { label: 'Isıl İletkenlik (λ)', value: '0.16 W/mK' },
-      { label: 'Maksimum Cam Kalınlığı', value: '52 mm' },
-      { label: 'Su Sızdırmazlık Sınıfı', value: '9A (600 Pa)' },
-      { label: 'Servis Ömrü Beklentisi', value: '40+ Yıl' },
+      { value: '6698', label: 'Kanun No' },
+      { value: '2026', label: 'Güncel Metin' },
+      { value: 'Çelikpen', label: 'Veri Sorumlusu' },
+      { value: 'Yazılı / Elektronik', label: 'Başvuru Kanalı' },
     ],
+    listTitle: 'KVKK Kapsamındaki Haklarınız',
+    list: [
+      'Kişisel verilerinizin işlenip işlenmediğini öğrenme',
+      'İşlenmişse buna ilişkin bilgi talep etme',
+      'İşlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme',
+      'Yurt içinde / yurt dışında aktarıldığı üçüncü kişileri bilme',
+      'Eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme',
+      'Silinmesini veya yok edilmesini isteme',
+      'Otomatik sistemlerle analiz sonucu aleyhinize çıkan sonuca itiraz etme',
+      'Kanuna aykırı işleme nedeniyle zarara uğramanız hâlinde giderilmesini talep etme',
+    ],
+    cta: {
+      title: 'KVKK Başvurusu',
+      description:
+        'Kişisel verilerinizle ilgili taleplerinizi iletişim formu üzerinden veya yazılı olarak bize iletebilirsiniz.',
+      label: 'Başvuru İlet',
+      href: '/iletisim?form=bilgi',
+    },
   },
   {
-    slug: 'ar-ge',
-    title: 'AR-GE Çalışmalarımız',
-    categoryGroup: 'KURUMSAL',
-    heroBadge: 'AKREDİTE TEST LABORATUVARI & İNOVASYON',
-    subtitle:
-      'Rüzgar tüneli simülasyonlarından Cool Colors güneş yansıtıcı nanoteknoloji folyolara kadar geleceğin pencere ve cam balkon sistemlerini nasıl test ediyoruz?',
-    seoDescription:
-      'Winsa & Çelikpen AR-GE Çalışmalarımız: Akredite rüzgar/su sızdırmazlık test kabinleri, Cool Colors pigment teknolojisi ve yeni nesil sürme kinematiği.',
-    paragraphs: [
-      'AR-GE merkezimizde geliştirilen her yeni profil kalıbı ve cam balkon tekerlek/kilit mekanizması, seri üretime geçmeden önce EN 14351-1 standardına uygun iklimlendirme ve rüzgar tüneli test kabinlerinde binlerce çevrimlik zorlu testlere tabi tutulur.',
-      'Saatte 160 km hıza ulaşan kasırga şiddetindeki rüzgar basıncı (1600 Pa) altında su sızdırmazlık (9A sınıfı) ve profil sehim testleri gerçekleştirilir. Ayrıca koyu renkli (Antrasit Gri, Mat Siyah) profillerin yaz güneşinde aşırı ısınmasını önleyen kızılötesi (NIR) yansıtıcı "Cool Colors" pigment teknolojisi AR-GE çalışmalarımızın en önemli çıktılarından biridir.',
-    ],
-    highlights: [
-      {
-        title: 'Cool Colors IR Yansıtıcı Yüzey Teknolojisi',
-        desc: 'Koyu renkli lamine profillerde güneşin kızılötesi ışınlarını yansıtarak yüzey sıcaklığını 15°C daha serin tutar, genleşmeyi önler.',
-      },
-      {
-        title: 'Comfort Slide Plus Eksenel Kilit Kinematiği',
-        desc: 'Sürme sistemlerde fırça conta devrini kapatan, kanadı kasaya 6 mm vakumlayarak kilitleyen yeni nesil AR-GE tasarımı.',
-      },
-      {
-        title: '25.000 Açma-Kapama Ömür Testi',
-        desc: 'Menteşeler, ispanyoletler ve 8 bilyalı cam balkon rulmanları 25.000 çevrim (yaklaşık 25 yıllık kullanım) yük altında test edilir.',
-      },
-      {
-        title: 'Termal Kamera (Flir) Saha Doğrulaması',
-        desc: 'Montajı tamamlanan projelerde termal kamera ile ısı köprüsü kontrolü yapılarak uygulama kalitesi belgelenir.',
-      },
-    ],
-    stats: [
-      { label: 'Test Rüzgar Basıncı', value: '1600 Pa' },
-      { label: 'Açma-Kapama Test Çevrimi', value: '25.000+' },
-      { label: 'Yüzey Sıcaklık Avantajı', value: '-15 °C' },
-      { label: 'UV Yaşlandırma Testi', value: '8.000 Saat' },
-    ],
-  },
-  {
-    slug: 'cevre-dostu-pencere',
-    title: 'Çevre Dostu Pencere',
-    categoryGroup: 'KURUMSAL',
-    heroBadge: '%100 KURŞUNSUZ (Ca-Zn) & SÜRDÜRÜLEBİLİR EKOLOJİ',
-    subtitle:
-      'Ağır metal içermeyen Kalsiyum-Çinko (Ca-Zn) stabilizatörlü yeşil profil formülasyonu ve yaşam döngüsü boyunca tonlarca CO₂ emisyonunu önleyen yüksek yalıtım.',
-    seoDescription:
-      'Çevre Dostu Pencere: %100 kurşunsuz Ca-Zn uPVC profil üretimi, kapalı döngü geri dönüşüm ve enerji tasarrufuyla karbon ayak izinin azaltılması.',
-    paragraphs: [
-      'Winsa ve Çelikpen olarak doğaya karşı sorumluluğumuz, hammadde seçimiyle başlar. Ürettiğimiz ve uyguladığımız tüm PVC profillerde insan sağlığına ve ekosisteme zararlı kurşun bileşikleri yerine %100 çevre dostu Kalsiyum-Çinko (Ca-Zn) organik stabilizatörler kullanılmaktadır.',
-      'Bir pencerenin çevreye en büyük katkısı ise kullanım ömrü boyunca sağladığı enerji tasarrufudur. Tek camlı veya eski nesil doğramaların Dorado 76, Revotech Gold veya VBS Isıcamlı Cam Balkon ile değiştirilmesi, tek bir dairede yılda ortalama 1.200 kg CO₂ salınımını engeller—bu değer her yıl 55 yetişkin ağacın doğaya kazandırdığı oksijene eşdeğerdir.',
-    ],
-    highlights: [
-      {
-        title: '%100 Kurşunsuz (Ca-Zn) Hammadde',
-        desc: 'İç mekan hava kalitesini koruyan, bebek ve çocuk odalarında güvenle kullanılan ağır metalsiz yeşil formül.',
-      },
-      {
-        title: '%100 Geri Dönüştürülebilir Yapı',
-        desc: 'Hem uPVC profiller hem de 6063-T6 alüminyum ve cam üniteleri, kullanım ömrü sonunda kalitesini kaybetmeden 7 keze kadar geri dönüştürülebilir.',
-      },
-      {
-        title: 'Düşük Karbon Ayak İzi',
-        desc: 'Üretim tesislerimizde kapalı devre su soğutma sistemleri ve yüksek verimli ekstrüzyon hatlarıyla enerji tüketimi minimize edilir.',
-      },
-      {
-        title: 'Isı Adası Etkisine Karşı Çözüm',
-        desc: 'Yüksek güneş kontrol (Solar Low-E) camlarımız yazın klima yükünü azaltarak kentsel ısı adası etkisini düşürü.',
-      },
-    ],
-    stats: [
-      { label: 'Kurşun & Ağır Metal Oranı', value: '%0.0' },
-      { label: 'Geri Dönüşüm Döngüsü', value: '7 Kez' },
-      { label: 'Yıllık CO₂ Azaltımı / Daire', value: '1.2 Ton' },
-      { label: 'ISO 14001 Çevre Standartı', value: 'Tam Uyum' },
-    ],
-  },
-  {
-    slug: 'kampanyalar',
-    title: 'Kampanyalar',
-    categoryGroup: 'KURUMSAL',
-    heroBadge: '2026 SEZON FIRSATLARI & ÖDEME KOLAYLIKLARI',
-    subtitle:
-      'Kentsel dönüşüm, komple daire doğrama yenileme ve 4+20+4 Argon gazlı Isıcamlı Cam Balkon projelerinde geçerli güncel Çelikpen & Winsa kampanyaları.',
-    seoDescription:
-      'Winsa & Çelikpen 2026 Kampanyaları: Isıcamlı cam balkon, Dorado 76 PVC pencere ve kedi tüllü sineklik paketlerinde sezon indirimleri.',
-    paragraphs: [
-      'Evini kışa hazırlayanlar, balkonunu dört mevsim konforlu bir yaşam alanına dönüştürmek isteyenler ve kentsel dönüşüm projeleri için sunduğumuz avantajlı paketlerle üst segment yalıtımı en ulaşılabilir bütçelerle sunuyoruz.',
-      'Tüm kampanyalarımızda ücretsiz lazerli keşif, 3D statik projelendirme ve Bahçelievler içi nakliye/montaj hizmetlerimiz standart olarak dahildir. Kendi ölçülerinizi girerek kampanya dahilindeki net bütçenizi Canlı m² Fiyat Hesaplama aracımızdan hemen görebilirsiniz.',
-    ],
-    highlights: [
-      {
-        title: 'KAMPANYA 1: VBS Isıcamlı Cam Balkonlarda Argon Gazı + Konfor Cam Farkı Bizden!',
-        desc: '15 m² ve üzeri VBS Isıcamlı (4+20+4 mm) cam balkon siparişlerinizde ara boşluk Argon gazı dolumu ve ilk 1 adet Kedi Tüllü Plise Sineklik hediye.',
-      },
-      {
-        title: 'KAMPANYA 2: Komple Daire Dorado 76 / Revotech Yenilemede Çift Açılım Hediyesi',
-        desc: 'Eski pencerelerini Winsa Dorado 76 veya Revotech Gold ile yenileyen müşterilerimize tüm odalarda standart tek açılım fiyatına Çift Açılım (Vasistas) donanım yükseltmesi.',
-      },
-      {
-        title: 'KAMPANYA 3: Apartman & Site Toplu Alımlarına Özel %12 Proje İskontosu',
-        desc: 'Aynı apartman veya siteden 3 ve üzeri dairenin birlikte verdiği cam balkon veya PVC doğrama siparişlerinde net %12 toplu üretim indirimi.',
-      },
-      {
-        title: 'KAMPANYA 4: Ücretsiz Lazerli Keşif + Termal Kamera Analizi',
-        desc: 'Bahçelievler (Kocasinan, Şirinevler, Siyavuşpaşa, Yayla, Soğanlı, Yenibosna) genelinde mevcut pencerelerinizin ısı kaybını ücretsiz ölçüyoruz.',
-      },
-    ],
-    stats: [
-      { label: 'Toplu Proje İndirimi', value: '%12' },
-      { label: 'Lazerli Keşif & Röleve', value: 'Ücretsiz' },
-      { label: 'Teslimat Süresi', value: '7 - 12 İş Günü' },
-      { label: 'Garanti Kapsamı', value: '10 Yıl' },
-    ],
-  },
-  {
-    slug: 'basinda-winsa',
+    slug: 'basinda-celikpen',
     title: 'Basında Çelikpen',
     categoryGroup: 'MEDYA',
-    heroBadge: 'MEDYA YANSIMALARI & SEKTÖREL HABERLER',
+    heroBadge: '35 YILLIK MARKA HAFIZASI, GÜNCEL MİMARİ GÜNDEM',
     subtitle:
-      'Mimari yapı dergileri, ulusal basın ve sektörel yayınlarda yer alan yeni ürün lansmanlarımız, enerji verimliliği röportajlarımız ve ödüllerimiz.',
+      'Çelikpen’in 1991’den bugüne uzanan hikâyesi, saha uzmanlığı ve mimari cam teknolojileri üzerine basın ve yayın çalışmaları.',
     seoDescription:
-      'Basında Çelikpen: Mimari yayınlar, yeni nesil Comfort Slide Plus ve Revotech Gold lansman haberleri.',
+      'Basında Çelikpen: 35 yıllık mimari cam ve doğrama deneyimi, cam balkon teknolojileri, PVC doğrama ve yalıtım standartları üzerine basın içerikleri.',
+    visual: 'press',
     paragraphs: [
-      'Yapı teknolojileri ve mimari cephe basını, yüksek enerji maliyetlerine karşı geliştirdiğimiz 84 mm Revotech Gold ve 4+20+4 Argon gazlı VBS Isıcamlı Cam Balkon çözümlerimizi yakından takip etmektedir.',
-      'Kentsel dönüşüm bölgelerinde akustik konfor (45 dB) ve sıfır enerjili bina kabuğu üzerine yayınlanan teknik makalelerimiz ve basın bültenlerimiz aşağıda yer almaktadır.',
+      'Çelikpen’in 35 yıllık hikâyesi; Bahçelievler’de başlayan bir atölyenin İstanbul’un mimari cam ve doğrama markasına dönüşmesini anlatır. Basın çalışmalarımızda marka mirasını, saha tecrübesini ve mühendislik yaklaşımımızı şeffaf biçimde paylaşıyoruz.',
+      'Cam balkon, motorlu giyotin cam, bioklimatik pergola, kış bahçesi, PVC pencere-kapı ve panjur sistemlerinde uzman görüşlerimiz; yapı fiziği, enerji verimliliği ve güvenli montaj başlıklarında yayınlanır.',
+      'Basın mensupları için teknik bilgi, proje referansları ve görsel arşiv taleplerini iletişim ekibimiz üzerinden iletebilirsiniz. Röportaj ve saha ziyareti talepleri, uygunluk durumuna göre planlanır.',
     ],
     highlights: [
       {
-        title: 'Yapı & Mimari Dergisi — Ekim 2026: "Sürme Sistemlerde Yeni Çağ: Comfort Slide Plus"',
-        desc: 'Fırça contalı klasik sürmelerin yerini alan, eksenel kilitleme mekanizmasıyla tam hava ve su sızdırmazlığı sağlayan Comfort Slide Plus serisi mimarlardan tam not aldı.',
+        title: 'Marka Hikâyesi',
+        desc: '1991–2026 arası kurumsal dönüm noktaları ve 35 yıllık üretim mirası.',
       },
       {
-        title: 'Ekonomi & Enerji Bülteni — Eylül 2026: "Isıcamlı Cam Balkon Doğalgaz Faturasını %38 Düşürüyor"',
-        desc: 'Bahçelievler ve Bakırköy konutlarında yapılan termal kamera ölçümleri, VBS 4+20+4 Argon gazlı cam balkon uygulamasının kış aylarında balkon sıcaklığını +14°C koruduğunu kanıtladı.',
+        title: 'Uzman Görüşü',
+        desc: 'Cam balkon, yalıtım, statik yük ve PVC doğrama konularında teknik değerlendirme.',
       },
       {
-        title: 'Cephe Mühendisliği Özel Sayısı — Ağustos 2026: "Cool Colors ile Antrasit Gri Cephelerde Sıfır Genleşme"',
-        desc: 'Koyu renkli doğramalarda güneş ısısını yansıtan nanoteknoloji pigment kaplamalarıyla 10 yıl renk ve form garantisi.',
+        title: 'Proje Referansları',
+        desc: 'Konut, teras ve ticari cephe uygulamalarından seçilmiş saha örnekleri.',
       },
       {
-        title: 'Dijital Dönüşüm Ödülü — Temmuz 2026: "Şeffaf Canlı m² Fiyat Hesaplama Modülü"',
-        desc: 'Kullanıcıların saniyeler içinde balkon tipini ve cam kalınlığını seçerek net bütçe çıkarabildiği Çelikpen interaktif hesaplama motoru sektörde örnek gösterildi.',
+        title: 'Basın İletişimi',
+        desc: 'Röportaj, görsel arşiv ve teknik dosya talepleri için doğrudan iletişim.',
       },
     ],
     stats: [
-      { label: 'Sektörel Yayın & Makale', value: '45+' },
-      { label: 'Mimar & Mühendis Semineri', value: '28' },
-      { label: 'Tasarım & İnovasyon Ödülü', value: '6' },
-      { label: 'Kurumsal İtibar Endeksi', value: 'A+' },
+      { value: '35 Yıl', label: 'Marka Hikâyesi' },
+      { value: '15.000+', label: 'Tamamlanan Proje' },
+      { value: '2026', label: 'Güncel Dönem' },
+      { value: '4', label: 'Uluslararası Fuar' },
     ],
+    cta: {
+      title: 'Basın ve Medya Talepleri',
+      description:
+        'Röportaj, teknik görüş veya görsel arşiv talepleriniz için iletişim ekibimizle görüşün.',
+      label: 'Basın İletişimi',
+      href: '/iletisim?form=bilgi',
+    },
   },
   {
     slug: 'fuarlar-etkinlikler',
-    title: 'Fuarlar ve Etkinlikler',
+    title: 'Fuarlar & Etkinlikler',
     categoryGroup: 'MEDYA',
-    heroBadge: 'ULUSLARARASI YAPI FUARLARI & SHOWROOM GÜNLERİ',
+    heroBadge: 'MİMARİ DİYALOG VE SAHA BULUŞMALARI',
     subtitle:
-      'Avrasya Pencere, Cam ve Kapı Fuarı (Eurasia Window), İstanbul Yapı Fuarı (TurkeyBuild) katılımlarımız ve Bahçelievler Kocasinan Showroom mimar buluşmaları.',
+      'Mimarlar, müteahhitler ve son kullanıcılarla buluştuğumuz fuarlar, teknik sunumlar ve showroom deneyim etkinlikleri.',
     seoDescription:
-      'Fuarlar ve Etkinlikler: Avrasya Pencere Fuarı, Yapı Fuarı İstanbul ve Çelikpen Kocasinan Showroom ürün deneyim etkinlikleri.',
+      'Çelikpen fuarlar ve etkinlikler: mimari cam sistemleri, PVC doğrama ve yalıtım teknolojileri üzerine sektörel buluşmalar, showroom etkinlikleri.',
+    visual: 'events',
     paragraphs: [
-      'Her yıl düzenlenen uluslararası ihtisas fuarlarında mimarlar, mühendisler, müteahhitler ve son kullanıcılarla bir araya gelerek en yeni PVC pencere, kaldır-sür, panjur ve motorlu giyotin cam sistemlerimizi canlı ölçekte sergiliyoruz.',
-      'Fuar dönemleri dışında da Bahçelievler Kocasinan Merkez Mahallesi’ndeki showroomumuzda tüm çalışan kesitleri, ses yalıtım test kabinini ve renk kartelalarını yılın 365 günü birebir deneyimleyebilirsiniz.',
+      'Çelikpen, her yıl düzenlenen yapı ve pencere teknolojileri fuarlarında mimarlar, mühendisler, müteahhitler ve son kullanıcılarla bir araya gelir. Yeni nesil cam balkon, motorlu giyotin, bioklimatik pergola ve PVC doğrama sistemlerini canlı ölçekte sergiler.',
+      'Fuar dönemleri dışında Kocasinan Merkez showroomumuzda teknik sunumlar, renk kartelası çalışmaları ve ses/ısı yalıtımı deneyimleri düzenliyoruz. Etkinlik takvimi, proje ekipleri ve davetli gruplar için randevuyla planlanır.',
+      'Mimari ofisler ve yüklenici ekipleri için özel teknik oturumlar; EN 12207, EN 12208, EN 12210 performansları, Uw hesapları ve montaj detayları üzerine uygulamalı olarak gerçekleştirilir.',
     ],
     highlights: [
       {
-        title: 'Avrasya Pencere & Cam Fuarı (TÜYAP İstanbul) — Kasım 2026',
-        desc: 'Revotech Gold 84 mm, Panorama HS 76 Kaldır-Sür ve Somfy otomasyonlu Vera Giyotin Cam sistemlerimizin canlı performans lansmanı.',
+        title: 'Sektörel Fuarlar',
+        desc: 'Yapı, pencere ve mimari cam teknolojileri fuarlarında canlı ürün deneyimi.',
       },
       {
-        title: 'TurkeyBuild Yapı Fuarı İstanbul — Mayıs 2026',
-        desc: 'Sürdürülebilir bina kabuğu, Winstor monoblok panjur akustik testleri ve Cool Colors yeni metalik renk koleksiyonu tanıtımı.',
+        title: 'Showroom Etkinlikleri',
+        desc: 'Kocasinan Merkez’de teknik sunum, renk seçimi ve yalıtım deneyimi.',
       },
       {
-        title: 'Kentsel Dönüşüm & Akustik Cephe Sempozyumu — Mart 2026',
-        desc: 'İstanbul Avrupa Yakası müteahhit ve mimarlarına yönelik TS EN 1991-1-4 rüzgar yükü statiği ve ihale şartname standartları oturumu.',
+        title: 'Mimari Sunumlar',
+        desc: 'Proje ekiplerine özel Uw, rüzgâr yükü ve montaj detayı oturumları.',
       },
       {
-        title: 'Kocasinan Merkez Showroom "Canlı Yalıtım Test Günleri" — Her Cumartesi',
-        desc: 'Showroomumuzda ısı lambası ve desibelmetre ile tek cam, standart çift cam ve 4+20+4 Argonlu Konfor Isıcam farkını canlı olarak test edin.',
+        title: 'Saha Buluşmaları',
+        desc: 'Uygulama öncesi keşif, ölçüm ve montaj planlama görüşmeleri.',
       },
     ],
     stats: [
-      { label: 'Yıllık Fuar Katılımı', value: '4 Uluslararası' },
-      { label: 'Showroom Canlı Numune', value: '22+ Seri' },
-      { label: 'Haftalık Açık Gün', value: '6 Gün' },
-      { label: 'Ücretsiz Teknik Sunum', value: 'Randevulu' },
+      { value: '2026', label: 'Etkinlik Dönemi' },
+      { value: '4', label: 'Uluslararası Fuar' },
+      { value: '22+', label: 'Showroom Serisi' },
+      { value: '6 Gün', label: 'Haftalık Açık' },
     ],
+    cta: {
+      title: 'Etkinlik ve Showroom Randevusu',
+      description:
+        'Mimari ekibiniz veya proje grubunuz için teknik showroom sunumu planlayalım.',
+      label: 'Randevu Planla',
+      href: '/iletisim?form=kesif',
+    },
   },
 ];
+
+export const CORPORATE_CORE_PAGES = CORPORATE_SUBPAGES.filter(
+  (page) => page.categoryGroup !== 'MEDYA'
+);
+
+export const CORPORATE_MEDIA_PAGES = CORPORATE_SUBPAGES.filter(
+  (page) => page.categoryGroup === 'MEDYA'
+);

@@ -5,13 +5,18 @@ const WHATSAPP_HREF =
   encodeURIComponent('Merhaba, cam balkon / teras için ücretsiz keşif randevusu almak istiyorum.');
 
 /**
- * Tüm sayfalarda sağ altta görünen, mobilde kompaktlaşan WhatsApp hattı.
+ * Tüm sayfalarda sağ altta görünen WhatsApp hattı.
+ *
+ * Varsayılan durumda yalnızca 56×56 yeşil ikon görünür. Masaüstünde hover
+ * ile 240 px genişliğe açılarak "Hızlı WhatsApp Hattı / Teklif Al" etiketini
+ * gösterir. Mobilde tek dokunuş doğrudan WhatsApp'ı açar; etiket varsayılan
+ * olarak max-w-0 / opacity-0 / overflow-hidden kalır.
  */
 export function FloatingWhatsApp() {
   return (
     <div className="fixed bottom-5 right-5 z-[90] sm:bottom-6 sm:right-6">
       <span
-        className="pointer-events-none absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/30 motion-reduce:animate-none"
+        className="pointer-events-none absolute bottom-0 left-0 z-0 h-14 w-14 animate-ping rounded-full bg-[#25D366]/30 motion-reduce:animate-none"
         aria-hidden="true"
       />
 
@@ -19,28 +24,21 @@ export function FloatingWhatsApp() {
         href={WHATSAPP_HREF}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="WhatsApp üzerinden ücretsiz keşif talep edin"
-        title="WhatsApp ile hemen yazın"
-        className="group relative flex h-14 w-14 items-center justify-center gap-3 rounded-full border border-white/20 bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1EBE5D] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 lg:min-h-[58px] lg:w-auto lg:justify-start lg:rounded-full lg:px-4 lg:py-3"
+        aria-label="WhatsApp üzerinden hızlı teklif alın"
+        title="Hızlı WhatsApp Hattı — Teklif Al"
+        className="group relative z-10 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[#25D366] text-white shadow-xl transition-all duration-300 ease-out hover:w-[240px] hover:justify-start hover:pl-4 hover:pr-5 hover:bg-[#1EBE5D] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#25D366] motion-reduce:transition-none"
       >
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 transition-colors group-hover:bg-white/20">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/20 transition-colors duration-300 group-hover:bg-white/20 motion-reduce:transition-none">
           <IconWhatsApp className="h-6 w-6" />
         </span>
 
-        <span className="hidden min-w-0 text-left lg:flex lg:flex-col">
-          <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.14em] text-white/80">
+        <span className="ml-0 flex max-w-0 opacity-0 overflow-hidden whitespace-nowrap flex-col transition-all duration-300 ease-out group-hover:ml-3 group-hover:max-w-[150px] group-hover:opacity-100 motion-reduce:transition-none">
+          <span className="text-[8px] font-semibold uppercase leading-none tracking-[0.14em] text-white/85">
             Hızlı WhatsApp Hattı
           </span>
-          <span className="mt-1 whitespace-nowrap text-[11.5px] font-semibold leading-none text-white">
-            Ücretsiz keşif için yazın
+          <span className="mt-1 block text-[11.5px] font-semibold leading-none text-white">
+            Teklif Al
           </span>
-        </span>
-
-        <span
-          className="hidden h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-transform group-hover:translate-x-0.5 lg:flex"
-          aria-hidden="true"
-        >
-          <IconArrowRight className="h-3.5 w-3.5" />
         </span>
       </a>
     </div>
@@ -49,31 +47,8 @@ export function FloatingWhatsApp() {
 
 function IconWhatsApp({ className = 'h-5 w-5' }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-    </svg>
-  );
-}
-
-function IconArrowRight({ className = 'h-4 w-4' }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12.04 2C6.58 2 2.14 6.44 2.14 11.9c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9C21.95 6.44 17.5 2 12.04 2Zm0 18.14h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.8-.23-.08-.4-.12-.57.12-.17.25-.66.8-.81.96-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.3.37-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.37-.78-1.87-.21-.49-.42-.42-.57-.43h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.02 2.6.12.17 1.76 2.69 4.27 3.77.6.26 1.06.41 1.43.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z" />
     </svg>
   );
 }

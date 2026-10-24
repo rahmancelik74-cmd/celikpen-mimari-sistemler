@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="celikpen-icon-title">
+  <title id="celikpen-icon-title">Çelikpen — 35. Yıl</title>
+  <defs>
+    <linearGradient id="badge-prism" x1="92" y1="90" x2="420" y2="422" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient id="badge-depth" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172554" />
+      <stop offset="0.55" stop-color="#1E3A8A" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="#1E3A8A" />
+  <rect width="512" height="512" rx="112" fill="url(#badge-depth)" opacity="0.55" />
+  <rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="2" />
+
+  <g transform="translate(48 48) scale(13)">
+    <!-- Birbirine geçen iki açılı cam düzlem -->
+    <path d="M3.6 6.2 14.8 3.1v26.1L3.6 25.8V6.2Z" fill="url(#badge-prism)" opacity="0.14" />
+    <path d="M17.2 3.1 28.4 6.2v19.6l-11.2 3.1V3.1Z" fill="url(#badge-prism)" opacity="0.2" />
+
+    <path
+      d="M3.6 6.2 14.8 3.1v26.1L3.6 25.8V6.2ZM17.2 3.1l11.2 3.1v19.6l-11.2 3.1V3.1Z"
+      stroke="url(#badge-prism)"
+      stroke-opacity="0.5"
+      stroke-width="0.7"
+      stroke-linejoin="miter"
+    />
+
+    <!-- Ç -->
+    <path
+      d="M16.9 7.35 10.3 8.95 7.25 16l3.05 7.05 6.6 1.6"
+      stroke="url(#badge-prism)"
+      stroke-width="2.2"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+
+    <!-- P -->
+    <path d="M18 5.25v21.5" stroke="url(#badge-prism)" stroke-width="2.2" stroke-linecap="square" />
+    <path
+      d="M18 6.8 24.75 8.35 27.2 12.05v3.7l-2.45 3.7L18 20.95"
+      stroke="url(#badge-prism)"
+      stroke-width="2.2"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+
+    <!-- Cam yansımaları -->
+    <path d="M9.55 22.1 14.15 9.85" stroke="url(#badge-prism)" stroke-width="0.8" stroke-linecap="round" opacity="0.6" />
+    <path d="M20.2 10.25 25.15 11.45 26.55 14.05" stroke="#FFFFFF" stroke-width="0.7" stroke-linecap="round" opacity="0.55" />
+
+    <!-- Hassas köşe vurgusu -->
+    <path d="M26.3 4h2.6v2.6" stroke="#FFFFFF" stroke-width="1.45" stroke-linecap="square" />
+  </g>
+</svg>

@@ -70,7 +70,7 @@ const MAIN_NAV: NavItem[] = [
   { label: 'Hizmetler', href: '#hizmetler', dropdown: true },
   { label: 'Mağaza', href: '/urunler', disabled: true },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
-  { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
+  { label: 'Kurumsal', href: '/kurumsal' },
   { label: 'Galeri', href: '/galeri' },
   { label: 'Blog', href: '/blog' },
 ];

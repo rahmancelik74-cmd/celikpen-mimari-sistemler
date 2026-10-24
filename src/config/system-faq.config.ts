@@ -66,7 +66,7 @@ export const SYSTEM_FAQS: Record<string, FaqItem[]> = {
     {
       question: 'Giyotin sistemlerde zincir mi yoksa triger kayış mı kullanılıyor?',
       answer:
-        'Projenin ölçüsüne göre çift sıra çelik zincir veya çelik telli sessiz triger kayış mekanizması kullanılır; mekanik aksam 5 yıl Çelikpen garantisi altındadır.',
+        'Projenin ölçüsüne göre çift sıra çelik zincir veya çelik telli sessiz triger kayış mekanizması kullanılır; sistem genelinde 10 yıl Çelikpen garantisi altındadır.',
     },
   ],
   'kis-bahcesi-ve-bioklimatik-tavan': [

@@ -34,6 +34,8 @@ export const LOCAL_KEYWORDS = [
   'Yenibosna cam balkon',
   'Avrupa Yakası cam balkon üretici',
   'Çelikpen cam balkon',
+  '35 yıllık cam balkon firması',
+  '1991’den bugüne cam balkon',
 ] as const;
 
 export const LONG_TAIL_KEYWORDS = [
@@ -82,7 +84,7 @@ export const SEO_FAQS = [
   {
     question: 'Cam balkon bakımı ve garanti süresi nasıl işliyor?',
     answer:
-      'Çelikpen cam balkon sistemlerinde mekanik aksam için 5 yıl, TSE EN 12150 temperli cam ve Isıcam konfor belgeli üretim için üretici garantisi bulunur. Periyodik olarak ray temizliği, fitil kontrolü ve paslanmaz rulman bakımı yapılması yeterlidir; montaj sonrası bakım ve yedek parça desteği kurumsal servis ekibimiz tarafından sağlanır.',
+      'Çelikpen cam balkon sistemlerinde 10 yıl sistem garantisi, TSE EN 12150 temperli cam ve Isıcam konfor belgeli üretim için üretici garantisi bulunur. Motor ve otomasyon bileşenleri üretici garantisi kapsamındadır. Periyodik olarak ray temizliği, fitil kontrolü ve paslanmaz rulman bakımı yapılması yeterlidir; montaj sonrası bakım ve yedek parça desteği kurumsal servis ekibimiz tarafından sağlanır.',
   },
 ] as const;
 
@@ -184,7 +186,14 @@ export const SEO_BUSINESS = {
   name: 'Çelikpen Mimari Cam & Doğrama Sistemleri',
   shortName: SITE_CONFIG.brandName,
   description:
-    'Bahçelievler Kocasinan Merkez merkezli cam balkon üreticisi. Isıcamlı cam balkon, giyotin cam, bioklimatik pergola, kış bahçesi, sürme cam, alüminyum & PVC doğrama ve plise perde sistemleri.',
+    '1991’den bugüne 35 yıllık mühendislik birikimiyle Bahçelievler Kocasinan Merkez merkezli cam balkon üreticisi. Isıcamlı cam balkon, giyotin cam, bioklimatik pergola, kış bahçesi, sürme cam, alüminyum & PVC doğrama ve plise perde sistemleri.',
+  foundingDate: '1991',
+  slogan:
+    '35 Yıllık Deneyimle İstanbul’un Öncü Cam Balkon ve Mimari Doğrama Sistemleri Markası',
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'Bahçelievler, İstanbul',
+  },
   telephone: SITE_CONFIG.phoneRaw,
   telephoneDisplay: SITE_CONFIG.phoneDisplay,
   priceRange: '₺₺',
@@ -208,7 +217,7 @@ export const SEO_BUSINESS = {
 } as const;
 
 export const SEO_DEFAULT_IMAGE = '/images/kocasinan-isicamli-cam-balkon-hero.jpg';
-export const SEO_ICON = '/icon.svg';
+export const SEO_ICON = '/icon.svg?v=35';
 
 export function absoluteUrl(path = '/'): string {
   const normalized = path.startsWith('/') ? path : `/${path}`;

@@ -6,13 +6,13 @@ import { generatePageMetadata } from '../../config/seo.config';
 import { WINSA_CONTENT_CONFIG } from '../../config/winsa-content.config';
 
 const CONTENT = {
-  metaTitle: `Hakkımızda — Kocasinan Merkez CNC Üretim, Kalite & Sertifikalar | ${SITE_CONFIG.brandName}`,
-  metaDescription: `${SITE_CONFIG.fullTitle}. ${SITE_CONFIG.address} adresindeki CNC üretim tesisimiz, TSE EN 12150 Şişecam Isıcam sertifikasyonumuz ve 10 yıl mekanik garantimiz.`,
-  badge: 'Kurumsal Profil • Kocasinan Merkez CNC Üretim & Mühendislik Gücü',
+  metaTitle: `Hakkımızda — 35 Yıllık Deneyim, CNC Üretim, Kalite & Sertifikalar | ${SITE_CONFIG.brandName}`,
+  metaDescription: `1991’den bugüne 35 yıllık Çelikpen deneyimi. ${SITE_CONFIG.fullTitle}. ${SITE_CONFIG.address} adresindeki CNC üretim tesisimiz, TSE EN 12150 Şişecam Isıcam sertifikasyonumuz ve 10 yıl sistem garantimiz.`,
+  badge: '35. Yıl • 1991’den Bugüne Kocasinan Merkez CNC Üretim & Mühendislik Gücü',
   heading: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri',
   section1: {
     title: '1. Kocasinan Merkez CNC Üretim Tesisimiz ve Ar-Ge Standartlarımız',
-    p1: `${SITE_CONFIG.brandName}, İstanbul ${SITE_CONFIG.district} ilçesinde doğrudan üretici ve mühendislik merkezi kimliğiyle hizmet vermek üzere ${SITE_CONFIG.headquartersNeighborhood} mahallesinde kurulmuştur.`,
+    p1: `${SITE_CONFIG.brandName}, 1991 yılından bu yana 35 yıllık mühendislik birikimiyle İstanbul ${SITE_CONFIG.district} ilçesinde doğrudan üretici ve mühendislik merkezi kimliğiyle hizmet veriyor. ${SITE_CONFIG.headquartersNeighborhood} mahallesindeki üretim ve showroom yapısını 35. yıla taşıyor.`,
     p2: 'Aracı bayi komisyonu olmadan, balkon ve teras ölçünüze özel 0.1 mm hassasiyetli CNC alüminyum/PVC profil işleme, EPDM vakum contalama ve TSE EN 12150 Şişecam Temperli / Isıcam Konfor montajını kendi bünyemizde gerçekleştiriyoruz.',
   },
   section2: {
@@ -60,17 +60,14 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function HakkimizdaPage() {
-  const totalCompletedProjects = SITE_CONFIG.neighborhoods.reduce(
-    (acc, n) => acc + n.completedProjectsCount,
-    0
-  );
-
   const aboutSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': `${SITE_CONFIG.siteUrl}/hakkimizda#organization`,
     name: SITE_CONFIG.fullTitle,
     description: SITE_CONFIG.slogan,
+    foundingDate: String(SITE_CONFIG.foundingYear),
+    slogan: SITE_CONFIG.slogan,
     telephone: SITE_CONFIG.phoneDisplay,
     address: {
       '@type': 'PostalAddress',
@@ -114,10 +111,10 @@ export default function HakkimizdaPage() {
 
         <div className="rounded-2xl border border-emerald-600/30 bg-emerald-50 px-5 py-3 text-right">
           <div className="text-2xl font-black text-emerald-700">
-            {totalCompletedProjects.toLocaleString('tr-TR')}+ tamamlanmış proje
+            {SITE_CONFIG.completedProjects.toLocaleString('tr-TR')}+ tamamlanmış proje
           </div>
           <div className="text-xs text-slate-600">
-            {SITE_CONFIG.district} ({SITE_CONFIG.neighborhoods.length} Mahallede Aktif Referans)
+            1991–2026 • 35 Yıllık Deneyim • İstanbul Geneli
           </div>
         </div>
       </div>
@@ -219,11 +216,11 @@ export default function HakkimizdaPage() {
               {CONTENT.section3.labels.projects}
             </div>
             <div className="mt-1 text-sm font-bold text-emerald-700">
-              {totalCompletedProjects.toLocaleString('tr-TR')}+ Tamamlanmış Balkon & Teras Uygulaması
+              {SITE_CONFIG.completedProjects.toLocaleString('tr-TR')}+ Tamamlanmış Proje
             </div>
             <p className="mt-1 text-xs text-slate-600">
-              Kocasinan, Soğanlı, Şirinevler ve Siyavuşpaşa başta olmak üzere tüm Bahçelievler’de
-              birebir referanslar.
+              1991–2026 arasında Kocasinan, Soğanlı, Şirinevler ve Siyavuşpaşa başta olmak üzere
+              İstanbul genelinde tamamlanan balkon, teras ve doğrama uygulamaları.
             </p>
           </div>
         </div>

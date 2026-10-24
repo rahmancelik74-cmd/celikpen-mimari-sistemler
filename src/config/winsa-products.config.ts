@@ -92,7 +92,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     description:
       'Winsa profilleriyle %100 entegre çalışan RC2 emniyetli ispanyolet kilitler, akustik pencere kolları, çocuk emniyet kilitleri ve 8 bilyalı paslanmaz rulmanlar.',
     defaultImage: '/images/products/donanim-aksesuar-default.svg',
-    badge: '10 Yıl Mekanik Garanti',
+    badge: '10 Yıl Sistem Garantisi',
   },
   {
     slug: 'renk-dunyasi',

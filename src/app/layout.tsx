@@ -4,7 +4,6 @@ import { Poppins } from 'next/font/google';
 import { SITE_CONFIG } from '../config/site.config';
 import {
   SEO_BUSINESS,
-  SEO_ICON,
   generatePageMetadata,
 } from '../config/seo.config';
 import { SeoJsonLd } from '../components/SeoJsonLd';
@@ -50,13 +49,6 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
-  },
-  icons: {
-    icon: [
-      { url: SEO_ICON, type: 'image/svg+xml' },
-    ],
-    shortcut: SEO_ICON,
-    apple: SEO_ICON,
   },
   manifest: '/manifest.webmanifest',
 };

@@ -58,7 +58,7 @@ const CONTENT = {
       line1:
         'Kendi kadrolu ve sigortalı montaj ekibimiz tarafından ortalama 3-5 saat içinde su tahliye, EPDM contalama ve kanat terazi ayarları yapılarak kurulum tamamlanır.',
       line2:
-        'Teslimat sırasında su deşarj testi, çocuk kilidi kontrolü yapılır ve 10 yıl rulman/mekanik garanti belgesi takdim edilir.',
+        'Teslimat sırasında su deşarj testi ve çocuk kilidi kontrolü yapılır; 10 yıl sistem garantisi belgesi takdim edilir.',
       checklist: [
         'Paslanmaz çelik dübel ve vidalarla mermer/beton ankraj sabitlemesi',
         'UV dayanımlı antibakteriyel nötr cephe silikonu ve EPDM fitil izolasyonu',

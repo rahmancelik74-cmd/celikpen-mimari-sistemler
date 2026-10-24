@@ -27,8 +27,11 @@ export interface FaqItem {
 
 export const SITE_CONFIG = {
   brandName: 'Çelikpen',
-  fullTitle: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri | Kocasinan, Bahçelievler',
-  slogan: 'Kocasinan Üretim Gücüyle Bahçelievler’de Mimari Cam Balkon Teknolojisi',
+  fullTitle: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri | 35 Yıl | Kocasinan, Bahçelievler',
+  slogan: '1991’den Bugüne 35 Yıllık Mühendislikle Bahçelievler’de Mimari Cam Teknolojisi',
+  foundingYear: 1991,
+  yearsOfExperience: 35,
+  completedProjects: 15000,
   siteUrl: 'https://celikpen.com.tr',
   district: 'Bahçelievler',
   headquartersNeighborhood: 'Kocasinan Merkez',
@@ -43,7 +46,7 @@ export const SITE_CONFIG = {
   },
   warranties: {
     glassCertification: 'TSE EN 12150 Şişecam Temperli & Isıcam Konfor Sertifikalı',
-    mechanicalWarrantyYears: 5,
+    mechanicalWarrantyYears: 10,
     freeSurveyPromise: 'Kocasinan Merkezden Tüm Bahçelievler’e Aynı Gün Lazerli Ücretsiz Keşif',
   },
   productSeries: [
