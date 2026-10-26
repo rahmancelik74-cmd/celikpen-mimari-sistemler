@@ -152,7 +152,7 @@ export function WinsaCatalogGrid({ initialBrand = 'all' }: WinsaCatalogGridProps
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {winsaProducts.map((prod) => (
               <BrandProductCard key={prod.slug} prod={prod} brandLabel="WINSA" />
             ))}
@@ -180,7 +180,7 @@ export function WinsaCatalogGrid({ initialBrand = 'all' }: WinsaCatalogGridProps
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {albertGenauProducts.map((prod) => (
               <BrandProductCard key={prod.slug} prod={prod} brandLabel="ALBERT GENAU" />
             ))}
@@ -201,39 +201,39 @@ function BrandProductCard({
   const displayTitle = prod.cardTitle || prod.name;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_14px_34px_-22px_rgba(15,23,42,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_22px_44px_-20px_rgba(30,58,138,0.26)]">
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-[0_12px_28px_-18px_rgba(15,23,42,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_18px_36px_-16px_rgba(30,58,138,0.26)]">
       <Link
         href={`/urunler/${prod.slug}`}
         prefetch={true}
-        className="relative flex h-80 w-full items-center justify-center overflow-hidden bg-white p-6 sm:h-96"
+        className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-white p-4 sm:h-56"
       >
         <Image
           src={prod.defaultImage}
           alt={`${displayTitle} (${brandLabel}) — Çelikpen ürün görseli`}
           title={`${displayTitle} — ${brandLabel} Mimari Sistemleri`}
-          width={640}
-          height={500}
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          width={480}
+          height={380}
+          sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
         />
-        <span className="pointer-events-none absolute left-3.5 top-3.5 rounded-lg bg-[#0F172A]/85 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
+        <span className="pointer-events-none absolute left-3 top-3 rounded-md bg-[#0F172A]/85 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
           {brandLabel}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col justify-between p-6">
-        <WinsaSeriesLogo slug={prod.slug} />
-        <h3 className="mt-2.5 text-xl font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+      <div className="flex flex-1 flex-col justify-between p-4">
+        <div className="scale-90 origin-left"><WinsaSeriesLogo slug={prod.slug} /></div>
+        <h3 className="mt-1.5 text-base font-bold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A] sm:text-lg">
           <Link href={`/urunler/${prod.slug}`} prefetch={true}>
             {displayTitle}
           </Link>
         </h3>
 
-        <div className="mt-5 pt-1">
+        <div className="mt-3 pt-0.5">
           <Link
             href={`/urunler/${prod.slug}`}
             prefetch={true}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-5 py-3.5 text-sm font-extrabold text-white shadow-navy transition-all hover:bg-[#1D4ED8]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E3A8A] px-3.5 py-2 text-xs font-extrabold text-white shadow-navy transition-all hover:bg-[#1D4ED8]"
           >
             <span>Ürün Detayı</span>
             <span

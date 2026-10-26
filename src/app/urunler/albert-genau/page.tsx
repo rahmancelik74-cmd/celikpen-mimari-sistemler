@@ -91,7 +91,7 @@ export default function AlbertGenauBrandPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-[1440px] space-y-12 px-4 pt-8 sm:px-8 sm:pt-10">
+      <div className="mx-auto max-w-7xl space-y-12 px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
         <WinsaCatalogGrid initialBrand="albert-genau" />
 
         {/* Albert Genau Resmi Video Vitrinleri (LiteYouTube + VideoObject JSON-LD) */}
