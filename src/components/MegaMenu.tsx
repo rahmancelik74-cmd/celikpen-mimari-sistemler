@@ -219,10 +219,15 @@ export function MegaMenu() {
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-3.5">
-            <span className="inline-flex items-center gap-1 text-[9px] text-slate-300 sm:text-[10px] md:text-[11px]">
+            <span
+              title="Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul"
+              className="inline-flex items-center gap-1 text-[9px] text-slate-300 sm:text-[10px] md:text-[11px]"
+            >
               <IconPin className="h-3 w-3 shrink-0 text-[#BFDBFE]" />
               <span className="whitespace-nowrap md:hidden">Bahçelievler</span>
-              <span className="hidden whitespace-nowrap md:inline">Bahçelievler / İstanbul</span>
+              <span className="hidden whitespace-nowrap md:inline">
+                Kocasinan Merkez, Bahçelievler / İstanbul
+              </span>
             </span>
             <span className="h-3.5 w-px bg-white/20" aria-hidden="true" />
             <a
@@ -235,7 +240,7 @@ export function MegaMenu() {
               <IconInstagram className="h-4 w-4" />
             </a>
             <a
-              href="https://wa.me/905326702654"
+              href="https://wa.me/905323332085"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen WhatsApp hattı"
@@ -597,7 +602,7 @@ export function MegaMenu() {
                   </span>
                 </a>
                 <a
-                  href="https://wa.me/905326702654"
+                  href="https://wa.me/905323332085"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[48px] items-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-white"

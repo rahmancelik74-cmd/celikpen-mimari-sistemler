@@ -1,8 +1,8 @@
 /* TEAM */
 Company: Çelikpen Mimari Cam & Doğrama Sistemleri
 Contact: info@celikpen.com.tr
-Phone: +90 212 555 00 34
-Location: Kocasinan Merkez Mah. Mahmutbey Cad., Bahçelievler / İstanbul, Türkiye
+Phone: +90 532 333 20 85
+Location: Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul, Türkiye
 
 /* SITE */
 Last update: 2026/10/21

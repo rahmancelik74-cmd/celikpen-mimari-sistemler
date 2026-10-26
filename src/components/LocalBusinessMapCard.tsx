@@ -9,11 +9,12 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
 
   const lat = SEO_BUSINESS.geo.latitude;
   const lng = SEO_BUSINESS.geo.longitude;
-  const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-  const googleMapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${SITE_CONFIG.brandName} Cam Balkon Kocasinan Merkez Bahçelievler İstanbul`,
-  )}`;
-  const embedMapUrl = `https://maps.google.com/maps?q=${lat},${lng}&hl=tr&z=16&output=embed`;
+  const googleMapsDirectionsUrl =
+    'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+  const googleMapsSearchUrl =
+    'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+  const embedMapUrl =
+    'https://maps.google.com/maps?q=Kocasinan%20Merkez%20Mah.%20K%C4%B1z%C4%B1lelma%20Cad.%20No%3A30%2FC%2034186%20Bah%C3%A7elievler%20%C4%B0stanbul&t=&z=16&ie=UTF8&iwloc=&output=embed';
 
   return (
     <section
@@ -132,7 +133,7 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
                 📍
               </div>
               <h3 className="mt-3 text-base font-extrabold text-white">
-                Kocasinan Merkez Mah. Mahmutbey Cad. No: 345
+                Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul
               </h3>
               <p className="mt-1 max-w-md text-xs leading-relaxed text-slate-300">
                 Sayfa açılış hızını (Core Web Vitals LCP) korumak için etkileşimli Google Haritası

@@ -35,7 +35,7 @@ const FOOTER_SOCIAL = [
   },
   {
     label: 'WhatsApp',
-    href: 'https://wa.me/902125550034',
+    href: 'https://wa.me/905323332085',
     icon: <IconWhatsApp />,
   },
   {
@@ -218,7 +218,9 @@ export function Footer() {
               256-Bit SSL • TLS 1.3 • HSTS
             </span>
             <span className="hidden h-3 w-px bg-white/10 sm:block" aria-hidden="true" />
-            <span className="text-[9px] text-slate-600">Kocasinan Merkez, Bahçelievler / İstanbul</span>
+            <span className="text-[9px] text-slate-600">
+              Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul
+            </span>
           </div>
         </div>
       </div>

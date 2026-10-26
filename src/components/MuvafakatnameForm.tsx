@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import { SITE_CONFIG } from '../config/site.config';
@@ -7,7 +7,9 @@ import { CELIKPEN_PRICING_CONFIG } from '../config/pricing.config';
 export function MuvafakatnameForm() {
   const [apartmentName, setApartmentName] = useState('Çelikpen Örnek Apartmanı');
   const [neighborhood, setNeighborhood] = useState('Kocasinan Merkez');
-  const [addressDetail, setAddressDetail] = useState('Mahmutbey Cad. No: 12 Bahçelievler / İstanbul');
+  const [addressDetail, setAddressDetail] = useState(
+    'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul'
+  );
   const [applicantDoorNo, setApplicantDoorNo] = useState('5');
   const [applicantName, setApplicantName] = useState('');
   const [totalUnits, setTotalUnits] = useState<number>(10);

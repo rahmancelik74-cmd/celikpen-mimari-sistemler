@@ -9,7 +9,7 @@ import { LocalBusinessMapCard } from '../../components/LocalBusinessMapCard';
 export const metadata: Metadata = generatePageMetadata({
   title: `Satış Noktaları & Showroom — Kocasinan Merkez ve Bahçelievler Keşif Ağı | ${SITE_CONFIG.brandName}`,
   description:
-    'Çelikpen Kocasinan Merkez Mah. Mahmutbey Cad. No: 345 Bahçelievler/İstanbul fabrika showroomumuz ve 11 mahalle gezici lazerli keşif noktalarımız.',
+    'Çelikpen Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul fabrika showroomumuz ve 11 mahalle gezici lazerli keşif noktalarımız.',
   path: '/satis-noktalari',
   keywords: [
     'Çelikpen showroom',

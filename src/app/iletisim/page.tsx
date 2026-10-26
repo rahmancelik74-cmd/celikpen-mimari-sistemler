@@ -7,7 +7,7 @@ import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 import { LocalBusinessMapCard } from '../../components/LocalBusinessMapCard';
 
 export const metadata: Metadata = generatePageMetadata({
-  title: 'İletişim & Ücretsiz Lazerli Keşif — Çelikpen Bahçelievler | 0 (212) 555 00 34',
+  title: 'İletişim & Ücretsiz Lazerli Keşif — Çelikpen Bahçelievler | 0 (532) 333 20 85',
   description: `${SITE_CONFIG.address}. Ücretsiz lazerli ölçü ve mimari sistem danışmanlığı için telefon: ${SITE_CONFIG.phoneDisplay}.`,
   path: '/iletisim',
   keywords: [

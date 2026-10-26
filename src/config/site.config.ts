@@ -45,14 +45,14 @@ export const SITE_CONFIG = {
   siteUrl: 'https://celikpen.com.tr',
   district: 'Bahçelievler',
   headquartersNeighborhood: 'Kocasinan Merkez',
-  address: 'Kocasinan Merkez Mah. Mahmutbey Cad. Üretim & Showroom, Bahçelievler / İstanbul',
-  phoneDisplay: '0 (212) 555 00 34',
-  phoneRaw: '+902125550034',
-  whatsappNumber: '902125550034', // Başında + olmadan ülke kodu ile
+  address: 'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul',
+  phoneDisplay: '0 (532) 333 20 85',
+  phoneRaw: '+905323332085',
+  whatsappNumber: '905323332085', // Başında + olmadan ülke kodu ile
   workingHours: 'Pazartesi - Cumartesi: 08:30 - 19:30',
   coordinates: {
-    latitude: 41.0168,
-    longitude: 28.8475,
+    latitude: 41.0112,
+    longitude: 28.8436,
   },
   warranties: {
     glassCertification: 'TSE EN 12150 Şişecam Temperli & Isıcam Konfor Sertifikalı',

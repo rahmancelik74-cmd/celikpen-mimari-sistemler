@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WHATSAPP_HREF =
-  'https://wa.me/902125550034?text=' +
+  'https://wa.me/905323332085?text=' +
   encodeURIComponent('Merhaba, cam balkon / teras için ücretsiz keşif randevusu almak istiyorum.');
 
 /**
