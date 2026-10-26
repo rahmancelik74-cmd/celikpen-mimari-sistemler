@@ -65,7 +65,7 @@ export const SITE_CONFIG = {
       code: 'Winsa Vera 8 / Vera Pro 10',
       name: 'Winsa Vera 8mm & Vera Pro 10mm Temperli Katlanır Cam Balkon',
       pricingSystemId: 'vns_10mm',
-      image: '/images/products/vera-katlanir.jpg',
+      image: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg',
       tagline: 'Tam açılır panoramik cephe, çift sıra paslanmaz rulman ve rüzgar kilidi.',
       description:
         'Bahçelievler ara sokak ve standart apartman balkonlarında rüzgar, yağmur, toz ve kuş girişini %100 kesen; yazın tüm kanatları köşeye toplanarak balkonu tamamen açık hale getiren klasik ve yüksek dayanımlı katlanır seri.',
@@ -88,7 +88,7 @@ export const SITE_CONFIG = {
       code: 'Winsa Vera Termal',
       name: 'Winsa Vera Termal 4+20+4 Argon Gazlı Isıcamlı Cam Balkon',
       pricingSystemId: 'vbs_isicam',
-      image: '/images/products/vera-termal.jpg',
+      image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
       tagline: '%72 ısı tasarrufu ve -38 dB trafik gürültüsü kesici termal seri.',
       description:
         'Balkonunu kışın da evin sıcak bir odası gibi kullanmak isteyenler ve Şirinevler, E-5, Mahmutbey Caddesi gibi yoğun gürültülü akslarda oturanlar için her iki camı da temperli 28mm (4+20+4) Argon gazlı Konfor Isıcam serisi.',
@@ -111,7 +111,7 @@ export const SITE_CONFIG = {
       code: 'Winsa Vera Slide',
       name: 'Winsa Vera Slide Eşiksiz Sürme (Sürgülü) Cam Balkon',
       pricingSystemId: 'vds_surme',
-      image: '/images/products/vera-slide.jpg',
+      image: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
       tagline: 'İçe kanat açılma payı sıfır; dar balkonlar için masa-sandalye dostu ray sistemi.',
       description:
         'Kanatlar içeriye doğru katlanmadığı için balkon içindeki masa, sandalye, çamaşırlık veya çiçeklik alanını hiç daraltmaz. Alt eşiksiz (takılma yapmayan) 3 veya 5 raylı alüminyum kasa üzerinde tek parmakla kayarak açılır.',
@@ -134,7 +134,7 @@ export const SITE_CONFIG = {
       code: 'Winsa Vera Vertical',
       name: 'Winsa Vera Vertical Motorlu Giyotin (Kumandalı Küpeşte) Cam',
       pricingSystemId: 'vgs_giyotin',
-      image: '/images/products/vera-vertical.jpg',
+      image: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
       tagline: 'Uzaktan kumandalı dikey açılım; açıkken güvenli cam korkuluk, kapalıyken tam yalıtım.',
       description:
         'Somfy veya Becker tüp motorlu, çelik zincir/kayış tahrikli dikey hareketli sistem. Açıldığında en alt sabit cam panel 110 cm yüksekliğinde güvenli küpeşte (korkuluk) görevi görür; teraslar, dubleks daireler ve ticari işletmeler için zirve teknolojidir.',
@@ -157,7 +157,7 @@ export const SITE_CONFIG = {
       code: 'Winsa Vela & Lotus Bioklimatik',
       name: 'Winsa Vela & Lotus Bioklimatik Pergola & Kış Bahçesi',
       pricingSystemId: 'pergola',
-      image: '/images/products/pergola.jpg',
+      image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
       tagline: 'Teras ve bahçe katlarını dört mevsim yaşam alanına dönüştüren tavan + cephe entegrasyonu.',
       description:
         'Bahçelievler’deki çatı terasları, bahçe katı daireler ve ticari mekanlar için kendi ekseninde dönerek havalandırma sağlayan ve geriye toplanan Bioklimatik alüminyum tavan veya 4+16+4 lamine ısıcam tavan ile Winsa Vera Termal Isıcamlı / Vera Vertical Giyotin cephe kombinasyonu.',

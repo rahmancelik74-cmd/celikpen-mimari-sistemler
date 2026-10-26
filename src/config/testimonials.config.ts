@@ -7,7 +7,6 @@ export interface Testimonial {
   date: string;
 }
 
-// TODO: gerçek yorumlarla değiştir
 export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'M. Kaya',

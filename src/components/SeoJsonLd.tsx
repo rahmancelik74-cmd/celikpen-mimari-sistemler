@@ -359,7 +359,7 @@ export function buildProductSchema({
     sku,
     category,
     description,
-    image: [image ? absoluteUrl(image) : absoluteUrl('/images/products/vera-termal.jpg')],
+    image: [image ? absoluteUrl(image) : absoluteUrl('/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg')],
     brand: {
       '@type': 'Brand',
       name: SEO_BUSINESS.name,

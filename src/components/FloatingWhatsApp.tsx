@@ -8,8 +8,8 @@ const WHATSAPP_HREF =
  * Tüm sayfalarda sağ altta görünen WhatsApp hattı.
  *
  * Varsayılan durumda yalnızca 56×56 yeşil ikon görünür. Masaüstünde hover
- * ile 240 px genişliğe açılarak "Hızlı WhatsApp Hattı / Teklif Al" etiketini
- * gösterir. Mobilde tek dokunuş doğrudan WhatsApp'ı açar; etiket varsayılan
+ * ile 244 px genişliğe açılarak "Ücretsiz Keşif & Destek / Mimarlarımızla
+ * Görüşün" iki satırlı davet metnini gösterir. Mobilde tek dokunuş doğrudan WhatsApp'ı açar; etiket varsayılan
  * olarak max-w-0 / opacity-0 / overflow-hidden kalır.
  */
 export function FloatingWhatsApp() {
@@ -24,20 +24,20 @@ export function FloatingWhatsApp() {
         href={WHATSAPP_HREF}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="WhatsApp üzerinden hızlı teklif alın"
-        title="Hızlı WhatsApp Hattı — Teklif Al"
-        className="group relative z-10 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[#25D366] text-white shadow-xl transition-all duration-300 ease-out hover:w-[240px] hover:justify-start hover:pl-4 hover:pr-5 hover:bg-[#1EBE5D] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#25D366] motion-reduce:transition-none"
+        aria-label="WhatsApp üzerinden mimarlarımızla görüşün — ücretsiz keşif ve destek"
+        title="Ücretsiz Keşif & Destek — Mimarlarımızla Görüşün"
+        className="group relative z-10 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[#25D366] text-white shadow-xl transition-all duration-300 ease-out hover:w-[244px] hover:justify-start hover:pl-2 hover:pr-5 hover:bg-[#1EBE5D] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#25D366] motion-reduce:transition-none"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/20 transition-colors duration-300 group-hover:bg-white/20 motion-reduce:transition-none">
           <IconWhatsApp className="h-6 w-6" />
         </span>
 
-        <span className="ml-0 flex max-w-0 opacity-0 overflow-hidden whitespace-nowrap flex-col transition-all duration-300 ease-out group-hover:ml-3 group-hover:max-w-[150px] group-hover:opacity-100 motion-reduce:transition-none">
-          <span className="text-[8px] font-semibold uppercase leading-none tracking-[0.14em] text-white/85">
-            Hızlı WhatsApp Hattı
+        <span className="ml-0 flex max-w-0 flex-col overflow-hidden whitespace-nowrap text-left opacity-0 transition-all duration-300 ease-out group-hover:ml-3 group-hover:max-w-[176px] group-hover:opacity-100 motion-reduce:transition-none">
+          <span className="text-[10px] font-medium leading-tight tracking-wide text-emerald-50 opacity-95">
+            Ücretsiz Keşif &amp; Destek
           </span>
-          <span className="mt-1 block text-[11.5px] font-semibold leading-none text-white">
-            Teklif Al
+          <span className="mt-0.5 block whitespace-nowrap text-[13px] font-bold leading-tight text-white">
+            Mimarlarımızla Görüşün
           </span>
         </span>
       </a>

@@ -47,7 +47,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '15 Ekim 2026',
     readTime: '5 dk okuma',
     author: 'Çelikpen Mühendislik Ekibi',
-    image: '/images/products/vera-termal.jpg',
+    image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
     imageAlt: 'Winsa Vera Termal ısıcamlı cam balkon uygulaması',
     featured: true,
     keyTakeaways: [
@@ -82,7 +82,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '08 Ekim 2026',
     readTime: '6 dk okuma',
     author: 'Çelikpen Proje Departmanı',
-    image: '/images/products/pvc-pencere.jpg',
+    image: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
     imageAlt: 'Antrasit PVC pencere ve kapı sistemi uygulaması',
     keyTakeaways: [
       '84 mm Revotech Gold, 7 odacıklı yapısı ve üçüncü orta contasıyla Uw 0,79 W/m²K değerine ulaşır.',
@@ -116,7 +116,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '01 Ekim 2026',
     readTime: '4 dk okuma',
     author: 'Çelikpen Hukuk & Proje Ekibi',
-    image: '/images/products/panorama-hs-76.jpg',
+    image: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
     imageAlt: 'Apartman terasında panoramik cam balkon uygulaması',
     keyTakeaways: [
       'Kat Mülkiyeti Kanunu 19. maddesi kapsamında 4/5 yazılı muvafakatname alınmalıdır.',
@@ -150,7 +150,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '22 Eylül 2026',
     readTime: '3 dk okuma',
     author: 'Çelikpen Donanım Uzmanları',
-    image: '/images/products/winsa-donanim.jpg',
+    image: '/images/products/kocasinan-winsa-pencere-kol-kilit-donanimi.jpg',
     imageAlt: 'Kedi tüllü sineklik ve pencere donanım detayı',
     keyTakeaways: [
       'Kedi tülünün yırtılma direnci standart sineklik tülüne göre yaklaşık 7 kat daha yüksektir.',
@@ -184,7 +184,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '17 Eylül 2026',
     readTime: '7 dk okuma',
     author: 'Çelikpen Mimari Çözümler Ekibi',
-    image: '/images/products/pergola.jpg',
+    image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
     imageAlt: 'Winsa Vela ve Lotus bioklimatik pergola teras uygulaması',
     keyTakeaways: [
       'Motorlu lamel tavan 0-135 derece arasında güneş ve hava kontrolü sağlar.',
@@ -218,7 +218,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '10 Eylül 2026',
     readTime: '6 dk okuma',
     author: 'Çelikpen Termal Fizik Ekibi',
-    image: '/images/products/vera-slide.jpg',
+    image: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
     imageAlt: 'Isıcamlı sürme cam balkon ve geniş cam cephe uygulaması',
     keyTakeaways: [
       'Argon gazı, hava boşluğuna göre ısı iletimini yaklaşık %15-20 azaltır.',
@@ -252,7 +252,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '03 Eylül 2026',
     readTime: '4 dk okuma',
     author: 'Çelikpen Montaj Sonrası Destek',
-    image: '/images/products/surme-sistem.jpg',
+    image: '/images/products/zafer-comfort-slide-surme-sistem.jpg',
     imageAlt: 'Sürme cam balkon ray ve profil detayı',
     keyTakeaways: [
       'Alt rayı ayda bir kuru fırça veya elektrikli süpürgeyle temizleyin.',
@@ -286,7 +286,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     date: '27 Ağustos 2026',
     readTime: '5 dk okuma',
     author: 'Çelikpen Keşif Ekibi',
-    image: '/images/products/vera-katlanir.jpg',
+    image: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg',
     imageAlt: 'Katlanır cam balkon ve panoramik balkon manzarası',
     keyTakeaways: [
       'Dar ve dikdörtgen balkonlarda eşiksiz sürme alan kaybını sıfıra indirir.',
@@ -347,7 +347,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '48 m² Doğrama & Cam Balkon',
     year: '2026',
     highlight: 'Isı kaybında %46 tasarruf, 42 dB akustik ses yalıtımı sağlandı.',
-    image: '/images/products/pergola.jpg',
+    image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
     imageAlt: 'Kocasinan panoramik dubleks teras pergola uygulaması',
   },
   {
@@ -361,7 +361,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '36 Daire Toplu Proje',
     year: '2025 - 2026',
     highlight: 'E-5 gürültüsü 78 dB seviyesinden 32 dB iç ortam konforuna düşürüldü.',
-    image: '/images/products/pvc-pencere.jpg',
+    image: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
     imageAlt: 'Şirinevler konut sitesi PVC pencere yenileme projesi',
   },
   {
@@ -375,7 +375,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '18,5 m² Köşe Balkon',
     year: '2026',
     highlight: 'Köşe birleşiminde sabit kayıt kullanılmadan %100 kesintisiz manzara elde edildi.',
-    image: '/images/products/vera-termal.jpg',
+    image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
     imageAlt: 'Siyavuşpaşa L balkon ısıcamlı cam balkon projesi',
   },
   {
@@ -389,7 +389,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '32 m² Teras Cephesi',
     year: '2026',
     highlight: '19 mm engelsiz eşik ve Somfy akıllı ev otomasyonlu panjur entegrasyonu.',
-    image: '/images/products/panorama-hs-76.jpg',
+    image: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
     imageAlt: 'Ataköy Marina rezidans HS 76 kaldır-sür teras projesi',
   },
   {
@@ -403,7 +403,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '28 m² Bahçe Terası',
     year: '2026',
     highlight: 'Dört mevsim oturma odası konforunda, uzaktan kumandalı cam ve tavan sistemi.',
-    image: '/images/products/kis-bahcesi.jpg',
+    image: '/images/blog/bioklimatik-pergola-kis-bahcesi.jpg',
     imageAlt: 'Florya villa bioklimatik pergola ve kış bahçesi projesi',
   },
   {
@@ -417,7 +417,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '24 Bağımsız Bölüm',
     year: '2025 - 2026',
     highlight: 'TS EN 12608-1 şartnamesine tam uyumlu anahtar teslim şantiye montajı.',
-    image: '/images/products/pvc-anthracite.jpg',
+    image: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
     imageAlt: 'Soğanlı kentsel dönüşüm PVC doğrama projesi',
   },
   {
@@ -431,7 +431,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '42 m² Ticari Cephe',
     year: '2026',
     highlight: 'Kışın kapalı, yazın tamamen açık kafe cephesi; rüzgar sensörü ve uzaktan kumanda.',
-    image: '/images/products/vera-vertical.jpg',
+    image: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
     imageAlt: 'Yeşilköy sahil kafe motorlu giyotin cam cephe projesi',
   },
   {
@@ -445,7 +445,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '22 m² Teras Balkon',
     year: '2026',
     highlight: 'Sıfır eşik yüksekliği ve paslanmaz rulman sistemiyle tek parmakla sürüş.',
-    image: '/images/products/vera-slide.jpg',
+    image: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
     imageAlt: 'Başakşehir geniş teras eşiksiz sürme cam balkon projesi',
   },
   {
@@ -459,7 +459,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '30 m² Restoran Cephesi',
     year: '2025',
     highlight: 'Akşam saatlerinde tam açılım, gündüz güneş kontrollü bronz cam konforu.',
-    image: '/images/products/comfort-slide.jpg',
+    image: '/images/products/sirinevler-comfort-slide-plus-surme-kapi.jpg',
     imageAlt: 'Bakırköy restoran katlanır cam balkon projesi',
   },
   {
@@ -473,7 +473,7 @@ export const MAGAZINE_REFERENCES: ReferenceProject[] = [
     area: '26 m² Kış Bahçesi',
     year: '2026',
     highlight: 'Lamine ısıcam tavan ve gizli drenaj ile yıl boyu yoğuşmasız kullanım.',
-    image: '/images/products/winter-garden.jpg',
+    image: '/images/blog/motorlu-giyotin-cam-sistemleri.jpg',
     imageAlt: 'Yenibosna rezidans kış bahçesi cam tavan projesi',
   },
 ];

@@ -17,7 +17,7 @@ export const metadata: Metadata = generatePageMetadata({
     'giyotin cam balkon fiyat',
     'Winsa Vera Termal fiyat',
   ],
-  image: '/images/products/vera-termal.jpg',
+  image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
   imageAlt: 'Winsa Vera Termal ısıcamlı cam balkon 2026 fiyat hesaplama',
 });
 

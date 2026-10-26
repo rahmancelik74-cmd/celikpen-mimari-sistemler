@@ -102,32 +102,20 @@ export function WinsaCatalogGrid() {
               className="pointer-events-none absolute bottom-2.5 right-2.5 z-20 h-3.5 w-3.5 border-b-2 border-r-2 border-[#1E3A8A] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
 
-            {/* Görsel + Köşede 2 Minimal Glassmorphic Spec Pill */}
-            <div className="relative overflow-hidden rounded-xl border border-slate-100 bg-slate-100">
+            {/* Gerçek uygulama fotoğrafı + üst köşede en fazla 2 kompakt teknik rozet */}
+            <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-slate-100 bg-slate-100">
               <Image
                 src={prod.defaultImage}
-                alt={prod.name}
-                width={560}
-                height={360}
+                alt={`${prod.name} — Çelikpen Bahçelievler uygulama fotoğrafı`}
+                width={640}
+                height={400}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="aspect-[15/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/35 via-transparent to-transparent" />
-
-              {/* Köşede 2 Minimal Glassmorphic Spec Pill (Uw | dB) */}
-              <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="rounded-md border border-white/30 bg-slate-950/65 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-md">
-                    Uw: {prod.technicalSpecs.isiYalitimiUw}
-                  </span>
-                  <span className="rounded-md border border-white/30 bg-slate-950/65 px-2 py-0.5 text-[10px] font-bold text-sky-200 backdrop-blur-md">
-                    {prod.technicalSpecs.sesYalitimiDb}
-                  </span>
-                </div>
-                <span className="rounded-md bg-[#0F172A]/90 px-2 py-0.5 text-[9.5px] font-extrabold text-white">
-                  {prod.technicalSpecs.profilGenisligi}
-                </span>
-              </div>
+              <CompactSpecBadges
+                uw={prod.technicalSpecs.isiYalitimiUw}
+                db={prod.technicalSpecs.sesYalitimiDb}
+              />
             </div>
 
             {/* Kategori Etiketi & Ürün Başlığı */}
@@ -168,6 +156,40 @@ export function WinsaCatalogGrid() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/** "Uw = 0.79 W/(m²K) / Uf = 0.92 ..." → "0.79"; sayısal değer yoksa null. */
+function shortUw(raw: string): string | null {
+  const match = raw.match(/U[wf]\s*=\s*([\d.,]+)/i);
+  return match ? match[1] : null;
+}
+
+/** "-46 dB (EN ISO 140-3 Sınıf 5)" → "46 dB"; "+10 dB Ek..." → "+10 dB". */
+function shortDb(raw: string): string | null {
+  const match = raw.match(/([+-]?)\s*(\d{2})\s*dB/i);
+  if (!match) return null;
+  return `${match[1] === '+' ? '+' : ''}${match[2]} dB`;
+}
+
+/** Fotoğrafı %90+ açık bırakan, tek satırlık en fazla 2 rozet. */
+function CompactSpecBadges({ uw, db }: { uw: string; db: string }) {
+  const uwValue = shortUw(uw);
+  const dbValue = shortDb(db);
+  if (!uwValue && !dbValue) return null;
+  return (
+    <div className="pointer-events-none absolute right-2 top-2 flex items-center gap-1">
+      {uwValue && (
+        <span className="whitespace-nowrap rounded-full bg-white/90 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-[#0F172A] shadow-sm backdrop-blur">
+          Uw: {uwValue}
+        </span>
+      )}
+      {dbValue && (
+        <span className="whitespace-nowrap rounded-full bg-[#0F172A]/80 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-white shadow-sm backdrop-blur">
+          {dbValue}
+        </span>
+      )}
     </div>
   );
 }

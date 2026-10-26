@@ -25,7 +25,7 @@ export const metadata: Metadata = generatePageMetadata({
     'Yeşilköy giyotin cam',
     'Başakşehir cam balkon',
   ],
-  image: '/images/products/pergola.jpg',
+  image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
   imageAlt: 'Çelikpen bioklimatik pergola ve cam balkon proje galerisi',
 });
 

@@ -13,56 +13,56 @@ const PRODUCT_GROUPS = [
     title: 'Cam Balkon Sistemleri',
     note: 'Isıcamlı, katlanır ve panoramik balkon çözümleri',
     href: '/urunler?kategori=cam-balkon-sistemleri',
-    image: '/images/products/vera-termal.jpg',
+    image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
     icon: <IconPanels />,
   },
   {
     title: 'Katlanır Cam Balkon',
     note: 'Tam açılım, geniş manzara ve sessiz kanat hareketi',
     href: '/urunler/vera-katlanir-cam-balkon',
-    image: '/images/products/vera-katlanir.jpg',
+    image: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg',
     icon: <IconFold />,
   },
   {
     title: 'Sürme Cam Sistemleri',
     note: 'Eşiksiz ray, geniş açıklık ve kesintisiz kullanım',
     href: '/urunler?kategori=surme-sistemler',
-    image: '/images/products/vera-slide.jpg',
+    image: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
     icon: <IconSlide />,
   },
   {
     title: 'Kış Bahçesi',
     note: 'Teras ve bahçeler için dört mevsim cam mimari',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/products/kis-bahcesi.jpg',
+    image: '/images/blog/bioklimatik-pergola-kis-bahcesi.jpg',
     icon: <IconWinterGarden />,
   },
   {
     title: 'Giyotin Cam Sistemleri',
     note: 'Motorlu, kumandalı ve güvenli dikey cam cephe',
     href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    image: '/images/products/vera-vertical.jpg',
+    image: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
     icon: <IconGiyotin />,
   },
   {
     title: 'Pergola Sistemleri',
     note: 'Motorlu lamel tavan, LED ve yağmur tahliyesi',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/products/pergola.jpg',
+    image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
     icon: <IconPergola />,
   },
   {
     title: 'PVC Pencere & Kapı',
     note: '76 ve 84 mm yüksek yalıtımlı profil serileri',
     href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
-    image: '/images/products/pvc-pencere.jpg',
+    image: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
     icon: <IconWindow />,
   },
   {
     title: 'Panjur & Sineklik',
     note: 'Panjur, plise perde ve kedi tüllü sineklik',
     href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
-    image: '/images/products/winstor-panjur.jpg',
+    image: '/images/products/sirinevler-winstor-monoblok-panjur.jpg',
     icon: <IconShutter />,
   },
 ];
@@ -330,24 +330,17 @@ export function ProductShowcaseStrip() {
               prefetch={true}
               className="group relative flex flex-col overflow-hidden border border-white/10 bg-white/[0.045] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#93C5FD]/[0.45] hover:bg-[#1E3A8A]"
             >
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-800">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-800">
                 <Image
                   src={product.image}
                   alt={`${product.title} — Çelikpen gerçek uygulama fotoğrafı`}
                   width={640}
-                  height={360}
+                  height={400}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/25 to-transparent" />
-                <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center border border-white/20 bg-slate-950/55 text-[#93C5FD] backdrop-blur-md transition-colors group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
-                  {product.icon}
-                </span>
-                <span className="absolute right-3 top-3 text-[9px] font-bold tracking-[0.18em] text-white/60">
+                <span className="pointer-events-none absolute right-2 top-2 rounded-full bg-[#0F172A]/80 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-white backdrop-blur">
                   {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="absolute bottom-3 left-3 rounded-sm border border-white/20 bg-slate-950/60 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-sky-100 backdrop-blur-md">
-                  Gerçek Uygulama
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-4">

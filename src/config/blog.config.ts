@@ -17,5 +17,4 @@ export const BLOG_POSTS: BlogPost[] = [
     readingMin: 6,
     tag: 'Mevzuat',
   },
-  // TODO: yeni yazılar buraya
 ];

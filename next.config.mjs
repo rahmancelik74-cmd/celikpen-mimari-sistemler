@@ -14,6 +14,8 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   // C:\Users\rahma\package-lock.json yüzünden yanlış kök algılanmasını engeller
   outputFileTracingRoot: projectRoot,
+  // Arka plandaki `next dev` (.next) ile `next build` çakışmasını önler
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     formats: ['image/avif', 'image/webp'],
     // Next/image optimizasyon sonuçları bir yıl boyunca değişmez kabul edilir.

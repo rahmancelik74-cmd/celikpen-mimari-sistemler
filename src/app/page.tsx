@@ -29,62 +29,62 @@ const CustomerReviews = dynamic(
    HOMEPAGE CONTENT
    ============================================================================ */
 
-type ServiceCard = {
-  title: string;
-  description: string;
-  href: string;
-  icon: React.ReactNode;
-};
-
-const SERVICE_CARDS: ServiceCard[] = [
+const SERVICE_CARDS = [
   {
     title: 'Isıcamlı Cam Balkon',
     description:
       '4+20+4 argon gazlı temperli cam ve antrasit profil ile dört mevsim yaşayan balkonlar.',
     href: '/urunler/vera-isicamli-cam-balkon',
-    icon: <IconGlass />,
+    image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
+    badges: ['Uw: 1.1', '38 dB'],
   },
   {
     title: 'Giyotin Cam Sistemleri',
     description:
       'Kumandalı, dikey açılan cam cephe; açıkken güvenli küpeşte, kapalıyken tam yalıtım.',
     href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    icon: <IconVertical />,
+    image: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
+    badges: ['Uw: 1.3', '36 dB'],
   },
   {
     title: 'Bioklimatik Pergola',
     description:
       'Motorlu alüminyum lamelli tavan, gizli yağmur tahliyesi ve entegre LED aydınlatma.',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    icon: <IconSun />,
+    image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
+    badges: ['Uw: 1.1', '40 dB'],
   },
   {
     title: 'Kış Bahçesi Sistemleri',
     description:
       'Teras ve bahçe katlarını dört mevsim kullanılan ferah bir yaşam alanına dönüştürün.',
     href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    icon: <IconHome />,
+    image: '/images/blog/bioklimatik-pergola-kis-bahcesi.jpg',
+    badges: ['Uw: 1.1', '40 dB'],
   },
   {
     title: 'Sürme Cam Sistemleri',
     description:
       'Eşiksiz alt ray, geniş açıklık ve tek parmakla sessiz kayma; dar balkonlarda alan kazancı.',
     href: '/urunler?kategori=surme-sistemler',
-    icon: <IconSlide />,
+    image: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
+    badges: ['Uw: 1.1', '40 dB'],
   },
   {
     title: 'Alüminyum & PVC Doğrama',
     description:
       'Revotech Gold, Dorado 76 ve Safir serileriyle yüksek yalıtımlı pencere ve kapı çözümleri.',
     href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
-    icon: <IconLayers />,
+    image: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
+    badges: ['Uw: 0.79', '46 dB'],
   },
   {
     title: 'Plise Perde & Sineklik',
     description:
       'Kedi tüllü sineklik, plise perde ve panjur entegrasyonuyla temiz ve konforlu iç mekânlar.',
     href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
-    icon: <IconShield />,
+    image: '/images/products/bahcelievler-plise-sineklik-kedi-tulu.jpg',
+    badges: ['Kedi Tüllü', 'Plise'],
   },
 ];
 
@@ -134,28 +134,28 @@ const PROJECTS = [
 
 const BLOG_POSTS = [
   {
-    title: 'Isıcamlı cam balkon mu, katlanır tek cam mı?',
-    excerpt: 'Isı yalıtımı, bütçe ve kullanım alışkanlıklarına göre doğru sistemi karşılaştırın.',
-    category: 'Sistem Rehberi',
-    read: '6 dk okuma',
-    href: '/profesyoneller/isicamli-cam-balkon-mu-katlanir-tek-cam-mi',
-    image: '/images/kocasinan-isicamli-cam-balkon-hero.jpg',
+    title: '2026 Isıcamlı Cam Balkon Rehberi: m² Fiyatları ve Vera Termal',
+    excerpt: 'Isıcamlı cam balkon m² fiyatları, 4+20+4 argon gazlı ısıcam ve ısı yalıtımı rehberi.',
+    category: 'Cam Balkon',
+    read: '9 dk okuma',
+    href: '/blog/isicamli-cam-balkon-rehberi-2026',
+    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg',
   },
   {
-    title: '76 mm ve 84 mm PVC profil farkı nedir?',
+    title: 'Winsa Dorado 76 mı, Revotech Gold mu? PVC Pencere Karşılaştırması',
     excerpt: 'Odacık sayısı, conta yapısı ve ısı yalıtımı açısından profil seçimini anlatıyoruz.',
-    category: 'Teknik Bilgi',
-    read: '4 dk okuma',
-    href: '/profesyoneller/pvc-pencerede-76mm-ve-84mm-profil-farki',
-    image: '/images/bahcelievler-giyotin-bioklimatik-sistem.jpg',
+    category: 'PVC Pencere',
+    read: '8 dk okuma',
+    href: '/blog/winsa-dorado-76-mi-revotech-gold-mu',
+    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg',
   },
   {
-    title: 'Apartmanda cam balkon için 4/5 muvafakatname rehberi',
-    excerpt: 'Yargıtay kararları, kat maliki onayı ve dış cephe uyumu hakkında pratik adımlar.',
-    category: 'Yasal Süreç',
-    read: '7 dk okuma',
-    href: '/profesyoneller/apartmanlarda-cam-balkon-yasal-muvafakatname-rehberi',
-    image: '/images/siyavuspasa-surme-cam-balkon.jpg',
+    title: 'Bahçelievler ve İstanbul’da Cam Balkon Yaptırırken 10 Kritik Detay',
+    excerpt: '4/5 kat maliki muvafakatnamesi, cam kalınlığı, rüzgâr yükü ve montaj detayları.',
+    category: 'Yerel Rehber',
+    read: '9 dk okuma',
+    href: '/blog/bahcelievler-cam-balkon-10-kritik-detay',
+    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg',
   },
 ];
 
@@ -208,26 +208,42 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICE_CARDS.map((service, index) => (
+            {SERVICE_CARDS.map((service) => (
               <Link
                 prefetch={true}
                 key={service.title}
                 href={service.href}
-                className="group relative flex flex-col rounded-card border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#BFDBFE] hover:shadow-card sm:p-6"
+                className="group relative flex flex-col overflow-hidden rounded-card border border-slate-200 bg-white p-4 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#BFDBFE] hover:shadow-card"
               >
-                <span className="absolute right-5 top-5 text-[10px] font-semibold tracking-[0.18em] text-slate-300">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] text-[#1E3A8A] transition-colors group-hover:bg-[#1E3A8A] group-hover:text-white">
-                  {service.icon}
-                </span>
-                <h3 className="mt-5 text-[15px] font-semibold text-[#0F172A] group-hover:text-[#1D4ED8]">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100">
+                  <Image
+                    src={service.image}
+                    alt={`${service.title} — Çelikpen uygulama fotoğrafı`}
+                    width={640}
+                    height={400}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="pointer-events-none absolute right-2 top-2 flex items-center gap-1">
+                    {service.badges.map((badge, i) => (
+                      <span
+                        key={badge}
+                        className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[9.5px] font-bold leading-4 shadow-sm backdrop-blur ${
+                          i === 0 ? 'bg-white/90 text-[#0F172A]' : 'bg-[#0F172A]/80 text-white'
+                        }`}
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="mt-4 text-[15px] font-semibold text-[#0F172A] group-hover:text-[#1D4ED8]">
                   {service.title}
                 </h3>
-                <p className="mt-2 flex-1 text-[12px] leading-relaxed text-slate-500">
+                <p className="mt-1.5 flex-1 text-[12px] leading-relaxed text-slate-500">
                   {service.description}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1E3A8A]">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1E3A8A]">
                   Detayları incele
                   <IconArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </span>

@@ -5,5 +5,4 @@ export interface GalleryItem {
   neighborhood: string;
 }
 
-// TODO: public/galeri/ altına saha görselleri eklendikçe bu diziyi doldurun
 export const GALLERY_ITEMS: GalleryItem[] = [];

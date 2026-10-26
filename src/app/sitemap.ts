@@ -3,6 +3,7 @@ import { SITE_CONFIG } from '../config/site.config';
 import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
+import { BLOG_POSTS } from '../data/blogPosts';
 
 /**
  * Tüm kamuya açık rotaları tek kaynaktan üretir.
@@ -90,7 +91,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/blog`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.75,
+      priority: 0.85,
+    },
+    {
+      url: `${base}/profesyoneller/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${base}/blog/eylul-2026-yargitay-cam-balkon-karari`,
@@ -99,6 +106,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
   ];
+
+  const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${base}/blog/${post.slug}`,
+    lastModified: new Date(`${post.updatedDate}T00:00:00Z`),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
 
   const winsaCatalogRoutes: MetadataRoute.Sitemap = WINSA_PRODUCTS.map((prod) => ({
     url: `${base}/urunler/${prod.slug}`,
@@ -137,6 +151,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...blogArticleRoutes,
     ...winsaCatalogRoutes,
     ...professionalSubRoutes,
     ...corporateSubRoutes,
