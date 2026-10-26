@@ -17,6 +17,31 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
   const [statusFilter, setStatusFilter] = useState('');
   const [confirm, setConfirm] = useState<{ title: string; message: string; action: () => void } | null>(null);
 
+  // ── Add New forms ───────────────────────────────────────────────
+  const [showAddPricing, setShowAddPricing] = useState(false);
+  const [newPricing, setNewPricing] = useState({ code: '', name: '', subtitle: '', pricePerM2: 3000, badge: '', active: true });
+  const [showAddRef, setShowAddRef] = useState(false);
+  const [newRef, setNewRef] = useState<{ title: string; district: string; system: string; category: string; image: string; status: 'published' | 'draft' }>({ title: '', district: 'Bahçelievler / Kocasinan Merkez', system: 'Winsa Vera Termal', category: 'Isıcamlı Cam Balkon', image: '/images/references/ref-1.jpg', status: 'published' });
+
+  const addPricingSystem = () => {
+    if (!newPricing.name.trim()) { showNotice('error', 'Sistem adı zorunludur.'); return; }
+    const id = `sys-${Date.now()}`;
+    setDraft(prev => ({ ...prev, pricingSystems: [...prev.pricingSystems, { id, ...newPricing }] }));
+    setNewPricing({ code: '', name: '', subtitle: '', pricePerM2: 3000, badge: '', active: true });
+    setShowAddPricing(false);
+    showNotice('success', 'Yeni fiyat sistemi eklendi. Kaydetmeyi unutmayın.');
+  };
+
+  const addReference = async () => {
+    if (!newRef.title.trim()) { showNotice('error', 'Proje başlığı zorunludur.'); return; }
+    const id = `ref-${Date.now()}`;
+    const nextDraft: CmsStoreData = { ...draft, references: [{ id, ...newRef, featured: true }, ...draft.references] };
+    setDraft(nextDraft);
+    setNewRef({ title: '', district: 'Bahçelievler / Kocasinan Merkez', system: 'Winsa Vera Termal', category: 'Isıcamlı Cam Balkon', image: '/images/references/ref-1.jpg', status: 'published' });
+    setShowAddRef(false);
+    await saveAllToCms(nextDraft, 'Yeni referans eklendi ve galeriye yayınlandı!');
+  };
+
   // ── Pricing helpers ──────────────────────────────────────────────
   const filteredPricing = useMemo(() => {
     const q = search.toLowerCase();
@@ -201,9 +226,33 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-72"><SearchInput value={search} onChange={setSearch} placeholder="Sistem adı veya kodu ara..." /></div>
+            <button type="button" onClick={() => setShowAddPricing(!showAddPricing)}
+              className="rounded-lg bg-[#1E3A8A] px-4 py-2 text-xs font-extrabold text-white shadow ring-1 ring-sky-400/30 hover:bg-[#1D4ED8]">
+              + Yeni Sistem Ekle
+            </button>
             <button type="button" onClick={exportPricingCsv} className={btn}>⬇ CSV İndir</button>
             <button type="button" onClick={printPricingTable} className={btn}>🖨 Yazdır / PDF</button>
           </div>
+
+          {showAddPricing && (
+            <div className="rounded-2xl border border-sky-400/30 bg-slate-900/90 p-5 shadow-lg">
+              <h3 className="text-sm font-extrabold text-white">Yeni Fiyat Sistemi Ekle</h3>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                <input type="text" placeholder="Kod (ör: Vera Pro)" value={newPricing.code} onChange={e => setNewPricing(p => ({ ...p, code: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="text" placeholder="Sistem Adı *" value={newPricing.name} onChange={e => setNewPricing(p => ({ ...p, name: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs font-bold text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="text" placeholder="Alt Başlık / Açıklama" value={newPricing.subtitle} onChange={e => setNewPricing(p => ({ ...p, subtitle: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="number" step={50} min={500} placeholder="m² Fiyat (₺)" value={newPricing.pricePerM2} onChange={e => setNewPricing(p => ({ ...p, pricePerM2: Number(e.target.value) || 0 }))}
+                  className="rounded-lg border border-emerald-500/40 bg-slate-950 px-3 py-2 text-xs font-black text-emerald-300 focus:border-emerald-400 focus:outline-none" />
+                <input type="text" placeholder="Rozet (ör: Ekonomik)" value={newPricing.badge} onChange={e => setNewPricing(p => ({ ...p, badge: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <button type="button" onClick={addPricingSystem}
+                  className="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-extrabold text-white shadow hover:bg-emerald-500">Ekle</button>
+              </div>
+            </div>
+          )}
 
           {pricingBulk.count > 0 && (
             <div className="flex flex-wrap items-center gap-2 rounded-xl border border-sky-500/30 bg-sky-950/40 px-4 py-2.5">
@@ -261,6 +310,10 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <div className="w-72"><SearchInput value={search} onChange={setSearch} placeholder="Başlık veya ilçe ara..." /></div>
+            <button type="button" onClick={() => setShowAddRef(!showAddRef)}
+              className="rounded-lg bg-[#1E3A8A] px-4 py-2 text-xs font-extrabold text-white shadow ring-1 ring-sky-400/30 hover:bg-[#1D4ED8]">
+              + Yeni Referans Projesi Ekle
+            </button>
             <select value={catFilter} onChange={e => setCatFilter(e.target.value)}
               className="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white">
               <option value="">Tüm Kategoriler</option>
@@ -276,6 +329,40 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
             <button type="button" onClick={exportRefCsv} className={btn}>⬇ CSV İndir</button>
             <button type="button" onClick={printRefTable} className={btn}>🖨 Yazdır / PDF</button>
           </div>
+
+          {showAddRef && (
+            <div className="rounded-2xl border border-sky-400/30 bg-slate-900/90 p-5 shadow-lg">
+              <h3 className="text-sm font-extrabold text-white">Yeni Referans Projesi Ekle</h3>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <input type="text" placeholder="Proje Başlığı *" value={newRef.title} onChange={e => setNewRef(p => ({ ...p, title: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs font-bold text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="text" placeholder="İlçe / Mahalle" value={newRef.district} onChange={e => setNewRef(p => ({ ...p, district: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="text" placeholder="Uygulanan Sistem" value={newRef.system} onChange={e => setNewRef(p => ({ ...p, system: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <input type="text" placeholder="Kategori" value={newRef.category} onChange={e => setNewRef(p => ({ ...p, category: e.target.value }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                <select value={newRef.status} onChange={e => setNewRef(p => ({ ...p, status: e.target.value as 'published' | 'draft' }))}
+                  className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white focus:border-sky-400 focus:outline-none">
+                  <option value="published">Yayında</option>
+                  <option value="draft">Taslak</option>
+                </select>
+                <div className="flex items-center gap-2">
+                  <input type="text" value={newRef.image} onChange={e => setNewRef(p => ({ ...p, image: e.target.value }))}
+                    className="min-w-0 flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-[10px] font-mono text-sky-300 focus:border-sky-400 focus:outline-none" />
+                  <label className="shrink-0 cursor-pointer rounded-lg bg-sky-600 px-3 py-2 text-[10px] font-bold text-white hover:bg-sky-500">
+                    <span>Yükle</span>
+                    <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden"
+                      onChange={async e => { const f = e.target.files?.[0]; if (!f) return; const u = await props.uploadImageFile(f); if (u) setNewRef(p => ({ ...p, image: u })); }} />
+                  </label>
+                </div>
+              </div>
+              <div className="mt-3 flex justify-end">
+                <button type="button" onClick={() => void addReference()}
+                  className="rounded-lg bg-emerald-600 px-5 py-2 text-xs font-extrabold text-white shadow hover:bg-emerald-500">Referansı Kaydet ve Ekle</button>
+              </div>
+            </div>
+          )}
 
           {refBulk.count > 0 && (
             <div className="flex flex-wrap items-center gap-2 rounded-xl border border-sky-500/30 bg-sky-950/40 px-4 py-2.5">

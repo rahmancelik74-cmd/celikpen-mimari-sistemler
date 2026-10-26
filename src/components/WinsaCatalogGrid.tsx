@@ -8,6 +8,7 @@ import {
   type ProductBrand,
   type WinsaProductItem,
 } from '../config/winsa-products.config';
+import { WinsaSeriesLogo } from './WinsaSeriesLogo';
 
 export type BrandFilterId = 'all' | 'winsa' | 'albert-genau';
 
@@ -204,20 +205,16 @@ function BrandProductCard({
       <Link
         href={`/urunler/${prod.slug}`}
         prefetch={true}
-        className="relative block aspect-[4/3] w-full overflow-hidden bg-slate-100"
+        className="relative block aspect-[16/10] w-full overflow-hidden bg-white"
       >
         <Image
           src={prod.defaultImage}
           alt={`${displayTitle} (${brandLabel}) — Çelikpen ürün görseli`}
           title={`${displayTitle} — ${brandLabel} Mimari Sistemleri`}
           width={640}
-          height={480}
+          height={400}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/55 via-transparent to-transparent"
-          aria-hidden="true"
+          className="h-full w-full object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <span className="pointer-events-none absolute left-3.5 top-3.5 rounded-lg bg-[#0F172A]/85 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
           {brandLabel}
@@ -225,7 +222,8 @@ function BrandProductCard({
       </Link>
 
       <div className="flex flex-1 flex-col justify-between p-5">
-        <h3 className="text-[17px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+        <WinsaSeriesLogo slug={prod.slug} />
+        <h3 className="mt-2 text-[17px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
           <Link href={`/urunler/${prod.slug}`} prefetch={true}>
             {displayTitle}
           </Link>

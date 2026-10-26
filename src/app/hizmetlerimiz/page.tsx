@@ -334,50 +334,37 @@ export default function HizmetlerimizPage() {
 
       {/* ============================ 8 CORE ARCHITECTURAL SERVICES GRID (GÜNGÖRPEN MINIMAL VISUAL CARDS) ============================ */}
       <section className="container-shell pt-10 sm:pt-14" aria-label="Hizmetlerimiz Listesi">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {ARCHITECTURAL_SERVICES.map((service) => (
             <article
               key={service.id}
               id={service.id}
-              className="group flex scroll-mt-32 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_18px_40px_-30px_rgba(15,23,42,0.38)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_24px_50px_-28px_rgba(30,58,138,0.4)]"
+              className="group relative scroll-mt-32 overflow-hidden rounded-2xl shadow-[0_18px_40px_-30px_rgba(15,23,42,0.38)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(30,58,138,0.4)]"
             >
-              {/* Clean High-Resolution Architectural Photo */}
               <Link
                 href={service.productHref}
                 prefetch={true}
-                className="relative block aspect-[4/3] w-full overflow-hidden bg-slate-900"
+                className="relative block aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden"
               >
                 <Image
                   src={service.image}
                   alt={`${service.title} — Çelikpen uygulama fotoğrafı`}
                   title={`${service.title} — Çelikpen`}
                   width={700}
-                  height={525}
+                  height={875}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/65 via-transparent to-transparent" />
-              </Link>
-
-              {/* Minimal Card Footer: Clean Title + Single "Ürün Detayı →" Button */}
-              <div className="flex flex-1 flex-col justify-between p-5">
-                <h2 className="text-[16px] font-extrabold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
-                  <Link href={service.productHref} prefetch={true}>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-5">
+                  <h2 className="text-[17px] font-extrabold leading-snug text-white drop-shadow-lg">
                     {service.title}
-                  </Link>
-                </h2>
-
-                <div className="mt-4 pt-2">
-                  <Link
-                    href={service.productHref}
-                    prefetch={true}
-                    className="inline-flex w-full items-center justify-center rounded-xl bg-[#1E3A8A] px-4 py-2.5 text-xs font-bold text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
-                    title={`${service.title} ürün detaylarını incele`}
-                  >
-                    Ürün Detayı →
-                  </Link>
+                  </h2>
+                  <span className="mt-3 inline-flex items-center justify-center rounded-xl bg-white/15 px-4 py-2.5 text-xs font-bold text-white backdrop-blur-sm transition-colors group-hover:bg-[#1E3A8A]">
+                    Detaylı İncele →
+                  </span>
                 </div>
-              </div>
+              </Link>
             </article>
           ))}
         </div>

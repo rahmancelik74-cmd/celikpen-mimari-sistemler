@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
@@ -51,10 +51,23 @@ const FOOTER_SOCIAL = [
 
 export function Footer() {
   const pathname = usePathname();
+  const router = useRouter();
   const { cms } = useCms();
   const settings = cms.siteSettings;
+  const [yilClicks, setYilClicks] = useState(0);
+  const yilTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  if (pathname?.startsWith('/admin')) {
+  const handleYilClick = useCallback(() => {
+    setYilClicks(prev => {
+      const next = prev + 1;
+      if (next >= 3) { router.push('/cp-yonetim-2026'); return 0; }
+      if (yilTimer.current) clearTimeout(yilTimer.current);
+      yilTimer.current = setTimeout(() => setYilClicks(0), 800);
+      return next;
+    });
+  }, [router]);
+
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/cp-yonetim-2026')) {
     return null;
   }
 
@@ -89,12 +102,12 @@ export function Footer() {
               1996’dan bugüne 30 yıllık üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon,
               kış bahçesi, giyotin, sürme cam, PVC doğrama ve mimari alüminyum çözümleri sunuyoruz.
             </p>
-            <div className="mt-4 inline-flex items-center gap-2 border-l-2 border-[#38BDF8] pl-3">
+            <button type="button" onClick={handleYilClick} className="mt-4 inline-flex cursor-default items-center gap-2 border-l-2 border-[#38BDF8] pl-3">
               <span className="text-[10px] font-extrabold tracking-[0.08em] text-white">30. YIL</span>
               <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                 1996 — 2026
               </span>
-            </div>
+            </button>
             <div className="mt-5 flex items-center gap-2">
               {socialItems.map((social) => (
                 <a
