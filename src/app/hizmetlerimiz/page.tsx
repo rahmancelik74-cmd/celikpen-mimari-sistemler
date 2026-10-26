@@ -332,127 +332,46 @@ export default function HizmetlerimizPage() {
         </div>
       </section>
 
-      {/* ============================ QUICK SERVICE ANCHOR BAR ============================ */}
-      <div className="border-b border-slate-200 bg-white shadow-xs">
-        <div className="container-shell flex items-center gap-2 overflow-x-auto py-3.5 no-scrollbar">
-          {ARCHITECTURAL_SERVICES.map((service) => (
-            <a
-              key={service.id}
-              href={`#${service.id}`}
-              className=" shrink-0 rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[11px] font-bold text-[#0F172A] transition hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]"
-            >
-              <span className="mr-1.5 text-[10px] font-extrabold text-[#1E3A8A]">
-                {service.number}
-              </span>
-              {service.title.replace(' Sistemleri', '').replace(' Hizmetleri', '')}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================ 8 CORE ARCHITECTURAL SERVICES GRID ============================ */}
+      {/* ============================ 8 CORE ARCHITECTURAL SERVICES GRID (GÜNGÖRPEN MINIMAL VISUAL CARDS) ============================ */}
       <section className="container-shell pt-10 sm:pt-14" aria-label="Hizmetlerimiz Listesi">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {ARCHITECTURAL_SERVICES.map((service) => (
             <article
               key={service.id}
               id={service.id}
-              className="group flex scroll-mt-32 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_18px_40px_-30px_rgba(15,23,42,0.4)] transition-all duration-300 hover:border-[#1E3A8A]/50 hover:shadow-[0_24px_50px_-28px_rgba(30,58,138,0.35)]"
+              className="group flex scroll-mt-32 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_18px_40px_-30px_rgba(15,23,42,0.38)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_24px_50px_-28px_rgba(30,58,138,0.4)]"
             >
-              {/* Service Real Photo Header */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
+              {/* Clean High-Resolution Architectural Photo */}
+              <Link
+                href={service.productHref}
+                prefetch={true}
+                className="relative block aspect-[4/3] w-full overflow-hidden bg-slate-900"
+              >
                 <Image
                   src={service.image}
                   alt={`${service.title} — Çelikpen uygulama fotoğrafı`}
-                  title={`${service.title} — ${service.subtitle} | Çelikpen`}
+                  title={`${service.title} — Çelikpen`}
                   width={700}
-                  height={440}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  height={525}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/85 via-[#0F172A]/20 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/65 via-transparent to-transparent" />
+              </Link>
 
-                <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1E3A8A] px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-white shadow-md">
-                    Hizmet {service.number}
-                  </span>
-                  <span className="rounded-full border border-white/25 bg-[#0F172A]/80 px-3 py-1 text-[10px] font-bold text-sky-200 backdrop-blur-md">
-                    {service.warrantyBadge}
-                  </span>
-                </div>
-
-                <div className="absolute inset-x-5 bottom-4">
-                  <span className="inline-block rounded-md bg-white/95 px-2.5 py-0.5 text-[10px] font-extrabold text-[#1E3A8A]">
-                    {service.specBadge}
-                  </span>
-                  <h2 className="mt-2 text-xl font-black leading-snug text-white sm:text-2xl">
+              {/* Minimal Card Footer: Clean Title + Single "Ürün Detayı →" Button */}
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <h2 className="text-[16px] font-extrabold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+                  <Link href={service.productHref} prefetch={true}>
                     {service.title}
-                  </h2>
-                  <p className="mt-0.5 text-xs font-semibold text-sky-200">{service.subtitle}</p>
-                </div>
-              </div>
-
-              {/* Service Content Body */}
-              <div className="flex flex-1 flex-col p-6">
-                <p className="text-[12.5px] leading-relaxed text-slate-600">
-                  {service.description}
-                </p>
-
-                {/* Technical Advantages */}
-                <div className="mt-5">
-                  <h3 className="text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#1E3A8A]">
-                    Teknik Avantajlar &amp; Standartlar
-                  </h3>
-                  <ul className="mt-2.5 space-y-2">
-                    {service.advantages.map((adv) => (
-                      <li
-                        key={adv}
-                        className="flex items-start gap-2 text-[11.5px] font-medium leading-snug text-slate-700"
-                      >
-                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#EFF6FF] text-[#1E3A8A]">
-                          ✓
-                        </span>
-                        <span>{adv}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Usage Areas */}
-                <div className="mt-5 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-4">
-                  <span className="mr-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    Kullanım Alanları:
-                  </span>
-                  {service.usageAreas.map((area) => (
-                    <span
-                      key={area}
-                      className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-semibold text-slate-700"
-                    >
-                      {area}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="mt-6 flex flex-wrap items-center gap-2.5 pt-2">
-                  <Link
-                    href="/iletisim?form=kesif"
-                    prefetch={true}
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#1E3A8A] px-4 py-3 text-xs font-bold text-white shadow-navy transition hover:bg-[#1D4ED8]"
-                  >
-                    Ücretsiz Keşif İste
                   </Link>
-                  <Link
-                    href={service.calculatorHref}
-                    prefetch={true}
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#1E3A8A] bg-[#EFF6FF] px-4 py-3 text-xs font-bold text-[#1E3A8A] transition hover:bg-[#DBEAFE]"
-                  >
-                    Fiyat Hesapla
-                  </Link>
+                </h2>
+
+                <div className="mt-4 pt-2">
                   <Link
                     href={service.productHref}
                     prefetch={true}
-                    className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-xs font-bold text-slate-700 transition hover:border-[#1E3A8A] hover:text-[#1E3A8A]"
+                    className="inline-flex w-full items-center justify-center rounded-xl bg-[#1E3A8A] px-4 py-2.5 text-xs font-bold text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
                     title={`${service.title} ürün detaylarını incele`}
                   >
                     Ürün Detayı →

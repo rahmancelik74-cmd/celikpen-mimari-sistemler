@@ -7,21 +7,22 @@ import { WINSA_PRODUCTS } from '../../config/winsa-products.config';
 import { WinsaCatalogGrid } from '../../components/WinsaCatalogGrid';
 
 export const metadata: Metadata = generatePageMetadata({
-  title: `Ürünlerimiz — Winsa PVC, Cam Balkon, Kış Bahçesi, Giyotin ve Panjur Sistemleri | ${SITE_CONFIG.brandName}`,
+  title: `Ürünlerimiz — Winsa & Albert Genau Mimari Sistemler | ${SITE_CONFIG.brandName}`,
   description:
-    'Winsa Revotech Gold, Dorado 76, Safir 76, Panorama HS 76 Kaldır-Sür, Comfort Slide Plus, Vera 4+20+4 Isıcamlı Cam Balkon, Vera Vertical Giyotin, Vela Bioklimatik Pergola ve Winstor Panjur sistemleri ürün kataloğu.',
+    'Winsa Safir 76, Dorado 76, Revotech Gold, Comfort Slide Plus, Panorama HS 76, Lotus, Winstor ve Albert Genau Isıcamlı Cam Balkon, Tambalkon Giyotin, Kış Bahçesi ve Bioklimatik Pergola sistemleri.',
   path: '/urunler',
   keywords: [
     'Winsa ürünlerimiz',
+    'Albert Genau ürünlerimiz',
     'Winsa Dorado 76',
     'Winsa Revotech Gold',
     'Panorama HS 76',
-    'ısıcamlı cam balkon serileri',
-    'giyotin cam sistemleri',
+    'Albert Genau ısıcamlı cam balkon',
+    'Tambalkon giyotin',
     'Winstor panjur',
   ],
-  image: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
-  imageAlt: 'Çelikpen Winsa PVC ve cam balkon ürün kataloğu',
+  image: '/images/brands/winsa/dorado-76.png',
+  imageAlt: 'Çelikpen Winsa ve Albert Genau ürün kataloğu',
 });
 
 export default function UrunlerHubPage() {

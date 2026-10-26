@@ -17,7 +17,9 @@ const FOOTER_SERVICES = [
 const FOOTER_QUICK = [
   { label: 'Anasayfa', href: '/' },
   { label: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
-  { label: 'Ürünlerimiz', href: '/urunler' },
+  { label: 'Ürünlerimiz (Tümü)', href: '/urunler' },
+  { label: 'Winsa Sistemleri', href: '/urunler/winsa' },
+  { label: 'Albert Genau Sistemleri', href: '/urunler/albert-genau' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Blog', href: '/profesyoneller/blog' },

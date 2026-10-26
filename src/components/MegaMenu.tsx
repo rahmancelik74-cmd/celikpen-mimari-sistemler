@@ -87,45 +87,15 @@ const SERVICES: MenuCardItem[] = [
 
 const PRODUCTS_MENU: MenuCardItem[] = [
   {
-    title: 'Winsa PVC Pencere ve Kapı Sistemleri',
-    description: 'Revotech Gold 84, Dorado 76 ve Safir 76 yalıtım serileri',
-    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
+    title: 'Winsa',
+    description: 'PVC Pencere, Kapı, Sürme ve Panjur Sistemleri',
+    href: '/urunler/winsa',
     icon: <IconLayers />,
   },
   {
-    title: 'Winsa Sürme Sistemler',
-    description: 'Panorama HS 76 Hebeschiebe, Comfort Slide Plus & Lotus',
-    href: '/urunler?kategori=surme-sistemler',
-    icon: <IconSliders />,
-  },
-  {
-    title: 'Cam Balkon Sistemleri (Vera Serisi)',
-    description: 'Vera Termal 4+20+4 Isıcamlı, Vera Katlanır ve Vera Slide',
-    href: '/urunler?kategori=cam-balkon-sistemleri',
-    icon: <IconPanels />,
-  },
-  {
-    title: 'Giyotin & Kış Bahçesi Sistemleri',
-    description: 'Vera Vertical Motorlu Giyotin ve Vela Bioklimatik Pergola',
-    href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    icon: <IconArrowUpDown />,
-  },
-  {
-    title: 'Panjur & Kepenk Sistemleri (Winstor)',
-    description: 'Winstor monoblok panjur, Winkepenk ve motorlu kepenk',
-    href: '/urunler?kategori=panjur-ve-kepenk-sistemleri',
-    icon: <IconShield />,
-  },
-  {
-    title: 'Alüminyum Doğrama Sistemleri',
-    description: 'Antrasit cephe, kedi tüllü sineklik ve RC2 donanım',
-    href: '/urunler?kategori=donanim-sistemleri',
-    icon: <IconHome />,
-  },
-  {
-    title: 'Isıcam & Konfor Cam Çözümleri',
-    description: 'Şişecam Sinerji, Konfor Low-E ve temperli cam kombinasyonları',
-    href: '/urunler/vera-isicamli-cam-balkon',
+    title: 'Albert Genau',
+    description: 'Isıcamlı Cam Balkon, Giyotin, Kış Bahçesi & Bioklimatik Pergola',
+    href: '/urunler/albert-genau',
     icon: <IconThermalGlass />,
   },
 ];
@@ -297,6 +267,7 @@ export function MegaMenu() {
                   key={item.label}
                   className="relative flex items-center"
                   onMouseEnter={() => openDropdown(item.dropdown!)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={item.href}
@@ -315,6 +286,56 @@ export function MegaMenu() {
                       }`}
                     />
                   </Link>
+
+                  {/* HİZMETLERİMİZ DİKEY DROPDOWN MENÜ */}
+                  {item.dropdown === 'services' && activeDropdown === 'services' && (
+                    <div
+                      id="hizmetlerimiz-dropdown"
+                      className="gpu-layer absolute left-0 top-full z-50 pt-2"
+                    >
+                      <div className="flex w-72 flex-col rounded-xl border border-slate-200/90 bg-white px-2 py-2.5 shadow-[0_20px_44px_-16px_rgba(15,23,42,0.22)]">
+                        {SERVICES.map((service) => (
+                          <Link
+                            key={service.title}
+                            href={service.href}
+                            prefetch={true}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-center gap-3 rounded-lg px-2.5 py-2 text-[12.5px] font-semibold text-[#0F172A] transition-colors hover:bg-[#EFF6FF] hover:text-[#1E3A8A]"
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-white group-hover:text-[#1E3A8A]">
+                              {service.icon}
+                            </span>
+                            <span className="leading-snug">{service.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ÜRÜNLERİMİZ DİKEY DROPDOWN MENÜ (WINSA & ALBERT GENAU) */}
+                  {item.dropdown === 'products' && activeDropdown === 'products' && (
+                    <div
+                      id="urunlerimiz-dropdown"
+                      className="gpu-layer absolute left-0 top-full z-50 pt-2"
+                    >
+                      <div className="flex w-60 flex-col rounded-xl border border-slate-200/90 bg-white px-2 py-2.5 shadow-[0_20px_44px_-16px_rgba(15,23,42,0.22)]">
+                        {PRODUCTS_MENU.map((prod) => (
+                          <Link
+                            key={prod.title}
+                            href={prod.href}
+                            prefetch={true}
+                            onClick={() => setActiveDropdown(null)}
+                            className="group flex items-center gap-3 rounded-lg px-2.5 py-2 text-[12.5px] font-semibold text-[#0F172A] transition-colors hover:bg-[#EFF6FF] hover:text-[#1E3A8A]"
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-white group-hover:text-[#1E3A8A]">
+                              {prod.icon}
+                            </span>
+                            <span className="leading-snug">{prod.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : item.disabled ? (
                 <span
@@ -376,118 +397,6 @@ export function MegaMenu() {
             </button>
           </div>
         </div>
-
-        {/* ============================ HİZMETLERİMİZ MEGA MENÜ ============================ */}
-        {activeDropdown === 'services' && (
-          <div
-            id="hizmetlerimiz-dropdown"
-            className="gpu-layer absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
-          >
-            <div className="container-shell py-6">
-              <div className="mx-auto max-w-3xl">
-                <div className="mb-4 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1E3A8A]">
-                      Hizmetlerimiz
-                    </p>
-                    <p className="mt-1 text-[12.5px] font-medium text-slate-500">
-                      Lazerli ücretsiz keşiften anahtar teslim montaja 8 uzmanlık alanımız.
-                    </p>
-                  </div>
-                  <Link
-                    href="/hizmetlerimiz"
-                    prefetch={true}
-                    onClick={() => setActiveDropdown(null)}
-                    className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
-                  >
-                    Tüm hizmetlerimiz
-                    <IconArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-2 gap-1.5">
-                  {SERVICES.map((service) => (
-                    <Link
-                      key={service.title}
-                      href={service.href}
-                      prefetch={true}
-                      onClick={() => setActiveDropdown(null)}
-                      className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-[#EFF6FF] group-hover:text-[#1E3A8A]">
-                        {service.icon}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[12.5px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
-                          {service.title}
-                        </span>
-                        <span className="mt-1 block text-[10.5px] leading-snug text-slate-500">
-                          {service.description}
-                        </span>
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ============================ ÜRÜNLERİMİZ MEGA MENÜ ============================ */}
-        {activeDropdown === 'products' && (
-          <div
-            id="urunlerimiz-dropdown"
-            className="gpu-layer absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
-          >
-            <div className="container-shell py-6">
-              <div className="mx-auto max-w-3xl">
-                <div className="mb-4 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1E3A8A]">
-                      Ürünlerimiz &amp; Sistem Kataloğu
-                    </p>
-                    <p className="mt-1 text-[12.5px] font-medium text-slate-500">
-                      Winsa PVC doğrama, sürme sistemler, Vera cam balkon, giyotin ve Winstor panjur serileri.
-                    </p>
-                  </div>
-                  <Link
-                    href="/urunler"
-                    prefetch={true}
-                    onClick={() => setActiveDropdown(null)}
-                    className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
-                  >
-                    Tüm ürünleri gör
-                    <IconArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-2 gap-1.5">
-                  {PRODUCTS_MENU.map((prod) => (
-                    <Link
-                      key={prod.title}
-                      href={prod.href}
-                      prefetch={true}
-                      onClick={() => setActiveDropdown(null)}
-                      className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-[#EFF6FF] group-hover:text-[#1E3A8A]">
-                        {prod.icon}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[12.5px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
-                          {prod.title}
-                        </span>
-                        <span className="mt-1 block text-[10.5px] leading-snug text-slate-500">
-                          {prod.description}
-                        </span>
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* ============================ MOBİL ÇEKMECE ============================ */}

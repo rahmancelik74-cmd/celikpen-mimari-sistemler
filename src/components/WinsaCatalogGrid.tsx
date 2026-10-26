@@ -1,328 +1,252 @@
 'use client';
 
-import React, { startTransition, useDeferredValue, useEffect, useMemo, useState } from 'react';
+import React, { startTransition, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  WINSA_PRODUCTS,
+  getProductsByBrand,
+  type ProductBrand,
   type WinsaProductItem,
 } from '../config/winsa-products.config';
 
-export type CatalogFilterId =
-  | 'all'
-  | 'pvc-pencere-kapi'
-  | 'winsa-surme'
-  | 'vera-cam-balkon'
-  | 'giyotin-bioklimatik'
-  | 'winstor-panjur-sineklik';
+export type BrandFilterId = 'all' | 'winsa' | 'albert-genau';
 
-interface FilterTabDef {
-  id: CatalogFilterId;
-  label: string;
-  queryAliases: string[];
-  matcher: (prod: WinsaProductItem) => boolean;
+interface WinsaCatalogGridProps {
+  initialBrand?: BrandFilterId;
 }
 
-const FILTER_TABS: FilterTabDef[] = [
-  {
-    id: 'all',
-    label: 'Tümü',
-    queryAliases: ['all', 'tumu'],
-    matcher: () => true,
-  },
-  {
-    id: 'pvc-pencere-kapi',
-    label: 'Winsa PVC Pencere & Kapı',
-    queryAliases: ['pencere-ve-kapi-sistemleri', 'pvc-pencere-kapi', 'renk-dunyasi'],
-    matcher: (p) =>
-      p.categorySlug === 'pencere-ve-kapi-sistemleri' || p.categorySlug === 'renk-dunyasi',
-  },
-  {
-    id: 'winsa-surme',
-    label: 'Winsa Sürme (Hebeschiebe & Comfort Slide)',
-    queryAliases: ['surme-sistemler', 'winsa-surme'],
-    matcher: (p) => p.categorySlug === 'surme-sistemler',
-  },
-  {
-    id: 'vera-cam-balkon',
-    label: 'Winsa Vera Cam Balkon Serisi',
-    queryAliases: ['cam-balkon-sistemleri', 'vera-cam-balkon'],
-    matcher: (p) =>
-      p.categorySlug === 'cam-balkon-sistemleri' &&
-      !p.slug.includes('giyotin') &&
-      !p.slug.includes('bioklimatik'),
-  },
-  {
-    id: 'giyotin-bioklimatik',
-    label: 'Giyotin & Bioklimatik Sistemler',
-    queryAliases: ['giyotin-bioklimatik', 'kis-bahcesi'],
-    matcher: (p) =>
-      p.slug.includes('giyotin') || p.slug.includes('bioklimatik'),
-  },
-  {
-    id: 'winstor-panjur-sineklik',
-    label: 'Winstor Panjur & Sineklik',
-    queryAliases: [
-      'panjur-ve-kepenk-sistemleri',
-      'donanim-sistemleri',
-      'winstor-panjur-sineklik',
-    ],
-    matcher: (p) =>
-      p.categorySlug === 'panjur-ve-kepenk-sistemleri' ||
-      p.categorySlug === 'donanim-sistemleri',
-  },
+const WINSA_ORDER = [
+  'safir-76',
+  'dorado-76',
+  'revotech-gold',
+  'comfort-slide-plus',
+  'panorama-hs-76',
+  'lotus-paralel-surme',
+  'winstor-monoblok-panjur',
 ];
 
-export function WinsaCatalogGrid() {
-  const [selectedTab, setSelectedTab] = useState<CatalogFilterId>('all');
-  const [query, setQuery] = useState('');
-  const deferredQuery = useDeferredValue(query);
+const ALBERT_GENAU_ORDER = [
+  'panorama-esiksiz-surme-cam-balkon',
+  'vera-isicamli-cam-balkon',
+  'vera-katlanir-cam-balkon',
+  'giyotin-motorlu-silinebilir-cam',
+  'kis-bahcesi-sistemleri',
+  'bioklimatik-kis-bahcesi-sistemleri',
+];
+
+function sortByOrder(items: WinsaProductItem[], order: string[]): WinsaProductItem[] {
+  return [...items].sort((a, b) => {
+    const ia = order.indexOf(a.slug);
+    const ib = order.indexOf(b.slug);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
+}
+
+export function WinsaCatalogGrid({ initialBrand = 'all' }: WinsaCatalogGridProps) {
+  const [selectedBrand, setSelectedBrand] = useState<BrandFilterId>(initialBrand);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
-    const kat = params.get('kategori');
-    if (!kat) return;
-    const matched = FILTER_TABS.find((t) => t.queryAliases.includes(kat));
-    if (matched) {
-      setSelectedTab(matched.id);
+    const marka = params.get('marka');
+    if (marka === 'winsa' || marka === 'albert-genau') {
+      setSelectedBrand(marka);
     }
   }, []);
 
-  const activeTabDef = useMemo(
-    () => FILTER_TABS.find((t) => t.id === selectedTab) ?? FILTER_TABS[0],
-    [selectedTab]
+  const winsaProducts = useMemo(
+    () => sortByOrder(getProductsByBrand('winsa'), WINSA_ORDER),
+    []
   );
 
-  const filteredProducts = useMemo(() => {
-    return WINSA_PRODUCTS.filter((p) => {
-      const matchesCat = activeTabDef.matcher(p);
-      const q = deferredQuery.trim().toLowerCase();
-      const matchesQuery =
-        !q ||
-        p.name.toLowerCase().includes(q) ||
-        p.code.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q) ||
-        p.technicalSpecs.profilGenisligi.toLowerCase().includes(q);
-      return matchesCat && matchesQuery;
-    });
-  }, [activeTabDef, deferredQuery]);
+  const albertGenauProducts = useMemo(
+    () => sortByOrder(getProductsByBrand('albert-genau'), ALBERT_GENAU_ORDER),
+    []
+  );
+
+  const showWinsa = selectedBrand === 'all' || selectedBrand === 'winsa';
+  const showAlbertGenau = selectedBrand === 'all' || selectedBrand === 'albert-genau';
 
   return (
-    <div className="space-y-7">
-      {/* Kategori Sekmeleri ve Hızlı Arama */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xs sm:p-5">
-        <div className="flex flex-col gap-3.5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Ürün Kategorileri">
-            {FILTER_TABS.map((tab) => {
-              const count = WINSA_PRODUCTS.filter(tab.matcher).length;
-              const isSelected = selectedTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isSelected}
-                  onClick={() => startTransition(() => setSelectedTab(tab.id))}
-                  className={`rounded-lg px-3.5 py-2 text-[11.5px] font-bold transition ${
-                    isSelected
-                      ? 'bg-[#1E3A8A] text-white shadow-navy'
-                      : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]'
-                  }`}
-                >
-                  {tab.label}{' '}
-                  <span
-                    className={`ml-1 text-[10px] ${
-                      isSelected ? 'text-sky-200' : 'text-slate-400'
-                    }`}
-                  >
-                    ({count})
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+    <div className="space-y-12">
+      {/* Marka Seçici Sekmeler (Winsa & Albert Genau) */}
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs sm:p-5">
+        <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Marka Seçimi">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedBrand === 'all'}
+            onClick={() => startTransition(() => setSelectedBrand('all'))}
+            className={`rounded-xl px-4 py-2.5 text-xs font-extrabold transition sm:text-[13px] ${
+              selectedBrand === 'all'
+                ? 'bg-[#1E3A8A] text-white shadow-navy'
+                : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]'
+            }`}
+          >
+            Tüm Ürünlerimiz ({winsaProducts.length + albertGenauProducts.length})
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedBrand === 'winsa'}
+            onClick={() => startTransition(() => setSelectedBrand('winsa'))}
+            className={`rounded-xl px-4 py-2.5 text-xs font-extrabold transition sm:text-[13px] ${
+              selectedBrand === 'winsa'
+                ? 'bg-[#1E3A8A] text-white shadow-navy'
+                : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]'
+            }`}
+          >
+            Winsa ({winsaProducts.length})
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedBrand === 'albert-genau'}
+            onClick={() => startTransition(() => setSelectedBrand('albert-genau'))}
+            className={`rounded-xl px-4 py-2.5 text-xs font-extrabold transition sm:text-[13px] ${
+              selectedBrand === 'albert-genau'
+                ? 'bg-[#1E3A8A] text-white shadow-navy'
+                : 'border border-slate-200 bg-white text-[#0F172A] hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]'
+            }`}
+          >
+            Albert Genau ({albertGenauProducts.length})
+          </button>
+        </div>
 
-          <div className="w-full lg:w-64">
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Seri ara (Revotech Gold, Dorado 76, Vera)..."
-              className="w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3.5 py-2 text-xs font-medium text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
-            />
-          </div>
+        <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
+          <Link
+            href="/urunler/winsa"
+            prefetch={true}
+            className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11.5px] font-bold text-[#1E3A8A] transition hover:border-[#BFDBFE] hover:bg-[#EFF6FF]"
+          >
+            Winsa Kataloğu →
+          </Link>
+          <Link
+            href="/urunler/albert-genau"
+            prefetch={true}
+            className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11.5px] font-bold text-[#1E3A8A] transition hover:border-[#BFDBFE] hover:bg-[#EFF6FF]"
+          >
+            Albert Genau Kataloğu →
+          </Link>
         </div>
       </div>
 
-      {/* GüngörPen Ürünlerimiz Vitrin Mimarisi + Teknik Tablolu Ürün Kartları */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProducts.map((prod) => (
-          <article
-            key={prod.slug}
-            className="hover-lift group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_16px_38px_-28px_rgba(15,23,42,0.38)] transition-all duration-300 hover:border-[#1E3A8A]"
-          >
-            {/* L-Bracket Köşe Vurgusu */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute top-2.5 left-2.5 z-20 h-3.5 w-3.5 border-t-2 border-l-2 border-[#1E3A8A] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-            />
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute bottom-2.5 right-2.5 z-20 h-3.5 w-3.5 border-b-2 border-r-2 border-[#1E3A8A] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-            />
-
+      {/* ============================ WINSA ÜRÜNLERİ ============================ */}
+      {showWinsa && (
+        <section id="winsa" aria-labelledby="winsa-heading" className="space-y-6">
+          <div className="flex flex-col justify-between gap-2 border-b border-slate-200 pb-4 sm:flex-row sm:items-end">
             <div>
-              {/* Ürün Görseli */}
-              <Link
-                href={`/urunler/${prod.slug}`}
-                prefetch={true}
-                className="relative block aspect-[16/10] overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EFF6FF] px-3 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#1E3A8A]">
+                PVC PENCERE • SÜRME • PANJUR SİSTEMLERİ
+              </span>
+              <h2
+                id="winsa-heading"
+                className="mt-2 text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl"
               >
-                <Image
-                  src={prod.defaultImage}
-                  alt={`${prod.name} — Çelikpen ürün ve uygulama görseli`}
-                  title={`${prod.name} (${prod.category}) — Çelikpen Teknik Sistem Kataloğu`}
-                  width={700}
-                  height={440}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="pointer-events-none absolute left-2.5 top-2.5 rounded-md bg-[#0F172A]/85 px-2.5 py-1 text-[9.5px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
-                  {prod.code}
-                </span>
-                <CompactSpecBadges
-                  uw={prod.technicalSpecs.isiYalitimiUw}
-                  db={prod.technicalSpecs.sesYalitimiDb}
-                />
-              </Link>
-
-              {/* Kategori & Başlık */}
-              <div className="mt-4">
-                <span className="block text-[10px] font-extrabold uppercase tracking-[0.14em] text-[#1E3A8A]">
-                  {prod.category}
-                </span>
-                <Link href={`/urunler/${prod.slug}`} prefetch={true}>
-                  <h2 className="mt-1 text-[16px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
-                    {prod.name}
-                  </h2>
-                </Link>
-                <p className="mt-1.5 line-clamp-2 text-[11.5px] leading-relaxed text-slate-600">
-                  {prod.shortDescription}
-                </p>
-              </div>
-
-              {/* Teknik Özellikler Tablosu */}
-              <dl className="mt-4 divide-y divide-slate-100 rounded-xl border border-slate-200/80 bg-[#F8FAFC] px-3.5 py-2 text-[11px]">
-                <div className="flex items-center justify-between gap-2 py-1.5">
-                  <dt className="font-semibold text-slate-500">Profil Genişliği</dt>
-                  <dd className="truncate font-bold text-[#0F172A]">
-                    {prod.technicalSpecs.profilGenisligi}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between gap-2 py-1.5">
-                  <dt className="font-semibold text-slate-500">Odacık Sayısı</dt>
-                  <dd className="truncate font-bold text-[#0F172A]">
-                    {prod.technicalSpecs.odacikSayisi}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between gap-2 py-1.5">
-                  <dt className="font-semibold text-slate-500">Isı İletim (Uw)</dt>
-                  <dd className="truncate font-bold text-[#1E3A8A]">
-                    {prod.technicalSpecs.isiYalitimiUw}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between gap-2 py-1.5">
-                  <dt className="font-semibold text-slate-500">Ses Yalıtımı (dB)</dt>
-                  <dd className="truncate font-bold text-[#0F172A]">
-                    {prod.technicalSpecs.sesYalitimiDb}
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between gap-2 py-1.5">
-                  <dt className="font-semibold text-slate-500">Cam Kalınlığı</dt>
-                  <dd className="truncate font-bold text-[#0F172A]">
-                    {prod.technicalSpecs.camKalinligi}
-                  </dd>
-                </div>
-              </dl>
+                Winsa Ürünlerimiz
+              </h2>
             </div>
-
-            {/* Aksiyon Butonları */}
-            <div className="mt-4 flex items-center gap-2 pt-2">
-              <Link
-                href={`/urunler/${prod.slug}`}
-                prefetch={true}
-                className="inline-flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#1E3A8A] px-3.5 py-2.5 text-[11.5px] font-bold text-white shadow-navy transition hover:bg-[#1D4ED8]"
-              >
-                Teknik Detay →
-              </Link>
-              <Link
-                href={
-                  prod.pricingSystemId
-                    ? `/fiyat-hesapla?seri=${prod.pricingSystemId}`
-                    : '/fiyat-hesapla'
-                }
-                prefetch={true}
-                className="inline-flex items-center justify-center rounded-xl border border-[#1E3A8A]/30 bg-[#EFF6FF] px-3.5 py-2.5 text-[11.5px] font-bold text-[#1E3A8A] transition hover:border-[#1E3A8A] hover:bg-[#DBEAFE]"
-              >
-                Fiyat Hesapla
-              </Link>
-            </div>
-          </article>
-        ))}
-
-        {filteredProducts.length === 0 && (
-          <div className="col-span-full rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
-            <p className="text-sm font-semibold text-[#0F172A]">Aramanıza uygun seri bulunamadı.</p>
-            <p className="mt-1 text-xs text-slate-500">
-              Farklı bir kategori seçebilir veya arama kelimenizi kısaltabilirsiniz.
+            <p className="text-xs font-medium text-slate-500">
+              Safir 76, Dorado 76, Revotech Gold, Comfort Slide Plus, Panorama HS 76, Lotus ve Winstor
             </p>
-            <button
-              type="button"
-              onClick={() => {
-                startTransition(() => {
-                  setSelectedTab('all');
-                  setQuery('');
-                });
-              }}
-              className="mt-4 rounded-lg bg-[#1E3A8A] px-4 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-            >
-              Tüm ürünleri göster
-            </button>
           </div>
-        )}
-      </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {winsaProducts.map((prod) => (
+              <BrandProductCard key={prod.slug} prod={prod} brandLabel="WINSA" />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ============================ ALBERT GENAU ÜRÜNLERİ ============================ */}
+      {showAlbertGenau && (
+        <section id="albert-genau" aria-labelledby="albert-genau-heading" className="space-y-6">
+          <div className="flex flex-col justify-between gap-2 border-b border-slate-200 pb-4 sm:flex-row sm:items-end">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EFF6FF] px-3 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#1E3A8A]">
+                CAM BALKON • GİYOTİN • KIŞ BAHÇESİ • BİOKLİMATİK PERGOLA
+              </span>
+              <h2
+                id="albert-genau-heading"
+                className="mt-2 text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl"
+              >
+                Albert Genau Ürünlerimiz
+              </h2>
+            </div>
+            <p className="text-xs font-medium text-slate-500">
+              Isıcamlı Sürme, Isıcamlı Katlanır, Ekonomik Katlanır, Tambalkon Giyotin, Kış Bahçesi ve Bioklimatik Pergola
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {albertGenauProducts.map((prod) => (
+              <BrandProductCard key={prod.slug} prod={prod} brandLabel="ALBERT GENAU" />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
 
-function shortUw(raw: string): string | null {
-  const match = raw.match(/U[wf]\s*=\s*([\d.,]+)/i);
-  return match ? match[1] : null;
-}
+function BrandProductCard({
+  prod,
+  brandLabel,
+}: {
+  prod: WinsaProductItem;
+  brandLabel: string;
+}) {
+  const displayTitle = prod.cardTitle || prod.name;
 
-function shortDb(raw: string): string | null {
-  const match = raw.match(/([+-]?)\s*(\d{2})\s*dB/i);
-  if (!match) return null;
-  return `${match[1] === '+' ? '+' : '-'}${match[2]} dB`;
-}
-
-function CompactSpecBadges({ uw, db }: { uw: string; db: string }) {
-  const uwValue = shortUw(uw);
-  const dbValue = shortDb(db);
-  if (!uwValue && !dbValue) return null;
   return (
-    <div className="pointer-events-none absolute right-2 top-2 flex items-center gap-1">
-      {uwValue && (
-        <span className="whitespace-nowrap rounded-full bg-white/95 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-[#0F172A] shadow-sm backdrop-blur">
-          Uw: {uwValue}
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_14px_34px_-22px_rgba(15,23,42,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_22px_44px_-20px_rgba(30,58,138,0.26)]">
+      <Link
+        href={`/urunler/${prod.slug}`}
+        prefetch={true}
+        className="relative block aspect-[4/3] w-full overflow-hidden bg-slate-100"
+      >
+        <Image
+          src={prod.defaultImage}
+          alt={`${displayTitle} (${brandLabel}) — Çelikpen ürün görseli`}
+          title={`${displayTitle} — ${brandLabel} Mimari Sistemleri`}
+          width={640}
+          height={480}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/55 via-transparent to-transparent"
+          aria-hidden="true"
+        />
+        <span className="pointer-events-none absolute left-3.5 top-3.5 rounded-lg bg-[#0F172A]/85 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
+          {brandLabel}
         </span>
-      )}
-      {dbValue && (
-        <span className="whitespace-nowrap rounded-full bg-[#1E3A8A]/95 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-white shadow-sm backdrop-blur">
-          {dbValue}
-        </span>
-      )}
-    </div>
+      </Link>
+
+      <div className="flex flex-1 flex-col justify-between p-5">
+        <h3 className="text-[17px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+          <Link href={`/urunler/${prod.slug}`} prefetch={true}>
+            {displayTitle}
+          </Link>
+        </h3>
+
+        <div className="mt-4 pt-1">
+          <Link
+            href={`/urunler/${prod.slug}`}
+            prefetch={true}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-4 py-3 text-xs font-extrabold text-white shadow-navy transition-all hover:bg-[#1D4ED8]"
+          >
+            <span>Ürün Detayı</span>
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
