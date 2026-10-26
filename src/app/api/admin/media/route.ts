@@ -77,13 +77,31 @@ export async function DELETE(request: Request) {
     }
 
     const filePath = path.join(process.cwd(), 'public', url);
-    const realPath = await fs.realpath(filePath);
-    const uploadsDir = await fs.realpath(path.join(process.cwd(), 'public', 'images', 'uploads'));
+
+    let realPath: string;
+    let uploadsDir: string;
+    try {
+      realPath = await fs.realpath(filePath);
+      uploadsDir = await fs.realpath(path.join(process.cwd(), 'public', 'images', 'uploads'));
+    } catch {
+      return NextResponse.json(
+        { ok: false, error: 'Dosya bulunamadı veya sunucu dosya sistemi salt okunur modda.' },
+        { status: 409 }
+      );
+    }
+
     if (!realPath.startsWith(uploadsDir)) {
       return NextResponse.json({ ok: false, error: 'Geçersiz dosya yolu.' }, { status: 400 });
     }
 
-    await fs.unlink(realPath);
+    try {
+      await fs.unlink(realPath);
+    } catch {
+      return NextResponse.json(
+        { ok: false, error: 'Dosya silinemedi. Sunucu dosya sistemi salt okunur modda olabilir.' },
+        { status: 409 }
+      );
+    }
     return NextResponse.json({ ok: true, message: 'Dosya başarıyla silindi.' });
   } catch (error) {
     return NextResponse.json(
