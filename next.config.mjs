@@ -10,8 +10,8 @@ const nextConfig = {
   compress: true,
   webpack(config, { dev, isServer }) {
     if (dev && !isServer) {
-      config.output.filename = 'static/chunks/[name].js?v=20261026';
-      config.output.chunkFilename = 'static/chunks/[name].js?v=20261026';
+      config.output.filename = 'static/chunks/[name]-v2.js';
+      config.output.chunkFilename = 'static/chunks/[name]-v2.js';
     }
     return config;
   },
