@@ -48,7 +48,9 @@ export default function AdminDashboardPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [currentRole, setCurrentRole] = useState<UserRole>('super_admin');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => { setMounted(true); }, []);
   useEffect(() => { setDraft(normalizeCmsData(cms)); }, [cms]);
 
   useEffect(() => {
@@ -214,7 +216,7 @@ export default function AdminDashboardPage() {
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 <span className="text-xs font-extrabold uppercase tracking-wider text-white">Enterprise CMS v2.0</span>
               </div>
-              <p className="text-[11px] text-slate-400">Son: {new Date(draft.updatedAt || Date.now()).toLocaleString('tr-TR')}</p>
+              <p className="text-[11px] text-slate-400" suppressHydrationWarning>Son: {mounted ? new Date(draft.updatedAt || Date.now()).toLocaleString('tr-TR') : '—'}</p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">

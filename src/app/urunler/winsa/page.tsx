@@ -91,7 +91,7 @@ export default function WinsaBrandPage() {
         </div>
       </section>
 
-      <div className="container-shell space-y-12 pt-8 sm:pt-10">
+      <div className="mx-auto max-w-[1440px] space-y-12 px-4 pt-8 sm:px-8 sm:pt-10">
         <WinsaCatalogGrid initialBrand="winsa" />
 
         {/* Winsa Resmi Video Vitrinleri (LiteYouTube + VideoObject JSON-LD) */}

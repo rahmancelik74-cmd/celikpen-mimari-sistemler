@@ -333,8 +333,8 @@ export default function HizmetlerimizPage() {
       </section>
 
       {/* ============================ 8 CORE ARCHITECTURAL SERVICES GRID (GÜNGÖRPEN MINIMAL VISUAL CARDS) ============================ */}
-      <section className="container-shell pt-10 sm:pt-14" aria-label="Hizmetlerimiz Listesi">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto max-w-[1440px] px-4 pt-10 sm:px-8 sm:pt-14" aria-label="Hizmetlerimiz Listesi">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {ARCHITECTURAL_SERVICES.map((service) => (
             <article
               key={service.id}
@@ -344,23 +344,23 @@ export default function HizmetlerimizPage() {
               <Link
                 href={service.productHref}
                 prefetch={true}
-                className="relative block aspect-[3/4] sm:aspect-[4/5] w-full overflow-hidden"
+                className="relative block aspect-[5/8] w-full overflow-hidden"
               >
                 <Image
                   src={service.image}
                   alt={`${service.title} — Çelikpen uygulama fotoğrafı`}
                   title={`${service.title} — Çelikpen`}
                   width={700}
-                  height={875}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  height={1120}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-5">
-                  <h2 className="text-[17px] font-extrabold leading-snug text-white drop-shadow-lg">
+                <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end p-6 sm:p-8">
+                  <h2 className="text-2xl font-black leading-snug text-white drop-shadow-lg">
                     {service.title}
                   </h2>
-                  <span className="mt-3 inline-flex items-center justify-center rounded-xl bg-white/15 px-4 py-2.5 text-xs font-bold text-white backdrop-blur-sm transition-colors group-hover:bg-[#1E3A8A]">
+                  <span className="mt-4 inline-flex items-center justify-center rounded-xl bg-white/15 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm transition-colors group-hover:bg-[#1E3A8A]">
                     Detaylı İncele →
                   </span>
                 </div>

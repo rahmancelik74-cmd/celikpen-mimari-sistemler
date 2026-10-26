@@ -8,7 +8,7 @@ export function FloatingWhatsApp() {
   const pathname = usePathname();
   const { cms } = useCms();
 
-  if (pathname?.startsWith('/admin')) {
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/cp-yonetim-2026')) {
     return null;
   }
 

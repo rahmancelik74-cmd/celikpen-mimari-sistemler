@@ -205,35 +205,35 @@ function BrandProductCard({
       <Link
         href={`/urunler/${prod.slug}`}
         prefetch={true}
-        className="relative block aspect-[16/10] w-full overflow-hidden bg-white"
+        className="relative flex h-80 w-full items-center justify-center overflow-hidden bg-white p-6 sm:h-96"
       >
         <Image
           src={prod.defaultImage}
           alt={`${displayTitle} (${brandLabel}) — Çelikpen ürün görseli`}
           title={`${displayTitle} — ${brandLabel} Mimari Sistemleri`}
           width={640}
-          height={400}
+          height={500}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-full w-full object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-105"
+          className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
         />
         <span className="pointer-events-none absolute left-3.5 top-3.5 rounded-lg bg-[#0F172A]/85 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-sky-200 backdrop-blur-sm">
           {brandLabel}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col justify-between p-5">
+      <div className="flex flex-1 flex-col justify-between p-6">
         <WinsaSeriesLogo slug={prod.slug} />
-        <h3 className="mt-2 text-[17px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+        <h3 className="mt-2.5 text-xl font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
           <Link href={`/urunler/${prod.slug}`} prefetch={true}>
             {displayTitle}
           </Link>
         </h3>
 
-        <div className="mt-4 pt-1">
+        <div className="mt-5 pt-1">
           <Link
             href={`/urunler/${prod.slug}`}
             prefetch={true}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-4 py-3 text-xs font-extrabold text-white shadow-navy transition-all hover:bg-[#1D4ED8]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-5 py-3.5 text-sm font-extrabold text-white shadow-navy transition-all hover:bg-[#1D4ED8]"
           >
             <span>Ürün Detayı</span>
             <span

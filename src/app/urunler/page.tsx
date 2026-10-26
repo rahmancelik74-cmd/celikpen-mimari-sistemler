@@ -89,7 +89,7 @@ export default function UrunlerHubPage() {
         </div>
       </section>
 
-      <div className="container-shell pt-8 sm:pt-10">
+      <div className="mx-auto max-w-[1440px] px-4 pt-8 sm:px-8 sm:pt-10">
         <WinsaCatalogGrid />
       </div>
     </main>

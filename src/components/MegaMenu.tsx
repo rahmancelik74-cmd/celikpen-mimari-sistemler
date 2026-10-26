@@ -651,7 +651,7 @@ export function MegaMenu() {
 export const SiteHeader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
   const isHome = pathname === '/';
-  const isAdmin = pathname?.startsWith('/admin');
+  const isAdmin = pathname?.startsWith('/admin') || pathname?.startsWith('/cp-yonetim-2026');
 
   if (isAdmin) {
     return <>{children}</>;
