@@ -13,6 +13,7 @@ import { Footer } from '../components/Footer';
 import { PageTransitionBar } from '../components/PageTransitionBar';
 import { InstantPrefetcher } from '../components/InstantPrefetcher';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
+import { CmsProvider } from '../components/CmsProvider';
 import './globals.css';
 
 const poppins = Poppins({
@@ -70,19 +71,21 @@ export default function RootLayout({
   return (
     <html lang="tr" className={poppins.variable}>
       <body className="bg-white font-sans text-slate-800 antialiased">
-        <PageTransitionBar />
-        <InstantPrefetcher />
-        <SeoJsonLd />
-        <SeoAnalytics />
+        <CmsProvider>
+          <PageTransitionBar />
+          <InstantPrefetcher />
+          <SeoJsonLd />
+          <SeoAnalytics />
 
-        {/* Sabit üst bar + ana menü; tüm sayfalarda aynı kurumsal kabuk */}
-        <SiteHeader>{children}</SiteHeader>
+          {/* Sabit üst bar + ana menü; tüm sayfalarda aynı kurumsal kabuk */}
+          <SiteHeader>{children}</SiteHeader>
 
-        {/* Mirabalkon ritminde çok kolonlu kurumsal footer */}
-        <Footer />
+          {/* Mirabalkon ritminde çok kolonlu kurumsal footer */}
+          <Footer />
 
-        {/* Tüm rotalarda sabit kalan hızlı WhatsApp hattı */}
-        <FloatingWhatsApp />
+          {/* Tüm rotalarda sabit kalan hızlı WhatsApp hattı */}
+          <FloatingWhatsApp />
+        </CmsProvider>
       </body>
     </html>
   );

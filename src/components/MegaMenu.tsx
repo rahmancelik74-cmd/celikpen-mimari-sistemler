@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
+import { useCms } from './CmsProvider';
 
 /**
  * Mağaza menüsü şu anda ziyaretçiye gösterilmez. Tüm navigasyon nesnesi ve
@@ -114,6 +115,19 @@ const MAIN_NAV: NavItem[] = [
 export function MegaMenu() {
   const pathname = usePathname();
   const router = useRouter();
+  const { cms } = useCms();
+  const settings = cms.siteSettings;
+  const showMagaza = Boolean(settings.showMagazaMenu ?? SHOW_MAGAZA_MENU);
+  const mainNav: NavItem[] = [
+    { label: 'Anasayfa', href: '/' },
+    { label: 'Hizmetlerimiz', href: '/hizmetlerimiz', dropdown: 'services' },
+    { label: 'Ürünlerimiz', href: '/urunler', dropdown: 'products' },
+    ...(showMagaza ? [{ label: 'Mağaza', href: '/urunler' }] : []),
+    { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
+    { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
+    { label: 'Blog', href: '/profesyoneller/blog' },
+    { label: 'İletişim', href: '/iletisim' },
+  ];
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<DropdownKind | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -191,7 +205,8 @@ export function MegaMenu() {
     setActiveDropdown(kind);
   };
 
-  const phoneHref = `tel:${SITE_CONFIG.phoneRaw}`;
+  const phoneHref = `tel:${settings.phoneRaw || SITE_CONFIG.phoneRaw}`;
+  const whatsappHref = `https://wa.me/${settings.whatsappNumber || SITE_CONFIG.whatsappNumber}`;
 
   return (
     <header className="fixed inset-x-0 top-0 z-[100]">
@@ -206,32 +221,32 @@ export function MegaMenu() {
               <IconPhone className="h-3 w-3 shrink-0 text-[#BFDBFE]" />
               <span className="hidden sm:inline">Bizi Arayın:</span>
               <span className="whitespace-nowrap font-semibold text-white">
-                {SITE_CONFIG.phoneDisplay}
+                {settings.phoneDisplay || SITE_CONFIG.phoneDisplay}
               </span>
             </a>
             <a
-              href="mailto:iletisim@celikpen.com"
+              href={`mailto:${settings.email || 'iletisim@celikpen.com'}`}
               className="hidden items-center gap-1.5 text-slate-300 transition-colors hover:text-white md:inline-flex"
             >
               <IconMail className="h-3 w-3 text-[#BFDBFE]" />
-              iletisim@celikpen.com
+              {settings.email || 'iletisim@celikpen.com'}
             </a>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-3.5">
             <span
-              title="Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul"
+              title={settings.address || SITE_CONFIG.address}
               className="inline-flex items-center gap-1 text-[9px] text-slate-300 sm:text-[10px] md:text-[11px]"
             >
               <IconPin className="h-3 w-3 shrink-0 text-[#BFDBFE]" />
               <span className="whitespace-nowrap md:hidden">Bahçelievler</span>
               <span className="hidden whitespace-nowrap md:inline">
-                Kocasinan Merkez, Bahçelievler / İstanbul
+                {settings.shortAddress || 'Kocasinan Merkez, Bahçelievler / İstanbul'}
               </span>
             </span>
             <span className="h-3.5 w-px bg-white/20" aria-hidden="true" />
             <a
-              href="https://www.instagram.com/celikpen"
+              href={settings.instagramUrl || 'https://www.instagram.com/celikpen'}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen Instagram"
@@ -240,7 +255,7 @@ export function MegaMenu() {
               <IconInstagram className="h-4 w-4" />
             </a>
             <a
-              href="https://wa.me/905323332085"
+              href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen WhatsApp hattı"
@@ -266,7 +281,7 @@ export function MegaMenu() {
           </Link>
 
           <nav aria-label="Ana menü" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
-            {MAIN_NAV.map((item) =>
+            {mainNav.map((item) =>
               item.dropdown ? (
                 <div
                   key={item.label}
@@ -380,7 +395,7 @@ export function MegaMenu() {
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1E3A8A] text-white">
                 <IconPhone className="h-3.5 w-3.5" />
               </span>
-              {SITE_CONFIG.phoneDisplay}
+              {settings.phoneDisplay || SITE_CONFIG.phoneDisplay}
             </a>
             <Link
               href="/iletisim?form=kesif"
@@ -529,7 +544,7 @@ export function MegaMenu() {
                   )}
                 </div>
 
-                {MAIN_NAV.filter(
+                {mainNav.filter(
                   (item) =>
                     item.label !== 'Anasayfa' &&
                     item.label !== 'Hizmetlerimiz' &&
@@ -597,12 +612,12 @@ export function MegaMenu() {
                       Hemen ara
                     </span>
                     <span className="block truncate text-[11.5px] font-semibold">
-                      {SITE_CONFIG.phoneDisplay}
+                      {settings.phoneDisplay || SITE_CONFIG.phoneDisplay}
                     </span>
                   </span>
                 </a>
                 <a
-                  href="https://wa.me/905323332085"
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[48px] items-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-white"
@@ -620,7 +635,7 @@ export function MegaMenu() {
               </div>
               <p className="mt-3 flex items-start gap-1.5 text-[10.5px] leading-relaxed text-slate-500">
                 <IconPin className="mt-0.5 h-3 w-3 shrink-0 text-[#1E3A8A]" />
-                {SITE_CONFIG.address}
+                {settings.address || SITE_CONFIG.address}
               </p>
             </div>
           </div>
@@ -636,6 +651,11 @@ export function MegaMenu() {
 export const SiteHeader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isAdmin = pathname?.startsWith('/admin');
+
+  if (isAdmin) {
+    return <>{children}</>;
+  }
 
   return (
     <>

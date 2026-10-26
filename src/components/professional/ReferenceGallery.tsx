@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCms } from '../CmsProvider';
 
 export interface ReferencePhotoItem {
   id: string;
@@ -169,10 +170,17 @@ function ZoomIcon() {
 }
 
 export function ReferenceGallery({
-  photos = REFERENCE_PHOTOS,
+  photos: customPhotos,
 }: {
   photos?: ReferencePhotoItem[];
 }) {
+  const { cms } = useCms();
+  const photos: ReferencePhotoItem[] =
+    customPhotos && customPhotos.length > 0
+      ? customPhotos
+      : cms.references && cms.references.length > 0
+        ? cms.references
+        : REFERENCE_PHOTOS;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const selectedPhoto: ReferencePhotoItem | null =
@@ -301,6 +309,7 @@ export function ReferenceGallery({
                 title={`${photo.title} (${photo.system}) — Çelikpen Referans Galerisi`}
                 width={1000}
                 height={700}
+                unoptimized={photo.image.startsWith('data:') || photo.image.startsWith('/images/uploads/')}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
@@ -400,6 +409,7 @@ export function ReferenceGallery({
                 title={`${selectedPhoto.title} (${selectedPhoto.system}) — Çelikpen`}
                 width={1200}
                 height={840}
+                unoptimized={selectedPhoto.image.startsWith('data:') || selectedPhoto.image.startsWith('/images/uploads/')}
                 sizes="(min-width: 1024px) 1024px, 100vw"
                 className="max-h-[68vh] w-full object-contain"
               />

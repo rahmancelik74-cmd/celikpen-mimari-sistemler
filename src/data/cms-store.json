@@ -1,0 +1,426 @@
+{
+  "updatedAt": "2026-10-26T23:40:00.000Z",
+  "siteSettings": {
+    "phoneDisplay": "0 (532) 333 20 85",
+    "phoneRaw": "+905323332085",
+    "whatsappNumber": "905323332085",
+    "whatsappText": "Mimarlarımızla Görüşün",
+    "email": "iletisim@celikpen.com",
+    "address": "Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul",
+    "shortAddress": "Kocasinan Merkez, Bahçelievler / İstanbul",
+    "workingHours": "Pazartesi – Cumartesi: 08:30 – 19:00",
+    "experienceYears": 30,
+    "showMagazaMenu": false,
+    "instagramUrl": "https://www.instagram.com/celikpen",
+    "announcementText": "İstanbul Geneli Ücretsiz Lazerli Keşif & 10 Yıl Sistem Garantisi"
+  },
+  "pricingSystems": [
+    {
+      "id": "vns_8mm",
+      "code": "Vera 8",
+      "name": "Katlanır Cam Balkon (8 mm Temperli)",
+      "subtitle": "8 mm Şişecam temperli, alüminyum fitilli klasik katlanır sistem",
+      "pricePerM2": 3650,
+      "badge": "Ekonomik & Şık",
+      "active": true
+    },
+    {
+      "id": "vns_10mm",
+      "code": "Vera Pro 10",
+      "name": "Katlanır Cam Balkon (10 mm Temperli)",
+      "subtitle": "Yüksek katlar ve rüzgar yükü yüksek cepheler için 10 mm güçlendirilmiş sistem",
+      "pricePerM2": 4150,
+      "badge": "Yüksek Kat Standardı",
+      "active": true
+    },
+    {
+      "id": "vbs_isicam",
+      "code": "Vera Termal",
+      "name": "Isıcamlı Cam Balkon (4+20+4 Argonlu)",
+      "subtitle": "Kışın oda sıcaklığını koruyan ısı yalıtımlı dört mevsim cam balkon sistemi",
+      "pricePerM2": 5850,
+      "badge": "En Çok Tercih Edilen",
+      "active": true
+    },
+    {
+      "id": "vds_surme",
+      "code": "Vera Slide",
+      "name": "Eşiksiz Sürme Cam Balkon (8 mm / 10 mm)",
+      "subtitle": "Perdeye ve mobilyaya çarpmayan, sıfır eşikli paslanmaz rulmanlı sürme",
+      "pricePerM2": 4300,
+      "badge": "Modern Teras & Kafe",
+      "active": true
+    },
+    {
+      "id": "vds_isicamli",
+      "code": "Vera Slide Termal",
+      "name": "Isıcamlı Eşiksiz Sürme Sistem",
+      "subtitle": "Hem sürme konforu hem de 4+20+4 ısıcam yalıtımı bir arada",
+      "pricePerM2": 6250,
+      "badge": "Maksimum Konfor",
+      "active": true
+    },
+    {
+      "id": "vgs_giyotin",
+      "code": "Vera Vertical",
+      "name": "Motorlu Giyotin (Kumandalı Küpeşte) Cam",
+      "subtitle": "Uzaktan kumandalı Somfy / Becker motorlu, dikey açılan ısıcamlı sistem",
+      "pricePerM2": 8400,
+      "badge": "Motorlu & Otomatik",
+      "active": true
+    },
+    {
+      "id": "pvc_dograma",
+      "code": "Dorado 76 / Revotech",
+      "name": "PVC Pencere & Kapı Sistemleri",
+      "subtitle": "7 odacıklı, 3 contalı (orta conta) 76–84 mm yüksek ısı ve ses yalıtımlı PVC doğrama",
+      "pricePerM2": 5400,
+      "badge": "A+ Enerji Sınıfı",
+      "active": true
+    },
+    {
+      "id": "hs_surme",
+      "code": "Panorama HS 76",
+      "name": "Kaldır-Sür (Hebeschiebe) Sürme Sistem",
+      "subtitle": "400 kg kanat taşıma kapasiteli, sıfır eşikli panoramik teras ve bahçe kapısı",
+      "pricePerM2": 7900,
+      "badge": "Panoramik Lüks",
+      "active": true
+    },
+    {
+      "id": "comfort_slide",
+      "code": "Comfort Slide Plus",
+      "name": "Yalıtımlı Yeni Nesil PVC Sürme",
+      "subtitle": "Klasik sürmelerden üstün EPDM vakum contalı, rüzgar ve su sızdırmaz sürme",
+      "pricePerM2": 6400,
+      "badge": "Akıllı Yalıtım",
+      "active": true
+    },
+    {
+      "id": "pergola",
+      "code": "Vela Bioklimatik",
+      "name": "Kış Bahçesi & Bioklimatik Pergola",
+      "subtitle": "Motorlu alüminyum lamel tavan, gizli dere tahliyesi ve entegre LED aydınlatma",
+      "pricePerM2": 11500,
+      "badge": "Mimari Çözüm",
+      "active": true
+    }
+  ],
+  "pricingAddons": {
+    "catScreenPerUnit": 1750,
+    "pleatedBlindPerM2": 950
+  },
+  "references": [
+    {
+      "id": "ref-1",
+      "image": "/images/references/ref-1.jpg",
+      "title": "Bahçelievler — Isıcamlı Cam Balkon",
+      "district": "Bahçelievler / Kocasinan Merkez",
+      "system": "Winsa Vera Termal 4+20+4 Argonlu Isıcam",
+      "category": "Isıcamlı Cam Balkon",
+      "featured": true
+    },
+    {
+      "id": "ref-2",
+      "image": "/images/references/ref-2.jpg",
+      "title": "Ataköy — Bioklimatik Kış Bahçesi",
+      "district": "Bakırköy / Ataköy",
+      "system": "Winsa Vela Bioklimatik Pergola & Cam Cephe",
+      "category": "Kış Bahçesi & Pergola",
+      "featured": true
+    },
+    {
+      "id": "ref-3",
+      "image": "/images/references/ref-3.jpg",
+      "title": "Bakırköy — Winsa Dorado 76 PVC",
+      "district": "Bakırköy / Merkez",
+      "system": "Winsa Dorado 76 Antrasit PVC Doğrama",
+      "category": "PVC Pencere & Kapı",
+      "featured": true
+    },
+    {
+      "id": "ref-4",
+      "image": "/images/references/ref-4.jpg",
+      "title": "Florya — Motorlu Giyotin Sistem",
+      "district": "Bakırköy / Florya",
+      "system": "Winsa Vera Vertical Uzaktan Kumandalı Giyotin",
+      "category": "Giyotin Cam Sistemi",
+      "featured": true
+    },
+    {
+      "id": "ref-5",
+      "image": "/images/references/ref-5.jpg",
+      "title": "Yeşilköy — Panorama HS 76 Kaldır-Sür",
+      "district": "Bakırköy / Yeşilköy",
+      "system": "Winsa Panorama HS 76 Hebeschiebe Sürme",
+      "category": "Sürme Sistemler",
+      "featured": true
+    },
+    {
+      "id": "ref-6",
+      "image": "/images/references/ref-6.jpg",
+      "title": "Siyavuşpaşa — Köşe L-Balkon Katlanır Cam",
+      "district": "Bahçelievler / Siyavuşpaşa",
+      "system": "Winsa Vera Pro 10 mm Temperli Katlanır Sistem",
+      "category": "Katlanır Cam Balkon",
+      "featured": true
+    },
+    {
+      "id": "ref-7",
+      "image": "/images/references/ref-7.jpg",
+      "title": "Başakşehir — Eşiksiz Sürme Cam Balkon",
+      "district": "Başakşehir",
+      "system": "Winsa Vera Slide Eşiksiz Paslanmaz Rulmanlı Sürme",
+      "category": "Sürme Cam Balkon",
+      "featured": true
+    },
+    {
+      "id": "ref-8",
+      "image": "/images/references/ref-8.jpg",
+      "title": "Şirinevler — Revotech Gold 84 mm PVC",
+      "district": "Bahçelievler / Şirinevler",
+      "system": "Winsa Revotech Gold 7 Odacıklı 3 Contalı Sistem",
+      "category": "PVC Pencere & Kapı",
+      "featured": true
+    },
+    {
+      "id": "ref-9",
+      "image": "/images/references/ref-9.jpg",
+      "title": "Kocasinan — Cam Tavanlı Kış Bahçesi",
+      "district": "Bahçelievler / Kocasinan Merkez",
+      "system": "Lamine Isıcam Tavan & Vera Termal Katlanır Cephe",
+      "category": "Kış Bahçesi Sistemleri",
+      "featured": true
+    },
+    {
+      "id": "ref-10",
+      "image": "/images/references/ref-10.jpg",
+      "title": "Yenibosna — Teras & Kafe Giyotin Cephe",
+      "district": "Bahçelievler / Yenibosna",
+      "system": "Somfy Motorlu Giyotin & Bioklimatik Tavan",
+      "category": "Giyotin & Pergola",
+      "featured": true
+    },
+    {
+      "id": "ref-11",
+      "image": "/images/references/ref-11.jpg",
+      "title": "Soğanlı — Winstor Monoblok Panjur & PVC",
+      "district": "Bahçelievler / Soğanlı",
+      "system": "Winsa Safir 76 & Winstor Motorlu Panjur",
+      "category": "Panjur & PVC Doğrama",
+      "featured": true
+    },
+    {
+      "id": "ref-12",
+      "image": "/images/references/ref-12.jpg",
+      "title": "Çobançeşme — Comfort Slide Plus Sürme",
+      "district": "Bahçelievler / Çobançeşme",
+      "system": "Winsa Comfort Slide Plus Vakum Contalı Sürme",
+      "category": "Sürme Sistemler",
+      "featured": true
+    }
+  ],
+  "services": [
+    {
+      "id": "katlanir-cam-balkon",
+      "title": "Katlanır Cam Balkon Sistemleri",
+      "subtitle": "8 mm ve 10 mm Şişecam temperli panellerle %100 açılabilir panoramik balkonlar",
+      "badge": "VERA & VERA PRO SERİSİ",
+      "image": "/images/services/katlanir-cam-balkon.jpg",
+      "href": "/urunler/katlanir-cam-balkon",
+      "active": true
+    },
+    {
+      "id": "isicamli-cam-balkon",
+      "title": "Isıcamlı Cam Balkon Sistemleri",
+      "subtitle": "4+20+4 mm Argon gazlı Şişecam Konfor & Sinerji camlarla 4 mevsim oda konforu",
+      "badge": "MAKSİMUM ISI YALITIMI",
+      "image": "/images/services/isicamli-cam-balkon.jpg",
+      "href": "/urunler/isicamli-cam-balkon",
+      "active": true
+    },
+    {
+      "id": "surme-cam-balkon",
+      "title": "Sürme (Sürgülü) Cam Balkon Sistemleri",
+      "subtitle": "İç mekana yer kaybettirmeyen eşiksiz ve ısıcamlı paslanmaz rulmanlı raylı sistemler",
+      "badge": "EŞİKSİZ & MODERN",
+      "image": "/images/services/surme-cam-balkon.jpg",
+      "href": "/urunler/esiksiz-surme",
+      "active": true
+    },
+    {
+      "id": "giyotin-cam-sistemleri",
+      "title": "Motorlu Giyotin (Hareketli Küpeşte) Cam",
+      "subtitle": "Uzaktan kumandalı Somfy / Becker motorlu, dikey açılan tam otomatik cam cephe",
+      "badge": "OTOMATİK & KUMANDALI",
+      "image": "/images/services/giyotin-cam.jpg",
+      "href": "/urunler/giyotin-cam",
+      "active": true
+    },
+    {
+      "id": "kis-bahcesi-sistemleri",
+      "title": "Kış Bahçesi Sistemleri",
+      "subtitle": "Teras, bahçe ve dubleks katları dört mevsim yaşanabilir lüks odalara dönüştürün",
+      "badge": "4 MEVSİM YAŞAM ALANI",
+      "image": "/images/services/kis-bahcesi.jpg",
+      "href": "/urunler/kis-bahcesi-pergola",
+      "active": true
+    },
+    {
+      "id": "bioklimatik-pergola",
+      "title": "Bioklimatik Pergola & Tente Sistemleri",
+      "subtitle": "Kendi ekseninde dönen ve geriye toplanan motorlu alüminyum lamel tavan sistemleri",
+      "badge": "MİMARİ DIŞ MEKAN",
+      "image": "/images/services/bioklimatik-pergola.jpg",
+      "href": "/urunler/kis-bahcesi-pergola",
+      "active": true
+    },
+    {
+      "id": "pvc-pencere-kapi",
+      "title": "Winsa PVC Pencere & Kapı Sistemleri",
+      "subtitle": "Dorado 76, Revotech Gold (84 mm) ve Panorama HS 76 ile A+ enerji tasarrufu",
+      "badge": "WINSA YETKİLİ BAYİ",
+      "image": "/images/services/pvc-pencere-kapi.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "panjur-kepenk-sineklik",
+      "title": "Motorlu Panjur, Kepenk & Kedi Sinekliği",
+      "subtitle": "Winsa Winstor monoblok panjur, alüminyum kepenk ve yırtılmaz çelik/kedi tüllü sineklik",
+      "badge": "TAMAMLAYICI SİSTEMLER",
+      "image": "/images/services/panjur-sineklik.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    }
+  ],
+  "products": [
+    {
+      "id": "winsa-dorado-76",
+      "brand": "Winsa",
+      "title": "Winsa Dorado 76 PVC Pencere ve Kapı Sistemi",
+      "category": "PVC Pencere & Kapı",
+      "badge": "76 MM / 5 ODACIK",
+      "image": "/images/products/winsa-dorado-76.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "winsa-revotech",
+      "brand": "Winsa",
+      "title": "Winsa Revotech Gold 84 mm 7 Odacıklı Sistem",
+      "category": "PVC Pencere & Kapı",
+      "badge": "84 MM / 7 ODACIK / 3 CONTA",
+      "image": "/images/products/winsa-revotech.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "winsa-safir-76",
+      "brand": "Winsa",
+      "title": "Winsa Safir 76 Yeni Nesil Yalıtım Serisi",
+      "category": "PVC Pencere & Kapı",
+      "badge": "SAFİR 76 SERİSİ",
+      "image": "/images/products/winsa-safir-76.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "winsa-panorama-hs-76",
+      "brand": "Winsa",
+      "title": "Winsa Panorama HS 76 Kaldır-Sür (Hebeschiebe)",
+      "category": "Sürme Sistemleri",
+      "badge": "400 KG KANAT KAPASİTESİ",
+      "image": "/images/products/winsa-panorama-hs-76.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "winsa-comfort-slide",
+      "brand": "Winsa",
+      "title": "Winsa Comfort Slide Plus & Lotus Sürme",
+      "category": "Sürme Sistemleri",
+      "badge": "VAKUM CONTALI SÜRME",
+      "image": "/images/products/winsa-comfort-slide.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "winsa-vera-cam-balkon",
+      "brand": "Winsa",
+      "title": "Winsa Vera Termal, Vera Pro & Vela Pergola",
+      "category": "Cam Balkon & Pergola",
+      "badge": "VERA & VELA SERİSİ",
+      "image": "/images/products/winsa-vera-cam-balkon.jpg",
+      "href": "/urunler/winsa",
+      "active": true
+    },
+    {
+      "id": "albert-genau-tiara",
+      "brand": "Albert Genau",
+      "title": "Albert Genau Tiara Twinmax Isıcamlı Cam Balkon",
+      "category": "Isıcamlı Cam Balkon",
+      "badge": "TIARA TWINMAX",
+      "image": "/images/services/isicamli-cam-balkon.jpg",
+      "href": "/urunler/albert-genau",
+      "active": true
+    },
+    {
+      "id": "albert-genau-vertiflex",
+      "brand": "Albert Genau",
+      "title": "Albert Genau VertiFlex Motorlu Giyotin & Targa Pergola",
+      "category": "Giyotin & Bioklimatik",
+      "badge": "VERTIFLEX & TARGA",
+      "image": "/images/services/giyotin-cam.jpg",
+      "href": "/urunler/albert-genau",
+      "active": true
+    }
+  ],
+  "blogPosts": [
+    {
+      "slug": "isicamli-cam-balkon-fiyatlari-yalitim-rehberi-2026",
+      "title": "2026 Isıcamlı Cam Balkon m² Fiyatları ve 4+20+4 Argonlu Yalıtım Rehberi",
+      "metaTitle": "Isıcamlı Cam Balkon Fiyatları 2026 | m² Hesaplama & Yalıtım",
+      "metaDescription": "2026 ısıcamlı cam balkon m² fiyatları, 4+20+4 argon gazlı Sinerji/Konfor cam karşılaştırması ve Bahçelievler ücretsiz lazer keşif rehberi.",
+      "primaryKeyword": "ısıcamlı cam balkon fiyatları 2026",
+      "category": "Cam Balkon",
+      "readTime": 9,
+      "publishedAt": "2026-01-15",
+      "updatedAt": "2026-10-26",
+      "coverImage": "/images/services/isicamli-cam-balkon.jpg",
+      "youtubeVideoId": "M7lc1UVf-VE",
+      "excerpt": "Klasik 8 mm tek cam ile 4+20+4 argon gazlı ısıcamlı cam balkon arasındaki 3,2 katlık ısı yalıtım farkı, amortisman hesabı ve güncel m² birim fiyatları.",
+      "contentHtml": "Isıcamlı cam balkon sistemleri (Winsa Vera Termal ve Albert Genau Tiara Twinmax), 4+20+4 mm argon gaz dolgulu Şişecam Sinerji ve Konfor kombinasyonuyla balkonları dört mevsim oda konforuna dönüştürür."
+    },
+    {
+      "slug": "winsa-dorado-76-revotech-gold-pvc-karsilastirma",
+      "title": "Winsa Dorado 76 mı, Revotech Gold 84 mm mi? Teknik PVC Doğrama Karşılaştırması",
+      "metaTitle": "Winsa Dorado 76 ve Revotech Gold 84mm PVC Karşılaştırması",
+      "metaDescription": "Winsa Dorado 76 (5 odacık) ile Revotech Gold 84 mm (7 odacık, 3 conta) PVC pencere sistemlerinin Uw ısı iletim ve dB ses yalıtım farkları.",
+      "primaryKeyword": "Winsa Dorado 76 Revotech karşılaştırma",
+      "category": "PVC Pencere",
+      "readTime": 8,
+      "publishedAt": "2026-02-02",
+      "updatedAt": "2026-10-26",
+      "coverImage": "/images/products/winsa-revotech.jpg",
+      "youtubeVideoId": "ysz5S6PUM-U",
+      "excerpt": "İstanbul ikliminde hangi cephede Dorado 76, hangi cephede 7 odacıklı ve 3 contalı Revotech Gold tercih edilmeli? Mühendislik verileriyle inceledik.",
+      "contentHtml": "Winsa Revotech Gold 84 mm profil genişliği, 7 odacıklı iç geometrisi ve orta conta (3. conta) bariyeriyle E-5 ve havalimanı aksındaki yüksek gürültülü cephelerde 45 dB'e varan akustik yalıtım sağlar."
+    },
+    {
+      "slug": "katlanir-mi-esiksiz-surme-cam-balkon-mu",
+      "title": "Katlanır Cam Balkon mu, Eşiksiz Sürme Sistem mi? Hangi Balkona Hangisi Uygun?",
+      "metaTitle": "Katlanır mı Sürme Cam Balkon mu? 2026 Mimari Seçim Rehberi",
+      "metaDescription": "Dar balkonlar, L-köşe balkonlar ve geniş teraslar için katlanır cam balkon ile eşiksiz sürme cam balkon arasındaki kullanım ve yalıtım farkları.",
+      "primaryKeyword": "katlanır mı sürme cam balkon mu",
+      "category": "Sürme Sistemler",
+      "readTime": 7,
+      "publishedAt": "2026-02-18",
+      "updatedAt": "2026-10-26",
+      "coverImage": "/images/services/surme-cam-balkon.jpg",
+      "youtubeVideoId": "M7lc1UVf-VE",
+      "excerpt": "Tül perde ve balkon mobilyası kullanımında eşiksiz sürme sistemlerin avantajları, tam açıklık isteyen cephelerde katlanır sistemlerin üstünlüğü.",
+      "contentHtml": "İçeriye doğru katlanan kanatların perdeye veya masa takımına çarpmasını istemeyen kullanıcılar için Winsa Vera Slide eşiksiz sürme cam balkon sistemleri sıfır alt ray çıkıntısıyla kusursuz konfor sunar."
+    }
+  ]
+}

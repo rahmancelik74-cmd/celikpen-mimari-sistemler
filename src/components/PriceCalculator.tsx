@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useMemo } from 'react';
 import {
@@ -10,6 +10,7 @@ import {
   calculateBalconyQuote,
 } from '../config/pricing.config';
 import { SITE_CONFIG } from '../config/site.config';
+import { useCms } from './CmsProvider';
 
 export interface PriceCalculatorProps {
   defaultNeighborhood?: string;
@@ -63,6 +64,7 @@ export function PriceCalculator({
   defaultNeighborhood = 'Kocasinan Merkez',
   defaultSystemId = 'vbs_isicam',
 }: PriceCalculatorProps = {}) {
+  const { cms } = useCms();
   const [geometry, setGeometry] = useState<BalconyGeometryId>('duz');
   const [widthsCm, setWidthsCm] = useState<[number, number, number]>([420, 160, 160]);
   const [heightCm, setHeightCm] = useState<number>(190);
@@ -80,19 +82,68 @@ export function PriceCalculator({
   const [isBulkBuilding, setIsBulkBuilding] = useState<boolean>(false);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState<string>(defaultNeighborhood);
 
+  const dynamicSystemsList = useMemo(() => {
+    const baseList = Object.values(CELIKPEN_PRICING_CONFIG.systems);
+    if (!cms.pricingSystems || cms.pricingSystems.length === 0) {
+      return baseList;
+    }
+    return baseList
+      .map((baseSys) => {
+        const override = cms.pricingSystems.find((item) => item.id === baseSys.id);
+        if (!override) return baseSys;
+        return {
+          ...baseSys,
+          code: override.code || baseSys.code,
+          name: override.name || baseSys.name,
+          shortDesc: override.subtitle || baseSys.shortDesc,
+          netPricePerM2:
+            typeof override.pricePerM2 === 'number' && override.pricePerM2 > 0
+              ? override.pricePerM2
+              : baseSys.netPricePerM2,
+          badge: override.badge || baseSys.badge,
+          active: override.active !== false,
+        };
+      })
+      .filter((sys) => (sys as { active?: boolean }).active !== false);
+  }, [cms.pricingSystems]);
+
+  const catScreenUnitCost =
+    cms.pricingAddons?.catScreenPerUnit ?? CELIKPEN_PRICING_CONFIG.addons.catScreenPerUnit;
+  const pleatedBlindM2Cost =
+    cms.pricingAddons?.pleatedBlindPerM2 ?? CELIKPEN_PRICING_CONFIG.addons.pleatedBlindPerM2;
+
+  const dynamicPricingConfig = useMemo(() => {
+    const systemsRecord = { ...CELIKPEN_PRICING_CONFIG.systems };
+    for (const sys of dynamicSystemsList) {
+      systemsRecord[sys.id] = sys;
+    }
+    return {
+      ...CELIKPEN_PRICING_CONFIG,
+      systems: systemsRecord,
+      addons: {
+        ...CELIKPEN_PRICING_CONFIG.addons,
+        catScreenPerUnit: catScreenUnitCost,
+        pleatedBlindPerM2: pleatedBlindM2Cost,
+      },
+    };
+  }, [dynamicSystemsList, catScreenUnitCost, pleatedBlindM2Cost]);
+
   const quote = useMemo(
     () =>
-      calculateBalconyQuote({
-        geometry,
-        widthsCm,
-        heightCm,
-        systemId,
-        glassId,
-        profileId,
-        includeCatScreen,
-        includePleatedBlind,
-        isBulkBuilding,
-      }),
+      calculateBalconyQuote(
+        {
+          geometry,
+          widthsCm,
+          heightCm,
+          systemId,
+          glassId,
+          profileId,
+          includeCatScreen,
+          includePleatedBlind,
+          isBulkBuilding,
+        },
+        dynamicPricingConfig
+      ),
     [
       geometry,
       widthsCm,
@@ -103,10 +154,13 @@ export function PriceCalculator({
       includeCatScreen,
       includePleatedBlind,
       isBulkBuilding,
+      dynamicPricingConfig,
     ]
   );
 
-  const selectedSystem = CELIKPEN_PRICING_CONFIG.systems[systemId];
+  const selectedSystem =
+    dynamicSystemsList.find((item) => item.id === systemId) ||
+    CELIKPEN_PRICING_CONFIG.systems[systemId];
   const selectedGlass = CELIKPEN_PRICING_CONFIG.glassOptions[glassId];
   const selectedProfile = CELIKPEN_PRICING_CONFIG.profileColors[profileId];
   const activeFronts = geometry === 'duz' ? 1 : geometry === 'l_tipi' ? 2 : 3;
@@ -210,8 +264,10 @@ export function PriceCalculator({
       `• Ek Donanım: ${includeCatScreen ? 'Kedi Sinekliği Var, ' : ''}${includePleatedBlind ? 'Plise Perde Var, ' : ''}${isBulkBuilding ? '5+ Daire Toplu Bina (%15 İndirim)' : 'Bireysel Daire'}`,
       `• Hesaplanan Net Tutar: ${quote.netTotal.toLocaleString('tr-TR')} TL`,
     ].join('\n');
-    return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
+    const waNumber = cms.siteSettings?.whatsappNumber || SITE_CONFIG.whatsappNumber;
+    return `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
   }, [
+    cms.siteSettings?.whatsappNumber,
     selectedNeighborhood,
     geometry,
     quote,
@@ -630,7 +686,7 @@ export function PriceCalculator({
           3. Resmi Winsa Sistem Serisi (2026 Net m² Birim Fiyatlı)
         </label>
         <div className="mt-1.5 grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {Object.values(CELIKPEN_PRICING_CONFIG.systems).map((sys) => (
+          {dynamicSystemsList.map((sys) => (
             <button
               key={sys.id}
               type="button"
@@ -701,7 +757,7 @@ export function PriceCalculator({
           />
           <span>
             Kedi Tüllü Sineklik (+
-            {CELIKPEN_PRICING_CONFIG.addons.catScreenPerUnit.toLocaleString('tr-TR')} ₺)
+            {catScreenUnitCost.toLocaleString('tr-TR')} ₺)
           </span>
         </label>
 
@@ -713,7 +769,7 @@ export function PriceCalculator({
             className="accent-celikpen-brand"
           />
           <span>
-            Plise Perde (+{CELIKPEN_PRICING_CONFIG.addons.pleatedBlindPerM2} ₺/m²)
+            Plise Perde (+{pleatedBlindM2Cost} ₺/m²)
           </span>
         </label>
 

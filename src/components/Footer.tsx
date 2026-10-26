@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
+import { useCms } from './CmsProvider';
 
 const FOOTER_SERVICES = [
   { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz#katlanir-cam-balkon' },
@@ -46,6 +50,32 @@ const FOOTER_SOCIAL = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  const { cms } = useCms();
+  const settings = cms.siteSettings;
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
+  const socialItems = [
+    {
+      label: 'Instagram',
+      href: settings.instagramUrl || 'https://www.instagram.com/celikpen',
+      icon: <IconInstagram />,
+    },
+    {
+      label: 'WhatsApp',
+      href: `https://wa.me/${settings.whatsappNumber || SITE_CONFIG.whatsappNumber}`,
+      icon: <IconWhatsApp />,
+    },
+    {
+      label: 'Telefon',
+      href: `tel:${settings.phoneRaw || SITE_CONFIG.phoneRaw}`,
+      icon: <IconPhone />,
+    },
+  ];
+
   return (
     <footer className="bg-[#0F172A] text-slate-300">
       <div className="container-shell pt-12 sm:pt-14">
@@ -66,7 +96,7 @@ export function Footer() {
               </span>
             </div>
             <div className="mt-5 flex items-center gap-2">
-              {FOOTER_SOCIAL.map((social) => (
+              {socialItems.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -137,25 +167,29 @@ export function Footer() {
             <ul className="mt-4 space-y-3.5">
               <li>
                 <a
-                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  href={`tel:${settings.phoneRaw || SITE_CONFIG.phoneRaw}`}
                   className="flex items-start gap-2.5 text-[11.5px] text-slate-300 transition-colors hover:text-white"
                 >
                   <span className="mt-0.5 text-[#BFDBFE]"><IconPhone /></span>
                   <span>
                     <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Telefon</span>
-                    <span className="mt-0.5 block font-semibold text-white">{SITE_CONFIG.phoneDisplay}</span>
+                    <span className="mt-0.5 block font-semibold text-white">
+                      {settings.phoneDisplay || SITE_CONFIG.phoneDisplay}
+                    </span>
                   </span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:iletisim@celikpen.com"
+                  href={`mailto:${settings.email || 'iletisim@celikpen.com'}`}
                   className="flex items-start gap-2.5 text-[11.5px] text-slate-300 transition-colors hover:text-white"
                 >
                   <span className="mt-0.5 text-[#BFDBFE]"><IconMail /></span>
                   <span>
                     <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">E-posta</span>
-                    <span className="mt-0.5 block text-slate-300">iletisim@celikpen.com</span>
+                    <span className="mt-0.5 block text-slate-300">
+                      {settings.email || 'iletisim@celikpen.com'}
+                    </span>
                   </span>
                 </a>
               </li>
@@ -163,14 +197,14 @@ export function Footer() {
                 <span className="mt-0.5 shrink-0 text-[#BFDBFE]"><IconPin /></span>
                 <span>
                   <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Showroom</span>
-                  <span className="mt-0.5 block">{SITE_CONFIG.address}</span>
+                  <span className="mt-0.5 block">{settings.address || SITE_CONFIG.address}</span>
                 </span>
               </li>
               <li className="flex items-start gap-2.5 text-[11.5px] leading-relaxed text-slate-400">
                 <span className="mt-0.5 shrink-0 text-[#BFDBFE]"><IconClock /></span>
                 <span>
                   <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Çalışma Saatleri</span>
-                  <span className="mt-0.5 block">{SITE_CONFIG.workingHours}</span>
+                  <span className="mt-0.5 block">{settings.workingHours || SITE_CONFIG.workingHours}</span>
                 </span>
               </li>
             </ul>
@@ -219,7 +253,7 @@ export function Footer() {
             </span>
             <span className="hidden h-3 w-px bg-white/10 sm:block" aria-hidden="true" />
             <span className="text-[9px] text-slate-600">
-              Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul
+              {settings.address || 'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul'}
             </span>
           </div>
         </div>

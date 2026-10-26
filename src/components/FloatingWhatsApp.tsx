@@ -1,18 +1,23 @@
+'use client';
+
 import React from 'react';
+import { usePathname } from 'next/navigation';
+import { useCms } from './CmsProvider';
 
-const WHATSAPP_HREF =
-  'https://wa.me/905323332085?text=' +
-  encodeURIComponent('Merhaba, cam balkon / teras için ücretsiz keşif randevusu almak istiyorum.');
-
-/**
- * Tüm sayfalarda sağ altta görünen WhatsApp hattı.
- *
- * Varsayılan durumda yalnızca 56×56 yeşil ikon görünür. Masaüstünde hover
- * ile 244 px genişliğe açılarak "Ücretsiz Keşif & Destek / Mimarlarımızla
- * Görüşün" iki satırlı davet metnini gösterir. Mobilde tek dokunuş doğrudan WhatsApp'ı açar; etiket varsayılan
- * olarak max-w-0 / opacity-0 / overflow-hidden kalır.
- */
 export function FloatingWhatsApp() {
+  const pathname = usePathname();
+  const { cms } = useCms();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
+  const whatsappNumber = cms.siteSettings.whatsappNumber || '905323332085';
+  const whatsappText = cms.siteSettings.whatsappText || 'Mimarlarımızla Görüşün';
+  const whatsappHref =
+    `https://wa.me/${whatsappNumber}?text=` +
+    encodeURIComponent('Merhaba, cam balkon / teras için ücretsiz keşif randevusu almak istiyorum.');
+
   return (
     <div className="fixed bottom-5 right-5 z-[90] sm:bottom-6 sm:right-6">
       <span
@@ -21,11 +26,11 @@ export function FloatingWhatsApp() {
       />
 
       <a
-        href={WHATSAPP_HREF}
+        href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp üzerinden mimarlarımızla görüşün — ücretsiz keşif ve destek"
-        title="Ücretsiz Keşif & Destek — Mimarlarımızla Görüşün"
+        title={`Ücretsiz Keşif & Destek — ${whatsappText}`}
         className="group relative z-10 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-[#25D366] text-white shadow-xl transition-all duration-300 ease-out hover:w-[244px] hover:justify-start hover:pl-2 hover:pr-5 hover:bg-[#1EBE5D] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#25D366] motion-reduce:transition-none"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/20 transition-colors duration-300 group-hover:bg-white/20 motion-reduce:transition-none">
@@ -37,7 +42,7 @@ export function FloatingWhatsApp() {
             Ücretsiz Keşif &amp; Destek
           </span>
           <span className="mt-0.5 block whitespace-nowrap text-[13px] font-bold leading-tight text-white">
-            Mimarlarımızla Görüşün
+            {whatsappText}
           </span>
         </span>
       </a>
