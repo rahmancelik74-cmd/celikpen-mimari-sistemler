@@ -12,10 +12,12 @@ import { CelikpenLogo } from './CelikpenLogo';
  */
 const SHOW_MAGAZA_MENU = false;
 
+type DropdownKind = 'services' | 'products';
+
 type NavItem = {
   label: string;
   href: string;
-  dropdown?: boolean;
+  dropdown?: DropdownKind;
   disabled?: boolean;
 };
 
@@ -25,74 +27,127 @@ const MAGAZA_NAV_ITEM: NavItem = {
   disabled: true,
 };
 
-type ServiceItem = {
+type MenuCardItem = {
   title: string;
   description: string;
   href: string;
   icon: React.ReactNode;
 };
 
-const SERVICES: ServiceItem[] = [
+const SERVICES: MenuCardItem[] = [
   {
-    title: 'Cam Balkon Sistemleri',
-    description: 'Isıcamlı, katlanır ve panoramik balkon çözümleri',
-    href: '/urunler?kategori=cam-balkon-sistemleri',
+    title: 'Katlanır Cam Balkon Sistemleri',
+    description: '8mm / 10mm temperli & maksimum panoramik açıklık',
+    href: '/hizmetlerimiz#katlanir-cam-balkon',
     icon: <IconPanels />,
   },
   {
-    title: 'Giyotin Cam Sistemleri',
-    description: 'Motorlu, kumandalı dikey açılan cam cephe',
-    href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    icon: <IconArrowUpDown />,
+    title: 'Isıcamlı Cam Balkon Sistemleri',
+    description: '4+20+4 argon gazlı Sinerji/Konfor cam & üstün yalıtım',
+    href: '/hizmetlerimiz#isicamli-cam-balkon',
+    icon: <IconThermalGlass />,
   },
   {
-    title: 'Bioklimatik Pergola',
-    description: 'Dört mevsim yaşayan teras ve tavan sistemleri',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    icon: <IconSun />,
-  },
-  {
-    title: 'Kış Bahçesi',
-    description: 'Teras, bahçe ve ticari alanlar için cam mimari',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    icon: <IconHome />,
-  },
-  {
-    title: 'Sürme Cam Sistemleri',
-    description: 'Eşiksiz, geniş açıklıklı ve sessiz sürme çözümleri',
-    href: '/urunler?kategori=surme-sistemler',
+    title: 'Sürme (Sürgülü) Cam Balkon Sistemleri',
+    description: 'Eşiksiz ve eşikli paslanmaz rulmanlı raylı sistemler',
+    href: '/hizmetlerimiz#surme-cam-balkon',
     icon: <IconSliders />,
   },
   {
-    title: 'Alüminyum & PVC Sistemler',
-    description: 'Pencere, kapı, panjur ve cephe doğramaları',
+    title: 'Motorlu Giyotin Cam Sistemleri',
+    description: 'Uzaktan kumandalı dikey açılan hareketli küpeşte',
+    href: '/hizmetlerimiz#giyotin-cam-sistemleri',
+    icon: <IconArrowUpDown />,
+  },
+  {
+    title: 'Kış Bahçesi Sistemleri',
+    description: 'Dört mevsim yalıtımlı cam tavan & cephe sistemleri',
+    href: '/hizmetlerimiz#kis-bahcesi-sistemleri',
+    icon: <IconHome />,
+  },
+  {
+    title: 'Bioklimatik Pergola & Tente Sistemleri',
+    description: 'Motorlu alüminyum lamel tavan ve gizli drenaj',
+    href: '/hizmetlerimiz#bioklimatik-pergola',
+    icon: <IconSun />,
+  },
+  {
+    title: 'PVC Pencere & Kapı Montaj / Yenileme',
+    description: 'Lazer ölçüm, söküm ve anahtar teslim Winsa uygulama',
+    href: '/hizmetlerimiz#pvc-pencere-kapi',
+    icon: <IconLayers />,
+  },
+  {
+    title: 'Panjur, Kepenk ve Plise Sineklik',
+    description: 'Motorlu monoblok panjur & kedi tüllü sineklik',
+    href: '/hizmetlerimiz#panjur-kepenk-sineklik',
+    icon: <IconShield />,
+  },
+];
+
+const PRODUCTS_MENU: MenuCardItem[] = [
+  {
+    title: 'Winsa PVC Pencere ve Kapı Sistemleri',
+    description: 'Revotech Gold 84, Dorado 76 ve Safir 76 yalıtım serileri',
     href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
     icon: <IconLayers />,
   },
   {
-    title: 'Plise Perde & Sineklik',
-    description: 'Kedi tüllü sineklik ve plise perde entegrasyonu',
-    href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
+    title: 'Winsa Sürme Sistemler',
+    description: 'Panorama HS 76 Hebeschiebe, Comfort Slide Plus & Lotus',
+    href: '/urunler?kategori=surme-sistemler',
+    icon: <IconSliders />,
+  },
+  {
+    title: 'Cam Balkon Sistemleri (Vera Serisi)',
+    description: 'Vera Termal 4+20+4 Isıcamlı, Vera Katlanır ve Vera Slide',
+    href: '/urunler?kategori=cam-balkon-sistemleri',
+    icon: <IconPanels />,
+  },
+  {
+    title: 'Giyotin & Kış Bahçesi Sistemleri',
+    description: 'Vera Vertical Motorlu Giyotin ve Vela Bioklimatik Pergola',
+    href: '/urunler/giyotin-motorlu-silinebilir-cam',
+    icon: <IconArrowUpDown />,
+  },
+  {
+    title: 'Panjur & Kepenk Sistemleri (Winstor)',
+    description: 'Winstor monoblok panjur, Winkepenk ve motorlu kepenk',
+    href: '/urunler?kategori=panjur-ve-kepenk-sistemleri',
     icon: <IconShield />,
+  },
+  {
+    title: 'Alüminyum Doğrama Sistemleri',
+    description: 'Antrasit cephe, kedi tüllü sineklik ve RC2 donanım',
+    href: '/urunler?kategori=donanim-sistemleri',
+    icon: <IconHome />,
+  },
+  {
+    title: 'Isıcam & Konfor Cam Çözümleri',
+    description: 'Şişecam Sinerji, Konfor Low-E ve temperli cam kombinasyonları',
+    href: '/urunler/vera-isicamli-cam-balkon',
+    icon: <IconThermalGlass />,
   },
 ];
 
 const MAIN_NAV: NavItem[] = [
   { label: 'Anasayfa', href: '/' },
-  { label: 'Hizmetler', href: '#hizmetler', dropdown: true },
+  { label: 'Hizmetlerimiz', href: '/hizmetlerimiz', dropdown: 'services' },
+  { label: 'Ürünlerimiz', href: '/urunler', dropdown: 'products' },
   ...(SHOW_MAGAZA_MENU ? [MAGAZA_NAV_ITEM] : []),
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
-  { label: 'Kurumsal', href: '/kurumsal' },
-  { label: 'Galeri', href: '/galeri' },
+  { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Blog', href: '/profesyoneller/blog' },
+  { label: 'İletişim', href: '/iletisim' },
 ];
 
 export function MegaMenu() {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
+  const [activeDropdown, setActiveDropdown] = useState<DropdownKind | null>(null);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +160,7 @@ export function MegaMenu() {
 
   useEffect(() => {
     setMobileOpen(false);
-    setServicesOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -122,13 +177,13 @@ export function MegaMenu() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    if (!servicesOpen) return;
+    if (!activeDropdown) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setServicesOpen(false);
+      if (event.key === 'Escape') setActiveDropdown(null);
     };
     const onPointerDown = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setServicesOpen(false);
+        setActiveDropdown(null);
       }
     };
     document.addEventListener('keydown', onKeyDown);
@@ -137,7 +192,7 @@ export function MegaMenu() {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('mousedown', onPointerDown);
     };
-  }, [servicesOpen]);
+  }, [activeDropdown]);
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -145,19 +200,25 @@ export function MegaMenu() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const prefetchServices = () => {
-    SERVICES.forEach((service) => {
+  const prefetchGroup = (kind: DropdownKind) => {
+    const list = kind === 'services' ? SERVICES : PRODUCTS_MENU;
+    try {
+      router.prefetch(kind === 'services' ? '/hizmetlerimiz' : '/urunler');
+    } catch {
+      // ignore
+    }
+    list.forEach((entry) => {
       try {
-        router.prefetch(service.href);
+        router.prefetch(entry.href);
       } catch {
         // Prefetch hatası gezinmeyi engellemez.
       }
     });
   };
 
-  const openServices = () => {
-    prefetchServices();
-    setServicesOpen(true);
+  const openDropdown = (kind: DropdownKind) => {
+    prefetchGroup(kind);
+    setActiveDropdown(kind);
   };
 
   const phoneHref = `tel:${SITE_CONFIG.phoneRaw}`;
@@ -222,9 +283,9 @@ export function MegaMenu() {
         className={`relative border-b border-slate-200/80 bg-white/95 backdrop-blur-xl transition-shadow duration-300 ${
           scrolled ? 'shadow-header' : 'shadow-none'
         }`}
-        onMouseLeave={() => setServicesOpen(false)}
+        onMouseLeave={() => setActiveDropdown(null)}
       >
-        <div className="container-shell flex h-[68px] items-center justify-between gap-3 lg:h-[74px] lg:gap-5">
+        <div className="container-shell flex h-[68px] items-center justify-between gap-3 lg:h-[74px] lg:gap-4">
           <Link href="/" prefetch={true} className="group shrink-0" aria-label="Çelikpen anasayfa">
             <CelikpenLogo size="md" />
           </Link>
@@ -232,30 +293,42 @@ export function MegaMenu() {
           <nav aria-label="Ana menü" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
             {MAIN_NAV.map((item) =>
               item.dropdown ? (
-                <div key={item.label} className="relative">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      prefetchServices();
-                      setServicesOpen((open) => !open);
-                    }}
-                    onMouseEnter={openServices}
-                    onFocus={prefetchServices}
-                    aria-expanded={servicesOpen}
-                    aria-controls="hizmetler-dropdown"
+                <div
+                  key={item.label}
+                  className="relative flex items-center"
+                  onMouseEnter={() => openDropdown(item.dropdown!)}
+                >
+                  <Link
+                    href={item.href}
+                    prefetch={true}
+                    onFocus={() => prefetchGroup(item.dropdown!)}
                     className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
-                      servicesOpen
+                      activeDropdown === item.dropdown || isActive(item.href)
                         ? 'bg-[#EFF6FF] text-[#1E3A8A]'
                         : 'text-[#1E293B] hover:bg-slate-50 hover:text-[#1E3A8A]'
                     }`}
                   >
                     {item.label}
-                    <IconChevron
-                      className={`h-3 w-3 transition-transform duration-200 ${
-                        servicesOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
+                    <button
+                      type="button"
+                      aria-label={`${item.label} alt menüsünü aç`}
+                      aria-expanded={activeDropdown === item.dropdown}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const kind = item.dropdown!;
+                        prefetchGroup(kind);
+                        setActiveDropdown((curr) => (curr === kind ? null : kind));
+                      }}
+                      className="inline-flex items-center justify-center p-0.5"
+                    >
+                      <IconChevron
+                        className={`h-3 w-3 transition-transform duration-200 ${
+                          activeDropdown === item.dropdown ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                  </Link>
                 </div>
               ) : item.disabled ? (
                 <span
@@ -274,6 +347,7 @@ export function MegaMenu() {
                   key={item.label}
                   href={item.href}
                   prefetch={true}
+                  onMouseEnter={() => setActiveDropdown(null)}
                   className={`rounded-lg px-2.5 py-2 text-[12px] font-medium transition-colors xl:text-[12.5px] ${
                     isActive(item.href)
                       ? 'bg-[#EFF6FF] text-[#1E3A8A]'
@@ -317,41 +391,41 @@ export function MegaMenu() {
           </div>
         </div>
 
-        {/* ============================ HİZMETLER MEGA MENÜ ============================ */}
-        {servicesOpen && (
+        {/* ============================ HİZMETLERİMİZ MEGA MENÜ ============================ */}
+        {activeDropdown === 'services' && (
           <div
-            id="hizmetler-dropdown"
+            id="hizmetlerimiz-dropdown"
             className="gpu-layer absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
           >
             <div className="container-shell py-6">
-              <div className="mx-auto max-w-2xl">
+              <div className="mx-auto max-w-3xl">
                 <div className="mb-4 flex items-end justify-between gap-4">
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1E3A8A]">
                       Hizmetlerimiz
                     </p>
                     <p className="mt-1 text-[12.5px] font-medium text-slate-500">
-                      Yaşam alanınıza uygun mimari cam sistemini seçin.
+                      Lazerli ücretsiz keşiften anahtar teslim montaja 8 uzmanlık alanımız.
                     </p>
                   </div>
                   <Link
-                    href="/urunler"
+                    href="/hizmetlerimiz"
                     prefetch={true}
-                    onClick={() => setServicesOpen(false)}
+                    onClick={() => setActiveDropdown(null)}
                     className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
                   >
-                    Tüm sistemler
+                    Tüm hizmetlerimiz
                     <IconArrowRight className="h-3 w-3" />
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-2 gap-1">
+                <div className="grid grid-cols-2 gap-1.5">
                   {SERVICES.map((service) => (
                     <Link
                       key={service.title}
                       href={service.href}
                       prefetch={true}
-                      onClick={() => setServicesOpen(false)}
+                      onClick={() => setActiveDropdown(null)}
                       className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
                     >
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-[#EFF6FF] group-hover:text-[#1E3A8A]">
@@ -363,6 +437,62 @@ export function MegaMenu() {
                         </span>
                         <span className="mt-1 block text-[10.5px] leading-snug text-slate-500">
                           {service.description}
+                        </span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ============================ ÜRÜNLERİMİZ MEGA MENÜ ============================ */}
+        {activeDropdown === 'products' && (
+          <div
+            id="urunlerimiz-dropdown"
+            className="gpu-layer absolute inset-x-0 top-full hidden border-b border-slate-200 bg-white shadow-[0_28px_56px_-30px_rgba(15,23,42,0.42)] lg:block"
+          >
+            <div className="container-shell py-6">
+              <div className="mx-auto max-w-3xl">
+                <div className="mb-4 flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1E3A8A]">
+                      Ürünlerimiz &amp; Sistem Kataloğu
+                    </p>
+                    <p className="mt-1 text-[12.5px] font-medium text-slate-500">
+                      Winsa PVC doğrama, sürme sistemler, Vera cam balkon, giyotin ve Winstor panjur serileri.
+                    </p>
+                  </div>
+                  <Link
+                    href="/urunler"
+                    prefetch={true}
+                    onClick={() => setActiveDropdown(null)}
+                    className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
+                  >
+                    Tüm ürünleri gör
+                    <IconArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-2 gap-1.5">
+                  {PRODUCTS_MENU.map((prod) => (
+                    <Link
+                      key={prod.title}
+                      href={prod.href}
+                      prefetch={true}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex min-h-[62px] items-center gap-3.5 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F8FAFC]"
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition-colors duration-200 group-hover:border-[#BFDBFE] group-hover:bg-[#EFF6FF] group-hover:text-[#1E3A8A]">
+                        {prod.icon}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-[12.5px] font-semibold leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
+                          {prod.title}
+                        </span>
+                        <span className="mt-1 block text-[10.5px] leading-snug text-slate-500">
+                          {prod.description}
                         </span>
                       </span>
                     </Link>
@@ -401,71 +531,137 @@ export function MegaMenu() {
                 <Link
                   href="/"
                   prefetch={true}
+                  onClick={() => setMobileOpen(false)}
                   className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
                 >
                   Anasayfa <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    prefetchServices();
-                    setMobileServicesOpen((open) => !open);
-                  }}
-                  aria-expanded={mobileServicesOpen}
-                  className="flex min-h-[44px] w-full items-center justify-between rounded-lg bg-[#EFF6FF] px-3 py-2.5 text-sm font-semibold text-[#1D4ED8]"
-                >
-                  Hizmetler
-                  <IconChevron
-                    className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                {mobileServicesOpen && (
-                  <div className="space-y-0.5 pb-1 pl-1">
-                    {SERVICES.map((service) => (
-                      <Link
-                        key={service.title}
-                        href={service.href}
-                        prefetch={true}
-                        onClick={() => setMobileOpen(false)}
-                        className="flex min-h-[44px] items-center gap-2.5 rounded-lg px-2.5 py-2 text-[12px] text-slate-600 hover:bg-slate-50 hover:text-[#1E3A8A]"
-                      >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#1E3A8A]">
-                          {service.icon}
-                        </span>
-                        {service.title}
-                      </Link>
-                    ))}
+
+                {/* Mobil Hizmetlerimiz */}
+                <div className="rounded-lg border border-slate-100 bg-slate-50/60">
+                  <div className="flex min-h-[44px] items-center justify-between px-3 py-2">
+                    <Link
+                      href="/hizmetlerimiz"
+                      prefetch={true}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-sm font-semibold text-[#1E3A8A]"
+                    >
+                      Hizmetlerimiz
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        prefetchGroup('services');
+                        setMobileServicesOpen((open) => !open);
+                      }}
+                      aria-expanded={mobileServicesOpen}
+                      aria-label="Hizmetlerimiz alt menüsünü aç"
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-white text-[#1E3A8A] shadow-2xs"
+                    >
+                      <IconChevron
+                        className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                      />
+                    </button>
                   </div>
-                )}
-                {MAIN_NAV.filter((item) => item.label !== 'Anasayfa' && item.label !== 'Hizmetler').map(
-                  (item) =>
-                    item.disabled ? (
-                      <span
-                        key={item.label}
-                        aria-disabled="true"
-                        title="Mağaza kısa süre içinde hizmete açılacak"
-                        className="flex min-h-[44px] cursor-not-allowed select-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 opacity-55"
-                      >
-                        <span className="flex items-center gap-2">
-                          {item.label}
-                          <span className="rounded bg-slate-200/80 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-slate-600">
-                            Yakında
+                  {mobileServicesOpen && (
+                    <div className="space-y-0.5 border-t border-slate-100 px-2 py-2">
+                      {SERVICES.map((service) => (
+                        <Link
+                          key={service.title}
+                          href={service.href}
+                          prefetch={true}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex min-h-[40px] items-center gap-2.5 rounded-lg px-2 py-1.5 text-[12px] text-slate-600 hover:bg-white hover:text-[#1E3A8A]"
+                        >
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#1E3A8A]">
+                            {service.icon}
                           </span>
-                        </span>
-                        <IconArrowRight className="h-3.5 w-3.5 text-slate-300" />
-                      </span>
-                    ) : (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        prefetch={true}
-                        onClick={() => setMobileOpen(false)}
-                        className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
-                      >
+                          {service.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobil Ürünlerimiz */}
+                <div className="rounded-lg border border-slate-100 bg-slate-50/60">
+                  <div className="flex min-h-[44px] items-center justify-between px-3 py-2">
+                    <Link
+                      href="/urunler"
+                      prefetch={true}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-sm font-semibold text-[#1E3A8A]"
+                    >
+                      Ürünlerimiz
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        prefetchGroup('products');
+                        setMobileProductsOpen((open) => !open);
+                      }}
+                      aria-expanded={mobileProductsOpen}
+                      aria-label="Ürünlerimiz alt menüsünü aç"
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-white text-[#1E3A8A] shadow-2xs"
+                    >
+                      <IconChevron
+                        className={`h-4 w-4 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                  </div>
+                  {mobileProductsOpen && (
+                    <div className="space-y-0.5 border-t border-slate-100 px-2 py-2">
+                      {PRODUCTS_MENU.map((prod) => (
+                        <Link
+                          key={prod.title}
+                          href={prod.href}
+                          prefetch={true}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex min-h-[40px] items-center gap-2.5 rounded-lg px-2 py-1.5 text-[12px] text-slate-600 hover:bg-white hover:text-[#1E3A8A]"
+                        >
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-[#1E3A8A]">
+                            {prod.icon}
+                          </span>
+                          {prod.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {MAIN_NAV.filter(
+                  (item) =>
+                    item.label !== 'Anasayfa' &&
+                    item.label !== 'Hizmetlerimiz' &&
+                    item.label !== 'Ürünlerimiz'
+                ).map((item) =>
+                  item.disabled ? (
+                    <span
+                      key={item.label}
+                      aria-disabled="true"
+                      title="Mağaza kısa süre içinde hizmete açılacak"
+                      className="flex min-h-[44px] cursor-not-allowed select-none items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 opacity-55"
+                    >
+                      <span className="flex items-center gap-2">
                         {item.label}
-                        <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
-                      </Link>
-                    )
+                        <span className="rounded bg-slate-200/80 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-slate-600">
+                          Yakında
+                        </span>
+                      </span>
+                      <IconArrowRight className="h-3.5 w-3.5 text-slate-300" />
+                    </span>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      prefetch={true}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex min-h-[44px] items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-[#F8FAFC]"
+                    >
+                      {item.label}
+                      <IconArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                    </Link>
+                  )
                 )}
               </div>
 
@@ -624,7 +820,6 @@ function IconCalendar({ className = 'h-4 w-4' }: IconProps) {
     </svg>
   );
 }
-/* Mimari dil: her hizmet için ayrı, ince çizgili ve 24px ızgarada dengeli ikonlar. */
 function IconPanels({ className = 'h-[18px] w-[18px]' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
@@ -633,6 +828,14 @@ function IconPanels({ className = 'h-[18px] w-[18px]' }: IconProps) {
       <path d="M4.5 11.5h15" />
       <path d="M9.5 11.5V21M14.5 11.5V21" />
       <path d="M4.5 8 7 3h10l2.5 5" />
+    </svg>
+  );
+}
+function IconThermalGlass({ className = 'h-[18px] w-[18px]' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="4" y="3" width="16" height="18" rx="1.5" />
+      <path d="M9 3v18M15 3v18M6.5 7.5l1.5 1.5M16.5 15l1.5 1.5" />
     </svg>
   );
 }

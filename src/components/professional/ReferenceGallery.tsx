@@ -1,15 +1,120 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  MAGAZINE_REFERENCES,
-  REFERENCE_FILTERS,
-  type ReferenceProject,
-} from '../../config/professional-magazine.config';
 
-type ReferenceFilter = (typeof REFERENCE_FILTERS)[number];
+export interface ReferencePhotoItem {
+  id: string;
+  image: string;
+  title: string;
+  district: string;
+  system: string;
+  category: string;
+}
+
+/**
+ * 12 Örnek Referans Fotoğrafı — Kendi proje fotoğraflarınızla değiştirmek için
+ * aşağıdaki `image` yollarını (`/images/references/ref-1.jpg` ... `ref-12.jpg`) güncellemeniz yeterlidir.
+ */
+export const REFERENCE_PHOTOS: ReferencePhotoItem[] = [
+  {
+    id: 'ref-1',
+    image: '/images/references/ref-1.jpg',
+    title: 'Bahçelievler — Isıcamlı Cam Balkon',
+    district: 'Bahçelievler / Kocasinan Merkez',
+    system: 'Winsa Vera Termal 4+20+4 Argonlu Isıcam',
+    category: 'Isıcamlı Cam Balkon',
+  },
+  {
+    id: 'ref-2',
+    image: '/images/references/ref-2.jpg',
+    title: 'Ataköy — Bioklimatik Kış Bahçesi',
+    district: 'Bakırköy / Ataköy',
+    system: 'Winsa Vela Bioklimatik Pergola & Cam Cephe',
+    category: 'Kış Bahçesi & Pergola',
+  },
+  {
+    id: 'ref-3',
+    image: '/images/references/ref-3.jpg',
+    title: 'Bakırköy — Winsa Dorado 76 PVC',
+    district: 'Bakırköy / Merkez',
+    system: 'Winsa Dorado 76 Antrasit PVC Doğrama',
+    category: 'PVC Pencere & Kapı',
+  },
+  {
+    id: 'ref-4',
+    image: '/images/references/ref-4.jpg',
+    title: 'Florya — Motorlu Giyotin Sistem',
+    district: 'Bakırköy / Florya',
+    system: 'Winsa Vera Vertical Uzaktan Kumandalı Giyotin',
+    category: 'Giyotin Cam Sistemi',
+  },
+  {
+    id: 'ref-5',
+    image: '/images/references/ref-5.jpg',
+    title: 'Yeşilköy — Panorama HS 76 Kaldır-Sür',
+    district: 'Bakırköy / Yeşilköy',
+    system: 'Winsa Panorama HS 76 Hebeschiebe Sürme',
+    category: 'Sürme Sistemler',
+  },
+  {
+    id: 'ref-6',
+    image: '/images/references/ref-6.jpg',
+    title: 'Siyavuşpaşa — Köşe L-Balkon Katlanır Cam',
+    district: 'Bahçelievler / Siyavuşpaşa',
+    system: 'Winsa Vera Pro 10 mm Temperli Katlanır Sistem',
+    category: 'Katlanır Cam Balkon',
+  },
+  {
+    id: 'ref-7',
+    image: '/images/references/ref-7.jpg',
+    title: 'Başakşehir — Eşiksiz Sürme Cam Balkon',
+    district: 'Başakşehir',
+    system: 'Winsa Vera Slide Eşiksiz Paslanmaz Rulmanlı Sürme',
+    category: 'Sürme Cam Balkon',
+  },
+  {
+    id: 'ref-8',
+    image: '/images/references/ref-8.jpg',
+    title: 'Şirinevler — Revotech Gold 84 mm PVC',
+    district: 'Bahçelievler / Şirinevler',
+    system: 'Winsa Revotech Gold 7 Odacıklı 3 Contalı Sistem',
+    category: 'PVC Pencere & Kapı',
+  },
+  {
+    id: 'ref-9',
+    image: '/images/references/ref-9.jpg',
+    title: 'Kocasinan — Cam Tavanlı Kış Bahçesi',
+    district: 'Bahçelievler / Kocasinan Merkez',
+    system: 'Lamine Isıcam Tavan & Vera Termal Katlanır Cephe',
+    category: 'Kış Bahçesi Sistemleri',
+  },
+  {
+    id: 'ref-10',
+    image: '/images/references/ref-10.jpg',
+    title: 'Yenibosna — Teras & Kafe Giyotin Cephe',
+    district: 'Bahçelievler / Yenibosna',
+    system: 'Somfy Motorlu Giyotin & Bioklimatik Tavan',
+    category: 'Giyotin & Pergola',
+  },
+  {
+    id: 'ref-11',
+    image: '/images/references/ref-11.jpg',
+    title: 'Soğanlı — Winstor Monoblok Panjur & PVC',
+    district: 'Bahçelievler / Soğanlı',
+    system: 'Winsa Safir 76 & Winstor Motorlu Panjur',
+    category: 'Panjur & PVC Doğrama',
+  },
+  {
+    id: 'ref-12',
+    image: '/images/references/ref-12.jpg',
+    title: 'Çobançeşme — Comfort Slide Plus Sürme',
+    district: 'Bahçelievler / Çobançeşme',
+    system: 'Winsa Comfort Slide Plus Vakum Contalı Sürme',
+    category: 'Sürme Sistemler',
+  },
+];
 
 function CloseIcon() {
   return (
@@ -33,7 +138,7 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       className="h-5 w-5"
     >
       <path
@@ -45,17 +150,33 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   );
 }
 
-export function ReferenceGallery() {
-  const [activeFilter, setActiveFilter] = useState<ReferenceFilter>('Tümü');
+function ZoomIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="h-4 w-4"
+    >
+      <path
+        d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function ReferenceGallery({
+  photos = REFERENCE_PHOTOS,
+}: {
+  photos?: ReferencePhotoItem[];
+}) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'Tümü') return MAGAZINE_REFERENCES;
-    return MAGAZINE_REFERENCES.filter((project) => project.filterCategory === activeFilter);
-  }, [activeFilter]);
-
-  const selectedProject: ReferenceProject | null =
-    selectedIndex === null ? null : filteredProjects[selectedIndex] ?? null;
+  const selectedPhoto: ReferencePhotoItem | null =
+    selectedIndex === null ? null : photos[selectedIndex] ?? null;
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -67,14 +188,12 @@ export function ReferenceGallery() {
       if (event.key === 'Escape') setSelectedIndex(null);
       if (event.key === 'ArrowLeft') {
         setSelectedIndex((current) =>
-          current === null
-            ? null
-            : (current - 1 + filteredProjects.length) % filteredProjects.length
+          current === null ? null : (current - 1 + photos.length) % photos.length
         );
       }
       if (event.key === 'ArrowRight') {
         setSelectedIndex((current) =>
-          current === null ? null : (current + 1) % filteredProjects.length
+          current === null ? null : (current + 1) % photos.length
         );
       }
     };
@@ -84,20 +203,11 @@ export function ReferenceGallery() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [selectedIndex, filteredProjects.length]);
-
-  const changeFilter = (filter: ReferenceFilter) => {
-    setActiveFilter(filter);
-    setSelectedIndex(null);
-  };
-
-  const openProject = (project: ReferenceProject) => {
-    const index = filteredProjects.findIndex((item) => item.id === project.id);
-    setSelectedIndex(index >= 0 ? index : null);
-  };
+  }, [selectedIndex, photos.length]);
 
   return (
     <div className="bg-[#F8FAFC] pb-16">
+      {/* ============================ DARK NAVY HERO HEADER (PRESERVED) ============================ */}
       <section className="relative overflow-hidden bg-[#0F172A] pt-10 pb-14 text-white sm:pt-14 sm:pb-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.16]"
@@ -148,7 +258,7 @@ export function ReferenceGallery() {
 
             <div className="grid grid-cols-3 gap-2">
               {[
-                { value: '10+', label: 'Öne çıkan proje' },
+                { value: '12+', label: 'Öne çıkan proje' },
                 { value: '30', label: 'Yıllık tecrübe' },
                 { value: '10 Yıl', label: 'Sistem garantisi' },
               ].map((stat) => (
@@ -167,269 +277,174 @@ export function ReferenceGallery() {
         </div>
       </section>
 
-      <div className="container-shell relative -mt-7">
-        <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_16px_45px_-28px_rgba(15,23,42,0.45)] sm:p-4">
-          <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Referans kategorileri">
-            {REFERENCE_FILTERS.map((filter) => {
-              const selected = activeFilter === filter;
-              const count =
-                filter === 'Tümü'
-                  ? MAGAZINE_REFERENCES.length
-                  : MAGAZINE_REFERENCES.filter((project) => project.filterCategory === filter)
-                      .length;
-              return (
-                <button
-                  key={filter}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  onClick={() => changeFilter(filter)}
-                  className={`rounded-lg px-3 py-2 text-[11px] font-bold transition ${
-                    selected
-                      ? 'bg-[#1E3A8A] text-white shadow-sm'
-                      : 'border border-slate-200 bg-white text-slate-700 hover:border-[#1E3A8A] hover:text-[#1E3A8A]'
-                  }`}
-                >
-                  {filter}
-                  <span
-                    className={`ml-1.5 text-[9.5px] font-semibold ${
-                      selected ? 'text-sky-200' : 'text-slate-400'
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mt-7 flex items-end justify-between gap-3">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#1E3A8A]">
-              Uygulama arşivi
-            </span>
-            <h2 className="mt-1 text-xl font-black text-[#0F172A]">
-              {activeFilter === 'Tümü' ? 'Tamamlanan projeler' : activeFilter}
-            </h2>
-          </div>
-          <span className="text-[11px] font-semibold text-slate-500">
-            {filteredProjects.length} proje
-          </span>
-        </div>
-
-        <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((project) => (
-            <article
-              key={project.id}
-              className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_18px_40px_-34px_rgba(15,23,42,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#BFDBFE] hover:shadow-[0_24px_48px_-30px_rgba(30,58,138,0.4)]"
-              onClick={() => openProject(project)}
+      {/* ============================ 12-PHOTO REFERENCE GALLERY GRID ============================ */}
+      <section className="container-shell pt-10 sm:pt-12" aria-label="Referans Fotoğraf Galerisi">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {photos.map((photo, index) => (
+            <figure
+              key={photo.id}
+              onClick={() => setSelectedIndex(index)}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault();
-                  openProject(project);
+                  setSelectedIndex(index);
                 }
               }}
               role="button"
               tabIndex={0}
-              aria-label={`${project.title} projesini büyüt`}
+              aria-label={`${photo.title} fotoğrafını tam ekran görüntüle`}
+              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-900 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_26px_52px_-26px_rgba(30,58,138,0.45)]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-                <Image
-                  src={project.image}
-                  alt={project.imageAlt}
-                  width={720}
-                  height={450}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-                <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-md bg-white/95 px-2 py-1 text-[9.5px] font-extrabold text-[#0F172A] shadow-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#D91B24]" aria-hidden="true" />
-                  {project.locationBadge}
+              <Image
+                src={photo.image}
+                alt={`${photo.title} — Çelikpen referans uygulaması`}
+                width={1000}
+                height={700}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              />
+
+              {/* Subtle bottom gradient overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/25 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+
+              {/* Top-left category badge & top-right zoom button */}
+              <div className="pointer-events-none absolute inset-x-4 top-4 flex items-center justify-between gap-2">
+                <span className="rounded-full border border-white/20 bg-[#0F172A]/75 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-sky-200 backdrop-blur-md">
+                  {photo.category}
                 </span>
-                <span className="absolute right-3 top-3 rounded-md border border-white/20 bg-slate-950/65 px-2 py-1 text-[9.5px] font-bold text-sky-100 backdrop-blur-sm">
-                  {project.year}
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1E3A8A] shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#1E3A8A] group-hover:text-white">
+                  <ZoomIcon />
                 </span>
-                <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-2">
-                  <span className="rounded-md bg-[#1E3A8A]/95 px-2 py-1 text-[9.5px] font-bold uppercase tracking-[0.08em] text-white">
-                    {project.filterCategory}
-                  </span>
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/95 text-[#1E3A8A]">
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="h-3.5 w-3.5"
-                    >
-                      <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3" strokeLinecap="round" />
-                    </svg>
-                  </span>
-                </div>
               </div>
 
-              <div className="flex flex-1 flex-col p-4">
-                <h3 className="text-[14px] font-black leading-snug text-[#0F172A] transition-colors group-hover:text-[#1E3A8A]">
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-[11px] font-semibold leading-5 text-[#1E3A8A]">
-                  {project.systemUsed}
+              {/* Bottom caption */}
+              <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 p-5 text-white">
+                <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sky-300">
+                  {photo.district}
                 </p>
-                <p className="mt-1 text-[10.5px] leading-5 text-slate-500">{project.highlight}</p>
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
-                  <span className="text-[10px] font-semibold text-slate-500">{project.area}</span>
-                  <span className="text-[10.5px] font-extrabold text-[#1E3A8A]">Galeriyi Aç →</span>
-                </div>
-              </div>
-            </article>
+                <h2 className="mt-1 text-base font-extrabold leading-snug tracking-tight text-white sm:text-[17px]">
+                  {photo.title}
+                </h2>
+                <p className="mt-1 text-[11.5px] font-medium text-slate-300">{photo.system}</p>
+              </figcaption>
+            </figure>
           ))}
         </div>
 
-        <div className="mt-9 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#BFDBFE] bg-[#EFF6FF] p-5 sm:flex-row sm:items-center">
+        {/* Bottom CTA Strip */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#BFDBFE] bg-[#EFF6FF] p-6 sm:flex-row sm:items-center">
           <div>
             <div className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#1E3A8A]">
               Benzer bir proje mi planlıyorsunuz?
             </div>
-            <p className="mt-1 text-[12px] leading-5 text-slate-600">
-              Cephenizi yerinde ölçelim; sistem, cam ve renk alternatiflerini birlikte netleştirelim.
+            <p className="mt-1 text-[12.5px] leading-5 text-slate-600">
+              Cephenizi yerinde ücretsiz ölçelim; sistem, cam ve renk alternatiflerini birlikte netleştirelim.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             <Link
               href="/iletisim?form=kesif"
-              className="rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-[11px] font-bold text-white transition hover:bg-[#1D4ED8]"
+              className="rounded-lg bg-[#1E3A8A] px-5 py-2.5 text-[11.5px] font-bold text-white shadow-navy transition hover:bg-[#1D4ED8]"
             >
-              Ücretsiz Keşif
+              Ücretsiz Keşif İste
             </Link>
             <Link
               href="/fiyat-hesapla"
-              className="rounded-lg border border-[#1E3A8A]/30 bg-white px-4 py-2.5 text-[11px] font-bold text-[#1E3A8A] transition hover:border-[#1E3A8A]"
+              className="rounded-lg border border-[#1E3A8A]/30 bg-white px-5 py-2.5 text-[11.5px] font-bold text-[#1E3A8A] transition hover:border-[#1E3A8A] hover:bg-white"
             >
-              2026 Fiyat Hesapla
+              Fiyat Hesapla
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      {selectedProject && (
+      {/* ============================ FULL-SCREEN LIGHTBOX MODAL ============================ */}
+      {selectedPhoto && (
         <div
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#020617]/80 p-3 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#020617]/90 p-3 backdrop-blur-md sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="reference-lightbox-title"
           onClick={() => setSelectedIndex(null)}
         >
           <div
-            className="relative flex max-h-[93vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#0F172A] text-white shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3">
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#1E3A8A]">
-                Proje Galerisi • {selectedProject.locationBadge}
+            {/* Modal Top Bar */}
+            <div className="flex items-center justify-between border-b border-white/10 bg-[#0F172A] px-5 py-3.5">
+              <div className="flex items-center gap-2.5">
+                <span className="rounded-md bg-[#1E3A8A] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-sky-200">
+                  {selectedPhoto.category}
+                </span>
+                <span className="text-xs font-semibold text-slate-300">
+                  {selectedIndex !== null ? selectedIndex + 1 : 1} / {photos.length}
+                </span>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedIndex(null)}
                 aria-label="Galeriyi kapat"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 hover:text-[#0F172A]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20"
               >
                 <CloseIcon />
               </button>
             </div>
 
-            <div className="overflow-y-auto">
-              <div className="relative bg-slate-900">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.imageAlt}
-                  width={1400}
-                  height={800}
-                  sizes="(min-width: 1024px) 1024px, 100vw"
-                  className="max-h-[52vh] w-full object-cover"
-                />
-                <button
-                  type="button"
-                  onClick={() =>
-                    setSelectedIndex((current) =>
-                      current === null
-                        ? null
-                        : (current - 1 + filteredProjects.length) % filteredProjects.length
-                    )
-                  }
-                  aria-label="Önceki proje"
-                  className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/65 text-white backdrop-blur-sm transition hover:bg-slate-950"
-                >
-                  <ArrowIcon direction="left" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setSelectedIndex((current) =>
-                      current === null ? null : (current + 1) % filteredProjects.length
-                    )
-                  }
-                  aria-label="Sonraki proje"
-                  className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-950/65 text-white backdrop-blur-sm transition hover:bg-slate-950"
-                >
-                  <ArrowIcon direction="right" />
-                </button>
-              </div>
+            {/* Modal Photo Stage */}
+            <div className="relative flex items-center justify-center bg-slate-950">
+              <Image
+                src={selectedPhoto.image}
+                alt={`${selectedPhoto.title} — Çelikpen referans uygulaması`}
+                width={1200}
+                height={840}
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="max-h-[68vh] w-full object-contain"
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedIndex((current) =>
+                    current === null ? null : (current - 1 + photos.length) % photos.length
+                  )
+                }
+                aria-label="Önceki fotoğraf"
+                className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#0F172A]/80 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A]"
+              >
+                <ArrowIcon direction="left" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedIndex((current) =>
+                    current === null ? null : (current + 1) % photos.length
+                  )
+                }
+                aria-label="Sonraki fotoğraf"
+                className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#0F172A]/80 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A]"
+              >
+                <ArrowIcon direction="right" />
+              </button>
+            </div>
 
-              <div className="p-5 sm:p-7">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-md bg-[#1E3A8A] px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.1em] text-white">
-                    {selectedProject.filterCategory}
-                  </span>
-                  <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-[9.5px] font-bold text-slate-600">
-                    {selectedProject.district}
-                  </span>
-                  <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-[9.5px] font-bold text-slate-600">
-                    {selectedProject.year}
-                  </span>
-                </div>
-
-                <h2
-                  id="reference-lightbox-title"
-                  className="mt-3 text-xl font-black leading-tight text-[#0F172A] sm:text-2xl"
-                >
-                  {selectedProject.title}
-                </h2>
-                <p className="mt-2 text-[12px] leading-6 text-slate-600">
-                  {selectedProject.highlight}
+            {/* Modal Footer Info */}
+            <div className="flex flex-col justify-between gap-4 border-t border-white/10 bg-[#0F172A] px-5 py-4 sm:flex-row sm:items-center">
+              <div>
+                <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-sky-300">
+                  {selectedPhoto.district}
                 </p>
-
-                <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    ['Kullanılan Sistem', selectedProject.systemUsed],
-                    ['Renk & Cam', selectedProject.color],
-                    ['Metraj', selectedProject.area],
-                    ['Lokasyon', selectedProject.district],
-                  ].map(([label, value]) => (
-                    <div key={label} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                      <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-slate-400">
-                        {label}
-                      </div>
-                      <div className="mt-1 text-[11px] font-semibold leading-5 text-[#0F172A]">
-                        {value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4">
-                  <span className="text-[10px] font-semibold text-slate-400">
-                    Proje {selectedIndex !== null ? selectedIndex + 1 : 1} / {filteredProjects.length}
-                    {' '}• Ok tuşlarıyla gezinebilirsiniz
-                  </span>
-                  <Link
-                    href="/iletisim?form=kesif"
-                    className="rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-[11px] font-bold text-white transition hover:bg-[#1D4ED8]"
-                  >
-                    Benzer Proje İçin Keşif İste
-                  </Link>
-                </div>
+                <h2 id="reference-lightbox-title" className="mt-0.5 text-lg font-extrabold text-white">
+                  {selectedPhoto.title}
+                </h2>
+                <p className="mt-0.5 text-xs text-slate-300">{selectedPhoto.system}</p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <Link
+                  href="/iletisim?form=kesif"
+                  className="rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#1D4ED8]"
+                >
+                  Bu Sistem İçin Keşif İste →
+                </Link>
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 
 const PRIMARY_ROUTES = [
   '/',
+  '/hizmetlerimiz',
   '/urunler',
   '/profesyoneller',
   '/profesyoneller/referanslar',

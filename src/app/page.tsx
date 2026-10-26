@@ -31,60 +31,68 @@ const CustomerReviews = dynamic(
 
 const SERVICE_CARDS = [
   {
-    title: 'Isıcamlı Cam Balkon',
+    title: 'Katlanır Cam Balkon Sistemleri',
+    description:
+      '8mm / 10mm Şişecam temperli güvenlik camı ve paslanmaz rulmanlarla %100 panoramik açılım.',
+    href: '/hizmetlerimiz#katlanir-cam-balkon',
+    image: '/images/services/katlanir-cam-balkon.jpg',
+    badges: ['8/10 mm', 'Temperli'],
+  },
+  {
+    title: 'Isıcamlı Cam Balkon Sistemleri',
     description:
       '4+20+4 argon gazlı temperli cam ve antrasit profil ile dört mevsim yaşayan balkonlar.',
-    href: '/urunler/vera-isicamli-cam-balkon',
-    image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
+    href: '/hizmetlerimiz#isicamli-cam-balkon',
+    image: '/images/services/isicamli-cam-balkon.jpg',
     badges: ['Uw: 1.1', '38 dB'],
   },
   {
-    title: 'Giyotin Cam Sistemleri',
+    title: 'Sürme Cam Balkon Sistemleri',
     description:
-      'Kumandalı, dikey açılan cam cephe; açıkken güvenli küpeşte, kapalıyken tam yalıtım.',
-    href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    image: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
-    badges: ['Uw: 1.3', '36 dB'],
+      'Eşiksiz alt ray, geniş açıklık ve tek parmakla sessiz kayma; dar balkonlarda alan kazancı.',
+    href: '/hizmetlerimiz#surme-cam-balkon',
+    image: '/images/services/surme-cam-balkon.jpg',
+    badges: ['Eşiksiz', 'Sürme'],
   },
   {
-    title: 'Bioklimatik Pergola',
+    title: 'Motorlu Giyotin Cam Sistemleri',
     description:
-      'Motorlu alüminyum lamelli tavan, gizli yağmur tahliyesi ve entegre LED aydınlatma.',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
-    badges: ['Uw: 1.1', '40 dB'],
+      'Kumandalı, dikey açılan cam cephe; açıkken güvenli küpeşte, kapalıyken tam yalıtım.',
+    href: '/hizmetlerimiz#giyotin-cam-sistemleri',
+    image: '/images/services/giyotin-cam-sistemleri.jpg',
+    badges: ['Uw: 1.3', '36 dB'],
   },
   {
     title: 'Kış Bahçesi Sistemleri',
     description:
       'Teras ve bahçe katlarını dört mevsim kullanılan ferah bir yaşam alanına dönüştürün.',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/blog/bioklimatik-pergola-kis-bahcesi.jpg',
+    href: '/hizmetlerimiz#kis-bahcesi-sistemleri',
+    image: '/images/services/kis-bahcesi-sistemleri.jpg',
     badges: ['Uw: 1.1', '40 dB'],
   },
   {
-    title: 'Sürme Cam Sistemleri',
+    title: 'Bioklimatik Pergola & Tente',
     description:
-      'Eşiksiz alt ray, geniş açıklık ve tek parmakla sessiz kayma; dar balkonlarda alan kazancı.',
-    href: '/urunler?kategori=surme-sistemler',
-    image: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
-    badges: ['Uw: 1.1', '40 dB'],
+      'Motorlu alüminyum lamelli tavan, gizli yağmur tahliyesi ve entegre LED aydınlatma.',
+    href: '/hizmetlerimiz#bioklimatik-pergola',
+    image: '/images/services/bioklimatik-pergola.jpg',
+    badges: ['0°-135°', 'Lamel'],
   },
   {
-    title: 'Alüminyum & PVC Doğrama',
+    title: 'PVC Pencere & Kapı Montajı',
     description:
       'Revotech Gold, Dorado 76 ve Safir serileriyle yüksek yalıtımlı pencere ve kapı çözümleri.',
-    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
-    image: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
+    href: '/hizmetlerimiz#pvc-pencere-kapi',
+    image: '/images/services/pvc-pencere-kapi.jpg',
     badges: ['Uw: 0.79', '46 dB'],
   },
   {
-    title: 'Plise Perde & Sineklik',
+    title: 'Panjur, Kepenk & Kedi Sinekliği',
     description:
-      'Kedi tüllü sineklik, plise perde ve panjur entegrasyonuyla temiz ve konforlu iç mekânlar.',
-    href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri',
-    image: '/images/products/bahcelievler-plise-sineklik-kedi-tulu.jpg',
-    badges: ['Kedi Tüllü', 'Plise'],
+      'Kedi tüllü sineklik, plise perde ve Winstor monoblok panjur entegrasyonu.',
+    href: '/hizmetlerimiz#panjur-kepenk-sineklik',
+    image: '/images/services/panjur-kepenk-sineklik.jpg',
+    badges: ['Winstor', 'Kedi Tüllü'],
   },
 ];
 

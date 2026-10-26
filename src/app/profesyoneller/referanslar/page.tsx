@@ -2,7 +2,10 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { generatePageMetadata } from '../../../config/seo.config';
-import { ReferenceGallery } from '../../../components/professional/ReferenceGallery';
+import {
+  ReferenceGallery,
+  REFERENCE_PHOTOS,
+} from '../../../components/professional/ReferenceGallery';
 import {
   JsonLd,
   buildBreadcrumbSchema,
@@ -25,7 +28,7 @@ export const metadata: Metadata = generatePageMetadata({
     'Yeşilköy giyotin cam',
     'Başakşehir cam balkon',
   ],
-  image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
+  image: '/images/references/ref-1.jpg',
   imageAlt: 'Çelikpen bioklimatik pergola ve cam balkon proje galerisi',
 });
 
@@ -39,15 +42,14 @@ export default function ProfessionalReferencesPage() {
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Ana Sayfa', path: '/' },
-    { name: 'Profesyoneller', path: '/profesyoneller' },
-    { name: 'Referanslar', path: '/profesyoneller/referanslar' },
+    { name: 'Projelerimiz', path: '/profesyoneller/referanslar' },
   ]);
 
   return (
     <main>
       <JsonLd data={webPageSchema} id="profesyoneller-referanslar-jsonld" />
       <JsonLd data={breadcrumbSchema} id="profesyoneller-referanslar-breadcrumb-jsonld" />
-      <ReferenceGallery />
+      <ReferenceGallery photos={REFERENCE_PHOTOS} />
     </main>
   );
 }

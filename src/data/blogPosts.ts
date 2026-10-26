@@ -125,7 +125,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.engineer,
     image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg',
-    imageAlt: 'Isıcamlı cam balkon uygulaması — dört mevsim kullanılabilen kapalı balkon',
+    imageAlt: 'Winsa Vera Termal 4+20+4 argon gazlı ısıcamlı cam balkon uygulaması',
     excerpt:
       'Isıcamlı cam balkon, balkonu dört mevsim kullanılabilen bir yaşam alanına dönüştürür. 2026 m² fiyatlarını, ısıcam katmanlarını ve Winsa Vera Termal’in tek camlı sistemlere göre farkını mühendis gözüyle anlattık.',
     highlights: [
@@ -241,7 +241,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.engineer,
     image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg',
-    imageAlt: 'Montaja hazır yeni nesil PVC pencere ve kapı doğramaları',
+    imageAlt: 'Winsa Dorado 76 ve Revotech Gold antrasit PVC pencere ve kapı doğramaları',
     excerpt:
       'Dorado 76 ince görünümlü 76 mm mimari seri, Revotech Gold ise 84 mm 7 odacıklı pasif ev sınıfı bir sistem. Hangisinin evinize daha uygun olduğunu teknik verilerle karşılaştırdık.',
     highlights: ['Revotech Gold: Uw 0.79 W/m²K, -46 dB', 'Dorado 76: 9 mm ince profil, daha fazla gün ışığı', `PVC doğrama net fiyatı: ${m2('pvc_dograma')}`],
@@ -325,7 +325,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.architect,
     image: '/images/blog/katlanir-mi-esiksiz-surme-mi.jpg',
-    imageAlt: 'Yarı açık konumda katlanır cam sistem',
+    imageAlt: 'Katlanır cam balkon ve eşiksiz sürme cam balkon uygulama karşılaştırması',
     excerpt:
       'Katlanır sistem balkonu tamamen açar, sürme sistem ise yer kaplamadan sessizce kayar. Balkonunuzun ölçüsüne, kullanım alışkanlığınıza ve bütçenize göre doğru seçimi yapmanız için karşılaştırdık.',
     highlights: ['Katlanır: %100 açılım', 'Sürme: kanat açma alanı gerektirmez', `Vera Slide net fiyatı: ${m2('vds_surme')}`],
@@ -404,7 +404,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.advisor,
     image: '/images/blog/motorlu-giyotin-cam-sistemleri.jpg',
-    imageAlt: 'Cam cepheli, aydınlık kış bahçesi ve teras alanı',
+    imageAlt: 'Teras ve kafe cephesinde uzaktan kumandalı motorlu giyotin cam sistemi',
     excerpt:
       'Giyotin cam sistemleri dikey hareket eden camlarıyla teras ve kafelerde kumandayla açılıp kapanan bir cephe oluşturur. Çalışma prensibini, güvenlik donanımlarını ve fiyatlandırmayı anlattık.',
     highlights: ['Uzaktan kumandalı zincirli motor sistemi', 'Engel algılama ve düşme emniyeti', `Vera Vertical net fiyatı: ${m2('vgs_giyotin')}`],
@@ -483,7 +483,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.architect,
     image: '/images/blog/bioklimatik-pergola-kis-bahcesi.jpg',
-    imageAlt: 'Villaya entegre cam kış bahçesi uygulaması',
+    imageAlt: 'Motorlu alüminyum lamelli bioklimatik pergola ve dört mevsim kış bahçesi',
     excerpt:
       'Bioklimatik pergolanın dönebilen alüminyum lamelleri yağmuru kanallara yönlendirir. Su sızdırmazlığını sağlayan mühendislik detaylarını ve kış bahçesinde dört mevsim konforun sırlarını açıklıyoruz.',
     highlights: ['Entegre oluk ve gizli drenaj kolonları', 'Yağmur sensörüyle otomatik kapanma', `Bioklimatik pergola net fiyatı: ${m2('pergola')}`],
@@ -564,7 +564,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.engineer,
     image: '/images/blog/panorama-hs-76-hebeschiebe.jpg',
-    imageAlt: 'Geniş cam cepheli modern konut mimarisi',
+    imageAlt: 'Winsa Panorama HS 76 Hebeschiebe kaldır-sür geniş açıklıklı teras kapısı',
     excerpt:
       'Kaldır-sür (hebeschiebe) sistemler, 300 kg’a varan kanatları tek elle hareket ettirerek salon ile teras arasındaki sınırı kaldırır. Panorama HS 76’nın mühendislik detaylarını inceledik.',
     highlights: ['300 kg kanat taşıma kapasitesi', '175 mm kasa / 76 mm kanat', `Panorama HS 76 net fiyatı: ${m2('hs_surme')}`],
@@ -635,7 +635,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.engineer,
     image: '/images/blog/sisecam-isicam-secimi.jpg',
-    imageAlt: 'Çift camlı ısıcam üniteleri',
+    imageAlt: 'Cam balkon ve PVC pencerelerde Şişecam Sinerji ve Konfor ısıcam uygulaması',
     excerpt:
       'Profil ne kadar iyi olursa olsun, pencere yüzeyinin %70’i camdır. Şişecam Sinerji ve Konfor ısıcamlar arasındaki farkı, hangi cepheye hangi camın seçilmesi gerektiğini anlattık.',
     highlights: ['Konfor: ısı yalıtımı odaklı Low-E', 'Sinerji: ısı + güneş kontrolü', 'Güney ve batı cephelerde Sinerji önerilir'],
@@ -708,7 +708,7 @@ const POSTS: BlogPostInput[] = [
     updatedDate: '2026-10-25',
     author: AUTHORS.advisor,
     image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg',
-    imageAlt: 'İstanbul’da apartman cepheleri ve balkonlar',
+    imageAlt: 'Bahçelievler apartman cephesinde antrasit cam balkon uygulaması',
     excerpt:
       "30 yıllık Bahçelievler saha tecrübemizle, cam balkon yaptırırken sonradan pişmanlık yaşatmayacak 10 kritik detayı derledik: yasal süreçten rüzgâr yüküne, ölçüden garantiye kadar.",
     highlights: ['4/5 kat maliki muvafakatnamesi', 'Yüksek katlarda 10 mm cam zorunluluğu', `5+ daireli binalarda %${BULK} toplu indirim`],

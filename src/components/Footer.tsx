@@ -4,21 +4,22 @@ import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
 
 const FOOTER_SERVICES = [
-  { label: 'Cam Balkon Sistemleri', href: '/urunler?kategori=cam-balkon-sistemleri' },
-  { label: 'Giyotin Cam Sistemleri', href: '/urunler/giyotin-motorlu-silinebilir-cam' },
-  { label: 'Bioklimatik Pergola', href: '/urunler/bioklimatik-kis-bahcesi-sistemleri' },
-  { label: 'Kış Bahçesi', href: '/urunler/bioklimatik-kis-bahcesi-sistemleri' },
-  { label: 'Sürme Cam Sistemleri', href: '/urunler?kategori=surme-sistemler' },
-  { label: 'Alüminyum & PVC Sistemler', href: '/urunler?kategori=pencere-ve-kapi-sistemleri' },
-  { label: 'Plise Perde & Sineklik', href: '/urunler/paslanmaz-rulman-ve-kedi-sinekligi-sistemleri' },
+  { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz#katlanir-cam-balkon' },
+  { label: 'Isıcamlı Cam Balkon Sistemleri', href: '/hizmetlerimiz#isicamli-cam-balkon' },
+  { label: 'Sürme Cam Balkon Sistemleri', href: '/hizmetlerimiz#surme-cam-balkon' },
+  { label: 'Motorlu Giyotin Cam Sistemleri', href: '/hizmetlerimiz#giyotin-cam-sistemleri' },
+  { label: 'Kış Bahçesi Sistemleri', href: '/hizmetlerimiz#kis-bahcesi-sistemleri' },
+  { label: 'Bioklimatik Pergola Sistemleri', href: '/hizmetlerimiz#bioklimatik-pergola' },
+  { label: 'PVC Pencere & Kapı Montajı', href: '/hizmetlerimiz#pvc-pencere-kapi' },
+  { label: 'Panjur, Kepenk & Kedi Sinekliği', href: '/hizmetlerimiz#panjur-kepenk-sineklik' },
 ];
 
 const FOOTER_QUICK = [
   { label: 'Anasayfa', href: '/' },
-  { label: 'Kurumsal', href: '/kurumsal' },
-  { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
+  { label: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
+  { label: 'Ürünlerimiz', href: '/urunler' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
-  { label: 'Galeri', href: '/galeri' },
+  { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Blog', href: '/profesyoneller/blog' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
