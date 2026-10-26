@@ -12,47 +12,95 @@ const publisher = {
   logo: { '@type': 'ImageObject', url: absoluteUrl(SEO_ICON), width: 512, height: 512 },
 };
 
-export const blogPostPath = (slug: string) => `/blog/${slug}`;
+export const blogPostPath = (slug: string, basePath = '/blog') => `${basePath}/${slug}`;
 
-/** Tek bir yazı için BlogPosting + Article (çoklu tip) şeması. */
-export function buildBlogPostingSchema(post: BlogPost) {
-  const url = absoluteUrl(blogPostPath(post.slug));
+/** Tek bir yazı için BlogPosting + TechArticle + Speakable + E-E-A-T + Citation şeması. */
+export function buildBlogPostingSchema(post: BlogPost, basePath = '/blog') {
+  const url = absoluteUrl(blogPostPath(post.slug, basePath));
+  const wordCount = post.sections.reduce(
+    (total, s) =>
+      total +
+      [
+        ...s.paragraphs,
+        ...(s.bullets ?? []),
+        ...(s.subsections ?? []).flatMap((x) => [...x.paragraphs, ...(x.bullets ?? [])]),
+      ]
+        .join(' ')
+        .split(/\s+/).length,
+    post.numberedChecklist.join(' ').split(/\s+/).length + 450,
+  );
+
   return {
     '@context': 'https://schema.org',
-    '@type': ['BlogPosting', 'Article'],
+    '@type': ['BlogPosting', 'TechArticle', 'Article'],
     '@id': `${url}#article`,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     url,
     headline: post.title.slice(0, 110),
+    name: post.seoTitle,
     alternativeHeadline: post.seoTitle,
     description: post.metaDescription,
-    image: [absoluteUrl(post.image)],
+    image: [
+      {
+        '@type': 'ImageObject',
+        url: absoluteUrl(post.image.split('?')[0]),
+        caption: post.imageAlt,
+        name: post.imageTitle,
+      },
+    ],
     datePublished: post.publishDate,
     dateModified: post.updatedDate,
     inLanguage: 'tr-TR',
     articleSection: post.category,
-    keywords: post.keywords.join(', '),
-    wordCount: post.sections.reduce(
-      (total, s) =>
-        total +
-        [...s.paragraphs, ...(s.bullets ?? []), ...(s.subsections ?? []).flatMap((x) => [...x.paragraphs, ...(x.bullets ?? [])])]
-          .join(' ')
-          .split(/\s+/).length,
-      0,
-    ),
+    keywords: [post.primaryKeyword, ...post.secondaryKeywords, ...post.tags].join(', '),
+    wordCount,
     timeRequired: `PT${post.readTime}M`,
-    author: { '@type': 'Person', name: post.author.name, jobTitle: post.author.role, worksFor: { '@id': ORGANIZATION_ID } },
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+      jobTitle: post.author.role,
+      worksFor: { '@id': ORGANIZATION_ID },
+    },
+    reviewedBy: {
+      '@type': 'Organization',
+      name: 'Çelikpen Mimari Mühendislik & Ar-Ge Kurulu',
+      url: absoluteUrl('/kurumsal/hakkimizda'),
+    },
     publisher,
-    isPartOf: { '@type': 'Blog', '@id': absoluteUrl('/blog#blog') },
+    isPartOf: { '@type': 'Blog', '@id': absoluteUrl(`${basePath}#blog`) },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '#makale-ozeti', '#sesli-arama-yanitlari', '#sss'],
+    },
+    citation: post.externalReferences.map((ref) => ({
+      '@type': 'CreativeWork',
+      name: ref.title,
+      publisher: { '@type': 'Organization', name: ref.organization },
+      url: ref.url,
+    })),
+    commentCount: post.initialComments.length,
+    comment: post.initialComments.map((c) => ({
+      '@type': 'Comment',
+      text: c.comment,
+      author: { '@type': 'Person', name: c.author },
+    })),
   };
 }
 
-export function buildFaqSchema(post: BlogPost) {
+export function buildFaqSchema(post: BlogPost, basePath = '/blog') {
+  const combinedFaqs: BlogFaq[] = [
+    ...post.faqs,
+    ...post.voiceSearchQa.map((v) => ({
+      question: v.spokenQuestion,
+      answer: v.directAnswer,
+    })),
+  ];
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${absoluteUrl(blogPostPath(post.slug))}#faq`,
-    mainEntity: post.faqs.map((faq) => ({
+    '@id': `${absoluteUrl(blogPostPath(post.slug, basePath))}#faq`,
+    mainEntity: combinedFaqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: { '@type': 'Answer', text: faq.answer },
@@ -65,7 +113,7 @@ export function buildBlogSchema(posts: BlogPost[], path: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    '@id': absoluteUrl('/blog#blog'),
+    '@id': absoluteUrl(`${path}#blog`),
     url: absoluteUrl(path),
     name: `${SITE_CONFIG.brandName} Mimari Rehber & Blog`,
     description:
@@ -74,13 +122,14 @@ export function buildBlogSchema(posts: BlogPost[], path: string) {
     publisher,
     blogPost: posts.map((post) => ({
       '@type': 'BlogPosting',
-      '@id': `${absoluteUrl(blogPostPath(post.slug))}#article`,
+      '@id': `${absoluteUrl(blogPostPath(post.slug, path))}#article`,
       headline: post.title.slice(0, 110),
       description: post.metaDescription,
-      url: absoluteUrl(blogPostPath(post.slug)),
-      image: absoluteUrl(post.image),
+      url: absoluteUrl(blogPostPath(post.slug, path)),
+      image: absoluteUrl(post.image.split('?')[0]),
       datePublished: post.publishDate,
       dateModified: post.updatedDate,
+      keywords: [post.primaryKeyword, ...post.secondaryKeywords].join(', '),
       author: { '@type': 'Person', name: post.author.name },
     })),
   };

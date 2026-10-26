@@ -113,12 +113,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
-    url: `${base}/blog/${post.slug}`,
-    lastModified: new Date(`${post.updatedDate}T00:00:00Z`),
-    changeFrequency: 'monthly',
-    priority: 0.8,
-  }));
+  const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((post) => [
+    {
+      url: `${base}/blog/${post.slug}`,
+      lastModified: new Date(`${post.updatedDate}T00:00:00Z`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    },
+    {
+      url: `${base}/profesyoneller/blog/${post.slug}`,
+      lastModified: new Date(`${post.updatedDate}T00:00:00Z`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    },
+  ]);
 
   const winsaCatalogRoutes: MetadataRoute.Sitemap = WINSA_PRODUCTS.map((prod) => ({
     url: `${base}/urunler/${prod.slug}`,

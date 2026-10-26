@@ -256,6 +256,7 @@ export function HeroSlider() {
             <img
               src="/images/kocasinan-isicamli-cam-balkon-hero.jpg"
               alt="Hayata Çelikpen'den Bak — Modern taş ve antrasit cam cepheli mimari villa"
+              title="Bahçelievler Isıcamlı Cam Balkon & Mimari Cam Sistemleri — Çelikpen"
               fetchPriority="high"
               className="h-full w-full object-cover object-center"
             />
@@ -329,6 +330,7 @@ export function HeroSlider() {
             <img
               src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
               alt="Çelikpen'den ücretsiz keşif — lüks teras ve mimari cam sistemleri"
+              title="Çelikpen Ücretsiz Lazerli Keşif — Bioklimatik Pergola ve Giyotin Cam Sistemleri"
               className="h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#040B1A]/90 via-[#081838]/70 to-[#040B1A]/45" />
@@ -400,6 +402,7 @@ export function HeroSlider() {
             <img
               src="/images/siyavuspasa-surme-cam-balkon.jpg"
               alt="Çelikpen ile Yaşandı — panoramik yaşam alanları"
+              title="Çelikpen Panoramik Eşiksiz Sürme ve Katlanır Cam Balkon Uygulamaları"
               className="h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#050C1C]/90 via-[#0A1936]/70 to-[#050C1C]/50" />

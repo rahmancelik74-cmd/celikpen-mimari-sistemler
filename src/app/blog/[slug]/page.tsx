@@ -2,8 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { generatePageMetadata } from '../../../config/seo.config';
-import { BLOG_POSTS, getBlogPost } from '../../../data/blogPosts';
+import { SITE_CONFIG } from '../../../config/site.config';
+import { absoluteUrl } from '../../../config/seo.config';
+import { getAllBlogSlugs, getBlogPost } from '../../../data/blogPosts';
 import { BlogArticle } from '../../../components/blog/BlogArticle';
 import {
   blogPostPath,
@@ -15,7 +16,7 @@ import { JsonLd, buildBreadcrumbSchema } from '../../../components/SeoJsonLd';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+  return getAllBlogSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -27,14 +28,46 @@ export async function generateMetadata({
   const post = getBlogPost(slug);
   if (!post) return {};
 
-  return generatePageMetadata({
-    title: post.seoTitle,
+  const canonical = absoluteUrl(blogPostPath(post.slug, '/blog'));
+  const imageUrl = absoluteUrl(post.image.split('?')[0]);
+
+  return {
+    title: {
+      absolute: post.seoTitle,
+    },
     description: post.metaDescription,
-    path: blogPostPath(post.slug),
-    keywords: post.keywords,
-    image: post.image,
-    imageAlt: post.imageAlt,
-  });
+    keywords: [post.primaryKeyword, ...post.secondaryKeywords, ...post.keywords],
+    authors: [{ name: post.author.name }],
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      type: 'article',
+      locale: 'tr_TR',
+      url: canonical,
+      siteName: `${SITE_CONFIG.brandName} Cam Balkon & Mimari Cam Sistemleri`,
+      title: post.seoTitle,
+      description: post.metaDescription,
+      publishedTime: post.publishDate,
+      modifiedTime: post.updatedDate,
+      authors: [post.author.name],
+      tags: post.tags,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.imageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seoTitle,
+      description: post.metaDescription,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function BlogPostDetailPage({
@@ -48,11 +81,11 @@ export default async function BlogPostDetailPage({
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Ana Sayfa', path: '/' },
-    { name: 'Blog', path: '/profesyoneller/blog' },
-    { name: post.title, path: blogPostPath(post.slug) },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: blogPostPath(post.slug, '/blog') },
   ]);
-  const articleSchema = buildBlogPostingSchema(post);
-  const faqSchema = buildFaqSchema(post);
+  const articleSchema = buildBlogPostingSchema(post, '/blog');
+  const faqSchema = buildFaqSchema(post, '/blog');
 
   return (
     <main>
@@ -61,9 +94,10 @@ export default async function BlogPostDetailPage({
       <JsonLd data={faqSchema} id={`blog-${post.slug}-faq-jsonld`} />
       <BlogArticle
         post={post}
+        breadcrumbBase={{ label: 'Blog', href: '/blog' }}
         backSlot={
           <Link
-            href="/profesyoneller/blog"
+            href="/blog"
             className="mb-5 inline-flex min-h-[40px] items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 text-[12px] font-semibold text-white backdrop-blur transition-colors hover:bg-white/20"
           >
             ← Tüm rehberlere dön

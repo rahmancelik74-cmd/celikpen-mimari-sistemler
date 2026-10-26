@@ -5,6 +5,23 @@
  * okunur; makale metinlerinde sabit (hardcoded) fiyat bulunmaz.
  */
 import { CELIKPEN_PRICING_CONFIG, type SystemSeriesId } from '../config/pricing.config';
+import {
+  BLOG_SEO_EXTENSIONS,
+  COMMON_EXTERNAL_AUTHORITIES,
+  type BlogCommentItem,
+  type BlogExternalReference,
+  type BlogInfographic,
+  type BlogInternalLink,
+  type BlogVoiceQa,
+} from './blogPostsExtended';
+
+export type {
+  BlogCommentItem,
+  BlogExternalReference,
+  BlogInfographic,
+  BlogInternalLink,
+  BlogVoiceQa,
+};
 
 export type BlogCategory =
   | 'Cam Balkon'
@@ -56,9 +73,13 @@ export interface BlogAuthor {
 
 export interface BlogPost {
   slug: string;
+  slugAliases?: string[];
   title: string;
   seoTitle: string;
   metaDescription: string;
+  primaryKeyword: string;
+  secondaryKeywords: string[];
+  tags: string[];
   keywords: string[];
   category: BlogCategory;
   readTime: number;
@@ -67,16 +88,38 @@ export interface BlogPost {
   author: BlogAuthor;
   image: string;
   imageAlt: string;
+  imageTitle: string;
   excerpt: string;
   highlights: string[];
+  numberedChecklistTitle: string;
+  numberedChecklist: string[];
   tableOfContents: BlogTocItem[];
   sections: BlogSection[];
+  internalLinks: BlogInternalLink[];
+  externalReferences: BlogExternalReference[];
+  infographic: BlogInfographic;
+  voiceSearchQa: BlogVoiceQa[];
+  initialComments: BlogCommentItem[];
   faqs: BlogFaq[];
   relatedProductHref: string;
   featured?: boolean;
 }
 
-type BlogPostInput = Omit<BlogPost, 'tableOfContents'>;
+type BlogPostInput = Omit<
+  BlogPost,
+  | 'tableOfContents'
+  | 'primaryKeyword'
+  | 'secondaryKeywords'
+  | 'tags'
+  | 'imageTitle'
+  | 'numberedChecklistTitle'
+  | 'numberedChecklist'
+  | 'internalLinks'
+  | 'externalReferences'
+  | 'infographic'
+  | 'voiceSearchQa'
+  | 'initialComments'
+>;
 
 /* ---------------------------- Fiyat yardımcıları ---------------------------- */
 const SYSTEMS = CELIKPEN_PRICING_CONFIG.systems;
@@ -802,17 +845,52 @@ const POSTS: BlogPostInput[] = [
   },
 ];
 
-export const BLOG_POSTS: BlogPost[] = POSTS.map((post) => ({
-  ...post,
-  tableOfContents: buildToc(post.sections),
-}));
+export const BLOG_POSTS: BlogPost[] = POSTS.map((post) => {
+  const ext = BLOG_SEO_EXTENSIONS[post.slug];
+  const mergedSections = ext ? [...post.sections, ...ext.extraSections] : post.sections;
+  return {
+    ...post,
+    slugAliases: ext?.slugAliases ?? [],
+    seoTitle: ext?.seoTitle ?? post.seoTitle,
+    metaDescription: ext?.metaDescription ?? post.metaDescription,
+    primaryKeyword: ext?.primaryKeyword ?? post.keywords[0] ?? post.title,
+    secondaryKeywords: ext?.secondaryKeywords ?? post.keywords.slice(1),
+    tags: ext?.tags ?? post.keywords.slice(0, 4).map((k) => `#${k.replace(/\s+/g, '')}`),
+    keywords: ext ? Array.from(new Set([ext.primaryKeyword, ...ext.secondaryKeywords, ...post.keywords])) : post.keywords,
+    readTime: Math.max(post.readTime + 4, 11),
+    imageTitle: ext?.imageTitle ?? post.imageAlt,
+    numberedChecklistTitle: ext?.numberedChecklistTitle ?? 'Uygulama Öncesi Kontrol Listesi',
+    numberedChecklist: ext?.numberedChecklist ?? [],
+    sections: mergedSections,
+    tableOfContents: buildToc(mergedSections),
+    internalLinks: ext?.internalLinks ?? [],
+    externalReferences: ext?.externalReferences ?? COMMON_EXTERNAL_AUTHORITIES,
+    infographic: ext?.infographic ?? {
+      title: 'Teknik Performans Karşılaştırması',
+      subtitle: 'Mühendislik test verileri',
+      metricUnit: '%',
+      items: [],
+      footnote: '',
+    },
+    voiceSearchQa: ext?.voiceSearchQa ?? [],
+    initialComments: ext?.initialComments ?? [],
+  };
+});
 
 export const BLOG_CATEGORIES: BlogCategory[] = Array.from(new Set(BLOG_POSTS.map((p) => p.category)));
+
+export const ALL_BLOG_TAGS: string[] = Array.from(new Set(BLOG_POSTS.flatMap((p) => p.tags)));
 
 export const FEATURED_BLOG_POST: BlogPost = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((post) => post.slug === slug);
+  return BLOG_POSTS.find((post) => post.slug === slug || (post.slugAliases ?? []).includes(slug));
+}
+
+export function getAllBlogSlugs(): string[] {
+  return Array.from(
+    new Set(BLOG_POSTS.flatMap((post) => [post.slug, ...(post.slugAliases ?? [])]))
+  );
 }
 
 export function formatBlogDate(iso: string): string {

@@ -29,7 +29,8 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
         >
           <Image
             src={product.defaultImage}
-            alt={product.name}
+            alt={`${product.name} — Çelikpen uygulama ve ürün görseli`}
+            title={`${product.name} (${product.code}) — Çelikpen`}
             width={780}
             height={500}
             priority
@@ -63,6 +64,7 @@ export const ProductDetailInteractive: React.FC<ProductDetailInteractiveProps> =
             <Image
               src={product.crossSectionSvg}
               alt={`${product.name} CAD Profil Kesiti`}
+              title={`${product.name} 1:1 Mimari CAD Profil Kesiti — Çelikpen`}
               width={560}
               height={390}
               className="aspect-[10/7] w-full object-cover"

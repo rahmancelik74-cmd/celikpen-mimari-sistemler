@@ -7,6 +7,7 @@ import {
   generatePageMetadata,
 } from '../config/seo.config';
 import { SeoJsonLd } from '../components/SeoJsonLd';
+import { SeoAnalytics } from '../components/SeoAnalytics';
 import { SiteHeader } from '../components/header/MegaMenu';
 import { Footer } from '../components/Footer';
 import { PageTransitionBar } from '../components/PageTransitionBar';
@@ -72,6 +73,7 @@ export default function RootLayout({
         <PageTransitionBar />
         <InstantPrefetcher />
         <SeoJsonLd />
+        <SeoAnalytics />
 
         {/* Sabit üst bar + ana menü; tüm sayfalarda aynı kurumsal kabuk */}
         <SiteHeader>{children}</SiteHeader>

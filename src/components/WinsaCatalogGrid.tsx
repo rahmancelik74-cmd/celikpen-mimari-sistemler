@@ -182,6 +182,7 @@ export function WinsaCatalogGrid() {
                 <Image
                   src={prod.defaultImage}
                   alt={`${prod.name} — Çelikpen ürün ve uygulama görseli`}
+                  title={`${prod.name} (${prod.category}) — Çelikpen Teknik Sistem Kataloğu`}
                   width={700}
                   height={440}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"

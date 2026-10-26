@@ -128,6 +128,7 @@ export default async function UrunDetayPage({
                   <Image
                     src={rel.defaultImage}
                     alt={`${rel.name} gerçek uygulama fotoğrafı`}
+                    title={`${rel.name} (${rel.code}) — Çelikpen Sistem Kataloğu`}
                     width={480}
                     height={300}
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"

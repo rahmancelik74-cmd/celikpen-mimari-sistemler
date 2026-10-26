@@ -298,6 +298,7 @@ export function ReferenceGallery({
               <Image
                 src={photo.image}
                 alt={`${photo.title} — Çelikpen referans uygulaması`}
+                title={`${photo.title} (${photo.system}) — Çelikpen Referans Galerisi`}
                 width={1000}
                 height={700}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -396,6 +397,7 @@ export function ReferenceGallery({
               <Image
                 src={selectedPhoto.image}
                 alt={`${selectedPhoto.title} — Çelikpen referans uygulaması`}
+                title={`${selectedPhoto.title} (${selectedPhoto.system}) — Çelikpen`}
                 width={1200}
                 height={840}
                 sizes="(min-width: 1024px) 1024px, 100vw"

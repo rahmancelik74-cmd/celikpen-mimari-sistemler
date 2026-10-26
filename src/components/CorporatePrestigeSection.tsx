@@ -120,6 +120,7 @@ export function CorporatePrestigeSection() {
                 <Image
                   src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
                   alt="Çelikpen bioklimatik pergola ve giyotin cam sistem uygulaması"
+                  title="Bahçelievler Bioklimatik Pergola ve Motorlu Giyotin Cam Uygulaması — Çelikpen"
                   fill
                   sizes="(min-width: 1024px) 48vw, 92vw"
                   className="object-cover"
@@ -154,6 +155,7 @@ export function CorporatePrestigeSection() {
                 <Image
                   src="/images/siyavuspasa-surme-cam-balkon.jpg"
                   alt="Çelikpen panoramik sürme cam balkon ve teras manzarası"
+                  title="Çelikpen Panoramik Sürme Cam Balkon ve Teras Kapatma Sistemleri"
                   fill
                   sizes="(min-width: 1024px) 34vw, 66vw"
                   className="object-cover"

@@ -293,6 +293,7 @@ export default function HomePage() {
               <Image
                 src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
                 alt="Çelikpen bioklimatik pergola ve giyotin cam sistem uygulaması"
+                title="Bahçelievler Bioklimatik Pergola ve Giyotin Cam Sistem Uygulaması — Çelikpen"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
@@ -434,6 +435,7 @@ export default function HomePage() {
                   <Image
                     src={project.image}
                     alt={project.title}
+                    title={`${project.title} — ${project.meta} | Çelikpen`}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -563,6 +565,7 @@ export default function HomePage() {
                   <Image
                     src={post.image}
                     alt={post.title}
+                    title={`${post.title} — Çelikpen Mimari Rehber & Blog`}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
