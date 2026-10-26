@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T23:40:00.000Z",
+  "updatedAt": "2026-10-27T10:00:00.000Z",
   "siteSettings": {
     "phoneDisplay": "0 (532) 333 20 85",
     "phoneRaw": "+905323332085",
@@ -12,8 +12,108 @@
     "experienceYears": 30,
     "showMagazaMenu": false,
     "instagramUrl": "https://www.instagram.com/celikpen",
+    "youtubeUrl": "",
+    "facebookUrl": "",
+    "linkedinUrl": "",
     "announcementText": "İstanbul Geneli Ücretsiz Lazerli Keşif & 10 Yıl Sistem Garantisi"
   },
+  "smtpSettings": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "user": "",
+    "password": "",
+    "senderName": "Çelikpen Mimari Sistemler",
+    "senderEmail": "iletisim@celikpen.com",
+    "encryption": "TLS"
+  },
+  "themeSettings": {
+    "darkMode": true,
+    "primaryColor": "#1E3A8A"
+  },
+  "maintenanceMode": {
+    "enabled": false,
+    "title": "Bakım Çalışması",
+    "message": "Sitemiz şu anda bakım çalışması nedeniyle geçici olarak kapalıdır. Kısa süre içinde tekrar hizmetinizdeyiz."
+  },
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Süper Admin",
+      "email": "admin@celikpen.com",
+      "password": "celikpen2026",
+      "role": "super_admin",
+      "twoFactorEnabled": false,
+      "twoFactorPin": "202630",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "user-2",
+      "name": "Editör",
+      "email": "editor@celikpen.com",
+      "password": "celikpen2026",
+      "role": "editor",
+      "twoFactorEnabled": false,
+      "twoFactorPin": "202630",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "user-3",
+      "name": "Moderatör",
+      "email": "moderator@celikpen.com",
+      "password": "celikpen2026",
+      "role": "moderator",
+      "twoFactorEnabled": false,
+      "twoFactorPin": "202630",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "sessions": [],
+  "auditLogs": [],
+  "notifications": [
+    {
+      "id": "notif-1",
+      "type": "info",
+      "title": "CMS v2.0 Aktif",
+      "message": "Enterprise CMS v2.0 başarıyla kuruldu. Tüm modüller aktif.",
+      "read": false,
+      "createdAt": "2026-10-27T10:00:00.000Z"
+    }
+  ],
+  "discoveryRequests": [
+    {
+      "id": "req-1",
+      "name": "Ahmet Yılmaz",
+      "phone": "0532 123 45 67",
+      "email": "ahmet@example.com",
+      "district": "Bahçelievler / Kocasinan",
+      "system": "Isıcamlı Cam Balkon",
+      "message": "3+1 dairemizin balkonuna ısıcamlı cam balkon sistemi yaptırmak istiyoruz. Yaklaşık 8 m² alan var.",
+      "status": "pending",
+      "createdAt": "2026-10-25T14:30:00.000Z"
+    },
+    {
+      "id": "req-2",
+      "name": "Fatma Demir",
+      "phone": "0543 987 65 43",
+      "email": "fatma.demir@example.com",
+      "district": "Bakırköy / Ataköy",
+      "system": "Bioklimatik Pergola",
+      "message": "Teras alanımıza bioklimatik pergola sistemi düşünüyoruz. 25 m² çatı terası mevcut.",
+      "status": "pending",
+      "createdAt": "2026-10-26T09:15:00.000Z"
+    },
+    {
+      "id": "req-3",
+      "name": "Mehmet Kaya",
+      "phone": "0555 222 33 44",
+      "email": "",
+      "district": "Başakşehir",
+      "system": "PVC Pencere & Kapı",
+      "message": "Tüm daire pencerelerini Winsa Revotech Gold 84mm ile değiştirmek istiyoruz. 12 adet pencere.",
+      "status": "contacted",
+      "createdAt": "2026-10-24T11:00:00.000Z"
+    }
+  ],
   "pricingSystems": [
     {
       "id": "vns_8mm",
@@ -118,6 +218,7 @@
       "district": "Bahçelievler / Kocasinan Merkez",
       "system": "Winsa Vera Termal 4+20+4 Argonlu Isıcam",
       "category": "Isıcamlı Cam Balkon",
+      "status": "published",
       "featured": true
     },
     {
@@ -127,6 +228,7 @@
       "district": "Bakırköy / Ataköy",
       "system": "Winsa Vela Bioklimatik Pergola & Cam Cephe",
       "category": "Kış Bahçesi & Pergola",
+      "status": "published",
       "featured": true
     },
     {
@@ -136,6 +238,7 @@
       "district": "Bakırköy / Merkez",
       "system": "Winsa Dorado 76 Antrasit PVC Doğrama",
       "category": "PVC Pencere & Kapı",
+      "status": "published",
       "featured": true
     },
     {
@@ -145,6 +248,7 @@
       "district": "Bakırköy / Florya",
       "system": "Winsa Vera Vertical Uzaktan Kumandalı Giyotin",
       "category": "Giyotin Cam Sistemi",
+      "status": "published",
       "featured": true
     },
     {
@@ -154,6 +258,7 @@
       "district": "Bakırköy / Yeşilköy",
       "system": "Winsa Panorama HS 76 Hebeschiebe Sürme",
       "category": "Sürme Sistemler",
+      "status": "published",
       "featured": true
     },
     {
@@ -163,6 +268,7 @@
       "district": "Bahçelievler / Siyavuşpaşa",
       "system": "Winsa Vera Pro 10 mm Temperli Katlanır Sistem",
       "category": "Katlanır Cam Balkon",
+      "status": "published",
       "featured": true
     },
     {
@@ -172,6 +278,7 @@
       "district": "Başakşehir",
       "system": "Winsa Vera Slide Eşiksiz Paslanmaz Rulmanlı Sürme",
       "category": "Sürme Cam Balkon",
+      "status": "published",
       "featured": true
     },
     {
@@ -181,6 +288,7 @@
       "district": "Bahçelievler / Şirinevler",
       "system": "Winsa Revotech Gold 7 Odacıklı 3 Contalı Sistem",
       "category": "PVC Pencere & Kapı",
+      "status": "published",
       "featured": true
     },
     {
@@ -190,6 +298,7 @@
       "district": "Bahçelievler / Kocasinan Merkez",
       "system": "Lamine Isıcam Tavan & Vera Termal Katlanır Cephe",
       "category": "Kış Bahçesi Sistemleri",
+      "status": "published",
       "featured": true
     },
     {
@@ -199,6 +308,7 @@
       "district": "Bahçelievler / Yenibosna",
       "system": "Somfy Motorlu Giyotin & Bioklimatik Tavan",
       "category": "Giyotin & Pergola",
+      "status": "published",
       "featured": true
     },
     {
@@ -208,6 +318,7 @@
       "district": "Bahçelievler / Soğanlı",
       "system": "Winsa Safir 76 & Winstor Motorlu Panjur",
       "category": "Panjur & PVC Doğrama",
+      "status": "published",
       "featured": true
     },
     {
@@ -217,6 +328,7 @@
       "district": "Bahçelievler / Çobançeşme",
       "system": "Winsa Comfort Slide Plus Vakum Contalı Sürme",
       "category": "Sürme Sistemler",
+      "status": "published",
       "featured": true
     }
   ],
@@ -384,11 +496,17 @@
       "metaDescription": "2026 ısıcamlı cam balkon m² fiyatları, 4+20+4 argon gazlı Sinerji/Konfor cam karşılaştırması ve Bahçelievler ücretsiz lazer keşif rehberi.",
       "primaryKeyword": "ısıcamlı cam balkon fiyatları 2026",
       "category": "Cam Balkon",
+      "tags": ["ısıcamlı", "cam balkon", "fiyat", "2026", "argon"],
+      "status": "published",
       "readTime": 9,
       "publishedAt": "2026-01-15",
       "updatedAt": "2026-10-26",
       "coverImage": "/images/services/isicamli-cam-balkon.jpg",
       "youtubeVideoId": "M7lc1UVf-VE",
+      "ogImage": "/images/services/isicamli-cam-balkon.jpg",
+      "ogTitle": "",
+      "ogDescription": "",
+      "canonicalUrl": "",
       "excerpt": "Klasik 8 mm tek cam ile 4+20+4 argon gazlı ısıcamlı cam balkon arasındaki 3,2 katlık ısı yalıtım farkı, amortisman hesabı ve güncel m² birim fiyatları.",
       "contentHtml": "Isıcamlı cam balkon sistemleri (Winsa Vera Termal ve Albert Genau Tiara Twinmax), 4+20+4 mm argon gaz dolgulu Şişecam Sinerji ve Konfor kombinasyonuyla balkonları dört mevsim oda konforuna dönüştürür."
     },
@@ -399,11 +517,17 @@
       "metaDescription": "Winsa Dorado 76 (5 odacık) ile Revotech Gold 84 mm (7 odacık, 3 conta) PVC pencere sistemlerinin Uw ısı iletim ve dB ses yalıtım farkları.",
       "primaryKeyword": "Winsa Dorado 76 Revotech karşılaştırma",
       "category": "PVC Pencere",
+      "tags": ["winsa", "dorado", "revotech", "pvc", "karşılaştırma"],
+      "status": "published",
       "readTime": 8,
       "publishedAt": "2026-02-02",
       "updatedAt": "2026-10-26",
       "coverImage": "/images/products/winsa-revotech.jpg",
       "youtubeVideoId": "ysz5S6PUM-U",
+      "ogImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "canonicalUrl": "",
       "excerpt": "İstanbul ikliminde hangi cephede Dorado 76, hangi cephede 7 odacıklı ve 3 contalı Revotech Gold tercih edilmeli? Mühendislik verileriyle inceledik.",
       "contentHtml": "Winsa Revotech Gold 84 mm profil genişliği, 7 odacıklı iç geometrisi ve orta conta (3. conta) bariyeriyle E-5 ve havalimanı aksındaki yüksek gürültülü cephelerde 45 dB'e varan akustik yalıtım sağlar."
     },
@@ -414,11 +538,17 @@
       "metaDescription": "Dar balkonlar, L-köşe balkonlar ve geniş teraslar için katlanır cam balkon ile eşiksiz sürme cam balkon arasındaki kullanım ve yalıtım farkları.",
       "primaryKeyword": "katlanır mı sürme cam balkon mu",
       "category": "Sürme Sistemler",
+      "tags": ["katlanır", "sürme", "cam balkon", "karşılaştırma"],
+      "status": "published",
       "readTime": 7,
       "publishedAt": "2026-02-18",
       "updatedAt": "2026-10-26",
       "coverImage": "/images/services/surme-cam-balkon.jpg",
       "youtubeVideoId": "M7lc1UVf-VE",
+      "ogImage": "",
+      "ogTitle": "",
+      "ogDescription": "",
+      "canonicalUrl": "",
       "excerpt": "Tül perde ve balkon mobilyası kullanımında eşiksiz sürme sistemlerin avantajları, tam açıklık isteyen cephelerde katlanır sistemlerin üstünlüğü.",
       "contentHtml": "İçeriye doğru katlanan kanatların perdeye veya masa takımına çarpmasını istemeyen kullanıcılar için Winsa Vera Slide eşiksiz sürme cam balkon sistemleri sıfır alt ray çıkıntısıyla kusursuz konfor sunar."
     }
