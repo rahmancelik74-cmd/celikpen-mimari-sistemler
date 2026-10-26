@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:ssl": "next dev --experimental-https",
-    "build": "node -e \"process.env.NEXT_DIST_DIR='.next-build';require('child_process').execSync('npx next build',{stdio:'inherit'})\"",
+    "build": "next build",
     "start": "node server.mjs",
     "typecheck": "tsc --noEmit",
     "test:pricing": "node --experimental-strip-types tests/pricing.test.mjs"
