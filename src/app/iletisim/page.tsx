@@ -4,6 +4,7 @@ import { SITE_CONFIG } from '../../config/site.config';
 import { generatePageMetadata } from '../../config/seo.config';
 import { ContactForm } from '../../components/ContactForm';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
+import { LocalBusinessMapCard } from '../../components/LocalBusinessMapCard';
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'İletişim & Ücretsiz Lazerli Keşif — Çelikpen Bahçelievler | 0 (212) 555 00 34',
@@ -101,6 +102,9 @@ export default function IletisimPage() {
           <ContactForm />
         </div>
       </div>
+
+      {/* Google Haritalar & İşletme Profili Yerel SEO Kartı */}
+      <LocalBusinessMapCard className="mt-10" />
     </main>
   );
 }

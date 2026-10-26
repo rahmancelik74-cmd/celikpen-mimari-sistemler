@@ -13,6 +13,8 @@ import {
 } from '../../data/blogPosts';
 import { blogPostPath } from './blogSchema';
 import { BlogCommentsSection, BlogShareBar } from './BlogInteractiveTools';
+import { LiteYouTubeEmbed } from '../LiteYouTubeEmbed';
+import { BacklinkCitationBox } from '../BacklinkCitationBox';
 
 /**
  * Paragraf içindeki [Etiket](/ic-rota) veya [Etiket](https://dis-kaynak) ifadelerini
@@ -206,6 +208,14 @@ export function BlogArticle({
                 ))}
                 <li>
                   <a
+                    href="#video-inceleme"
+                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
+                  >
+                    ▶ Sistem Video İncelemesi
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#infografik"
                     className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
                   >
@@ -242,6 +252,14 @@ export function BlogArticle({
                     className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
                   >
                     Standartlar &amp; Dış Kaynaklar
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#kaynak-goster-embed"
+                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
+                  >
+                    Kaynak Göster / Embed Aracı
                   </a>
                 </li>
                 <li>
@@ -313,6 +331,11 @@ export function BlogArticle({
             {post.sections.map((section) => (
               <ArticleSection key={section.id} section={section} />
             ))}
+          </div>
+
+          {/* Gömülü Winsa & Albert Genau Sistem Videosu (LiteYouTube + VideoObject Schema) */}
+          <div id="video-inceleme" className="mt-12 scroll-mt-32">
+            <LiteYouTubeEmbed slug={post.slug} />
           </div>
 
           {/* Gömülü Teknik İnfografik & Görsel Karşılaştırma Diyagramı */}
@@ -516,6 +539,15 @@ export function BlogArticle({
               <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">30 Yıllık Saha Deneyimi</span>
             </div>
           </section>
+
+          {/* Backlink & Kaynak Göster / Embed Aracı */}
+          <BacklinkCitationBox
+            title={post.title}
+            url={canonicalArticleUrl}
+            authorName={post.author.name}
+            publishDate={post.publishDate}
+            primaryKeyword={post.primaryKeyword}
+          />
 
           {/* Alt Sosyal Paylaşım Çubuğu */}
           <div className="mt-8">

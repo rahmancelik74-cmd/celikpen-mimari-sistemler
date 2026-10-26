@@ -4,6 +4,7 @@ import { SITE_CONFIG } from '../../config/site.config';
 import { generatePageMetadata } from '../../config/seo.config';
 import { SalesPointsDirectory } from '../../components/SalesPointsDirectory';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
+import { LocalBusinessMapCard } from '../../components/LocalBusinessMapCard';
 
 export const metadata: Metadata = generatePageMetadata({
   title: `Satış Noktaları & Showroom — Kocasinan Merkez ve Bahçelievler Keşif Ağı | ${SITE_CONFIG.brandName}`,
@@ -29,6 +30,7 @@ export default function SatisNoktalariPage() {
       />
 
       <SalesPointsDirectory />
+      <LocalBusinessMapCard className="mt-10" />
     </main>
   );
 }

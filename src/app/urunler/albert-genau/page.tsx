@@ -3,7 +3,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { generatePageMetadata } from '../../../config/seo.config';
+import { ARCHITECTURAL_VIDEO_CATALOG } from '../../../config/videos.config';
 import { WinsaCatalogGrid } from '../../../components/WinsaCatalogGrid';
+import { LiteYouTubeEmbed } from '../../../components/LiteYouTubeEmbed';
 
 export const metadata: Metadata = generatePageMetadata({
   title: `Albert Genau Cam Balkon, Giyotin & Bioklimatik Pergola | ${SITE_CONFIG.brandName}`,
@@ -89,8 +91,27 @@ export default function AlbertGenauBrandPage() {
         </div>
       </section>
 
-      <div className="container-shell pt-8 sm:pt-10">
+      <div className="container-shell space-y-12 pt-8 sm:pt-10">
         <WinsaCatalogGrid initialBrand="albert-genau" />
+
+        {/* Albert Genau Resmi Video Vitrinleri (LiteYouTube + VideoObject JSON-LD) */}
+        <section aria-labelledby="albert-genau-video-vitrin" className="space-y-5 pt-4">
+          <div>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EFF6FF] px-3 py-1 text-[10.5px] font-extrabold uppercase tracking-[0.16em] text-[#1E3A8A]">
+              RESMİ VİDEO TANITIM &amp; SAHA UYGULAMA İNCELEMESİ
+            </span>
+            <h2
+              id="albert-genau-video-vitrin"
+              className="mt-2 text-2xl font-black tracking-tight text-[#0F172A] sm:text-3xl"
+            >
+              Albert Genau Sistem Videoları
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <LiteYouTubeEmbed video={ARCHITECTURAL_VIDEO_CATALOG['albert-genau-tiara-twinmax']} />
+            <LiteYouTubeEmbed video={ARCHITECTURAL_VIDEO_CATALOG['albert-genau-tambalkon-giyotin']} />
+          </div>
+        </section>
       </div>
     </main>
   );

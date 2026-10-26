@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { SITE_CONFIG } from '../../../config/site.config';
+import { ANALYTICS_CONFIG, INDEXNOW_STATIC_KEY } from '../../../config/analytics.config';
+import { ARCHITECTURAL_VIDEO_CATALOG, getVideoForSlug } from '../../../config/videos.config';
 import { BLOG_POSTS } from '../../../data/blogPosts';
 import sitemap from '../../sitemap';
 
@@ -9,6 +11,7 @@ export async function GET() {
   const blogAudits = BLOG_POSTS.map((post) => {
     const titleLength = post.seoTitle.length;
     const descriptionLength = post.metaDescription.length;
+    const matchedVideo = getVideoForSlug(post.slug);
     return {
       slug: post.slug,
       urls: [
@@ -28,9 +31,13 @@ export async function GET() {
       externalAuthorityLinksCount: post.externalReferences.length,
       voiceSearchQaCount: post.voiceSearchQa.length,
       commentsCount: post.initialComments.length,
+      embeddedVideoId: matchedVideo.videoId,
+      embeddedVideoTitle: matchedVideo.title,
+      backlinkCitationWidgetEnabled: true,
       schemasEnabled: [
         'BlogPosting',
         'TechArticle',
+        'VideoObject',
         'SpeakableSpecification',
         'FAQPage',
         'BreadcrumbList',
@@ -48,6 +55,26 @@ export async function GET() {
     siteUrl: SITE_CONFIG.siteUrl,
     totalIndexedSitemapUrls: sitemapEntries.length,
     allBlogMetaLengthsOptimal: allOptimal,
+    videoSeoEngine: {
+      component: 'LiteYouTubeEmbed',
+      zeroInitialIframeJs: true,
+      totalCatalogVideos: Object.keys(ARCHITECTURAL_VIDEO_CATALOG).length,
+      videoObjectSchemaEnabled: true,
+    },
+    analyticsAndIndexingHub: {
+      indexNowKey: INDEXNOW_STATIC_KEY,
+      indexNowKeyVerificationFile: `${SITE_CONFIG.siteUrl}/${INDEXNOW_STATIC_KEY}.txt`,
+      indexNowEndpoint: `${SITE_CONFIG.siteUrl}/api/indexnow`,
+      googleSearchConsoleReady: true,
+      ga4ConversionTrackingReady: true,
+      trackedEvents: ANALYTICS_CONFIG.trackedConversionEvents,
+    },
+    backlinkAndLocalSeoTools: {
+      backlinkCitationGeneratorEnabled: true,
+      citationFormats: ['HTML Dofollow Backlink', 'Markdown / APA', 'Blockquote Embed'],
+      googleBusinessProfileMapCardEnabled: true,
+      localSeoGeoCircleRadiusMeters: 35000,
+    },
     technicalSeoChecklist: {
       httpsAndHstsEnabled: true,
       mobileFirstResponsive: true,
@@ -61,6 +88,7 @@ export async function GET() {
         'WebSite',
         'BlogPosting',
         'TechArticle',
+        'VideoObject',
         'SpeakableSpecification',
         'FAQPage',
         'Product',

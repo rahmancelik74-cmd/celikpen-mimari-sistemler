@@ -13,6 +13,7 @@ import {
 import { MinimalSubpageHeader } from '../../../components/MinimalSubpageHeader';
 import { ProductDetailInteractive } from '../../../components/ProductDetailInteractive';
 import { PrintDatasheetButton } from '../../../components/PrintDatasheetButton';
+import { LiteYouTubeEmbed } from '../../../components/LiteYouTubeEmbed';
 import {
   JsonLd,
   buildBreadcrumbSchema,
@@ -102,6 +103,11 @@ export default async function UrunDetayPage({
 
       {/* İnteraktif Bento Spec Grid + 1:1 CAD Kesit + Canlı Renk Seçici */}
       <ProductDetailInteractive product={prod} />
+
+      {/* Resmi Sistem Video İncelemesi (LiteYouTube + VideoObject JSON-LD) */}
+      <div className="mt-10 print:hidden">
+        <LiteYouTubeEmbed slug={prod.slug} />
+      </div>
 
       {/* Bu Kategorideki Diğer Sistemler */}
       {relatedProducts.length > 0 && (

@@ -31,6 +31,15 @@ const OPENING_HOURS = {
 
 const AREA_SERVED = [
   {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: SEO_BUSINESS.geo.latitude,
+      longitude: SEO_BUSINESS.geo.longitude,
+    },
+    geoRadius: 35000,
+  },
+  {
     '@type': 'City',
     name: 'İstanbul',
     containedInPlace: { '@type': 'Country', name: 'Türkiye' },
@@ -45,6 +54,22 @@ const AREA_SERVED = [
     name: `${neighborhood.name}, Bahçelievler, İstanbul`,
     containedInPlace: { '@type': 'AdministrativeArea', name: 'Bahçelievler, İstanbul' },
   })),
+];
+
+const SAME_AS_PROFILES = [
+  'https://www.instagram.com/celikpen',
+  `https://www.google.com/maps/search/?api=1&query=${SEO_BUSINESS.geo.latitude},${SEO_BUSINESS.geo.longitude}`,
+  'https://www.winsa.com.tr/',
+  'https://www.albertgenau.com/',
+];
+
+const KNOWS_ABOUT_TOPICS = [
+  'Isıcamlı Cam Balkon Sistemleri (4+20+4 Argon Gazlı)',
+  'Winsa PVC Pencere ve Kapı Sistemleri (Dorado 76, Revotech Gold, Safir 76)',
+  'Albert Genau Cam Balkon, SlideMaster ve Tiara Twinmax',
+  'Motorlu Giyotin Cam (Tambalkon) Sistemleri',
+  'Bioklimatik Pergola ve Kış Bahçesi Sistemleri',
+  'Winstor Monoblok Panjur ve Kedi Tüllü Plise Sineklik',
 ];
 
 const REVIEWS = TESTIMONIALS.map((testimonial) => ({
@@ -133,6 +158,8 @@ export function SeoJsonLd() {
           longitude: SEO_BUSINESS.geo.longitude,
         },
         hasMap: `https://www.google.com/maps/search/?api=1&query=${SEO_BUSINESS.geo.latitude},${SEO_BUSINESS.geo.longitude}`,
+        sameAs: SAME_AS_PROFILES,
+        knowsAbout: KNOWS_ABOUT_TOPICS,
         openingHoursSpecification: [OPENING_HOURS],
         areaServed: AREA_SERVED,
         aggregateRating: {
