@@ -169,7 +169,7 @@ const BLOG_POSTS = [
 
 const ADDITIONAL_LINKS = [
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
-  { label: 'Proje Galerisi', href: '/galeri' },
+  { label: 'Proje Galerisi', href: '/profesyoneller/referanslar' },
   { label: 'Müşteri Yorumları', href: '/yorumlar' },
   { label: 'Karşılaştır', href: '/karsilastir' },
 ];
@@ -415,7 +415,7 @@ export default function HomePage() {
             </div>
             <Link
               prefetch={true}
-              href="/galeri"
+              href="/profesyoneller/referanslar"
               className="inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
               Tüm projeleri incele <IconArrowRight className="h-3.5 w-3.5" />
@@ -452,10 +452,8 @@ export default function HomePage() {
             ))}
 
             <Link
-
               prefetch={true}
-
-              href="/galeri"
+              href="/profesyoneller/referanslar"
               className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-card border border-[#BFDBFE] bg-gradient-to-br from-[#0F172A] via-[#172554] to-[#1D4ED8] p-6 text-white shadow-xs transition-transform duration-300 hover:-translate-y-1"
             >
               <span className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#1E3A8A]/40 blur-2xl" />

@@ -18,23 +18,42 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Next/image optimizasyon sonuçları bir yıl boyunca değişmez kabul edilir.
-    minimumCacheTTL: 31536000,
+    minimumCacheTTL: process.env.NODE_ENV === 'production' ? 3600 : 0,
   },
-  // Kamu görselleri, derlenmiş chunk'lar ve favicon tarayıcıda kalıcı önbelleğe alınır.
+  // Kamu görselleri, derlenmiş chunk'lar ve favicon önbellek yönetimi.
   async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      const noStore = [
+        {
+          key: 'Cache-Control',
+          value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      ];
+      return [
+        { source: '/:path*', headers: noStore },
+        { source: '/images/:path*', headers: noStore },
+        { source: '/_next/static/:path*', headers: noStore },
+      ];
+    }
+
     const immutable = [
       {
         key: 'Cache-Control',
         value: 'public, max-age=31536000, immutable',
       },
     ];
+    const revalidateImages = [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=3600, must-revalidate',
+      },
+    ];
 
     return [
-      { source: '/images/:path*', headers: immutable },
+      { source: '/images/:path*', headers: revalidateImages },
       { source: '/_next/static/:path*', headers: immutable },
-      { source: '/favicon.ico', headers: immutable },
-      { source: '/icon.svg', headers: immutable },
+      { source: '/favicon.ico', headers: revalidateImages },
+      { source: '/icon.svg', headers: revalidateImages },
     ];
   },
   // Eski ürün bağlantılarını güncel WINSA katalog slug'larına kalıcı olarak yönlendirir.

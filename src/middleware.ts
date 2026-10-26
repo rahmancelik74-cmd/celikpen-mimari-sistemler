@@ -195,8 +195,15 @@ export function middleware(request: NextRequest) {
     return applySecurityHeaders(NextResponse.redirect(httpsUrl, 308));
   }
 
-  /* 6. Güvenlik başlıkları */
+  /* 6. Güvenlik başlıkları ve önbellek yenileme */
   const response = NextResponse.next();
+  if (isLocalhost) {
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  }
+  if (!request.cookies.has('celikpen_cache_v3')) {
+    response.headers.set('Clear-Site-Data', '"cache"');
+    response.cookies.set('celikpen_cache_v3', '1', { path: '/', maxAge: 86400 });
+  }
   return applySecurityHeaders(response, shouldUpgradeInsecureRequests);
 }
 
