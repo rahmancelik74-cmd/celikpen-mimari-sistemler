@@ -200,10 +200,6 @@ export function middleware(request: NextRequest) {
   if (isLocalhost) {
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   }
-  if (!request.cookies.has('celikpen_cache_v3')) {
-    response.headers.set('Clear-Site-Data', '"cache"');
-    response.cookies.set('celikpen_cache_v3', '1', { path: '/', maxAge: 86400 });
-  }
   return applySecurityHeaders(response, shouldUpgradeInsecureRequests);
 }
 

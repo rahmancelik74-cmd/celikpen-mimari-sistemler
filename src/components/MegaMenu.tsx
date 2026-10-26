@@ -265,7 +265,7 @@ export function MegaMenu() {
               <IconInstagram className="h-4 w-4" />
             </a>
             <a
-              href="https://wa.me/902125550034"
+              href="https://wa.me/905326702654"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Çelikpen WhatsApp hattı"
@@ -308,26 +308,12 @@ export function MegaMenu() {
                         : 'text-[#1E293B] hover:bg-slate-50 hover:text-[#1E3A8A]'
                     }`}
                   >
-                    {item.label}
-                    <button
-                      type="button"
-                      aria-label={`${item.label} alt menüsünü aç`}
-                      aria-expanded={activeDropdown === item.dropdown}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const kind = item.dropdown!;
-                        prefetchGroup(kind);
-                        setActiveDropdown((curr) => (curr === kind ? null : kind));
-                      }}
-                      className="inline-flex items-center justify-center p-0.5"
-                    >
-                      <IconChevron
-                        className={`h-3 w-3 transition-transform duration-200 ${
-                          activeDropdown === item.dropdown ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
+                    <span>{item.label}</span>
+                    <IconChevron
+                      className={`h-3 w-3 transition-transform duration-200 ${
+                        activeDropdown === item.dropdown ? 'rotate-180' : ''
+                      }`}
+                    />
                   </Link>
                 </div>
               ) : item.disabled ? (
@@ -702,7 +688,7 @@ export function MegaMenu() {
                   </span>
                 </a>
                 <a
-                  href="https://wa.me/902125550034"
+                  href="https://wa.me/905326702654"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[48px] items-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-white"

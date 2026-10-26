@@ -147,7 +147,7 @@ const BLOG_POSTS = [
     category: 'Cam Balkon',
     read: '9 dk okuma',
     href: '/blog/isicamli-cam-balkon-rehberi-2026',
-    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg',
+    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg?v=2',
   },
   {
     title: 'Winsa Dorado 76 mı, Revotech Gold mu? PVC Pencere Karşılaştırması',
@@ -155,7 +155,7 @@ const BLOG_POSTS = [
     category: 'PVC Pencere',
     read: '8 dk okuma',
     href: '/blog/winsa-dorado-76-mi-revotech-gold-mu',
-    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg',
+    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg?v=2',
   },
   {
     title: 'Bahçelievler ve İstanbul’da Cam Balkon Yaptırırken 10 Kritik Detay',
@@ -163,7 +163,7 @@ const BLOG_POSTS = [
     category: 'Yerel Rehber',
     read: '9 dk okuma',
     href: '/blog/bahcelievler-cam-balkon-10-kritik-detay',
-    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg',
+    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg?v=2',
   },
 ];
 

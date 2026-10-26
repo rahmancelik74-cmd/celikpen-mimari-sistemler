@@ -55,7 +55,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Pencere & Kapı',
     description:
       '60 mm’den 84 mm profil genişliğine, 7 odacıklı ve 3 contalı pasif ev standartlarında maksimum ısı ve ses yalıtımlı PVC pencere ve kapı sistemleri.',
-    defaultImage: '/images/products/bahcelievler-pvc-pencere-kapi-sistemleri.jpg',
+    defaultImage: '/images/products/bahcelievler-pvc-pencere-kapi-sistemleri.jpg?v=2',
     badge: 'TS EN 12608-1 Sınıf A',
   },
   {
@@ -64,7 +64,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Sürme Sistemler',
     description:
       'Geniş teras ve balkon açıklıklarında kesintisiz manzara sunan Kaldır-Sür (Hebeschiebe), yeni nesil akıllı Comfort Slide ve paralel sürme çözümleri.',
-    defaultImage: '/images/products/bahcelievler-surme-kapi-sistemleri.jpg',
+    defaultImage: '/images/products/bahcelievler-surme-kapi-sistemleri.jpg?v=2',
     badge: '300 kg Kanat Kapasitesi',
   },
   {
@@ -73,7 +73,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Cam Balkon',
     description:
       '4+20+4 Argon gazlı Isıcamlı Vera Termal, 8-10 mm temperli katlanır, eşiksiz sürme, motorlu silinebilir giyotin ve bioklimatik kış bahçesi serileri.',
-    defaultImage: '/images/products/bahcelievler-cam-balkon-sistemleri.jpg',
+    defaultImage: '/images/products/bahcelievler-cam-balkon-sistemleri.jpg?v=2',
     badge: 'TSE EN 12150 Temperli',
   },
   {
@@ -82,7 +82,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Panjur & Kepenk',
     description:
       'Güneş kontrolü, fırtına güvenliği ve +%28 ek ısı yalıtımı sağlayan Winstor monoblok panjur ve Somfy/Becker motorlu poliüretanlı alüminyum kepenkler.',
-    defaultImage: '/images/products/bahcelievler-panjur-kepenk-sistemleri.jpg',
+    defaultImage: '/images/products/bahcelievler-panjur-kepenk-sistemleri.jpg?v=2',
     badge: 'Somfy / Becker Otomasyon',
   },
   {
@@ -91,7 +91,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Donanım Sistemleri',
     description:
       'Winsa profilleriyle %100 entegre çalışan RC2 emniyetli ispanyolet kilitler, akustik pencere kolları, çocuk emniyet kilitleri ve 8 bilyalı paslanmaz rulmanlar.',
-    defaultImage: '/images/products/bahcelievler-donanim-aksesuar.jpg',
+    defaultImage: '/images/products/bahcelievler-donanim-aksesuar.jpg?v=2',
     badge: '10 Yıl Sistem Garantisi',
   },
   {
@@ -100,7 +100,7 @@ export const WINSA_CATEGORIES: WinsaCategoryInfo[] = [
     shortName: 'Renk Dünyası',
     description:
       'Cool Colors teknolojili Antrasit Gri (RAL 7016), Kumlu Antrasit, Altın Meşe, Koyu Ceviz, Maun ve Metalik Gümüş UV dayanımlı dış cephe laminasyon kartelası.',
-    defaultImage: '/images/products/bahcelievler-renk-dunyasi-lamine.jpg',
+    defaultImage: '/images/products/bahcelievler-renk-dunyasi-lamine.jpg?v=2',
     badge: 'EN 513 Sınıf S UV Dayanım',
   },
 ];
@@ -131,7 +131,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '84 mm kasa/kanat genişliği, 7 odacıklı kesiti ve 3 contalı (orta conta) mimarisiyle en zorlu iklim ve gürültü koşullarında zirve yalıtım sunar.',
     fullDescription:
       'Winsa ürün ailesinin en üst segment yalıtım serisi olan Revotech Gold; 84 mm profil derinliği ve 7 odacıklı iç geometrisiyle ısı kayıplarını minimuma indirir. Üçüncü orta conta bariyeri sayesinde şiddetli lodos ve sağanak yağışta su sızdırmazlığını Sınıf 9A seviyesine taşırken, 52 mm’ye kadar üçlü (triple) Argon gazlı Konfor Isıcam uygulamasına olanak tanır.',
-    defaultImage: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
+    defaultImage: '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '84 mm profil genişliği ve 7 odacıklı simetrik kasa/kanat mimarisi',
@@ -168,7 +168,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '84 mm genişliğindeki 7 odacıklı profil yapısı ve çift sıra EPDM conta sistemi ile yüksek ısı ve ses izolasyonu sağlayan güçlü mimari seri.',
     fullDescription:
       'Revotech serisi, 84 mm kasa-kanat oturma genişliği ve 7 odacıklı iç tasarımıyla büyük ebatlı pencere ve balkon kapılarında esneme yapmayan yüksek statik direnç sunar. Kapalı kutu galvanizli destek sacı yapısı sayesinde yüksek katlarda rüzgar yüküne karşı tam güvenlik sağlar.',
-    defaultImage: '/images/products/bahcelievler-revotech-pvc-pencere-cephe.jpg',
+    defaultImage: '/images/products/bahcelievler-revotech-pvc-pencere-cephe.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '84 mm 7 odacıklı profil kesiti ile düşük ısı iletim katsayısı (Uf: 1.0 W/m²K)',
@@ -205,7 +205,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '76 mm profil genişliği, 5 odacıklı yapısı ve ince kenar görünümüyle modern mimari projelerin en çok tercih edilen pencere ve kapı serisi.',
     fullDescription:
       'Dorado 76; keskin ve minimalist mimari hatları, 9 mm’ye düşürülmüş iç-dış kanat binisi ve 76 mm kasa derinliği ile hem estetik hem de yüksek yalıtım beklentisini tek potada eritir. 24 mm’den 52 mm’ye kadar tüm çift ve üçlü cam kombinasyonlarıyla tam uyumludur.',
-    defaultImage: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
+    defaultImage: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '76 mm profil genişliği ve 5 odacıklı yüksek yalıtım geometrisi',
@@ -242,7 +242,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '76 mm oturma genişliği ve 5 odacıklı tasarımıyla hem yeni binalarda hem de pencere yenileme projelerinde uzun ömürlü yalıtım sağlar.',
     fullDescription:
       'Safir 76, 70 mm sistemlere kıyasla artırılmış 76 mm kasa derinliği sayesinde ısı ve ses yalıtımında bir üst sınıf performans sunar. Bahçelievler’deki daire tadilatlarında mevcut denizlik ve mermer yapısına zarar vermeden hızlıca uygulanabilir.',
-    defaultImage: '/images/products/yenibosna-safir-76-pvc-pencere.jpg',
+    defaultImage: '/images/products/yenibosna-safir-76-pvc-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '76 mm 5 odacıklı kasa ve kanat yapısı',
@@ -278,7 +278,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '70 mm genişliği, 5 odacıklı kesiti ve damlalıklı kanat opsiyonuyla her türlü apartman dairesinde kanıtlanmış dayanıklılık.',
     fullDescription:
       'Safir 70; 70 mm profil genişliği, 5 odacıklı iç yapısı ve 20-36 mm cam kalınlığı desteği ile standart apartman dairelerinde yüksek ısı ve ses izolasyonu sağlar. Damlalıklı kanat tasarımı yağmur suyunun conta yüzeyine temas etmeden tahliye edilmesine yardımcı olur.',
-    defaultImage: '/images/products/cobancesme-safir-70-pencere-uygulamasi.jpg',
+    defaultImage: '/images/products/cobancesme-safir-70-pencere-uygulamasi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '70 mm 5 odacıklı ideal kasa ve kanat kesiti',
@@ -314,7 +314,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '60 mm profil derinliği ve 4 odacıklı yapısıyla iç mekan bölmeleri, ara kapılar ve ekonomik konut projeleri için pratik çözüm.',
     fullDescription:
       'Karina 60 serisi, 4 odacıklı profil yapısı ve 60 mm oturma derinliği ile dar denizlikli pencerelerde, apartman merdiven sahanlıklarında ve ofis içi bölmelerde güvenilir performans ve ekonomik bütçe avantajı sağlar.',
-    defaultImage: '/images/products/hurriyet-karina-pvc-pencere.jpg',
+    defaultImage: '/images/products/hurriyet-karina-pvc-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '60 mm 4 odacıklı kompakt profil tasarımı',
@@ -353,7 +353,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Geniş teras, bahçe ve balkon açıklıklarında devasa cam kanatların tek parmakla kaldırılarak kaydırıldığı üst segment Hebeschiebe sistemi.',
     fullDescription:
       'Panorama HS 76 Kaldır-Sür sistemi; 175 mm genişliğindeki 8 odacıklı kasa profili, 76 mm 5 odacıklı kanat yapısı ve termal bariyerli alüminyum alt eşiği ile 6.5 metreye varan açıklıkları tek bir panoramik cam duvara dönüştürür. Kolu çevirdiğinizde kanat hafifçe yükselerek özel rulmanlar üzerinde zahmetsizce kayar; kilitlendiğinde ise EPDM contalar üzerine vakumlanarak tam sızdırmazlık sağlar.',
-    defaultImage: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
+    defaultImage: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '175 mm 8 odacıklı kasa ve 76 mm 5 odacıklı yüksek mukavemetli kanat',
@@ -389,7 +389,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '150 mm kasa ve 76 mm kanat yapısıyla kıl fitil yerine çepeçevre EPDM kauçuk conta baskısı uygulayan yeni nesil akıllı sürme sistemi.',
     fullDescription:
       'Comfort Slide Plus, sürme sistemlerin kullanım kolaylığını açılır pencerelerin üstün yalıtım gücüyle birleştirir. Kol kapatıldığında kanat tüm çevresi boyunca kasa profiline doğru 8 mm eksenel hareket yaparak EPDM contaları sıkıştırır; böylece rüzgar ıslığı, toz ve yağmur sızıntısını %100 ortadan kaldırır.',
-    defaultImage: '/images/products/sirinevler-comfort-slide-plus-surme-kapi.jpg',
+    defaultImage: '/images/products/sirinevler-comfort-slide-plus-surme-kapi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '150 mm kasa ve 76 mm kanat derinliği ile yüksek termal bariyer',
@@ -425,7 +425,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       '149 mm 6 odacıklı kasa ve 76 mm 5 odacıklı kanat profiliyle dar alanlarda maksimum açıklık ve yüksek ısı yalıtımı sağlar.',
     fullDescription:
       'Comfort Slide, balkon ve teras geçişlerinde kanat açılma payını sıfırlayarak iç mekan mobilya yerleşimini özgürleştirir. Özel eksenel rulman mekanizması sayesinde ağır ısıcamlı kanatlar dahi tek elle kolayca hareket ettirilir.',
-    defaultImage: '/images/products/zafer-comfort-slide-surme-sistem.jpg',
+    defaultImage: '/images/products/zafer-comfort-slide-surme-sistem.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '149 mm 6 odacıklı kasa ve 76 mm 5 odacıklı kanat kesiti',
@@ -460,7 +460,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Dorado 76, Revotech ve Safir 70 serileriyle tam uyumlu çalışan, yüksek sızdırmazlıklı paralel sürme (devirmeli sürme) sistemi.',
     fullDescription:
       'Lotus Paralel Sürme sistemi, standart pencere profillerinin yüksek yalıtım kabiliyetini sürme konforuyla birleştirir. İlk kademede kanat üstten devrilerek (vasistas) güvenli havalandırma sağlar; ikinci kademede ise sabit kanadın önüne geçerek ray üzerinde kayar.',
-    defaultImage: '/images/products/fevzicakmak-lotus-paralel-surme-kapi.jpg',
+    defaultImage: '/images/products/fevzicakmak-lotus-paralel-surme-kapi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Çift kademeli kullanım: Vasistas havalandırma + Paralel sürme açılım',
@@ -495,7 +495,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Balkon kapatma, teras ve iç mekan bölmelerinde geniş açıklıkları ekonomik ve pratik şekilde kapatmak için tasarlanmış çok raylı sürme serisi.',
     fullDescription:
       'Vela Gold ve Vela sürme sistemleri; tek ray, çift ray, kendinden sineklik raylı ve pervazlı kasa seçenekleriyle her türlü balkon ve pencere detayına uyum sağlar. Kanat birleşimlerindeki özel kenet profilleri sayesinde rüzgar ve toz geçişini engeller.',
-    defaultImage: '/images/products/soganli-vela-gold-surme-pencere.jpg',
+    defaultImage: '/images/products/soganli-vela-gold-surme-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Çift raylı ve 3 raylı (3 kanadın üst üste toplanabildiği) kasa alternatifleri',
@@ -534,7 +534,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Balkonunu kışın da evin sıcak bir odası gibi kullanmak isteyenler için 28 mm Argon gazlı Şişecam Sinerji/Konfor Isıcamlı ve EPDM contalı katlanır sistem.',
     fullDescription:
       'Vera Termal (Winsa Vera Termal) Isıcamlı Cam Balkon; her iki cam plakası da TSE EN 12150 standardında temperlenmiş 28 mm (4 mm + 20 mm Argon boşluk + 4 mm Low-E Konfor) cam üniteleriyle standart tek camlı sistemlere göre 4.2 kat daha yüksek ısı yalıtımı sağlar. Alüminyum mıknatıslı ve EPDM kauçuk kanat birleşim contaları sayesinde Şirinevler ve E-5 aksındaki yoğun trafik gürültüsünü -38 dB keser.',
-    defaultImage: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
+    defaultImage: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '28 mm (4+20+4) Argon gazlı ve her iki yüzeyi TSE EN 12150 temperli Konfor Isıcam',
@@ -572,7 +572,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Yazın tüm kanatları köşeye toplanarak balkonu tamamen açık hale getiren, kışın yağmur, rüzgar ve tozu %100 kesen klasik katlanır cam balkon.',
     fullDescription:
       'Winsa Vera Katlanır Cam Balkon Sistemi; 8 mm veya 10 mm Şişecam temperli güvenlik camları, 3 mm et kalınlığında T66 ısıl işlemli alüminyum profilleri ve L/U tipi balkonlarda köşe direksiz tam açılım sağlayan özel dönüş mekanizmasıyla kesintisiz panoramik manzara sunar.',
-    defaultImage: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg',
+    defaultImage: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '8 mm ve 10 mm TSE EN 12150 Şişecam temperli güvenlik camı seçenekleri',
@@ -610,7 +610,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Kanatlar içeriye doğru katlanmadığı için balkon kullanım alanını hiç daraltmayan, 3 veya 5 raylı engelsiz alt eşikli sürme cam balkon.',
     fullDescription:
       'Panorama Slide (Winsa Vera Slide) Eşiksiz Sürme Cam Balkon; yalnızca 8 mm yüksekliğindeki pahlı alt rayı sayesinde ayak takılmasına izin vermez, tekerlekli sandalye ve çocuklar için engelsiz geçiş sunar. Kanatlar birbirini çeken kenetli alüminyum profillerle tek parmakla kayarak açılır.',
-    defaultImage: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
+    defaultImage: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'İçe açılan kanat payı sıfır; balkon içindeki masa, sandalye ve dolaplara çarpmaz',
@@ -648,7 +648,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Somfy/Becker tüp motorlu, içeriden dış camları güvenle silinebilen ve açık konumda 110 cm cam korkuluk görevi gören otomatik giyotin sistem.',
     fullDescription:
       'Vera Vertical (Winsa Vera Vertical) Motorlu Giyotin Cam Sistemi; çelik zincir veya çelik telli triger kayış tahrikiyle uzaktan kumanda üzerinden dikey olarak açılıp kapanır. Patentli silinebilir kanat mekanizması sayesinde dış cepheye sarkmadan içeriden temizlik yapılabilir.',
-    defaultImage: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg',
+    defaultImage: '/images/products/yenibosna-vera-vertical-motorlu-giyotin-cam.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Somfy veya Becker RTS uzaktan kumandalı, 5 yıl garantili sessiz tüp motor',
@@ -686,7 +686,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Kendi ekseninde dönerek havalandırma sağlayan ve geriye toplanan bioklimatik alüminyum tavan veya lamine güvenlikli ısıcam çatı sistemi.',
     fullDescription:
       'Panorama Bioklimatik & Kış Bahçesi sistemi; çatı teraslarını ve bahçe verandalarını 365 gün yaşanabilir bir odaya dönüştürür. Taşıyıcı kolonların içinden geçen gizli yağmur olukları, Samsung LED aydınlatma ve Vera Termal / Giyotin cephe entegrasyonuyla anahtar teslim uygulanır.',
-    defaultImage: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
+    defaultImage: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Motorlu açılır-toplanır Bioklimatik lamel veya 4+16+(4+4 Lamine) güvenlikli cam tavan',
@@ -728,7 +728,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Pencere ve kapıları güneş ışınlarından, fırtınadan ve dış etkenlerden korurken bina dış cephesine üstün mimari karakter kazandıran kepenk sistemi.',
     fullDescription:
       'Winsa Winkepenk sistemi; sabit veya hareketli lamel seçenekleri, kemerli ve dikdörtgen form uygulanabilirliği, zengin ahşap/antrasit laminasyon renkleri ve korozyona tam dayanıklı donanımıyla hem müstakil konutlarda hem de kentsel dönüşüm cephelerinde yüksek güvenlik ve ısı/ışık kontrolü sağlar.',
-    defaultImage: '/images/products/cobancesme-winkepenk-kepenk-sistemi.jpg',
+    defaultImage: '/images/products/cobancesme-winkepenk-kepenk-sistemi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Sabit ve hareketli (açı ayarlı) aerodinamik lamel seçenekleri',
@@ -764,7 +764,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Tüm Winsa pencere ve sürme serileriyle tek parça (monoblok) olarak birleşen, EPS ısı/ses yalıtımlı ve motorlu/manuel kontrol seçenekli panjur sistemi.',
     fullDescription:
       'Winstor Monoblok Panjur Sistemi, pencere üstüne entegre edilen özel yalıtımlı kutusu sayesinde dış cephe estetiğini bozmadan güneş kontrolü, fırtına koruması ve caydırıcı hırsızlık güvenliği sağlar. Kış aylarında pencere ile panjur arasında oluşan durgun hava tabakası sayesinde ısı kaybını %28’e kadar azaltır.',
-    defaultImage: '/images/products/sirinevler-winstor-monoblok-panjur.jpg',
+    defaultImage: '/images/products/sirinevler-winstor-monoblok-panjur.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '185x185 mm, 220x220 mm ve kendinden yalıtımlı 185x220 mm kutu seçenekleri',
@@ -800,7 +800,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Tüm Winsa pencere ve sürme serileriyle tek parça (monoblok) olarak birleşen, EPS ısı/ses yalıtımlı ve motorlu/manuel kontrol seçenekli panjur sistemi.',
     fullDescription:
       'Winstor Monoblok Panjur Sistemi, pencere üstüne entegre edilen özel yalıtımlı kutusu sayesinde dış cephe estetiğini bozmadan güneş kontrolü, fırtına koruması ve caydırıcı hırsızlık güvenliği sağlar. Kış aylarında pencere ile panjur arasında oluşan durgun hava tabakası sayesinde ısı kaybını %28’e kadar azaltır.',
-    defaultImage: '/images/products/zafer-winstor-panjur-sistemi.jpg',
+    defaultImage: '/images/products/zafer-winstor-panjur-sistemi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '185x185 mm, 220x220 mm ve kendinden yalıtımlı 185x220 mm kutu seçenekleri',
@@ -836,7 +836,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Cam balkonların, mevcut PVC pencerelerin ve terasların dışına doğrudan monte edilebilen uzaktan kumandalı alüminyum panjur ve kepenk sistemi.',
     fullDescription:
       'Dıştan takma (alüminyum kutulu) motorlu panjur sistemi; mevcut doğramalarınızı kırmadan veya değiştirmeden balkon ve pencerelerinize tam otomasyonlu güvenlik ve yalıtım kazandırır. Yüksek yoğunluklu poliüretan köpük dolgulu alüminyum lameller dolu yağışı, fırtına ve zorlamalara karşı yüksek direnç gösterir.',
-    defaultImage: '/images/products/hurriyet-motorlu-aluminyum-panjur.jpg',
+    defaultImage: '/images/products/hurriyet-motorlu-aluminyum-panjur.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       '45° pahlı veya oval alüminyum dış kutu (165 mm, 180 mm, 205 mm, 250 mm)',
@@ -875,7 +875,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Pencere ve kapıların sızdırmazlık ve güvenliğini belirleyen mantar başlıklı çelik ispanyolet kilitler, akustik kollar ve ağır hizmet menteşeleri.',
     fullDescription:
       'Bir pencere veya cam balkon sisteminin yalıtım ömrü kullanılan donanımın kalitesiyle doğrudan ilişkilidir. Winsa ve Çelikpen sistemlerinde kullanılan korozyon dirençli (EN 1670 Sınıf 5) çift açılım mekanizmaları, mantar başlıklı RC2 güvenlik pimler ve kademeli akustik pencere kolları on binlerce açma-kapama çevriminde ilk günkü sıkılığını korur.',
-    defaultImage: '/images/products/kocasinan-winsa-pencere-kol-kilit-donanimi.jpg',
+    defaultImage: '/images/products/kocasinan-winsa-pencere-kol-kilit-donanimi.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Tek açılım, çift açılım (vasistas), paralel sürme ve katlanır donanım grupları',
@@ -911,7 +911,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Cam balkon sistemlerinde 10 yıl sarsıntısız yürüyüş sağlayan 8 bilyalı rulmanlar, alüminyum mıknatıs fitiller ve evcil hayvan dostu çelik sineklikler.',
     fullDescription:
       'Çelikpen cam balkon serilerinde plastik veya zamak teker yerine her kanatta 8 bilyalı AISI 304 paslanmaz çelik rulman kullanılır. Ayrıca evcil hayvanların tırmalamasına ve yüklenmesine dayanıklı çelik/polyester alaşımlı yırtılmaz Kedi Sinekliği ve 28 mm cam çıtasına sıfır oturan içten Plise Perde sistemleri kendi atölyemizde üretilir.',
-    defaultImage: '/images/products/bahcelievler-plise-sineklik-kedi-tulu.jpg',
+    defaultImage: '/images/products/bahcelievler-plise-sineklik-kedi-tulu.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Kanat başına 8 bilyalı, poliamid sessiz gömlekli AISI 304 paslanmaz çelik rulman',
@@ -951,7 +951,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Güneşin kızılötesi (IR) ışınlarını yansıtarak profilin aşırı ısınmasını önleyen Kumlu Antrasit, RAL 7016, Gece Siyahı ve Gümüş Gri yüzeyler.',
     fullDescription:
       'Bahçelievler’deki yeni kentsel dönüşüm apartmanlarının %80’inde dış cephe standardı olan Antrasit Gri (RAL 7016), Kumlu Antrasit ve Gece Siyahı (RAL 9005) renklerimiz; PVC profillerde Cool Colors UV laminasyon folyosu, alüminyum cam balkon profillerinde ise QUALICOAT sertifikalı elektrostatik fırın boya ile uygulanır.',
-    defaultImage: '/images/products/soganli-antrasit-metalik-cephe-renkleri.jpg',
+    defaultImage: '/images/products/soganli-antrasit-metalik-cephe-renkleri.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Kumlu Antrasit, Düz Antrasit Gri (RAL 7016), Gece Siyahı (RAL 9005) ve Metalik Gümüş',
@@ -993,7 +993,7 @@ export const WINSA_PRODUCTS: WinsaProductItem[] = [
       'Vernik veya boya bakımı gerektirmeyen, gerçek ahşap damar dokusuna sahip Altın Meşe, Fındık, Ceviz, Maun ve Venge laminasyon kartelası.',
     fullDescription:
       'Ahşap görünümlü pencerelerin ve cam balkonların estetiğini seven ancak her yıl zımpara ve vernik bakımıyla uğraşmak istemeyen kullanıcılar için geliştirilen 3D dokulu laminasyon serimiz; Altın Meşe, Fındık, Koyu Ceviz, Maun ve Venge tonlarıyla hem iç mekana sıcaklık katar hem de dış cephede uzun yıllar ilk günkü canlılığını korur.',
-    defaultImage: '/images/products/fevzicakmak-ahsap-desenli-pvc-pencere.jpg',
+    defaultImage: '/images/products/fevzicakmak-ahsap-desenli-pvc-pencere.jpg?v=2',
     crossSectionSvg: '/images/products/cad-cross-section.svg',
     highlights: [
       'Gerçek ahşap gözenek ve damar hissiyatı veren 3D kabartmalı Renolit/Skai folyo',

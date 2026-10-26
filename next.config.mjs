@@ -8,6 +8,13 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  webpack(config, { dev, isServer }) {
+    if (dev && !isServer) {
+      config.output.filename = 'static/chunks/[name].js?v=20261026';
+      config.output.chunkFilename = 'static/chunks/[name].js?v=20261026';
+    }
+    return config;
+  },
   // WAF'ın /wp-admin/ gibi sondaki eğik çizgili probları Next'in otomatik
   // 308'inden önce görebilmesi için yerleşik trailing-slash yönlendirmesi kapalı.
   // Normalizasyon middleware içinde güvenlik başlıklarıyla birlikte yapılır.
@@ -17,6 +24,7 @@ const nextConfig = {
   // Arka plandaki `next dev` (.next) ile `next build` çakışmasını önler
   distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: process.env.NODE_ENV === 'production' ? 3600 : 0,
   },
