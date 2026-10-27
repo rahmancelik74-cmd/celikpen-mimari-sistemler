@@ -344,7 +344,7 @@ export default function HizmetlerimizPage() {
               <Link
                 href={service.productHref}
                 prefetch={true}
-                className="relative block h-[310px] w-full overflow-hidden sm:h-[340px]"
+                className="relative block h-[341px] w-full overflow-hidden sm:h-[374px]"
               >
                 <Image
                   src={service.image}
