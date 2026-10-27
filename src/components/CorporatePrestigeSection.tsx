@@ -336,9 +336,10 @@ export function ProductShowcaseStrip() {
                 <Image
                   src={product.image}
                   alt={`${product.title} — ürün görseli`}
-                  width={640}
-                  height={400}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  width={480}
+                  height={300}
+                  quality={75}
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 280px"
                   className="aspect-[16/10] h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="pointer-events-none absolute left-2 top-2 rounded-full bg-[#1E3A8A] px-2.5 py-0.5 text-[9px] font-bold leading-4 text-white">

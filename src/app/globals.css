@@ -186,23 +186,10 @@ h4 {
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
 }
 
-.marble-surface,
-.marble-cream-bg {
-  background-color: #f8fafc;
-  background-image: none;
-}
-
 .glass-card {
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
   border: 1px solid #e2e8f0;
-}
-
-.soft-card {
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 12px 32px -26px rgba(15, 23, 42, 0.28);
 }
 
 .glass-sheen {
@@ -297,24 +284,6 @@ h4 {
   animation: fadeUpSubtle 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes acousticWavePulse {
-  0% {
-    transform: scaleY(0.55);
-  }
-  100% {
-    transform: scaleY(1.12);
-  }
-}
-
-.acoustic-wave-bar {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.acoustic-wave-bar--active {
-  animation: acousticWavePulse 620ms ease-in-out infinite alternate;
-}
-
 /* Hero helper: keep the fixed header from crowding the 100vh composition */
 .hero-copy-offset {
   padding-top: 7.5rem;
@@ -340,7 +309,6 @@ h4 {
     scroll-behavior: auto;
   }
 
-  .acoustic-wave-bar--active,
   .animate-architectural-marquee,
   .animate-float-slow,
   .animate-ping,

@@ -21,12 +21,16 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   // C:\Users\rahma\package-lock.json yüzünden yanlış kök algılanmasını engeller
   outputFileTracingRoot: projectRoot,
+  experimental: {
+    optimizeCss: true,
+  },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: false },
   images: {
-    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: process.env.NODE_ENV === 'production' ? 3600 : 0,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1600],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000,
   },
   // Kamu görselleri, derlenmiş chunk'lar ve favicon önbellek yönetimi.
   async headers() {

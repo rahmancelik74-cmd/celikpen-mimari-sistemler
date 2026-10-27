@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface Scene3Story {
@@ -254,13 +255,15 @@ export function HeroSlider() {
               activeScene === 0 ? 'scale-100' : 'scale-105'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/kocasinan-isicamli-cam-balkon-hero.jpg"
               alt="Hayata Çelikpen'den Bak — Modern taş ve antrasit cam cepheli mimari villa"
               title="Bahçelievler Isıcamlı Cam Balkon & Mimari Cam Sistemleri — Çelikpen"
-              fetchPriority="high"
-              className="h-full w-full object-cover object-center"
+              fill
+              priority
+              quality={75}
+              sizes="100vw"
+              className="object-cover object-center"
             />
             {/* Üst 160px Aydınlık Gündüz Gökyüzü Atmosferi (Şeffaf Header'daki #0B1560 Menü Netliği İçin) */}
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#EBF2F7]/92 via-[#DCE8F2]/60 to-transparent" />
@@ -328,12 +331,15 @@ export function HeroSlider() {
               activeScene === 1 ? 'scale-100' : 'scale-105'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
               alt="Çelikpen'den ücretsiz keşif — lüks teras ve mimari cam sistemleri"
               title="Çelikpen Ücretsiz Lazerli Keşif — Bioklimatik Pergola ve Giyotin Cam Sistemleri"
-              className="h-full w-full object-cover object-center"
+              fill
+              loading="lazy"
+              quality={75}
+              sizes="100vw"
+              className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#040B1A]/90 via-[#081838]/70 to-[#040B1A]/45" />
             <svg
@@ -400,12 +406,15 @@ export function HeroSlider() {
               activeScene === 2 ? 'scale-100' : 'scale-105'
             }`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/siyavuspasa-surme-cam-balkon.jpg"
               alt="Çelikpen ile Yaşandı — panoramik yaşam alanları"
               title="Çelikpen Panoramik Eşiksiz Sürme ve Katlanır Cam Balkon Uygulamaları"
-              className="h-full w-full object-cover object-center"
+              fill
+              loading="lazy"
+              quality={75}
+              sizes="100vw"
+              className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#050C1C]/90 via-[#0A1936]/70 to-[#050C1C]/50" />
           </div>

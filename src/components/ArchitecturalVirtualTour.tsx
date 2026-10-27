@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 type SystemKey = 'katlanir' | 'giyotin' | 'bioklimatik';
@@ -144,11 +145,14 @@ export const ArchitecturalVirtualTour: React.FC = () => {
           <span className="pointer-events-none absolute bottom-4 right-4 z-20 h-6 w-6 border-b-2 border-r-2 border-[#1E3A8A]" />
 
           <div className="relative h-[52vh] w-full overflow-hidden sm:h-[58vh] lg:h-[62vh] lg:max-h-[520px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={current.image}
               alt={current.title}
-              className={`h-full w-full object-cover transition-all duration-700 ${
+              fill
+              loading="lazy"
+              quality={75}
+              sizes="100vw"
+              className={`object-cover transition-all duration-700 ${
                 isNight
                   ? 'scale-[1.02] brightness-[0.58] contrast-125 saturate-110'
                   : 'scale-100 brightness-105 contrast-100'
