@@ -27,6 +27,7 @@ const FOOTER_QUICK = [
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
   { label: 'Blog', href: '/profesyoneller/blog' },
+  { label: 'Bahçelievler Cam Balkon & Pimapen', href: '/bahcelievler-cam-balkon' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
 ];

@@ -14,7 +14,7 @@ export function SeoSchema() {
     '@graph': [
       {
         '@type': ['HomeAndConstructionBusiness', 'LocalBusiness'],
-        '@id': 'https://celikpen.com.tr/#business',
+        '@id': 'https://www.celikpen.com.tr/#business',
         name: SITE_CONFIG.fullTitle,
         description: SITE_CONFIG.slogan,
         telephone: SITE_CONFIG.phoneDisplay,

@@ -106,6 +106,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
     {
+      url: `${base}/bahcelievler-cam-balkon`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
       url: `${base}/blog`,
       lastModified: now,
       changeFrequency: 'weekly',

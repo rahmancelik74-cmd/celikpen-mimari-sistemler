@@ -87,7 +87,7 @@ export default async function SistemSeriPage({
         unitCode: 'MTK',
       },
       availability: 'https://schema.org/InStock',
-      seller: { '@id': 'https://celikpen.com.tr/#business' },
+      seller: { '@id': 'https://www.celikpen.com.tr/#business' },
     },
   };
 

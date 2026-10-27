@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
   foundingYear: 1996,
   yearsOfExperience: 30,
   completedProjects: 15000,
-  siteUrl: 'https://celikpen.com.tr',
+  siteUrl: 'https://www.celikpen.com.tr',
   district: 'Bahçelievler',
   headquartersNeighborhood: 'Kocasinan Merkez',
   address: 'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul',

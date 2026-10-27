@@ -124,7 +124,7 @@ function hasMaliciousPayload(request: NextRequest): boolean {
 }
 
 export function middleware(request: NextRequest) {
-  const host = request.headers.get('host') || 'celikpen.com.tr';
+  const host = request.headers.get('host') || 'www.celikpen.com.tr';
   const forwardedProto = request.headers.get('x-forwarded-proto');
   const isLocalhost = isLocalhostHost(host);
   const isHttpRequest = forwardedProto
