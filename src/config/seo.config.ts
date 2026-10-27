@@ -205,8 +205,8 @@ export const SEO_BUSINESS = {
     addressCountry: 'TR',
   },
   geo: {
-    latitude: 41.0112,
-    longitude: 28.8436,
+    latitude: 41.0151,
+    longitude: 28.8339,
   },
   aggregateRating: {
     ratingValue: '4.9',

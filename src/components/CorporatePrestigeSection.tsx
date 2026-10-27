@@ -10,60 +10,60 @@ import Link from 'next/link';
 
 const PRODUCT_GROUPS = [
   {
-    title: 'Isıcamlı Cam Balkon',
-    note: '4+20+4 Argon gazlı Sinerji/Konfor cam ve termal kasa',
-    href: '/urunler/vera-isicamli-cam-balkon',
-    image: '/images/services/isicamli-cam-balkon.jpg',
-    icon: <IconPanels />,
+    title: 'Winsa Dorado 76',
+    note: '76 mm 5 odacıklı, yüksek ısı yalıtımlı PVC profil serisi',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/dorado-76.png',
+    brand: 'Winsa',
   },
   {
-    title: 'Katlanır Cam Balkon',
-    note: 'Tam açılım, geniş manzara ve sessiz kanat hareketi',
-    href: '/urunler/vera-katlanir-cam-balkon',
-    image: '/images/services/katlanir-cam-balkon.jpg',
-    icon: <IconFold />,
+    title: 'Winsa Revotech Gold 84',
+    note: '84 mm 7 odacıklı, Uw: 0.79 premium termal profil',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/revotech-gold.png',
+    brand: 'Winsa',
   },
   {
-    title: 'Sürme Cam Sistemleri',
-    note: 'Eşiksiz ray, geniş açıklık ve kesintisiz kullanım',
-    href: '/urunler?kategori=surme-sistemler',
-    image: '/images/services/surme-cam-balkon.jpg',
-    icon: <IconSlide />,
+    title: 'Winsa Safir 76',
+    note: '76 mm 6 odacıklı, düz hat estetik tasarım serisi',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/safir-76.png',
+    brand: 'Winsa',
   },
   {
-    title: 'Kış Bahçesi Sistemleri',
-    note: 'Teras ve bahçeler için dört mevsim cam mimari',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/services/kis-bahcesi-sistemleri.jpg',
-    icon: <IconWinterGarden />,
+    title: 'Winsa Panorama HS 76',
+    note: 'Kaldır-sür (Hebeschiebe) geniş cam geçişli sürme kapı',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/panorama-hs-76.png',
+    brand: 'Winsa',
   },
   {
-    title: 'Giyotin Cam Sistemleri',
-    note: 'Motorlu, kumandalı ve güvenli dikey cam cephe',
-    href: '/urunler/giyotin-motorlu-silinebilir-cam',
-    image: '/images/services/giyotin-cam-sistemleri.jpg',
-    icon: <IconGiyotin />,
+    title: 'Winsa Comfort Slide Plus',
+    note: 'Sürme pencere ve kapı sistemi, kolay kullanım',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/comfort-slide-plus.png',
+    brand: 'Winsa',
   },
   {
-    title: 'Bioklimatik Pergola',
-    note: 'Motorlu lamel tavan, LED ve yağmur tahliyesi',
-    href: '/urunler/bioklimatik-kis-bahcesi-sistemleri',
-    image: '/images/services/bioklimatik-pergola.jpg',
-    icon: <IconPergola />,
+    title: 'Winsa Lotus',
+    note: 'Paralel sürme kapı, geniş açıklık ve modern estetik',
+    href: '/urunler/winsa',
+    image: '/images/brands/winsa/lotus.png',
+    brand: 'Winsa',
   },
   {
-    title: 'PVC Pencere & Kapı',
-    note: '76 ve 84 mm yüksek yalıtımlı Winsa profil serileri',
-    href: '/urunler?kategori=pencere-ve-kapi-sistemleri',
-    image: '/images/services/pvc-pencere-kapi.jpg',
-    icon: <IconWindow />,
+    title: 'Albert Genau Tiara Twinmax',
+    note: 'Isıcamlı katlanır cam balkon, termal yalıtım serisi',
+    href: '/urunler/albert-genau',
+    image: '/images/brands/albert-genau/isicamli-katlanir-cambalkon.png',
+    brand: 'Albert Genau',
   },
   {
-    title: 'Panjur & Sineklik',
-    note: 'Winstor panjur, plise perde ve kedi tüllü sineklik',
-    href: '/urunler/winstor-monoblok-panjur',
-    image: '/images/services/panjur-kepenk-sineklik.jpg',
-    icon: <IconShutter />,
+    title: 'Albert Genau Vertiflex Giyotin',
+    note: 'Motorlu giyotin cam sistemi, dikey hareketli küpeşte',
+    href: '/urunler/albert-genau',
+    image: '/images/brands/albert-genau/tambalkon-giyotin.png',
+    brand: 'Albert Genau',
   },
 ];
 
@@ -99,7 +99,7 @@ export function CorporatePrestigeSection() {
     <section
       id="kurumsal-prestij"
       aria-labelledby="kurumsal-prestij-baslik"
-      className="relative overflow-hidden bg-[#F8FAFC] py-16 sm:py-20 lg:py-24"
+      className="relative overflow-hidden bg-[#F8FAFC] py-10 lg:py-12"
     >
       <div className="architectural-grid pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
       <div
@@ -112,11 +112,11 @@ export function CorporatePrestigeSection() {
       />
 
       <div className="container-shell relative">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:gap-12">
           {/* Çift çerçeveli mimari görsel kompozisyonu */}
-          <div className="relative pb-5 sm:pb-8 lg:pb-4">
-            <div className="relative w-[92%] rounded-sm bg-white p-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] sm:p-3">
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+          <div className="relative pb-4 lg:pb-2">
+            <div className="relative w-[92%] rounded-sm bg-white p-2 shadow-[0_20px_50px_rgba(15,23,42,0.12)] sm:p-2.5">
+              <div className="relative aspect-[4/3] max-h-[280px] overflow-hidden bg-slate-100 lg:max-h-[320px]">
                 <Image
                   src="/images/bahcelievler-giyotin-bioklimatik-sistem.jpg"
                   alt="Çelikpen bioklimatik pergola ve giyotin cam sistem uygulaması"
@@ -150,8 +150,8 @@ export function CorporatePrestigeSection() {
               />
             </div>
 
-            <div className="relative z-10 -mt-24 ml-auto w-[72%] rounded-sm bg-white p-2.5 shadow-[0_25px_60px_rgba(15,23,42,0.16)] sm:-mt-32 sm:p-3">
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+            <div className="relative z-10 -mt-20 ml-auto w-[72%] rounded-sm bg-white p-2 shadow-[0_25px_60px_rgba(15,23,42,0.16)] sm:-mt-24 sm:p-2.5">
+              <div className="relative aspect-[4/3] max-h-[220px] overflow-hidden bg-slate-100 lg:max-h-[250px]">
                 <Image
                   src="/images/siyavuspasa-surme-cam-balkon.jpg"
                   alt="Çelikpen panoramik sürme cam balkon ve teras manzarası"
@@ -193,12 +193,12 @@ export function CorporatePrestigeSection() {
 
             <h2
               id="kurumsal-prestij-baslik"
-              className="mt-2 text-2xl font-extrabold leading-[1.22] text-[#0F172A] sm:text-3xl lg:text-[32px]"
+              className="mt-2 text-2xl font-extrabold leading-[1.22] text-[#0F172A] lg:text-3xl"
             >
               30 Yıllık Tecrübeyle İstanbul&apos;un Güvenilir Cam Balkon ve PVC Sistemleri Firması
             </h2>
 
-            <div className="mt-5 space-y-4 text-[12.5px] leading-7 text-slate-600 sm:text-[13px]">
+            <div className="mt-3 space-y-3 text-sm leading-relaxed text-slate-600">
               <p>
                 Temelleri 30 yıl önce{' '}
                 <strong className="font-semibold text-[#0F172A]">İstanbul / Bahçelievler</strong>&apos;de atılan{' '}
@@ -257,21 +257,21 @@ export function CorporatePrestigeSection() {
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
-                href="/kurumsal/hakkimizda"
+                href="/iletisim?form=kesif"
                 prefetch={true}
-                className="inline-flex items-center gap-2.5 rounded-md border border-[#1E3A8A]/40 px-5 py-2.5 text-xs font-semibold text-[#1E3A8A] transition-all hover:border-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
+                className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-[#1E3A8A] via-[#1D4ED8] to-[#2563EB] px-6 py-3.5 text-xs font-semibold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-blue-600/40"
               >
-                <IconList />
-                Hakkımızda
+                <IconSparkle />
+                Ücretsiz Keşif & Fiyat Al
                 <IconArrowRight />
               </Link>
               <Link
-                href="/profesyoneller/kataloglar"
+                href="/kurumsal/hakkimizda"
                 prefetch={true}
-                className="inline-flex items-center gap-2.5 rounded-md border border-[#1E3A8A]/40 px-5 py-2.5 text-xs font-semibold text-[#1E3A8A] transition-all hover:border-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
+                className="inline-flex items-center gap-2.5 rounded-xl border border-blue-200 bg-slate-50 px-6 py-3.5 text-xs font-semibold text-[#1E3A8A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50/80"
               >
-                <IconBook />
-                e-Katalog
+                <IconList />
+                Kurumsal Kimliğimiz
                 <IconArrowRight />
               </Link>
             </div>
@@ -301,17 +301,17 @@ export function ProductShowcaseStrip() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#93C5FD]">
               <span className="h-px w-6 bg-[#93C5FD]" aria-hidden="true" />
-              Uygulama &amp; Ürün Grupları
+              Ürün Gruplarımız — Winsa &amp; Albert Genau
             </div>
             <h2
               id="urun-gruplari-baslik"
               className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl"
             >
-              Tek çatı altında sekiz mimari sistem ailesi
+              Dünya Standartlarında PVC ve Mimari Cam Sistem Serileri
             </h2>
             <p className="mt-2 max-w-xl text-[12px] leading-relaxed text-slate-400">
-              Balkondan cepheye, terastan iç mekâna kadar tüm cam ve doğrama ihtiyaçlarınız için
-              ölçülü, belgeli ve uzun ömürlü çözümler.
+              Winsa yetkili üretim merkezi ve Albert Genau çözüm ortağı olarak dünya standartlarında
+              pencere, kapı, cam balkon ve mimari cam sistemleri sunuyoruz.
             </p>
           </div>
           <Link
@@ -325,24 +325,24 @@ export function ProductShowcaseStrip() {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCT_GROUPS.map((product, index) => (
+          {PRODUCT_GROUPS.map((product) => (
             <Link
               key={product.title}
               href={product.href}
               prefetch={true}
               className="group relative flex flex-col overflow-hidden border border-white/10 bg-white/[0.045] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#93C5FD]/[0.45] hover:bg-[#1E3A8A]"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-800">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-white p-4">
                 <Image
                   src={product.image}
-                  alt={`${product.title} — Çelikpen gerçek uygulama fotoğrafı`}
+                  alt={`${product.title} — ürün görseli`}
                   width={640}
                   height={400}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-[16/10] h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
-                <span className="pointer-events-none absolute right-2 top-2 rounded-full bg-[#0F172A]/80 px-2 py-0.5 text-[9.5px] font-bold leading-4 text-white backdrop-blur">
-                  {String(index + 1).padStart(2, '0')}
+                <span className="pointer-events-none absolute left-2 top-2 rounded-full bg-[#1E3A8A] px-2.5 py-0.5 text-[9px] font-bold leading-4 text-white">
+                  {product.brand}
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-4">
@@ -587,6 +587,14 @@ function IconCalendar({ className = 'h-4 w-4' }: IconProps) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
       <rect x="3" y="4" width="18" height="18" rx="2" />
       <path d="M16 2v4M8 2v4M3 10h18" />
+    </svg>
+  );
+}
+
+function IconSparkle({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="m12 3-1.9 5.1L5 10l5.1 1.9L12 17l1.9-5.1L19 10l-5.1-1.9L12 3Z" /><path d="M5 3v4M3 5h4M19 17v4M17 19h4" />
     </svg>
   );
 }

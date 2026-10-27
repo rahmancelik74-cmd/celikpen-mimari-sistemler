@@ -10,11 +10,11 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
   const lat = SEO_BUSINESS.geo.latitude;
   const lng = SEO_BUSINESS.geo.longitude;
   const googleMapsDirectionsUrl =
-    'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+    'https://www.google.com/maps/dir/?api=1&destination=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No%3A30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
   const googleMapsSearchUrl =
-    'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+    'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No%3A30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
   const embedMapUrl =
-    'https://maps.google.com/maps?q=Kocasinan%20Merkez%20Mah.%20K%C4%B1z%C4%B1lelma%20Cad.%20No%3A30%2FC%2034186%20Bah%C3%A7elievler%20%C4%B0stanbul&t=&z=16&ie=UTF8&iwloc=&output=embed';
+    'https://maps.google.com/maps?q=Kocasinan%20Merkez%20Mah.%20K%C4%B1z%C4%B1lelma%20Cad.%20No%3A30%2FC%20Bah%C3%A7elievler%20%C4%B0stanbul&t=&z=17&ie=UTF8&iwloc=&output=embed';
 
   return (
     <section

@@ -190,10 +190,12 @@ export function HeroSlider() {
   }, []);
 
   const handleTouchStart = (e: React.TouchEvent<HTMLElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     touchStartYRef.current = e.touches[0]?.clientY ?? null;
   };
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     if (touchStartYRef.current === null) return;
     if (typeof window !== 'undefined' && window.scrollY > 40) return;
     const endY = e.changedTouches[0]?.clientY ?? touchStartYRef.current;
@@ -232,7 +234,7 @@ export function HeroSlider() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-label="Çelikpen 3 Aşamalı Tam Ekran Mimari Vitrin"
-      className="relative h-screen h-[100dvh] min-h-[600px] w-full select-none overflow-hidden bg-[#070E1E] sm:min-h-[640px]"
+      className="relative h-screen h-[100dvh] min-h-[600px] w-full select-none overflow-hidden bg-[#070E1E] sm:min-h-[640px] touch-pan-y lg:touch-auto"
     >
       {/* 3 SAHNELİ DİKEY SAHNE KONTEYNERİ — Tam 0%, -100% ve -200% GPU Dönüşümü */}
       <div
@@ -422,7 +424,13 @@ export function HeroSlider() {
                 <span className="drop-shadow-md">ile Yaşandı</span>
               </h2>
 
-              <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-4 text-white backdrop-blur-md transition-all duration-500 sm:p-5">
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={handleNextStory}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleNextStory(); }}
+                className="mt-6 cursor-pointer rounded-2xl border border-white/15 bg-white/10 p-4 text-white backdrop-blur-md transition-all duration-500 active:scale-[0.98] sm:p-5"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-[#BFDBFE] sm:text-xs">
                   <span className="min-w-0 break-words">{currentStory.location}</span>
                   <span className="max-w-full rounded-full bg-[#D91B24] px-2.5 py-1 text-[9px] font-black leading-tight text-white sm:px-3 sm:text-[11px]">
@@ -439,6 +447,7 @@ export function HeroSlider() {
                   <Link
                     prefetch={true}
                     href={currentStory.href}
+                    onClick={(e) => e.stopPropagation()}
                     className="inline-flex min-h-[36px] items-center rounded-full bg-[#1E3A8A] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-[#1D4ED8] sm:px-5 sm:text-[11px]"
                   >
                     İNCELE →
@@ -451,7 +460,7 @@ export function HeroSlider() {
                   type="button"
                   onClick={handlePrevStory}
                   aria-label="Önceki Mimari Hikaye"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 text-base font-light text-white transition-all hover:border-white hover:bg-white/15"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 text-base font-light text-white transition-all active:scale-95 hover:border-white hover:bg-white/15"
                 >
                   &#10094;
                 </button>
@@ -459,13 +468,25 @@ export function HeroSlider() {
                   type="button"
                   onClick={handleNextStory}
                   aria-label="Sonraki Mimari Hikaye"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 text-base font-light text-white transition-all hover:border-white hover:bg-white/15"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 text-base font-light text-white transition-all active:scale-95 hover:border-white hover:bg-white/15"
                 >
                   &#10095;
                 </button>
-                <span className="ml-2 text-xs font-bold tracking-widest text-white/75">
-                  0{storyIndex + 1} / 0{SCENE_3_STORIES.length}
-                </span>
+                {SCENE_3_STORIES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setStoryIndex(idx)}
+                    aria-label={`${idx + 1}. hikaye`}
+                    className={`flex h-9 w-9 items-center justify-center rounded-full text-[11px] font-black transition-all active:scale-95 ${
+                      storyIndex === idx
+                        ? 'bg-[#D91B24] text-white shadow-lg'
+                        : 'border border-white/40 text-white/70 hover:border-white hover:bg-white/15 hover:text-white'
+                    }`}
+                  >
+                    0{idx + 1}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

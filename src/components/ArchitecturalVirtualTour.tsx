@@ -56,7 +56,7 @@ export const ArchitecturalVirtualTour: React.FC = () => {
   return (
     <section
       id="sanal-tur"
-      className="relative overflow-hidden bg-[#0F172A] py-16 text-white sm:py-20"
+      className="relative overflow-hidden bg-[#0F172A] py-6 text-white lg:py-8"
     >
       {/* Dekoratif Köşe Çizgileri */}
       <div
@@ -76,7 +76,7 @@ export const ArchitecturalVirtualTour: React.FC = () => {
               <span className="h-[2px] w-6 bg-[#1E3A8A]" />
               <span>SANAL TUR &amp; MİMARİ DENEYİM</span>
             </div>
-            <h2 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-white lg:text-3xl">
               Mekanınızın Atmosferini Canlı Deneyimleyin
             </h2>
           </div>
@@ -136,14 +136,14 @@ export const ArchitecturalVirtualTour: React.FC = () => {
         </div>
 
         {/* Ana Panoramik Sahne Vitrini */}
-        <div className="relative mt-8 overflow-hidden rounded-3xl border border-white/15 bg-slate-950 shadow-2xl">
+        <div className="relative mt-4 overflow-hidden rounded-3xl border border-white/15 bg-slate-950 shadow-2xl">
           {/* 4 Köşe Mimari L-Bracket Dekorasyonu */}
           <span className="pointer-events-none absolute top-4 left-4 z-20 h-6 w-6 border-t-2 border-l-2 border-[#1E3A8A]" />
           <span className="pointer-events-none absolute top-4 right-4 z-20 h-6 w-6 border-t-2 border-r-2 border-[#1E3A8A]" />
           <span className="pointer-events-none absolute bottom-4 left-4 z-20 h-6 w-6 border-b-2 border-l-2 border-[#1E3A8A]" />
           <span className="pointer-events-none absolute bottom-4 right-4 z-20 h-6 w-6 border-b-2 border-r-2 border-[#1E3A8A]" />
 
-          <div className="relative aspect-[16/9] max-h-[520px] w-full overflow-hidden">
+          <div className="relative h-[52vh] w-full overflow-hidden sm:h-[58vh] lg:h-[62vh] lg:max-h-[520px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={current.image}
