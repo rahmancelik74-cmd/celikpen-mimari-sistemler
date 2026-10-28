@@ -310,126 +310,6 @@
       "category": "Sürme & Isıcamlı Cam Balkon",
       "status": "published",
       "featured": true
-    },
-    {
-      "id": "ref-1",
-      "image": "/images/references/ref-1.jpg",
-      "title": "Bahçelievler — Isıcamlı Cam Balkon",
-      "district": "Bahçelievler / Kocasinan Merkez",
-      "system": "Winsa Vera Termal 4+20+4 Argonlu Isıcam",
-      "category": "Isıcamlı Cam Balkon",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-2",
-      "image": "/images/references/ref-2.jpg",
-      "title": "Ataköy — Bioklimatik Kış Bahçesi",
-      "district": "Bakırköy / Ataköy",
-      "system": "Winsa Vela Bioklimatik Pergola & Cam Cephe",
-      "category": "Kış Bahçesi & Pergola",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-3",
-      "image": "/images/references/ref-3.jpg",
-      "title": "Bakırköy — Winsa Dorado 76 PVC",
-      "district": "Bakırköy / Merkez",
-      "system": "Winsa Dorado 76 Antrasit PVC Doğrama",
-      "category": "PVC Pencere & Kapı",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-4",
-      "image": "/images/references/ref-4.jpg",
-      "title": "Florya — Motorlu Giyotin Sistem",
-      "district": "Bakırköy / Florya",
-      "system": "Winsa Vera Vertical Uzaktan Kumandalı Giyotin",
-      "category": "Giyotin Cam Sistemi",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-5",
-      "image": "/images/references/ref-5.jpg",
-      "title": "Yeşilköy — Panorama HS 76 Kaldır-Sür",
-      "district": "Bakırköy / Yeşilköy",
-      "system": "Winsa Panorama HS 76 Hebeschiebe Sürme",
-      "category": "Sürme Sistemler",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-6",
-      "image": "/images/references/ref-6.jpg",
-      "title": "Siyavuşpaşa — Köşe L-Balkon Katlanır Cam",
-      "district": "Bahçelievler / Siyavuşpaşa",
-      "system": "Winsa Vera Pro 10 mm Temperli Katlanır Sistem",
-      "category": "Katlanır Cam Balkon",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-7",
-      "image": "/images/references/ref-7.jpg",
-      "title": "Başakşehir — Eşiksiz Sürme Cam Balkon",
-      "district": "Başakşehir",
-      "system": "Winsa Vera Slide Eşiksiz Paslanmaz Rulmanlı Sürme",
-      "category": "Sürme Cam Balkon",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-8",
-      "image": "/images/references/ref-8.jpg",
-      "title": "Şirinevler — Revotech Gold 84 mm PVC",
-      "district": "Bahçelievler / Şirinevler",
-      "system": "Winsa Revotech Gold 7 Odacıklı 3 Contalı Sistem",
-      "category": "PVC Pencere & Kapı",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-9",
-      "image": "/images/references/ref-9.jpg",
-      "title": "Kocasinan — Cam Tavanlı Kış Bahçesi",
-      "district": "Bahçelievler / Kocasinan Merkez",
-      "system": "Lamine Isıcam Tavan & Vera Termal Katlanır Cephe",
-      "category": "Kış Bahçesi Sistemleri",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-10",
-      "image": "/images/references/ref-10.jpg",
-      "title": "Yenibosna — Teras & Kafe Giyotin Cephe",
-      "district": "Bahçelievler / Yenibosna",
-      "system": "Somfy Motorlu Giyotin & Bioklimatik Tavan",
-      "category": "Giyotin & Pergola",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-11",
-      "image": "/images/references/ref-11.jpg",
-      "title": "Soğanlı — Winstor Monoblok Panjur & PVC",
-      "district": "Bahçelievler / Soğanlı",
-      "system": "Winsa Safir 76 & Winstor Motorlu Panjur",
-      "category": "Panjur & PVC Doğrama",
-      "status": "published",
-      "featured": true
-    },
-    {
-      "id": "ref-12",
-      "image": "/images/references/ref-12.jpg",
-      "title": "Çobançeşme — Comfort Slide Plus Sürme",
-      "district": "Bahçelievler / Çobançeşme",
-      "system": "Winsa Comfort Slide Plus Vakum Contalı Sürme",
-      "category": "Sürme Sistemler",
-      "status": "published",
-      "featured": true
     }
   ],
   "services": [
@@ -651,6 +531,69 @@
       "canonicalUrl": "",
       "excerpt": "Tül perde ve balkon mobilyası kullanımında eşiksiz sürme sistemlerin avantajları, tam açıklık isteyen cephelerde katlanır sistemlerin üstünlüğü.",
       "contentHtml": "İçeriye doğru katlanan kanatların perdeye veya masa takımına çarpmasını istemeyen kullanıcılar için Winsa Vera Slide eşiksiz sürme cam balkon sistemleri sıfır alt ray çıkıntısıyla kusursuz konfor sunar."
+    },
+    {
+      "slug": "2026-istanbul-cam-balkon-m2-fiyatlari",
+      "title": "2026 İstanbul Cam Balkon m² Fiyatları ve Maliyet Hesaplama Rehberi",
+      "metaTitle": "2026 İstanbul Cam Balkon m² Fiyatları | Maliyet Hesaplama Rehberi",
+      "metaDescription": "İstanbul geneli ve Bahçelievler'de cam balkon m² fiyatları, ısıcamlı cam balkon maliyetleri, katlanır ve sürme sistem fiyat karşılaştırması ve bütçe planlama rehberi.",
+      "primaryKeyword": "cam balkon m² fiyatları 2026 İstanbul",
+      "category": "Cam Balkon",
+      "tags": ["cam balkon fiyatları", "İstanbul cam balkon", "m² fiyat", "2026", "maliyet hesaplama", "Bahçelievler"],
+      "status": "published",
+      "readTime": 11,
+      "publishedAt": "2026-10-15",
+      "updatedAt": "2026-10-28",
+      "coverImage": "/images/references/yesilkoy-bahce-kati-surme-cam-balkon.jpg",
+      "youtubeVideoId": "",
+      "ogImage": "/images/references/yesilkoy-bahce-kati-surme-cam-balkon.jpg",
+      "ogTitle": "2026 İstanbul Cam Balkon m² Fiyatları — Çelikpen Maliyet Rehberi",
+      "ogDescription": "İstanbul'da cam balkon yaptırmak isteyenlere özel: katlanır, sürme, ısıcamlı ve giyotin sistemlerin güncel m² fiyatları ve bütçe hesaplama ipuçları.",
+      "canonicalUrl": "",
+      "excerpt": "İstanbul geneli ve Bahçelievler'de cam balkon m² fiyatları, ısıcamlı cam balkon maliyetleri ve bütçe planlama rehberi.",
+      "contentHtml": "<h2>2026 İstanbul Cam Balkon m² Fiyatları</h2><p>Cam balkon fiyatları; seçilen sistem türüne (katlanır, sürme, ısıcamlı veya giyotin), cam kalınlığına, profil rengine ve balkon ölçüsüne göre değişir. İstanbul genelinde 2026 yılı güncel m² birim fiyatları aşağıdaki gibidir:</p><h3>Katlanır Cam Balkon (8/10 mm Temperli)</h3><p>En yaygın cam balkon sistemi olan katlanır cam, 8 mm veya 10 mm Şişecam temperli paneller kullanır. Kanatlar tek köşeye toplanarak balkonun tamamını açık terasa dönüştürür. Fiyat aralığı: standart şeffaf cam için uygun, antrasit veya bronz profil opsiyonlarında ek maliyet oluşur.</p><h3>Isıcamlı Cam Balkon (4+20+4 Argonlu)</h3><p>Dört mevsim kullanım için en ideal sistem: 4+20+4 mm argon gazlı Şişecam Sinerji veya Konfor ısıcam ile -38 dB akustik yalıtım ve %72 ısı tasarrufu sağlar. Isıcamlı sistemler tek camlı alternatiflere göre yaklaşık %40-60 daha yüksek başlangıç maliyetine sahip olsa da enerji faturasından tasarruf ile 2-3 yılda kendini amorti eder.</p><h3>Sürme (Eşiksiz) Cam Balkon</h3><p>Dar ve uzun balkonlarda alan kazandıran sürme cam balkon, içeriye açılan kanat payını sıfırlar. Eşiksiz alt ray seçeneği engelli erişimine uygundur. Fiyat/performans oranı en dengeliydi sistem budur.</p><h3>Motorlu Giyotin Cam</h3><p>Somfy veya Becker motorlu dikey açılım sistemi, kafe, restoran cepheleri ve dubleks teraslar için idealdir. Uzaktan kumandalı, yağmur sensörlü, akıllı telefon kontrollü otomasyon seçenekleriyle en premium segment sistemidir.</p><h3>Ücretsiz Keşif ve Fiyat Teklifi</h3><p>Çelikpen olarak İstanbul genelinde ücretsiz lazerli keşif hizmeti sunuyoruz. <a href='/fiyat-hesapla'>Online fiyat hesaplama aracımızı</a> kullanarak anında tahmini maliyet öğrenebilir, <a href='/iletisim'>iletişim sayfamızdan</a> randevu talep edebilirsiniz.</p>"
+    },
+    {
+      "slug": "bahcelievler-isicamli-cam-balkon-yalitim",
+      "title": "Bahçelievler Isıcamlı Cam Balkon ile Maksimum Ses ve Isı Yalıtımı",
+      "metaTitle": "Bahçelievler Isıcamlı Cam Balkon | Ses & Isı Yalıtımı Rehberi",
+      "metaDescription": "Bahçelievler'de 4+20+4 temperli argon gazlı ısıcamlı cam balkon sistemleri ile evinizde enerji tasarrufu ve akustik konfor. 10 yıl garanti, ücretsiz keşif.",
+      "primaryKeyword": "Bahçelievler ısıcamlı cam balkon",
+      "category": "Cam Balkon",
+      "tags": ["ısıcamlı cam balkon", "Bahçelievler", "ses yalıtımı", "ısı yalıtımı", "argon gazlı cam", "enerji tasarrufu"],
+      "status": "published",
+      "readTime": 8,
+      "publishedAt": "2026-10-20",
+      "updatedAt": "2026-10-28",
+      "coverImage": "/images/references/yesilkoy-teras-kis-bahcesi-katlanir-cam.jpg",
+      "youtubeVideoId": "",
+      "ogImage": "/images/references/yesilkoy-teras-kis-bahcesi-katlanir-cam.jpg",
+      "ogTitle": "Bahçelievler Isıcamlı Cam Balkon — Ses ve Isı Yalıtımı",
+      "ogDescription": "4+20+4 argon gazlı ısıcamlı cam balkon ile Bahçelievler'de enerji tasarrufu ve akustik konfor rehberi.",
+      "canonicalUrl": "",
+      "excerpt": "4+20+4 temperli argon gazlı ısıcamlı cam balkon sistemleri ile evinizde enerji tasarrufu ve akustiği artırın.",
+      "contentHtml": "<h2>Bahçelievler'de Isıcamlı Cam Balkon Neden Tercih Edilmeli?</h2><p>Bahçelievler, İstanbul'un en yoğun trafik akslarından E-5 (D-100) karayoluna bitişik konumuyla yüksek gürültü seviyesine maruz kalan ilçelerden biridir. Kocasinan, Şirinevler, Yenibosna ve Soğanlı mahallelerinde ana caddeye bakan balkonlarda 8 mm tek camlı standart cam balkon sistemi gürültüyü yeterince filtreleyemez.</p><h3>4+20+4 Argon Gazlı Isıcam Teknolojisi</h3><p>Isıcamlı cam balkon sistemi, iki adet 4 mm temperli cam arasına 20 mm argon gaz boşluğu yerleştirerek çalışır. Şişecam Sinerji ve Konfor cam serileri Low-E kaplama teknolojisiyle güneş ışığının zararlı UV bileşenini engellerken görünür ışık geçirgenliğini korur.</p><ul><li><strong>Ses Yalıtımı:</strong> -38 dB akustik azaltma — E-5 ve havalimanı aksındaki cephelerde keskin sessizlik</li><li><strong>Isı Yalıtımı:</strong> Uw: 1.1 W/m²K — Standart tek cama göre %72 ısı tasarrufu</li><li><strong>Güvenlik:</strong> Her iki yüzey temperli — kırılma durumunda küçük parçalara ayrılarak yaralanma riskini minimize eder</li></ul><h3>Enerji Tasarrufu Hesabı</h3><p>Tipik 10 m² bir Bahçelievler balkonu için ısıcamlı sistem, kış aylarında aylık doğalgaz faturasından ortalama %15-20 tasarruf sağlar. Bu, yatırımın 2-3 kış sezonunda kendini amorti etmesi anlamına gelir.</p><h3>Çelikpen ile Bahçelievler'de 10 Yıl Garantili Montaj</h3><p>30 yıllık saha deneyimimizle Bahçelievler'in tüm 11 mahallesinde ücretsiz lazerli keşif hizmeti veriyoruz. <a href='/hizmetlerimiz#isicamli-cam-balkon'>Isıcamlı cam balkon hizmetimiz</a> hakkında detaylı bilgi alabilir veya <a href='/fiyat-hesapla'>fiyat hesaplama aracımızla</a> anında teklif oluşturabilirsiniz.</p>"
+    },
+    {
+      "slug": "winsa-pvc-dograma-serileri-karsilastirmasi",
+      "title": "Winsa PVC Doğrama Serileri Karşılaştırması: Dorado, Revotech ve Safir",
+      "metaTitle": "Winsa PVC Doğrama Karşılaştırması: Dorado vs Revotech vs Safir 2026",
+      "metaDescription": "Winsa'nın en çok tercih edilen PVC pencere serilerinin teknik karşılaştırması: Dorado 76, Revotech Gold 84mm ve Safir 76 — ısı yalıtım değerleri, ses izolasyonu ve fiyat analizi.",
+      "primaryKeyword": "Winsa PVC doğrama serileri karşılaştırma",
+      "category": "PVC Pencere",
+      "tags": ["Winsa", "PVC doğrama", "Dorado 76", "Revotech Gold", "Safir 76", "pencere karşılaştırma"],
+      "status": "published",
+      "readTime": 10,
+      "publishedAt": "2026-10-25",
+      "updatedAt": "2026-10-28",
+      "coverImage": "/images/references/bahcelievler-kocasinan-antrasit-pvc-dograma.jpg",
+      "youtubeVideoId": "",
+      "ogImage": "/images/references/bahcelievler-kocasinan-antrasit-pvc-dograma.jpg",
+      "ogTitle": "Winsa PVC Doğrama Serileri: Dorado, Revotech ve Safir Karşılaştırması",
+      "ogDescription": "Winsa'nın en popüler 3 PVC pencere serisinin teknik özellikleri, ısı yalıtım değerleri ve fiyat analizi.",
+      "canonicalUrl": "",
+      "excerpt": "Winsa'nın en çok tercih edilen PVC pencere ve kapı serilerinin teknik özellikleri, ısı yalıtım değerleri.",
+      "contentHtml": "<h2>Winsa PVC Pencere Serileri: Hangi Seri Size Uygun?</h2><p>Winsa, Türkiye'nin en büyük PVC profil üreticisi olarak farklı bütçe ve performans beklentilerine yönelik geniş bir ürün gamı sunar. Çelikpen olarak 30 yıldır Winsa bayisi olarak İstanbul'da binlerce daire ve ticari mekanda PVC doğrama montajı gerçekleştirdik. Bu rehberde en çok tercih edilen üç seriyi karşılaştırıyoruz.</p><h3>1. Winsa Dorado 76</h3><p>76 mm profil genişliği ve 5 odacıklı iç geometrisiyle Dorado 76, fiyat/performans dengesi arayan kullanıcılar için ideal bir başlangıç serisidir.</p><ul><li><strong>Profil Genişliği:</strong> 76 mm</li><li><strong>Odacık Sayısı:</strong> 5</li><li><strong>Conta:</strong> 2 sıra EPDM</li><li><strong>Uw Değeri:</strong> 1.0 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -38 dB</li><li><strong>İdeal Kullanım:</strong> İç cepheler, sessiz mahalleler, bütçe dostu yenileme projeleri</li></ul><h3>2. Winsa Revotech Gold 84mm</h3><p>84 mm profil genişliği, 7 odacıklı geometri ve 3 sıra conta bariyeriyle Revotech Gold, Winsa'nın en üst segment pencere sistemidir.</p><ul><li><strong>Profil Genişliği:</strong> 84 mm</li><li><strong>Odacık Sayısı:</strong> 7 (orta conta bariyerli)</li><li><strong>Conta:</strong> 3 sıra EPDM (orta conta dahil)</li><li><strong>Uw Değeri:</strong> 0.79 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -46 dB</li><li><strong>İdeal Kullanım:</strong> E-5 ve havalimanı aksı, ana cadde cepheleri, maksimum enerji tasarrufu</li></ul><h3>3. Winsa Safir 76</h3><p>76 mm genişlikte 6 odacıklı orta segment seri. Dorado'dan bir adım yukarıda konumlanan Safir, ek cam kalınlığı seçenekleriyle esnek bir çözüm sunar.</p><ul><li><strong>Profil Genişliği:</strong> 76 mm</li><li><strong>Odacık Sayısı:</strong> 6</li><li><strong>Conta:</strong> 2 sıra EPDM</li><li><strong>Uw Değeri:</strong> 0.93 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -40 dB</li><li><strong>İdeal Kullanım:</strong> Genel konut yenileme, arka cepheler, dengeli bütçe-performans</li></ul><h3>Hangi Seri Hangi Cepheye?</h3><p>E-5 aksında, havalimanı yakınında veya ana caddeye bakan cephelerde <strong>Revotech Gold</strong> kesinlikle önerilir. Sessiz iç cephelerde ve bütçe optimizasyonu gereken projelerde <strong>Dorado 76</strong> yeterli performans sunar. İkisi arasında kalan, hem uygun fiyat hem iyi yalıtım isteyenler için <strong>Safir 76</strong> dengeli bir tercih olacaktır.</p><p>Tüm Winsa serilerimizi <a href='/urunler/winsa'>Winsa ürün kataloğumuzda</a> inceleyebilir, <a href='/iletisim'>iletişim sayfamızdan</a> ücretsiz keşif randevusu alabilirsiniz.</p>"
     }
   ]
 }
