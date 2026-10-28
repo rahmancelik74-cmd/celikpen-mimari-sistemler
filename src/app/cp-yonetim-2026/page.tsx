@@ -18,6 +18,7 @@ import AdminSecurityTab from '../../components/admin/AdminSecurityTab';
 import AdminMediaTab from '../../components/admin/AdminMediaTab';
 import AdminContentSeoTab from '../../components/admin/AdminContentSeoTab';
 import AdminDataTables from '../../components/admin/AdminDataTables';
+import AdminReviewsTab from '../../components/admin/AdminReviewsTab';
 import AdminSettingsLogsTab from '../../components/admin/AdminSettingsLogsTab';
 
 const ADMIN_SESSION_KEY = 'celikpen_admin_auth_v1';
@@ -28,6 +29,7 @@ const NAV_ITEMS: { id: AdminTabId; icon: string; label: string; getBadge?: (d: C
   { id: 'references', icon: '📸', label: 'Referans & Tablo', getBadge: d => `${d.references.length}` },
   { id: 'catalog', icon: '🏢', label: 'Hizmet & Ürünler', getBadge: d => `${d.services.length + d.products.length}` },
   { id: 'blog', icon: '📝', label: 'Blog & SEO', getBadge: d => `${d.blogPosts.length}` },
+  { id: 'reviews', icon: '⭐', label: 'Müşteri Yorumları', getBadge: d => `${d.testimonials?.length || 0}` },
   { id: 'media', icon: '🖼️', label: 'Medya Kütüphanesi' },
   { id: 'security', icon: '🔒', label: 'Güvenlik & RBAC', getBadge: d => `${d.users.length}` },
   { id: 'settings', icon: '⚙️', label: 'Ayarlar & Loglar' },
@@ -279,6 +281,7 @@ export default function AdminDashboardPage() {
           {(activeTab === 'pricing' || activeTab === 'references') && <AdminDataTables {...tabProps} initialSubTab={activeTab === 'pricing' ? 'pricing' : 'references'} />}
           {activeTab === 'catalog' && <CatalogTab {...tabProps} />}
           {activeTab === 'blog' && <AdminContentSeoTab {...tabProps} />}
+          {activeTab === 'reviews' && <AdminReviewsTab {...tabProps} />}
           {activeTab === 'media' && <AdminMediaTab {...tabProps} />}
           {activeTab === 'security' && <AdminSecurityTab {...tabProps} />}
           {activeTab === 'settings' && <AdminSettingsLogsTab {...tabProps} />}

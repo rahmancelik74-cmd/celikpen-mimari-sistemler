@@ -595,5 +595,43 @@
       "excerpt": "Winsa'nın en çok tercih edilen PVC pencere ve kapı serilerinin teknik özellikleri, ısı yalıtım değerleri.",
       "contentHtml": "<h2>Winsa PVC Pencere Serileri: Hangi Seri Size Uygun?</h2><p>Winsa, Türkiye'nin en büyük PVC profil üreticisi olarak farklı bütçe ve performans beklentilerine yönelik geniş bir ürün gamı sunar. Çelikpen olarak 30 yıldır Winsa bayisi olarak İstanbul'da binlerce daire ve ticari mekanda PVC doğrama montajı gerçekleştirdik. Bu rehberde en çok tercih edilen üç seriyi karşılaştırıyoruz.</p><h3>1. Winsa Dorado 76</h3><p>76 mm profil genişliği ve 5 odacıklı iç geometrisiyle Dorado 76, fiyat/performans dengesi arayan kullanıcılar için ideal bir başlangıç serisidir.</p><ul><li><strong>Profil Genişliği:</strong> 76 mm</li><li><strong>Odacık Sayısı:</strong> 5</li><li><strong>Conta:</strong> 2 sıra EPDM</li><li><strong>Uw Değeri:</strong> 1.0 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -38 dB</li><li><strong>İdeal Kullanım:</strong> İç cepheler, sessiz mahalleler, bütçe dostu yenileme projeleri</li></ul><h3>2. Winsa Revotech Gold 84mm</h3><p>84 mm profil genişliği, 7 odacıklı geometri ve 3 sıra conta bariyeriyle Revotech Gold, Winsa'nın en üst segment pencere sistemidir.</p><ul><li><strong>Profil Genişliği:</strong> 84 mm</li><li><strong>Odacık Sayısı:</strong> 7 (orta conta bariyerli)</li><li><strong>Conta:</strong> 3 sıra EPDM (orta conta dahil)</li><li><strong>Uw Değeri:</strong> 0.79 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -46 dB</li><li><strong>İdeal Kullanım:</strong> E-5 ve havalimanı aksı, ana cadde cepheleri, maksimum enerji tasarrufu</li></ul><h3>3. Winsa Safir 76</h3><p>76 mm genişlikte 6 odacıklı orta segment seri. Dorado'dan bir adım yukarıda konumlanan Safir, ek cam kalınlığı seçenekleriyle esnek bir çözüm sunar.</p><ul><li><strong>Profil Genişliği:</strong> 76 mm</li><li><strong>Odacık Sayısı:</strong> 6</li><li><strong>Conta:</strong> 2 sıra EPDM</li><li><strong>Uw Değeri:</strong> 0.93 W/m²K</li><li><strong>Ses Yalıtımı:</strong> -40 dB</li><li><strong>İdeal Kullanım:</strong> Genel konut yenileme, arka cepheler, dengeli bütçe-performans</li></ul><h3>Hangi Seri Hangi Cepheye?</h3><p>E-5 aksında, havalimanı yakınında veya ana caddeye bakan cephelerde <strong>Revotech Gold</strong> kesinlikle önerilir. Sessiz iç cephelerde ve bütçe optimizasyonu gereken projelerde <strong>Dorado 76</strong> yeterli performans sunar. İkisi arasında kalan, hem uygun fiyat hem iyi yalıtım isteyenler için <strong>Safir 76</strong> dengeli bir tercih olacaktır.</p><p>Tüm Winsa serilerimizi <a href='/urunler/winsa'>Winsa ürün kataloğumuzda</a> inceleyebilir, <a href='/iletisim'>iletişim sayfamızdan</a> ücretsiz keşif randevusu alabilirsiniz.</p>"
     }
+  ],
+  "testimonials": [
+    {
+      "id": "seed-elif-bahcelievler",
+      "name": "Elif Yılmaz",
+      "location": "Bahçelievler",
+      "service": "Isıcamlı Cam Balkon",
+      "rating": 5,
+      "comment": "Kocasinan'daki showroomda tüm sistemleri tek tek anlattılar. Balkonumuz kışın da evin en sıcak köşesi oldu; montaj ekibi koridoru ve balkonu bizden temiz bıraktı.",
+      "date": "2026-09-12"
+    },
+    {
+      "id": "seed-murat-bakirkoy",
+      "name": "Murat Demir",
+      "location": "Bakırköy",
+      "service": "Motorlu Giyotin Sistem",
+      "rating": 5,
+      "comment": "Sabah 9'da geldiler, öğleden sonra sistemi teslim ettiler. Motor çok sessiz, kumanda eşimle bana ayrı ayrı tanımlandı. İşçilik ve contalar beklediğimden çok daha düzgün.",
+      "date": "2026-09-28"
+    },
+    {
+      "id": "seed-zeynep-atakoy",
+      "name": "Zeynep Kaya",
+      "location": "Ataköy",
+      "service": "Bioklimatik Pergola",
+      "rating": 4,
+      "comment": "Terasın tamamı artık her hafta kullanılıyor. Lamel ve LED aydınlatma çok iyi çalışıyor. Montaj bir gün gecikti ama ekip önceden haber verdi ve işi eksiksiz tamamladı.",
+      "date": "2026-10-06"
+    },
+    {
+      "id": "seed-ahmet-sirinevler",
+      "name": "Ahmet Çelik",
+      "location": "Şirinevler",
+      "service": "Kış Bahçesi",
+      "rating": 5,
+      "comment": "E-5 tarafındaki gürültü belirgin şekilde azaldı. Ölçüye geldiklerinde renk ve cam seçeneklerini örnekleriyle gösterdiler; söz verilen tarihte bitirdiler. Garanti evraklarını da teslim ettiler.",
+      "date": "2026-10-14"
+    }
   ]
 }

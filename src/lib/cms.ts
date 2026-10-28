@@ -169,6 +169,16 @@ export interface CmsBlogPostItem {
   contentHtml: string;
 }
 
+export interface CmsTestimonialItem {
+  id: string;
+  name: string;
+  location: string;
+  service: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 export interface CmsStoreData {
   updatedAt: string;
   siteSettings: CmsSiteSettings;
@@ -186,6 +196,7 @@ export interface CmsStoreData {
   services: CmsServiceItem[];
   products: CmsProductItem[];
   blogPosts: CmsBlogPostItem[];
+  testimonials: CmsTestimonialItem[];
 }
 
 export const ROLE_LABELS: Record<UserRole, string> = {
@@ -261,5 +272,9 @@ export function normalizeCmsData(raw: Partial<CmsStoreData> | null | undefined):
       Array.isArray(raw.blogPosts) && raw.blogPosts.length > 0
         ? raw.blogPosts
         : DEFAULT_CMS_DATA.blogPosts,
+    testimonials:
+      Array.isArray(raw.testimonials) && raw.testimonials.length > 0
+        ? raw.testimonials
+        : DEFAULT_CMS_DATA.testimonials || [],
   };
 }

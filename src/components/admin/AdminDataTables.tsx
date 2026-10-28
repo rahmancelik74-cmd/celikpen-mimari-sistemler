@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import type { AdminTabProps, CmsPricingSystem, CmsReferenceItem, CmsStoreData } from './types';
 import {
   SearchInput, PaginationBar, usePagination, useBulkSelect,
-  StatusBadge, ConfirmModal, exportCsv, exportPrintHtml,
+  ConfirmModal, exportCsv, exportPrintHtml,
 } from './AdminShared';
 
 type SubTab = 'pricing' | 'references';
@@ -13,8 +13,6 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
   const { draft, setDraft, saveAllToCms, isSaving, showNotice, initialSubTab } = props;
   const [sub, setSub] = useState<SubTab>(initialSubTab || 'pricing');
   const [search, setSearch] = useState('');
-  const [catFilter, setCatFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
   const [confirm, setConfirm] = useState<{ title: string; message: string; action: () => void } | null>(null);
 
   // ── Add New forms ───────────────────────────────────────────────
@@ -122,51 +120,6 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
   };
 
   // ── Reference helpers ────────────────────────────────────────────
-  const categories = useMemo(
-    () => [...new Set(draft.references.map(r => r.category))].sort(),
-    [draft.references],
-  );
-
-  const filteredRefs = useMemo(() => {
-    const q = search.toLowerCase();
-    return draft.references.filter(r => {
-      if (q && !r.title.toLowerCase().includes(q) && !r.district.toLowerCase().includes(q)) return false;
-      if (catFilter && r.category !== catFilter) return false;
-      if (statusFilter && (r.status || 'published') !== statusFilter) return false;
-      return true;
-    });
-  }, [draft.references, search, catFilter, statusFilter]);
-
-  const refPag = usePagination(filteredRefs, 10);
-  const refBulk = useBulkSelect(filteredRefs);
-
-  const bulkRefStatus = (status: 'published' | 'draft' | 'archived') => {
-    setDraft(prev => ({
-      ...prev,
-      references: prev.references.map(r =>
-        refBulk.selected.has(r.id) ? { ...r, status } : r,
-      ),
-    }));
-    refBulk.clearSelection();
-    showNotice('info', `Seçili referanslar "${status}" olarak güncellendi.`);
-  };
-
-  const bulkRefDelete = () => {
-    setConfirm({
-      title: 'Toplu Silme',
-      message: `${refBulk.count} referans silinecek. Emin misiniz?`,
-      action: () => {
-        setDraft(prev => ({
-          ...prev,
-          references: prev.references.filter(r => !refBulk.selected.has(r.id)),
-        }));
-        refBulk.clearSelection();
-        showNotice('info', 'Seçili referanslar silindi.');
-        setConfirm(null);
-      },
-    });
-  };
-
   const moveRef = (id: string, dir: -1 | 1) => {
     setDraft(prev => {
       const refs = [...prev.references];
@@ -181,22 +134,6 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
   const deleteRef = (id: string) => {
     setDraft(prev => ({ ...prev, references: prev.references.filter(r => r.id !== id) }));
     showNotice('info', 'Referans silindi. Kaydetmeyi unutmayın.');
-  };
-
-  const exportRefCsv = () => {
-    const headers = ['Başlık', 'İlçe', 'Sistem', 'Kategori', 'Durum'];
-    const rows = draft.references.map(r => [r.title, r.district, r.system, r.category, r.status || 'published']);
-    exportCsv(headers, rows, `celikpen-referanslar-${new Date().toISOString().slice(0, 10)}.csv`);
-  };
-
-  const printRefTable = () => {
-    const rows = draft.references
-      .map(r => `<tr><td>${r.title}</td><td>${r.district}</td><td>${r.system}</td><td>${r.category}</td><td>${r.status || 'published'}</td></tr>`)
-      .join('');
-    exportPrintHtml(
-      'Çelikpen — Referans Projeleri',
-      `<table><thead><tr><th>Başlık</th><th>İlçe</th><th>Sistem</th><th>Kategori</th><th>Durum</th></tr></thead><tbody>${rows}</tbody></table>`,
-    );
   };
 
   const btn = 'rounded-lg border border-white/10 bg-slate-800 px-2.5 py-1.5 text-xs font-bold text-slate-200 hover:bg-slate-700';
@@ -227,9 +164,9 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
       {/* Sub-tabs */}
       <div className="flex gap-2">
         {(['pricing', 'references'] as SubTab[]).map(t => (
-          <button key={t} type="button" onClick={() => { setSub(t); setSearch(''); setCatFilter(''); setStatusFilter(''); pricingBulk.clearSelection(); refBulk.clearSelection(); }}
+          <button key={t} type="button" onClick={() => { setSub(t); setSearch(''); pricingBulk.clearSelection(); }}
             className={`rounded-xl px-4 py-2 text-xs font-extrabold transition ${sub === t ? 'bg-[#1E3A8A] text-white shadow ring-1 ring-sky-400/30' : 'border border-white/10 bg-slate-900 text-slate-300 hover:bg-white/5'}`}>
-            {t === 'pricing' ? `💰 Fiyat Tablosu (${draft.pricingSystems.length})` : `📸 Referans Tablosu (${draft.references.length})`}
+            {t === 'pricing' ? `💰 Fiyat Tablosu (${draft.pricingSystems.length})` : `📸 Referans Galerisi (${draft.references.length})`}
           </button>
         ))}
       </div>
@@ -318,78 +255,48 @@ export default function AdminDataTables(props: AdminTabProps & { initialSubTab?:
         </div>
       )}
 
-      {/* ═══ REFERENCES TABLE ═══ */}
+      {/* ═══ REFERENCES — SQUARE PHOTO GRID ═══ */}
       {sub === 'references' && (
-        <div className="space-y-3">
+        <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="w-72"><SearchInput value={search} onChange={setSearch} placeholder="Başlık veya ilçe ara..." /></div>
             <label className={`cursor-pointer rounded-lg bg-[#1E3A8A] px-4 py-2 text-xs font-extrabold text-white shadow ring-1 ring-sky-400/30 hover:bg-[#1D4ED8] ${isUploadingRef ? 'opacity-50 pointer-events-none' : ''}`}>
               {isUploadingRef ? 'Yükleniyor...' : '+ Fotoğraf Ekle'}
               <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden"
                 onChange={e => { const f = e.target.files?.[0]; if (f) void addReferenceFromFile(f); e.target.value = ''; }} />
             </label>
-            <select value={catFilter} onChange={e => setCatFilter(e.target.value)}
-              className="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white">
-              <option value="">Tüm Kategoriler</option>
-              {categories.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
-              className="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white">
-              <option value="">Tüm Durumlar</option>
-              <option value="published">Yayında</option>
-              <option value="draft">Taslak</option>
-              <option value="archived">Arşiv</option>
-            </select>
-            <button type="button" onClick={exportRefCsv} className={btn}>⬇ CSV İndir</button>
-            <button type="button" onClick={printRefTable} className={btn}>🖨 Yazdır / PDF</button>
+            <span className="text-xs text-slate-400">{draft.references.length} fotoğraf</span>
           </div>
 
-          {refBulk.count > 0 && (
-            <div className="flex flex-wrap items-center gap-2 rounded-xl border border-sky-500/30 bg-sky-950/40 px-4 py-2.5">
-              <span className="text-xs font-extrabold text-sky-200">{refBulk.count} seçili:</span>
-              <button type="button" onClick={bulkRefDelete} className={`${bulkBtn} bg-rose-600 text-white hover:bg-rose-500`}>Toplu Sil</button>
-              <button type="button" onClick={() => bulkRefStatus('published')} className={`${bulkBtn} bg-emerald-600 text-white hover:bg-emerald-500`}>Toplu Yayınla</button>
-              <button type="button" onClick={() => bulkRefStatus('draft')} className={`${bulkBtn} bg-amber-600 text-white hover:bg-amber-500`}>Toplu Taslak</button>
-              <button type="button" onClick={() => bulkRefStatus('archived')} className={`${bulkBtn} bg-slate-600 text-white hover:bg-slate-500`}>Toplu Arşivle</button>
-            </div>
-          )}
-
-          <div className="overflow-x-auto rounded-2xl border border-white/10 bg-[#0F172A]">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b border-white/10 text-left text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
-                  <th className="p-3"><input type="checkbox" checked={refBulk.allSelected} onChange={refBulk.toggleAll} className="accent-sky-500" /></th>
-                  <th className="p-3">Görsel</th><th className="p-3">Başlık</th><th className="p-3">İlçe</th>
-                  <th className="p-3">Sistem</th><th className="p-3">Kategori</th><th className="p-3">Durum</th><th className="p-3">İşlem</th>
-                </tr>
-              </thead>
-              <tbody>
-                {refPag.paged.map(ref => (
-                  <tr key={ref.id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                    <td className="p-3"><input type="checkbox" checked={refBulk.selected.has(ref.id)} onChange={() => refBulk.toggleOne(ref.id)} className="accent-sky-500" /></td>
-                    <td className="p-3">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={ref.image} alt={ref.title} className="h-10 w-14 rounded object-cover" />
-                    </td>
-                    <td className="p-3 font-bold text-white max-w-[180px] truncate">{ref.title}</td>
-                    <td className="p-3 text-slate-300">{ref.district}</td>
-                    <td className="p-3 text-slate-400 max-w-[160px] truncate">{ref.system}</td>
-                    <td className="p-3"><span className="rounded bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-sky-300">{ref.category}</span></td>
-                    <td className="p-3"><StatusBadge status={ref.status || 'published'} /></td>
-                    <td className="p-3">
-                      <div className="flex gap-1">
-                        <button type="button" onClick={() => moveRef(ref.id, -1)} className={btn} title="Yukarı">↑</button>
-                        <button type="button" onClick={() => moveRef(ref.id, 1)} className={btn} title="Aşağı">↓</button>
-                        <button type="button" onClick={() => deleteRef(ref.id)}
-                          className="rounded-lg border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5 text-xs font-bold text-rose-300 hover:bg-rose-500/20">Sil</button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {draft.references.map((ref, idx) => (
+              <div key={ref.id} className="group rounded-xl border border-white/10 bg-[#0F172A] overflow-hidden">
+                <div className="relative aspect-square">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ref.image} alt={ref.title || 'Referans'} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/30" />
+                  <div className="absolute top-1.5 right-1.5 flex gap-1 opacity-0 transition group-hover:opacity-100">
+                    <button type="button" onClick={() => moveRef(ref.id, -1)} disabled={idx === 0}
+                      className="flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-xs text-white backdrop-blur hover:bg-black/80 disabled:opacity-30" title="Sola">←</button>
+                    <button type="button" onClick={() => moveRef(ref.id, 1)} disabled={idx === draft.references.length - 1}
+                      className="flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-xs text-white backdrop-blur hover:bg-black/80 disabled:opacity-30" title="Sağa">→</button>
+                    <button type="button" onClick={() => deleteRef(ref.id)}
+                      className="flex h-7 w-7 items-center justify-center rounded-full bg-rose-600/80 text-xs text-white backdrop-blur hover:bg-rose-600" title="Sil">✕</button>
+                  </div>
+                </div>
+                <div className="p-2">
+                  <input type="text" value={ref.title} placeholder="İsim ekle..."
+                    onChange={e => {
+                      const val = e.target.value;
+                      setDraft(prev => ({
+                        ...prev,
+                        references: prev.references.map(r => r.id === ref.id ? { ...r, title: val } : r),
+                      }));
+                    }}
+                    className="w-full rounded border border-white/10 bg-transparent px-2 py-1 text-[11px] font-semibold text-white placeholder:text-slate-500 focus:border-sky-400 focus:outline-none" />
+                </div>
+              </div>
+            ))}
           </div>
-          <PaginationBar {...refPag} />
         </div>
       )}
     </div>

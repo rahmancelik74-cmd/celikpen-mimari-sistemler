@@ -6,6 +6,7 @@ import type {
   CmsServiceItem,
   CmsProductItem,
   CmsSiteSettings,
+  CmsTestimonialItem,
   UserRole,
 } from '../../lib/cms';
 
@@ -15,6 +16,7 @@ export type AdminTabId =
   | 'references'
   | 'catalog'
   | 'blog'
+  | 'reviews'
   | 'settings'
   | 'security'
   | 'media'
@@ -41,5 +43,6 @@ export type {
   CmsServiceItem,
   CmsProductItem,
   CmsSiteSettings,
+  CmsTestimonialItem,
   UserRole,
 };

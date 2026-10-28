@@ -1,6 +1,7 @@
 'use client';
 
 import React, { startTransition, useEffect, useMemo, useRef, useState } from 'react';
+import { useCms } from './CmsProvider';
 
 /* ============================================================================
    MÜŞTERİ YORUMLARI — canlı puan özeti, yıldız dağılımı ve yorum formu
@@ -121,7 +122,22 @@ function localDateValue() {
 }
 
 export function CustomerReviews() {
-  const [reviews, setReviews] = useState<Review[]>(INITIAL_REVIEWS);
+  const { cms } = useCms();
+
+  const cmsSeeds: Review[] = useMemo(() => {
+    if (!cms.testimonials || cms.testimonials.length === 0) return INITIAL_REVIEWS;
+    return cms.testimonials.map(t => ({
+      id: t.id,
+      name: t.name,
+      district: t.location,
+      system: t.service,
+      rating: t.rating,
+      text: t.comment,
+      date: t.date,
+    }));
+  }, [cms.testimonials]);
+
+  const [reviews, setReviews] = useState<Review[]>(cmsSeeds);
   const [showAll, setShowAll] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -136,16 +152,17 @@ export function CustomerReviews() {
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) return;
+      if (!stored) { setReviews(cmsSeeds); return; }
       const parsed: unknown = JSON.parse(stored);
       if (Array.isArray(parsed)) {
         const validReviews = parsed.filter(isStoredReview).slice(0, 80);
-        if (validReviews.length > 0) setReviews(validReviews);
+        if (validReviews.length > 0) { setReviews(validReviews); return; }
       }
+      setReviews(cmsSeeds);
     } catch {
-      // Depolama kapalıysa varsayılan yorumlarla devam edilir.
+      setReviews(cmsSeeds);
     }
-  }, []);
+  }, [cmsSeeds]);
 
   useEffect(() => {
     return () => {
