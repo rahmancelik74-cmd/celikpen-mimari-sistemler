@@ -309,7 +309,7 @@ export function ReferenceGallery({
                 title={`${photo.title} (${photo.system}) — Çelikpen Referans Galerisi`}
                 width={1000}
                 height={700}
-                unoptimized={photo.image.startsWith('data:') || photo.image.startsWith('/images/uploads/')}
+                unoptimized={photo.image.startsWith('data:')}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />

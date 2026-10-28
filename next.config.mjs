@@ -31,6 +31,12 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1600],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
+    ],
   },
   // Kamu görselleri, derlenmiş chunk'lar ve favicon önbellek yönetimi.
   async headers() {

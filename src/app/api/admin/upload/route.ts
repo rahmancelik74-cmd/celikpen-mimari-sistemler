@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { uploadImageToBlob } from '../../../../lib/blob-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,6 +26,20 @@ function sanitizeFileName(rawName: string): string {
 
   const safeBase = base || 'celikpen-proje';
   return `${safeBase}-${Date.now()}${allowedExt}`;
+}
+
+async function tryDiskWrite(
+  buffer: Buffer,
+  fileName: string
+): Promise<string | null> {
+  try {
+    const uploadDir = path.join(process.cwd(), 'public', 'images', 'uploads');
+    await fs.mkdir(uploadDir, { recursive: true });
+    await fs.writeFile(path.join(uploadDir, fileName), buffer);
+    return `/images/uploads/${fileName}`;
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(request: Request) {
@@ -52,27 +67,25 @@ export async function POST(request: Request) {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       const fileName = sanitizeFileName(file.name);
-      const uploadDir = path.join(process.cwd(), 'public', 'images', 'uploads');
-      const fullPath = path.join(uploadDir, fileName);
+      const mime = file.type || 'image/jpeg';
 
-      try {
-        await fs.mkdir(uploadDir, { recursive: true });
-        await fs.writeFile(fullPath, buffer);
-        return NextResponse.json({
-          ok: true,
-          url: `/images/uploads/${fileName}`,
-          fileName,
-        });
-      } catch {
-        const mime = file.type || 'image/jpeg';
-        const dataUrl = `data:${mime};base64,${buffer.toString('base64')}`;
-        return NextResponse.json({
-          ok: true,
-          url: dataUrl,
-          fileName,
-          inlineFallback: true,
-        });
+      const diskUrl = await tryDiskWrite(buffer, fileName);
+      if (diskUrl) {
+        return NextResponse.json({ ok: true, url: diskUrl, fileName });
       }
+
+      const blobUrl = await uploadImageToBlob(fileName, buffer, mime);
+      if (blobUrl) {
+        return NextResponse.json({ ok: true, url: blobUrl, fileName, blob: true });
+      }
+
+      const dataUrl = `data:${mime};base64,${buffer.toString('base64')}`;
+      return NextResponse.json({
+        ok: true,
+        url: dataUrl,
+        fileName,
+        inlineFallback: true,
+      });
     }
 
     const body = (await request.json()) as {
@@ -99,25 +112,23 @@ export async function POST(request: Request) {
     const rawBase64 = body.base64.replace(/^data:image\/[a-zA-Z0-9+.-]+;base64,/, '');
     const buffer = Buffer.from(rawBase64, 'base64');
     const fileName = sanitizeFileName(body.fileName || 'celikpen-gorsel.jpg');
-    const uploadDir = path.join(process.cwd(), 'public', 'images', 'uploads');
-    const fullPath = path.join(uploadDir, fileName);
 
-    try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      await fs.writeFile(fullPath, buffer);
-      return NextResponse.json({
-        ok: true,
-        url: `/images/uploads/${fileName}`,
-        fileName,
-      });
-    } catch {
-      return NextResponse.json({
-        ok: true,
-        url: body.base64,
-        fileName,
-        inlineFallback: true,
-      });
+    const diskUrl = await tryDiskWrite(buffer, fileName);
+    if (diskUrl) {
+      return NextResponse.json({ ok: true, url: diskUrl, fileName });
     }
+
+    const blobUrl = await uploadImageToBlob(fileName, buffer, 'image/jpeg');
+    if (blobUrl) {
+      return NextResponse.json({ ok: true, url: blobUrl, fileName, blob: true });
+    }
+
+    return NextResponse.json({
+      ok: true,
+      url: body.base64,
+      fileName,
+      inlineFallback: true,
+    });
   } catch (error) {
     return NextResponse.json(
       {

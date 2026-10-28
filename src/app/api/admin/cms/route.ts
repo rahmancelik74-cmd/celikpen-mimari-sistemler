@@ -3,6 +3,7 @@ import { revalidatePath } from 'next/cache';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
+import { readCmsFromBlob, writeCmsToBlob } from '../../../../lib/blob-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,8 +20,19 @@ async function readCmsStoreFromFile(): Promise<CmsStoreData> {
   }
 }
 
+async function readCmsStore(): Promise<CmsStoreData> {
+  const blobData = await readCmsFromBlob();
+  if (blobData) {
+    const fileData = await readCmsStoreFromFile();
+    const blobTime = new Date(blobData.updatedAt || 0).getTime();
+    const fileTime = new Date(fileData.updatedAt || 0).getTime();
+    return blobTime >= fileTime ? normalizeCmsData(blobData) : fileData;
+  }
+  return readCmsStoreFromFile();
+}
+
 export async function GET() {
-  const data = await readCmsStoreFromFile();
+  const data = await readCmsStore();
   return NextResponse.json(
     {
       ok: true,
@@ -53,7 +65,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const currentData = await readCmsStoreFromFile();
+    const currentData = await readCmsStore();
     const mergedData: CmsStoreData = normalizeCmsData({
       ...currentData,
       ...(body.data || {}),
@@ -69,6 +81,8 @@ export async function POST(request: Request) {
       persistedToDisk = false;
     }
 
+    const persistedToBlob = await writeCmsToBlob(mergedData);
+
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/fiyat-hesapla');
@@ -80,12 +94,15 @@ export async function POST(request: Request) {
       // Ignore revalidation errors in edge contexts
     }
 
+    const persisted = persistedToDisk || persistedToBlob;
+
     return NextResponse.json({
       ok: true,
       persistedToDisk,
-      message: persistedToDisk
+      persistedToBlob,
+      message: persisted
         ? 'Değişiklikler başarıyla kaydedildi ve tüm sitede anında güncellendi.'
-        : 'Değişiklikler tarayıcı belleğine kaydedildi (Canlı sunucuya kalıcı işlemek için GitHub senkronizasyonunu kullanabilirsiniz).',
+        : 'Değişiklikler tarayıcı belleğine kaydedildi (Canlı sunucuya kalıcı işlemek için Vercel Blob Storage ayarlayın veya GitHub senkronizasyonunu kullanın).',
       data: mergedData,
     });
   } catch (error) {
