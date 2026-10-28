@@ -2,10 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { generatePageMetadata } from '../../../config/seo.config';
-import {
-  ReferenceGallery,
-  REFERENCE_PHOTOS,
-} from '../../../components/professional/ReferenceGallery';
+import { ReferenceGallery } from '../../../components/professional/ReferenceGallery';
 import {
   JsonLd,
   buildBreadcrumbSchema,
@@ -49,7 +46,7 @@ export default function ProfessionalReferencesPage() {
     <main>
       <JsonLd data={webPageSchema} id="profesyoneller-referanslar-jsonld" />
       <JsonLd data={breadcrumbSchema} id="profesyoneller-referanslar-breadcrumb-jsonld" />
-      <ReferenceGallery photos={REFERENCE_PHOTOS} />
+      <ReferenceGallery />
     </main>
   );
 }

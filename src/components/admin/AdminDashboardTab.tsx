@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AdminTabProps } from './types';
 import { BarChart, AreaChart, ChecklistWidget, StatusBadge } from './AdminShared';
 
@@ -16,6 +16,55 @@ const MONTHLY_VISITORS = [
   { label: 'Eyl', value: 3900 },
   { label: 'Eki', value: 4200 },
 ];
+
+function EnvironmentBanner() {
+  const [env, setEnv] = useState<{ isVercel: boolean; hasBlob: boolean; hasGithub: boolean } | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/admin/cms?t=${Date.now()}`, { cache: 'no-store' })
+      .then(res => res.headers)
+      .then(headers => {
+        const isVercel = !!headers.get('x-vercel-id') || window.location.hostname.includes('vercel.app') || window.location.hostname.includes('celikpen.com.tr');
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        setEnv({ isVercel: isVercel && !isLocalhost, hasBlob: false, hasGithub: false });
+      })
+      .catch(() => setEnv(null));
+  }, []);
+
+  if (!env) return null;
+
+  if (env.isVercel) {
+    return (
+      <div className="rounded-xl border border-amber-500/30 bg-amber-950/40 p-4">
+        <div className="flex items-start gap-3">
+          <span className="text-lg">☁️</span>
+          <div>
+            <h3 className="text-sm font-extrabold text-amber-200">Vercel Bulut Ortamı</h3>
+            <p className="mt-0.5 text-xs leading-relaxed text-amber-300/80">
+              Canlı sunucudasınız. &ldquo;Kaydet&rdquo; butonuyla yapılan değişiklikler Blob Storage&apos;a ve sayfa önbelleğine anlık yansır.
+              &ldquo;GitHub&apos;a Kaydet&rdquo; ise kalıcı kayıt için Vercel&apos;i yeniden deploy eder.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/40 p-4">
+      <div className="flex items-start gap-3">
+        <span className="text-lg">💻</span>
+        <div>
+          <h3 className="text-sm font-extrabold text-emerald-200">Yerel Geliştirme Ortamı</h3>
+          <p className="mt-0.5 text-xs leading-relaxed text-emerald-300/80">
+            Localhost&apos;ta çalışıyorsunuz. &ldquo;Kaydet&rdquo; değişiklikleri cms-store.json dosyasına yazar.
+            &ldquo;GitHub&apos;a Kaydet&rdquo; ile git push yapılır ve Vercel otomatik deploy başlar.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function AdminDashboardTab({ draft, setActiveTab }: AdminTabProps) {
   const pendingRequests = draft.discoveryRequests?.filter(r => r.status === 'pending') || [];
@@ -39,6 +88,9 @@ export default function AdminDashboardTab({ draft, setActiveTab }: AdminTabProps
 
   return (
     <div className="space-y-6">
+      {/* ── Environment Banner ──────────────────────────────── */}
+      <EnvironmentBanner />
+
       {/* ── Hero Banner ─────────────────────────────────────── */}
       <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#1E3A8A] via-[#0F172A] to-[#0F172A] p-6 shadow-xl">
         <div className="flex flex-wrap items-center justify-between gap-4">

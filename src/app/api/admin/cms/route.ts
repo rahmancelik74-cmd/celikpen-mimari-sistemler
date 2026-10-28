@@ -6,6 +6,7 @@ import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../
 import { readCmsFromBlob, writeCmsToBlob } from '../../../../lib/blob-storage';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
 const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
@@ -85,11 +86,14 @@ export async function POST(request: Request) {
 
     try {
       revalidatePath('/', 'layout');
+      revalidatePath('/projelerimiz');
       revalidatePath('/fiyat-hesapla');
       revalidatePath('/profesyoneller/referanslar');
       revalidatePath('/hizmetlerimiz');
       revalidatePath('/urunler');
+      revalidatePath('/blog');
       revalidatePath('/profesyoneller/blog');
+      revalidatePath('/iletisim');
     } catch {
       // Ignore revalidation errors in edge contexts
     }

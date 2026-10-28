@@ -38,7 +38,7 @@ export function CmsProvider({ children }: { children: React.ReactNode }) {
 
   const refreshCms = useCallback(async () => {
     try {
-      const response = await fetch('/api/admin/cms', { cache: 'no-store' });
+      const response = await fetch(`/api/admin/cms?t=${Date.now()}`, { cache: 'no-store' });
       if (!response.ok) return;
       const payload = (await response.json()) as { ok?: boolean; data?: CmsStoreData };
       if (payload.ok && payload.data) {
