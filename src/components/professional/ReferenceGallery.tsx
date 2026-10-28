@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCms } from '../CmsProvider';
@@ -14,10 +14,6 @@ export interface ReferencePhotoItem {
   category: string;
 }
 
-/**
- * 12 Örnek Referans Fotoğrafı — Kendi proje fotoğraflarınızla değiştirmek için
- * aşağıdaki `image` yollarını (`/images/references/ref-1.jpg` ... `ref-12.jpg`) güncellemeniz yeterlidir.
- */
 export const REFERENCE_PHOTOS: ReferencePhotoItem[] = [
   {
     id: 'ref-new-1',
@@ -231,7 +227,7 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   );
 }
 
-function ZoomIcon() {
+function SearchZoomIcon() {
   return (
     <svg
       aria-hidden="true"
@@ -239,12 +235,11 @@ function ZoomIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
-      className="h-4 w-4"
+      className="h-5 w-5"
     >
-      <path
-        d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"
-        strokeLinecap="round"
-      />
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+      <path d="M11 8v6M8 11h6" strokeLinecap="round" />
     </svg>
   );
 }
@@ -277,6 +272,20 @@ export function ReferenceGallery({
   const selectedPhoto: ReferencePhotoItem | null =
     selectedIndex === null ? null : photos[selectedIndex] ?? null;
 
+  const goNext = useCallback(() => {
+    setSelectedIndex((current) =>
+      current === null ? null : (current + 1) % photos.length
+    );
+  }, [photos.length]);
+
+  const goPrev = useCallback(() => {
+    setSelectedIndex((current) =>
+      current === null ? null : (current - 1 + photos.length) % photos.length
+    );
+  }, [photos.length]);
+
+  const closeLightbox = useCallback(() => setSelectedIndex(null), []);
+
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -284,17 +293,9 @@ export function ReferenceGallery({
     document.body.style.overflow = 'hidden';
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setSelectedIndex(null);
-      if (event.key === 'ArrowLeft') {
-        setSelectedIndex((current) =>
-          current === null ? null : (current - 1 + photos.length) % photos.length
-        );
-      }
-      if (event.key === 'ArrowRight') {
-        setSelectedIndex((current) =>
-          current === null ? null : (current + 1) % photos.length
-        );
-      }
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') goPrev();
+      if (event.key === 'ArrowRight') goNext();
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -302,11 +303,11 @@ export function ReferenceGallery({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [selectedIndex, photos.length]);
+  }, [selectedIndex, closeLightbox, goNext, goPrev]);
 
   return (
     <div className="bg-[#F8FAFC] pb-16">
-      {/* ============================ DARK NAVY HERO HEADER (PRESERVED) ============================ */}
+      {/* ============================ DARK NAVY HERO HEADER ============================ */}
       <section className="relative overflow-hidden bg-[#0F172A] pt-10 pb-14 text-white sm:pt-14 sm:pb-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.16]"
@@ -349,7 +350,7 @@ export function ReferenceGallery({
                 <span className="text-sky-300">30 yıllık saha imzası.</span>
               </h1>
               <p className="mt-4 max-w-2xl text-[12.5px] leading-6 text-slate-300 sm:text-[13px]">
-                Bahçelievler, Bakırköy, Ataköy, Florya, Yeşilköy ve Başakşehir’de tamamlanan cam
+                Bahçelievler, Bakırköy, Ataköy, Florya, Yeşilköy ve Başakşehir'de tamamlanan cam
                 balkon, PVC doğrama, kaldır-sür ve bioklimatik pergola projelerinden seçkiler.
                 Her kare, kendi montaj ekibimiz tarafından teslim edilen gerçek bir uygulamadır.
               </p>
@@ -357,7 +358,7 @@ export function ReferenceGallery({
 
             <div className="grid grid-cols-3 gap-2">
               {[
-                { value: '12+', label: 'Öne çıkan proje' },
+                { value: '22+', label: 'Öne çıkan proje' },
                 { value: '30', label: 'Yıllık tecrübe' },
                 { value: '10 Yıl', label: 'Sistem garantisi' },
               ].map((stat) => (
@@ -376,9 +377,9 @@ export function ReferenceGallery({
         </div>
       </section>
 
-      {/* ============================ CATEGORY FILTER TABS ============================ */}
+      {/* ============================ CATEGORY FILTER PILLS ============================ */}
       {showFilters && categories.length > 1 && (
-        <div className="container-shell pt-8 sm:pt-10">
+        <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
@@ -412,11 +413,14 @@ export function ReferenceGallery({
         </div>
       )}
 
-      {/* ============================ REFERENCE GALLERY GRID ============================ */}
-      <section className="container-shell pt-10 sm:pt-12" aria-label="Referans Fotoğraf Galerisi">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* ============================ PURE PHOTO GALLERY GRID ============================ */}
+      <section
+        className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 sm:pt-12 lg:px-8"
+        aria-label="Referans Fotoğraf Galerisi"
+      >
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
           {photos.map((photo, index) => (
-            <figure
+            <div
               key={photo.id}
               onClick={() => setSelectedIndex(index)}
               onKeyDown={(event) => {
@@ -428,43 +432,25 @@ export function ReferenceGallery({
               role="button"
               tabIndex={0}
               aria-label={`${photo.title} fotoğrafını tam ekran görüntüle`}
-              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-900 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E3A8A] hover:shadow-[0_26px_52px_-26px_rgba(30,58,138,0.45)]"
+              className="group cursor-pointer rounded-2xl border-2 border-[#1E3A8A]/20 bg-white p-2 shadow-md transition-all duration-300 hover:border-[#1E3A8A] hover:shadow-xl hover:shadow-blue-950/15"
             >
-              <Image
-                src={photo.image}
-                alt={`${photo.title} — Çelikpen referans uygulaması`}
-                title={`${photo.title} (${photo.system}) — Çelikpen Referans Galerisi`}
-                width={1000}
-                height={700}
-                unoptimized={photo.image.startsWith('data:')}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
-
-              {/* Subtle bottom gradient overlay */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/25 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-
-              {/* Top-left category badge & top-right zoom button */}
-              <div className="pointer-events-none absolute inset-x-4 top-4 flex items-center justify-between gap-2">
-                <span className="rounded-full border border-white/20 bg-[#0F172A]/75 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-sky-200 backdrop-blur-md">
-                  {photo.category}
-                </span>
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#1E3A8A] shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#1E3A8A] group-hover:text-white">
-                  <ZoomIcon />
-                </span>
+              <div className="relative h-[310px] w-full overflow-hidden rounded-xl ring-1 ring-slate-200 group-hover:ring-[#2563EB]/40 sm:h-[340px]">
+                <Image
+                  src={photo.image}
+                  alt={`${photo.title} — Çelikpen referans uygulaması`}
+                  fill
+                  unoptimized={photo.image.startsWith('data:')}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[#0F172A]/0 transition-all duration-300 group-hover:bg-[#0F172A]/30" />
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-[#1E3A8A] opacity-0 shadow-lg transition-all duration-300 scale-90 group-hover:opacity-100 group-hover:scale-100">
+                    <SearchZoomIcon />
+                  </span>
+                </div>
               </div>
-
-              {/* Bottom caption */}
-              <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 p-5 text-white">
-                <p className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sky-300">
-                  {photo.district}
-                </p>
-                <h2 className="mt-1 text-base font-extrabold leading-snug tracking-tight text-white sm:text-[17px]">
-                  {photo.title}
-                </h2>
-                <p className="mt-1 text-[11.5px] font-medium text-slate-300">{photo.system}</p>
-              </figcaption>
-            </figure>
+            </div>
           ))}
         </div>
 
@@ -495,97 +481,61 @@ export function ReferenceGallery({
         </div>
       </section>
 
-      {/* ============================ FULL-SCREEN LIGHTBOX MODAL ============================ */}
+      {/* ============================ FULLSCREEN LIGHTBOX MODAL ============================ */}
       {selectedPhoto && (
         <div
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#020617]/90 p-3 backdrop-blur-md sm:p-6"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#0F172A]/95 p-4 backdrop-blur-md"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="reference-lightbox-title"
-          onClick={() => setSelectedIndex(null)}
+          aria-label="Fotoğraf büyütme"
+          onClick={closeLightbox}
         >
-          <div
-            className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#0F172A] text-white shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
+          {/* Close button (top-right) */}
+          <button
+            type="button"
+            onClick={closeLightbox}
+            aria-label="Galeriyi kapat"
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:bg-white/25"
           >
-            {/* Modal Top Bar */}
-            <div className="flex items-center justify-between border-b border-white/10 bg-[#0F172A] px-5 py-3.5">
-              <div className="flex items-center gap-2.5">
-                <span className="rounded-md bg-[#1E3A8A] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-sky-200">
-                  {selectedPhoto.category}
-                </span>
-                <span className="text-xs font-semibold text-slate-300">
-                  {selectedIndex !== null ? selectedIndex + 1 : 1} / {photos.length}
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setSelectedIndex(null)}
-                aria-label="Galeriyi kapat"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20"
-              >
-                <CloseIcon />
-              </button>
-            </div>
+            <CloseIcon />
+          </button>
 
-            {/* Modal Photo Stage */}
-            <div className="relative flex items-center justify-center bg-slate-950">
-              <Image
-                src={selectedPhoto.image}
-                alt={`${selectedPhoto.title} — Çelikpen referans uygulaması`}
-                title={`${selectedPhoto.title} (${selectedPhoto.system}) — Çelikpen`}
-                width={1200}
-                height={840}
-                unoptimized={selectedPhoto.image.startsWith('data:') || selectedPhoto.image.startsWith('/images/uploads/')}
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                className="max-h-[68vh] w-full object-contain"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  setSelectedIndex((current) =>
-                    current === null ? null : (current - 1 + photos.length) % photos.length
-                  )
-                }
-                aria-label="Önceki fotoğraf"
-                className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#0F172A]/80 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A]"
-              >
-                <ArrowIcon direction="left" />
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setSelectedIndex((current) =>
-                    current === null ? null : (current + 1) % photos.length
-                  )
-                }
-                aria-label="Sonraki fotoğraf"
-                className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#0F172A]/80 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A]"
-              >
-                <ArrowIcon direction="right" />
-              </button>
-            </div>
+          {/* Image counter (top-center) */}
+          <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/90 backdrop-blur-sm">
+            {selectedIndex !== null ? selectedIndex + 1 : 1} / {photos.length}
+          </div>
 
-            {/* Modal Footer Info */}
-            <div className="flex flex-col justify-between gap-4 border-t border-white/10 bg-[#0F172A] px-5 py-4 sm:flex-row sm:items-center">
-              <div>
-                <p className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-sky-300">
-                  {selectedPhoto.district}
-                </p>
-                <h2 id="reference-lightbox-title" className="mt-0.5 text-lg font-extrabold text-white">
-                  {selectedPhoto.title}
-                </h2>
-                <p className="mt-0.5 text-xs text-slate-300">{selectedPhoto.system}</p>
-              </div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <Link
-                  href="/iletisim?form=kesif"
-                  className="rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#1D4ED8]"
-                >
-                  Bu Sistem İçin Keşif İste →
-                </Link>
-              </div>
-            </div>
+          {/* Prev button */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); goPrev(); }}
+            aria-label="Önceki fotoğraf"
+            className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A] sm:left-6"
+          >
+            <ArrowIcon direction="left" />
+          </button>
+
+          {/* Next button */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); goNext(); }}
+            aria-label="Sonraki fotoğraf"
+            className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white backdrop-blur-sm transition hover:bg-[#1E3A8A] sm:right-6"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+
+          {/* Main photo */}
+          <div onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={selectedPhoto.image}
+              alt={`${selectedPhoto.title} — Çelikpen referans uygulaması`}
+              width={1400}
+              height={980}
+              unoptimized={selectedPhoto.image.startsWith('data:')}
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="max-h-[85vh] max-w-5xl w-auto h-auto rounded-xl border-2 border-white/90 object-contain shadow-2xl"
+            />
           </div>
         </div>
       )}
