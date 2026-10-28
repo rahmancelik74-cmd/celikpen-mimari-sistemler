@@ -20,6 +20,86 @@ export interface ReferencePhotoItem {
  */
 export const REFERENCE_PHOTOS: ReferencePhotoItem[] = [
   {
+    id: 'ref-new-1',
+    image: '/images/references/cekmekoy-magaza-dograma-kepenk.jpg',
+    title: 'Çekmeköy Ticari Mağaza Vitrini Doğrama & Kepenk Sistemi',
+    district: 'Çekmeköy, İstanbul',
+    system: 'Aldoks/Termal Alüminyum Vitrin Doğrama, Temperli Güvenlik Camı ve Motorlu Kepenk',
+    category: 'PVC & Alüminyum Doğrama',
+  },
+  {
+    id: 'ref-new-2',
+    image: '/images/references/yesilkoy-bahce-kati-surme-cam-balkon.jpg',
+    title: 'Yeşilköy Bahçe Katı Antrasit Sürme Cam Balkon Uygulaması',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'RAL 7016 Antrasit Sabit Alt Küpeşteli, Füme Temperli Sürme Cam Balkon',
+    category: 'Sürme & Isıcamlı Cam Balkon',
+  },
+  {
+    id: 'ref-new-3',
+    image: '/images/references/yesilkoy-teras-kis-bahcesi-katlanir-cam.jpg',
+    title: 'Yeşilköy Teras Kış Bahçesi ve Katlanır Cam Balkon',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Cam Tavanlı Teras Kış Bahçesi, Isıcamlı Katlanır Sistem ve Vasistas Havalandırma',
+    category: 'Kış Bahçesi Sistemleri',
+  },
+  {
+    id: 'ref-new-4',
+    image: '/images/references/yesilkoy-bronz-aluminyum-giris-korkuluk.jpg',
+    title: 'Yeşilköy Apartman Girişi Bronz Alüminyum Korkuluk & Kapı',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Bronz Eloksal Paslanmaz Alüminyum Giriş Kapısı ve Merdiven Küpeşte Sistemi',
+    category: 'Alüminyum Küpeşte & Korkuluk',
+  },
+  {
+    id: 'ref-new-5',
+    image: '/images/references/yesilkoy-antrasit-bahce-duvar-korkuluk.jpg',
+    title: 'Yeşilköy Peyzaj Çevresi Antrasit Alüminyum Bahçe Korkuluğu',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Elektrostatik Fırın Boyalı Siyah/Antrasit Dış Mekan Bahçe Duvar Korkuluğu',
+    category: 'Alüminyum Küpeşte & Korkuluk',
+  },
+  {
+    id: 'ref-new-6',
+    image: '/images/references/yesilkoy-rezidans-cam-korkuluk-cephe.jpg',
+    title: 'Yeşilköy Modern Rezidans Cam Balkon Korkuluk & Cephe Doğrama',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Lamine Temperli Camlı Alüminyum Balkon Korkulukları ve Cephe Doğrama Sistemleri',
+    category: 'Alüminyum Küpeşte & Korkuluk',
+  },
+  {
+    id: 'ref-new-7',
+    image: '/images/references/bahcelievler-kocasinan-antrasit-pvc-dograma.jpg',
+    title: 'Bahçelievler Kocasinan Antrasit PVC & Cephe Doğrama Montajı',
+    district: 'Kocasinan, Bahçelievler / İstanbul',
+    system: 'Antrasit Gri Çok Odacıklı Isı Yalıtımlı PVC Doğrama ve Çift Açılım Pencere Sistemi',
+    category: 'PVC & Alüminyum Doğrama',
+  },
+  {
+    id: 'ref-new-8',
+    image: '/images/references/yesilkoy-villa-kis-bahcesi-surme-cam.jpg',
+    title: 'Yeşilköy Villa Bahçesi Dört Mevsim Kış Bahçesi Sistemi',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Yüksek Yalıtımlı Cam Tavan, Eşikli Sürme Cam ve Kilitli Kapı Kış Bahçesi',
+    category: 'Kış Bahçesi Sistemleri',
+  },
+  {
+    id: 'ref-new-9',
+    image: '/images/references/yesilkoy-park-apt-panjur-balkon-korkuluk.jpg',
+    title: 'Yeşilköy Park Apartmanı Motorlu Panjur & Balkon Korkulukları',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Poliüretan Dolgulu Antrasit Otomatik Panjur ve Özel Tasarım Alüminyum Balkon Korkuluğu',
+    category: 'Panjur & Kepenk Sistemleri',
+  },
+  {
+    id: 'ref-new-10',
+    image: '/images/references/yesilkoy-fume-veranda-cam-balkon-kapama.jpg',
+    title: 'Yeşilköy Bahçe Katı Füme Cam Balkon ve Veranda Kapama',
+    district: 'Yeşilköy, Bakırköy / İstanbul',
+    system: 'Antrasit Alüminyum Karkas, Füme Temperli Cam ve Sabit Alt Panelli Veranda Kapama',
+    category: 'Sürme & Isıcamlı Cam Balkon',
+  },
+  {
     id: 'ref-1',
     image: '/images/references/ref-1.jpg',
     title: 'Bahçelievler — Isıcamlı Cam Balkon',
@@ -171,17 +251,28 @@ function ZoomIcon() {
 
 export function ReferenceGallery({
   photos: customPhotos,
+  showFilters = false,
 }: {
   photos?: ReferencePhotoItem[];
+  showFilters?: boolean;
 }) {
   const { cms } = useCms();
-  const photos: ReferencePhotoItem[] =
+  const allPhotos: ReferencePhotoItem[] =
     customPhotos && customPhotos.length > 0
       ? customPhotos
       : cms.references && cms.references.length > 0
         ? cms.references
         : REFERENCE_PHOTOS;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const categories = showFilters
+    ? Array.from(new Set(allPhotos.map((p) => p.category)))
+    : [];
+
+  const photos = activeCategory
+    ? allPhotos.filter((p) => p.category === activeCategory)
+    : allPhotos;
 
   const selectedPhoto: ReferencePhotoItem | null =
     selectedIndex === null ? null : photos[selectedIndex] ?? null;
@@ -285,7 +376,43 @@ export function ReferenceGallery({
         </div>
       </section>
 
-      {/* ============================ 12-PHOTO REFERENCE GALLERY GRID ============================ */}
+      {/* ============================ CATEGORY FILTER TABS ============================ */}
+      {showFilters && categories.length > 1 && (
+        <div className="container-shell pt-8 sm:pt-10">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setActiveCategory(null)}
+              className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                activeCategory === null
+                  ? 'bg-[#1E3A8A] text-white shadow-md'
+                  : 'border border-slate-200 bg-white text-slate-600 hover:border-[#1E3A8A] hover:text-[#1E3A8A]'
+              }`}
+            >
+              Tümü ({allPhotos.length})
+            </button>
+            {categories.map((cat) => {
+              const count = allPhotos.filter((p) => p.category === cat).length;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                  className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                    activeCategory === cat
+                      ? 'bg-[#1E3A8A] text-white shadow-md'
+                      : 'border border-slate-200 bg-white text-slate-600 hover:border-[#1E3A8A] hover:text-[#1E3A8A]'
+                  }`}
+                >
+                  {cat} ({count})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ============================ REFERENCE GALLERY GRID ============================ */}
       <section className="container-shell pt-10 sm:pt-12" aria-label="Referans Fotoğraf Galerisi">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {photos.map((photo, index) => (
