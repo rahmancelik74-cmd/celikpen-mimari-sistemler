@@ -303,7 +303,7 @@ export const BLOG_SEO_EXTENSIONS: Record<string, BlogSeoExtension> = {
       },
       {
         label: 'PVC Pencere & Kapı Montaj Hizmetlerimiz',
-        href: '/hizmetlerimiz#pvc-pencere-kapi-sistemleri',
+        href: '/hizmetlerimiz/pvc-pencere-kapi',
         context: 'Eski doğrama sökümü ve anahtar teslim montaj süreci',
       },
       {
@@ -660,7 +660,7 @@ export const BLOG_SEO_EXTENSIONS: Record<string, BlogSeoExtension> = {
       },
       {
         label: 'Kış Bahçesi Hizmetlerimiz',
-        href: '/hizmetlerimiz#kis-bahcesi-sistemleri',
+        href: '/hizmetlerimiz/kis-bahcesi-sistemleri',
         context: 'Statik projelendirme, drenaj ve anahtar teslim uygulama',
       },
       {

@@ -173,6 +173,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const serviceSlugs = [
+    'katlanir-cam-balkon',
+    'isicamli-cam-balkon',
+    'surme-cam-balkon',
+    'giyotin-cam-sistemleri',
+    'kis-bahcesi-sistemleri',
+    'bioklimatik-pergola',
+    'pvc-pencere-kapi',
+    'panjur-kepenk-sineklik',
+  ];
+
+  const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
+    url: `${base}/hizmetlerimiz/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
   const productRoutes: MetadataRoute.Sitemap = SITE_CONFIG.productSeries.map((p) => ({
     url: `${base}/sistemler/${p.slug}`,
     lastModified: now,
@@ -189,6 +207,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...serviceRoutes,
     ...blogArticleRoutes,
     ...winsaCatalogRoutes,
     ...professionalSubRoutes,

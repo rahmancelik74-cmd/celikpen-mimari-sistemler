@@ -342,7 +342,7 @@ export default function HizmetlerimizPage() {
               className="group relative scroll-mt-32 overflow-hidden rounded-2xl shadow-[0_18px_40px_-30px_rgba(15,23,42,0.38)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(30,58,138,0.4)]"
             >
               <Link
-                href={service.productHref}
+                href={`/hizmetlerimiz/${service.id}`}
                 prefetch={true}
                 className="relative block h-[341px] w-full overflow-hidden sm:h-[374px]"
               >

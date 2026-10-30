@@ -8,14 +8,14 @@ import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
 
 const FOOTER_SERVICES = [
-  { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz#katlanir-cam-balkon' },
-  { label: 'Isıcamlı Cam Balkon Sistemleri', href: '/hizmetlerimiz#isicamli-cam-balkon' },
-  { label: 'Sürme Cam Balkon Sistemleri', href: '/hizmetlerimiz#surme-cam-balkon' },
-  { label: 'Motorlu Giyotin Cam Sistemleri', href: '/hizmetlerimiz#giyotin-cam-sistemleri' },
-  { label: 'Kış Bahçesi Sistemleri', href: '/hizmetlerimiz#kis-bahcesi-sistemleri' },
-  { label: 'Bioklimatik Pergola Sistemleri', href: '/hizmetlerimiz#bioklimatik-pergola' },
-  { label: 'PVC Pencere & Kapı Montajı', href: '/hizmetlerimiz#pvc-pencere-kapi' },
-  { label: 'Panjur, Kepenk & Kedi Sinekliği', href: '/hizmetlerimiz#panjur-kepenk-sineklik' },
+  { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz/katlanir-cam-balkon' },
+  { label: 'Isıcamlı Cam Balkon Sistemleri', href: '/hizmetlerimiz/isicamli-cam-balkon' },
+  { label: 'Sürme Cam Balkon Sistemleri', href: '/hizmetlerimiz/surme-cam-balkon' },
+  { label: 'Motorlu Giyotin Cam Sistemleri', href: '/hizmetlerimiz/giyotin-cam-sistemleri' },
+  { label: 'Kış Bahçesi Sistemleri', href: '/hizmetlerimiz/kis-bahcesi-sistemleri' },
+  { label: 'Bioklimatik Pergola Sistemleri', href: '/hizmetlerimiz/bioklimatik-pergola' },
+  { label: 'PVC Pencere & Kapı Montajı', href: '/hizmetlerimiz/pvc-pencere-kapi' },
+  { label: 'Panjur, Kepenk & Kedi Sinekliği', href: '/hizmetlerimiz/panjur-kepenk-sineklik' },
 ];
 
 const FOOTER_QUICK = [
