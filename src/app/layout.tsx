@@ -14,6 +14,7 @@ import { PageTransitionBar } from '../components/PageTransitionBar';
 import { InstantPrefetcher } from '../components/InstantPrefetcher';
 import { FloatingWhatsApp } from '../components/FloatingWhatsApp';
 import { CmsProvider } from '../components/CmsProvider';
+import { CookieConsentBanner } from '../components/CookieConsentBanner';
 import './globals.css';
 
 const poppins = Poppins({
@@ -85,6 +86,7 @@ export default function RootLayout({
 
           {/* Tüm rotalarda sabit kalan hızlı WhatsApp hattı */}
           <FloatingWhatsApp />
+          <CookieConsentBanner />
         </CmsProvider>
       </body>
     </html>

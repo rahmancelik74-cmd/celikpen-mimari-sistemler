@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { SITE_CONFIG } from '../config/site.config';
 import { WINSA_CONTENT_CONFIG } from '../config/winsa-content.config';
 
@@ -67,7 +68,9 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
     telefon?: string;
     mesaj?: string;
     security?: string;
+    kvkk?: string;
   }>({});
+  const [kvkkOk, setKvkkOk] = useState(false);
 
   useEffect(() => {
     mountedAtRef.current = Date.now();
@@ -107,7 +110,10 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
     const cleanedPhone = sanitizeInput(telefon).replace(/\s+/g, '');
     const cleanMesaj = sanitizeInput(mesaj);
 
-    const nextErrors: { ad?: string; telefon?: string; mesaj?: string } = {};
+    const nextErrors: { ad?: string; telefon?: string; mesaj?: string; kvkk?: string } = {};
+    if (!kvkkOk) {
+      nextErrors.kvkk = 'Devam etmek için KVKK Aydınlatma Metni onayı gereklidir.';
+    }
 
     if (cleanAd.length < 2) {
       nextErrors.ad = 'Lütfen adınızı girin.';
@@ -299,9 +305,33 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
           )}
         </div>
 
+        <div className="mt-3">
+          <label className="flex items-start gap-2 text-[11px] leading-relaxed text-slate-600">
+            <input
+              type="checkbox"
+              name="kvkk"
+              checked={kvkkOk}
+              onChange={(e) => setKvkkOk(e.target.checked)}
+              required
+              className="mt-0.5 h-4 w-4 shrink-0 accent-[#1E3A8A]"
+            />
+            <span>
+              6698 sayılı{' '}
+              <Link href="/kvkk" target="_blank" className="font-semibold text-[#1E3A8A] underline">
+                KVKK Aydınlatma Metni
+              </Link>
+              &apos;ni okudum ve kişisel verilerimin işlenmesini kabul ediyorum.
+            </span>
+          </label>
+          {errors.kvkk && (
+            <p role="alert" className="mt-1 text-[11px] font-semibold text-[#D91B24]">
+              {errors.kvkk}
+            </p>
+          )}
+        </div>
+
         <button
-          type="submit"
-          className="w-full rounded-lg bg-[#1E3A8A] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
+          type="submit"          className="w-full rounded-lg bg-[#1E3A8A] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-navy transition-colors hover:bg-[#1D4ED8]"
         >
           WhatsApp Üzerinden Gönder →
         </button>

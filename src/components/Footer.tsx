@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
+import { openCookiePreferences } from './CookieConsentBanner';
 
 const FOOTER_SERVICES = [
   { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz/katlanir-cam-balkon' },
@@ -30,6 +31,14 @@ const FOOTER_QUICK = [
   { label: 'Bahçelievler Cam Balkon & Pimapen', href: '/bahcelievler-cam-balkon' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
+];
+
+const FOOTER_LEGAL = [
+  { label: 'KVKK Aydınlatma Metni', href: '/kvkk' },
+  { label: 'Gizlilik Politikası', href: '/gizlilik-politikasi' },
+  { label: 'Çerez Politikası', href: '/cerez-politikasi' },
+  { label: 'Kullanım Koşulları', href: '/kullanim-kosullari' },
+  { label: 'Yasal Künye & Yer Sağlayıcı', href: '/kunye' },
 ];
 
 const FOOTER_SOCIAL = [
@@ -260,6 +269,16 @@ export function Footer() {
           <p className="text-center text-[9.5px] text-slate-500 sm:text-left">
             © {new Date().getFullYear()} Çelikpen Cam Balkon & Mimari Sistemler. Tüm hakları saklıdır.
           </p>
+          <nav aria-label="Yasal bağlantılar" className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
+            {FOOTER_LEGAL.map((l) => (
+              <Link key={l.href} href={l.href} className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]">
+                {l.label}
+              </Link>
+            ))}
+            <button type="button" onClick={openCookiePreferences} className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]">
+              Çerez Tercihleri
+            </button>
+          </nav>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-1.5 text-[9px] font-medium tracking-wide text-slate-500">
               <IconLock className="h-3 w-3 text-[#10B981]" />

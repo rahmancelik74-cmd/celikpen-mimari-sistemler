@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import Script from 'next/script';
 import { ANALYTICS_CONFIG } from '../config/analytics.config';
+import { COOKIE_CHANGE_EVENT, readCookieConsent } from './CookieConsentBanner';
 
 declare global {
   interface Window {
@@ -42,6 +43,15 @@ export function SeoAnalytics() {
     bingVerification,
     yandexVerification,
   } = ANALYTICS_CONFIG;
+
+  const [analyticsAllowed, setAnalyticsAllowed] = React.useState(false);
+
+  useEffect(() => {
+    setAnalyticsAllowed(Boolean(readCookieConsent()?.analytics));
+    const onChange = () => setAnalyticsAllowed(Boolean(readCookieConsent()?.analytics));
+    window.addEventListener(COOKIE_CHANGE_EVENT, onChange);
+    return () => window.removeEventListener(COOKIE_CHANGE_EVENT, onChange);
+  }, []);
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
@@ -96,7 +106,7 @@ export function SeoAnalytics() {
       {bingVerification ? <meta name="msvalidate.01" content={bingVerification} /> : null}
       {yandexVerification ? <meta name="yandex-verification" content={yandexVerification} /> : null}
 
-      {gaMeasurementId ? (
+      {analyticsAllowed && gaMeasurementId ? (
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
@@ -117,7 +127,7 @@ export function SeoAnalytics() {
         </>
       ) : null}
 
-      {gtmContainerId ? (
+      {analyticsAllowed && gtmContainerId ? (
         <Script id="gtm-init" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

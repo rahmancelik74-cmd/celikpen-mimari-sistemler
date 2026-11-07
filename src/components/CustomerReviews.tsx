@@ -1,6 +1,7 @@
 'use client';
 
 import React, { startTransition, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useCms } from './CmsProvider';
 
 /* ============================================================================
@@ -18,7 +19,7 @@ type Review = {
   submitted?: boolean;
 };
 
-type FormErrors = Partial<Record<'rating' | 'name' | 'system' | 'text', string>>;
+type FormErrors = Partial<Record<'rating' | 'name' | 'system' | 'text' | 'kvkk', string>>;
 
 const STORAGE_KEY = 'celikpen-customer-reviews-v1';
 
@@ -146,6 +147,7 @@ export function CustomerReviews() {
   const [system, setSystem] = useState('');
   const [text, setText] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
+  const [kvkkOk, setKvkkOk] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -222,6 +224,10 @@ export function CustomerReviews() {
     }
     if (cleanText.length < 10) {
       nextErrors.text = 'Yorumunuz en az 10 karakter olmalıdır.';
+    }
+
+    if (!kvkkOk) {
+      nextErrors.kvkk = 'Devam etmek için KVKK Aydınlatma Metni onayı gereklidir.';
     }
 
     setErrors(nextErrors);
@@ -504,9 +510,31 @@ export function CustomerReviews() {
                 )}
               </label>
 
+              <div>
+                <label className="flex items-start gap-2 text-[10.5px] leading-relaxed text-slate-600">
+                  <input
+                    type="checkbox"
+                    name="kvkk"
+                    checked={kvkkOk}
+                    onChange={(e) => setKvkkOk(e.target.checked)}
+                    required
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#1E3A8A]"
+                  />
+                  <span>
+                    6698 sayılı{' '}
+                    <Link href="/kvkk" target="_blank" className="font-semibold text-[#1E3A8A] underline">
+                      KVKK Aydınlatma Metni
+                    </Link>
+                    &apos;ni okudum ve kişisel verilerimin işlenmesini kabul ediyorum.
+                  </span>
+                </label>
+                {errors.kvkk && (
+                  <span className="mt-1 block text-[10px] text-red-600">{errors.kvkk}</span>
+                )}
+              </div>
+
               <button
-                type="submit"
-                className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-4 py-3 text-[12px] font-semibold text-white shadow-navy transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2"
+                type="submit"                className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-4 py-3 text-[12px] font-semibold text-white shadow-navy transition-all hover:-translate-y-0.5 hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2"
               >
                 <IconSend className="h-4 w-4" />
                 Yorumu Yayınla

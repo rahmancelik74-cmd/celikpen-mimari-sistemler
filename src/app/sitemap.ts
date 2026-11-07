@@ -137,6 +137,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  const legalRoutes: MetadataRoute.Sitemap = [
+    '/kvkk',
+    '/gizlilik-politikasi',
+    '/cerez-politikasi',
+    '/kullanim-kosullari',
+    '/kunye',
+  ].map((path) => ({
+    url: `\\`,
+    lastModified: now,
+    changeFrequency: 'yearly' as const,
+    priority: 0.4,
+  }));
+
   const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((post) => [
     {
       url: `${base}/blog/${post.slug}`,
@@ -207,6 +220,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...legalRoutes,
     ...serviceRoutes,
     ...blogArticleRoutes,
     ...winsaCatalogRoutes,
