@@ -13,6 +13,9 @@ export const ANALYTICS_CONFIG = {
     process.env.NEXT_PUBLIC_GOOGLE_SITE_verification ||
     '',
   gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
+  googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || 'AW-18541324717',
+  googleAdsConversionLabel:
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || 'ZIyMCLGJ0rMdEK3TmIlF',
   gtmContainerId: process.env.NEXT_PUBLIC_GTM_ID || '',
   bingVerification: process.env.NEXT_PUBLIC_BING_VERIFICATION || '',
   yandexVerification: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',

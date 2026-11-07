@@ -12,6 +12,8 @@ declare global {
   }
 }
 
+const ADS_CONVERSION_EVENTS = ['whatsapp_click', 'phone_call_click'];
+
 export function pushSeoEvent(eventName: string, payload: Record<string, unknown> = {}) {
   if (typeof window === 'undefined') return;
   window.dataLayer = window.dataLayer || [];
@@ -21,6 +23,18 @@ export function pushSeoEvent(eventName: string, payload: Record<string, unknown>
     timestamp: new Date().toISOString(),
     ...payload,
   });
+
+  if (
+    ADS_CONVERSION_EVENTS.includes(eventName) &&
+    ANALYTICS_CONFIG.googleAdsId &&
+    ANALYTICS_CONFIG.googleAdsConversionLabel &&
+    readCookieConsent()?.marketing &&
+    typeof window.gtag === 'function'
+  ) {
+    window.gtag('event', 'conversion', {
+      send_to: `${ANALYTICS_CONFIG.googleAdsId}/${ANALYTICS_CONFIG.googleAdsConversionLabel}`,
+    });
+  }
 
   if (typeof window.gtag === 'function') {
     window.gtag('event', eventName, {
@@ -40,15 +54,22 @@ export function SeoAnalytics() {
     googleSiteVerification,
     gaMeasurementId,
     gtmContainerId,
+    googleAdsId,
     bingVerification,
     yandexVerification,
   } = ANALYTICS_CONFIG;
 
   const [analyticsAllowed, setAnalyticsAllowed] = React.useState(false);
+  const [marketingAllowed, setMarketingAllowed] = React.useState(false);
 
   useEffect(() => {
-    setAnalyticsAllowed(Boolean(readCookieConsent()?.analytics));
-    const onChange = () => setAnalyticsAllowed(Boolean(readCookieConsent()?.analytics));
+    const sync = () => {
+      const c = readCookieConsent();
+      setAnalyticsAllowed(Boolean(c?.analytics));
+      setMarketingAllowed(Boolean(c?.marketing));
+    };
+    sync();
+    const onChange = sync;
     window.addEventListener(COOKIE_CHANGE_EVENT, onChange);
     return () => window.removeEventListener(COOKIE_CHANGE_EVENT, onChange);
   }, []);
@@ -123,6 +144,21 @@ export function SeoAnalytics() {
                 anonymize_ip: true
               });
             `}
+          </Script>
+        </>
+      ) : null}
+
+      {marketingAllowed && googleAdsId ? (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+            strategy="afterInteractive"
+          />
+          <Script id="gads-init" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+              window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+              gtag('js', new Date());
+              gtag('config', '${googleAdsId}');`}
           </Script>
         </>
       ) : null}
