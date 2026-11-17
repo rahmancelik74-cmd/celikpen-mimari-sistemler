@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { TESTIMONIALS } from '../../../config/testimonials.config';
 import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../lib/cms';
 import { readCmsFromBlob } from '../../../lib/blob-storage';
 import {
@@ -28,18 +27,14 @@ export interface GoogleReviewItem {
   authorName: string;
   profilePhotoUrl?: string;
   relativeTime?: string;
-  location: string;
-  system: string;
   rating: number;
   text: string;
   date: string;
-  verifiedLabel: string;
-  districtHref: string;
 }
 
 export interface GoogleReviewsApiResponse {
   ok: boolean;
-  mode: 'live_google_places_api' | 'demo_verified_preview';
+  mode: 'live_google_places_api' | 'awaiting_google_api';
   statusBadge: string;
   statusMessage: string;
   hasConfiguredKey: boolean;
@@ -99,22 +94,8 @@ async function readCmsSettings(): Promise<CmsStoreData['siteSettings']> {
 }
 
 function maskApiKey(key: string): string {
-  if (!key || key.length < 10) return 'Tanımlı Değil (Demo Modu)';
+  if (!key || key.length < 10) return 'Tanımlı Değil';
   return `${key.slice(0, 6)}••••••••••••••••••••${key.slice(-4)}`;
-}
-
-function buildFallbackReviews(): GoogleReviewItem[] {
-  return TESTIMONIALS.map((t, index) => ({
-    id: `google-verified-${index + 1}`,
-    authorName: t.name,
-    location: t.neighborhoodSlug,
-    system: t.systemCode,
-    rating: t.rating,
-    text: t.comment,
-    date: t.date,
-    verifiedLabel: t.verifiedLabel,
-    districtHref: t.districtHref,
-  }));
 }
 
 function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
@@ -125,24 +106,19 @@ function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
   };
 }
 
-function mapV1Reviews(
-  reviews: PlacesV1Review[] | undefined,
-  fallback: GoogleReviewItem[]
-): GoogleReviewItem[] {
-  if (!Array.isArray(reviews) || reviews.length === 0) return fallback;
-  return reviews.map((r, idx) => ({
-    id: `live-google-${idx + 1}`,
-    authorName: r.authorAttribution?.displayName || 'Google Doğrulanmış Müşteri',
-    profilePhotoUrl: r.authorAttribution?.photoUri,
-    relativeTime: r.relativePublishTimeDescription,
-    location: 'Bahçelievler / İstanbul',
-    system: 'Google Haritalar Müşteri Değerlendirmesi',
-    rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
-    text: r.text?.text || r.originalText?.text || '',
-    date: r.publishTime ? r.publishTime.slice(0, 10) : new Date().toISOString().slice(0, 10),
-    verifiedLabel: 'Google Onaylı Yorum (Doğrulanmış Müşteri)',
-    districtHref: '/hizmetlerimiz/isicamli-cam-balkon',
-  }));
+function mapV1Reviews(reviews: PlacesV1Review[] | undefined): GoogleReviewItem[] {
+  if (!Array.isArray(reviews) || reviews.length === 0) return [];
+  return reviews
+    .filter((r) => Boolean(r.text?.text || r.originalText?.text || r.authorAttribution?.displayName))
+    .map((r, idx) => ({
+      id: `live-google-${idx + 1}`,
+      authorName: r.authorAttribution?.displayName || 'Google Kullanıcısı',
+      profilePhotoUrl: r.authorAttribution?.photoUri,
+      relativeTime: r.relativePublishTimeDescription,
+      rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
+      text: (r.text?.text || r.originalText?.text || '').trim(),
+      date: r.publishTime ? r.publishTime.slice(0, 10) : new Date().toISOString().slice(0, 10),
+    }));
 }
 
 async function queryPlacesV1Search(
@@ -224,8 +200,6 @@ async function resolveGoogleReviews(
     ''
   ).trim();
 
-  const fallbackReviews = buildFallbackReviews();
-  const isValidPlaceId = isValidGooglePlaceId;
   const defaultAddress =
     'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul';
   let apiDiagnostic = '';
@@ -234,7 +208,7 @@ async function resolveGoogleReviews(
     try {
       /* 1. Places API (New) — Doğrudan Place ID veya 41.0225161, 28.8353366 locationBias araması */
       let v1Place: PlacesV1Place | undefined;
-      if (isValidPlaceId(rawPlaceId)) {
+      if (isValidGooglePlaceId(rawPlaceId)) {
         const detailAttempt = await queryPlacesV1Details(rawApiKey, rawPlaceId);
         v1Place = detailAttempt.place;
         if (detailAttempt.error) apiDiagnostic = `Places v1 Details: ${detailAttempt.error}`;
@@ -255,8 +229,9 @@ async function resolveGoogleReviews(
 
       if (v1Place?.id) {
         const resolvedId = v1Place.id;
-        const totalReviews = v1Place.userRatingCount || fallbackReviews.length;
-        const liveReviews = mapV1Reviews(v1Place.reviews, fallbackReviews);
+        const liveReviews = mapV1Reviews(v1Place.reviews);
+        const totalReviews = v1Place.userRatingCount ?? liveReviews.length;
+        const rating = typeof v1Place.rating === 'number' ? v1Place.rating : 0;
         const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
           resolvedId,
           v1Place.googleMapsUri
@@ -266,7 +241,7 @@ async function resolveGoogleReviews(
           ok: true,
           mode: 'live_google_places_api',
           statusBadge: 'Google Places API Bağlı',
-          statusMessage: `Google Places API bağlantısı aktif. Place ID (${resolvedId}) üzerinden ${totalReviews} değerlendirme ve ${liveReviews.length} yorum başarıyla senkronize edildi.`,
+          statusMessage: `Google Places API bağlantısı aktif. Place ID (${resolvedId}) üzerinden ${totalReviews} değerlendirme ve ${liveReviews.length} gerçek yorum çekildi.`,
           hasConfiguredKey: true,
           maskedKey: maskApiKey(rawApiKey),
           placeId: resolvedId,
@@ -274,7 +249,7 @@ async function resolveGoogleReviews(
           businessName: v1Place.displayName?.text || EXACT_BUSINESS_NAME,
           businessAddress: v1Place.formattedAddress || defaultAddress,
           coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
-          rating: v1Place.rating || 4.9,
+          rating,
           totalReviews,
           userRatingsTotal: totalReviews,
           googleMapsUrl,
@@ -288,7 +263,7 @@ async function resolveGoogleReviews(
 
       /* 2. Legacy Places API (nearbysearch + details) Fallback */
       let targetPlaceId = rawPlaceId;
-      if (!isValidPlaceId(targetPlaceId)) {
+      if (!isValidGooglePlaceId(targetPlaceId)) {
         const nearbyUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${EXACT_LAT},${EXACT_LNG}&radius=80&keyword=${encodeURIComponent(
           'Pimapen Cam Balkon'
         )}&language=tr&key=${encodeURIComponent(rawApiKey)}`;
@@ -310,7 +285,7 @@ async function resolveGoogleReviews(
         }
       }
 
-      if (isValidPlaceId(targetPlaceId)) {
+      if (isValidGooglePlaceId(targetPlaceId)) {
         const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(
           targetPlaceId
         )}&fields=place_id,name,rating,user_ratings_total,reviews,url,formatted_address&language=tr&key=${encodeURIComponent(
@@ -343,25 +318,23 @@ async function resolveGoogleReviews(
           if (detailsJson.status === 'OK' && detailsJson.result) {
             const resData = detailsJson.result;
             const finalPlaceId = resData.place_id || targetPlaceId;
-            const totalReviews = resData.user_ratings_total || 128;
-            const liveReviews: GoogleReviewItem[] =
-              Array.isArray(resData.reviews) && resData.reviews.length > 0
-                ? resData.reviews.map((r, idx) => ({
+            const liveReviews: GoogleReviewItem[] = Array.isArray(resData.reviews)
+              ? resData.reviews
+                  .filter((r) => Boolean(r.text || r.author_name))
+                  .map((r, idx) => ({
                     id: `live-google-${idx + 1}`,
-                    authorName: r.author_name || 'Google Doğrulanmış Müşteri',
+                    authorName: r.author_name || 'Google Kullanıcısı',
                     profilePhotoUrl: r.profile_photo_url,
                     relativeTime: r.relative_time_description,
-                    location: 'Bahçelievler / İstanbul',
-                    system: 'Google Haritalar Müşteri Değerlendirmesi',
-                    rating: r.rating || 5,
-                    text: r.text || '',
+                    rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
+                    text: (r.text || '').trim(),
                     date: r.time
                       ? new Date(r.time * 1000).toISOString().slice(0, 10)
                       : new Date().toISOString().slice(0, 10),
-                    verifiedLabel: 'Google Onaylı Yorum (Doğrulanmış Müşteri)',
-                    districtHref: '/hizmetlerimiz/isicamli-cam-balkon',
                   }))
-                : fallbackReviews;
+              : [];
+            const totalReviews = resData.user_ratings_total ?? liveReviews.length;
+            const rating = typeof resData.rating === 'number' ? resData.rating : 0;
 
             const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
               finalPlaceId,
@@ -372,7 +345,7 @@ async function resolveGoogleReviews(
               ok: true,
               mode: 'live_google_places_api',
               statusBadge: 'Google Places API Bağlı',
-              statusMessage: `Google Places API bağlantısı aktif. Place ID (${finalPlaceId}) üzerinden ${liveReviews.length} doğrulanmış yorum başarıyla çekildi.`,
+              statusMessage: `Google Places API bağlantısı aktif. Place ID (${finalPlaceId}) üzerinden ${liveReviews.length} gerçek yorum çekildi.`,
               hasConfiguredKey: true,
               maskedKey: maskApiKey(rawApiKey),
               placeId: finalPlaceId,
@@ -380,7 +353,7 @@ async function resolveGoogleReviews(
               businessName: resData.name || EXACT_BUSINESS_NAME,
               businessAddress: resData.formatted_address || defaultAddress,
               coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
-              rating: resData.rating || 4.9,
+              rating,
               totalReviews,
               userRatingsTotal: totalReviews,
               googleMapsUrl,
@@ -400,36 +373,36 @@ async function resolveGoogleReviews(
     }
   }
 
-  /* 3. Graceful Fallback (Doğrudan Gerçek Google İşletme Profili URL + Koordinat Kilitli Önizleme) */
+  /* 3. Sahte/Örnek Yorum Yok — Yalnızca Google API Yetkisi Beklenirken Boş Liste Döner */
   const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(rawPlaceId);
 
   return {
     ok: true,
-    mode: 'demo_verified_preview',
+    mode: 'awaiting_google_api',
     statusBadge: rawApiKey
-      ? 'Google İşletme Konumu Kilitli (Places API (New) Yetkisi Bekleniyor)'
-      : 'Demo Modu Aktif (API Anahtarı Tanımlı Değil)',
+      ? 'Google Places API Yetkisi Bekleniyor'
+      : 'Google Places API Anahtarı Tanımlı Değil',
     statusMessage: rawApiKey
-      ? `API anahtarı (.env.local) okundu ancak Google Cloud projenizde "Places API (New)" (places.googleapis.com) yetkisi kısıtlı (${apiDiagnostic || 'API_KEY_SERVICE_BLOCKED'}). Konum (41.0225161, 28.8353366) ve gerçek Google İşletme Profili bağlantıları aktif, doğrulanmış yorumlar gösterilmektedir.`
-      : 'Doğrulanmış saha projesi önizleme yorumları ve gerçek işletme konumu aktif.',
+      ? `API anahtarı (.env.local) tanımlı ancak Google Cloud projenizden canlı yorum çekimi henüz açılmamış (${apiDiagnostic || 'PERMISSION_DENIED'}). Sahte yorum gösterilmemektedir.`
+      : 'Google Places API anahtarı tanımlandığında gerçek işletme yorumları burada otomatik listelenir.',
     hasConfiguredKey: Boolean(rawApiKey),
     maskedKey: maskApiKey(rawApiKey),
-    placeId: isValidPlaceId(rawPlaceId) ? rawPlaceId : '',
-    resolvedPlaceId: isValidPlaceId(rawPlaceId)
+    placeId: isValidGooglePlaceId(rawPlaceId) ? rawPlaceId : '',
+    resolvedPlaceId: isValidGooglePlaceId(rawPlaceId)
       ? rawPlaceId
-      : 'Henüz çözümlenemedi (Places API (New) anahtar kısıtı açıldığında ChIJ Place ID otomatik alınır)',
+      : 'Places API yetkisi açıldığında ChIJ Place ID otomatik çözümlenir',
     businessName: EXACT_BUSINESS_NAME,
     businessAddress: defaultAddress,
     coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
-    rating: 4.9,
-    totalReviews: 128,
-    userRatingsTotal: 128,
+    rating: 0,
+    totalReviews: 0,
+    userRatingsTotal: 0,
     googleMapsUrl,
     mapsUrl: googleMapsUrl,
     writeReviewUrl,
     embedMapUrl,
     apiDiagnostic: apiDiagnostic || undefined,
-    reviews: fallbackReviews,
+    reviews: [],
     fetchedAt: new Date().toISOString(),
   };
 }

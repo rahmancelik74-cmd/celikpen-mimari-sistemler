@@ -48,8 +48,9 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
     ? liveData.writeReviewUrl || getExactWriteReviewUrl(liveData.placeId)
     : liveData?.writeReviewUrl || EXACT_WRITE_REVIEW_URL;
   const embedMapUrl = liveData?.embedMapUrl || EXACT_EMBED_MAP_URL;
-  const displayRating = liveData?.rating ?? SEO_BUSINESS.aggregateRating.ratingValue;
-  const displayReviewCount = liveData?.totalReviews ?? SEO_BUSINESS.aggregateRating.reviewCount;
+  const displayRating = liveData?.rating && liveData.rating > 0 ? liveData.rating : null;
+  const displayReviewCount =
+    liveData?.totalReviews && liveData.totalReviews > 0 ? liveData.totalReviews : null;
 
   return (
     <section
@@ -73,10 +74,12 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
           </div>
 
           <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2">
-            <span className="text-lg font-black text-amber-400">★ {displayRating}</span>
+            <span className="text-lg font-black text-amber-400">
+              {displayRating ? `★ ${displayRating.toFixed(1)}` : '★ Google'}
+            </span>
             <div className="text-[10.5px] leading-tight text-slate-300">
               <strong className="block font-bold text-white">
-                {displayReviewCount}+ Doğrulanmış Müşteri
+                {displayReviewCount ? `${displayReviewCount} Google Yorumu` : 'Doğrulanmış İşletme'}
               </strong>
               <span>Bahçelievler / İstanbul</span>
             </div>
