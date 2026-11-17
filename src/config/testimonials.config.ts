@@ -16,7 +16,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Bakırköy Florya Sahil Konutu Projesi',
     neighborhoodSlug: 'Bakırköy / Florya',
-    districtHref: '/bolgeler/bakirkoy-cam-balkon',
+    districtHref: '/hizmetlerimiz/isicamli-cam-balkon',
     systemCode: 'Winsa Vera Termal 4+20+4 Isıcamlı Cam Balkon',
     rating: 5,
     comment:
@@ -27,7 +27,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Beşiktaş Etiler Teras Dubleks Projesi',
     neighborhoodSlug: 'Beşiktaş / Etiler',
-    districtHref: '/bolgeler/besiktas-cam-balkon',
+    districtHref: '/hizmetlerimiz/giyotin-cam-sistemleri',
     systemCode: 'Winsa Vera Vertical Somfy Motorlu Giyotin Cam',
     rating: 5,
     comment:
@@ -38,7 +38,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Sarıyer Zekeriyaköy Müstakil Villa Projesi',
     neighborhoodSlug: 'Sarıyer / Zekeriyaköy',
-    districtHref: '/bolgeler/sariyer-cam-balkon',
+    districtHref: '/hizmetlerimiz/kis-bahcesi-sistemleri',
     systemCode: 'Bioklimatik Pergola & Lamine Isıcam Kış Bahçesi',
     rating: 5,
     comment:
@@ -49,7 +49,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Başakşehir Bahçeşehir Gölet Konut Projesi',
     neighborhoodSlug: 'Başakşehir / Bahçeşehir',
-    districtHref: '/bolgeler/basaksehir-cam-balkon',
+    districtHref: '/hizmetlerimiz/pvc-pencere-kapi',
     systemCode: 'Winsa Revotech Gold 84 mm PVC & Isıcamlı Balkon',
     rating: 5,
     comment:
@@ -60,7 +60,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Bahçelievler Kocasinan Merkez Aile Apartmanı',
     neighborhoodSlug: 'Bahçelievler / Kocasinan Merkez',
-    districtHref: '/bolgeler/bahcelievler-cam-balkon',
+    districtHref: '/bahcelievler/kocasinan',
     systemCode: 'Winsa Vera Termal & %15 Toplu Bina İndirimi',
     rating: 5,
     comment:
@@ -71,7 +71,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Beylikdüzü Yakuplu Marina Rezidans Projesi',
     neighborhoodSlug: 'Beylikdüzü / Yakuplu Marina',
-    districtHref: '/bolgeler/beylikduzu-cam-balkon',
+    districtHref: '/hizmetlerimiz/surme-cam-balkon',
     systemCode: 'Albert Genau Tiara Twinmax & Eşiksiz Sürme',
     rating: 5,
     comment:

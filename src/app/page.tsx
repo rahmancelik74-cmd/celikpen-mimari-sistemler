@@ -169,7 +169,6 @@ const BLOG_POSTS = [
 
 const ADDITIONAL_LINKS = [
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
-  { label: 'Avrupa Yakası Hizmet Bölgeleri', href: '/bolgeler' },
   { label: 'Proje Galerisi', href: '/profesyoneller/referanslar' },
   { label: 'Google Onaylı Yorumlar', href: '/yorumlar' },
   { label: 'Karşılaştır', href: '/karsilastir' },

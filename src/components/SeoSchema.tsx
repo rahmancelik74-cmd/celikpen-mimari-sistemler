@@ -1,7 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../config/site.config';
 import { CELIKPEN_PRICING_CONFIG } from '../config/pricing.config';
-import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 
 export function SeoSchema() {
   const prices = Object.values(CELIKPEN_PRICING_CONFIG.systems).map(
@@ -33,16 +32,10 @@ export function SeoSchema() {
           latitude: SITE_CONFIG.coordinates.latitude,
           longitude: SITE_CONFIG.coordinates.longitude,
         },
-        areaServed: [
-          ...EUROPEAN_SIDE_DISTRICTS.map((d) => ({
-            '@type': 'AdministrativeArea',
-            name: `${d.name} (${d.subDistricts}), İstanbul`,
-          })),
-          ...SITE_CONFIG.neighborhoods.map((n) => ({
-            '@type': 'Place',
-            name: `${n.name}, Bahçelievler, İstanbul`,
-          })),
-        ],
+        areaServed: SITE_CONFIG.neighborhoods.map((n) => ({
+          '@type': 'Place',
+          name: `${n.name}, Bahçelievler, İstanbul`,
+        })),
       },
       {
         '@type': 'Product',

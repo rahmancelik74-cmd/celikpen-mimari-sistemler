@@ -568,12 +568,12 @@ function LiveVisitorAnalyticsBanner({
   stats: VisitorAnalyticsData | null;
   onRefresh: () => void;
 }) {
-  const totalUnique = stats?.totalUniqueVisitors ?? 18420;
-  const todayUnique = stats?.todayUniqueVisitors ?? 148;
-  const totalViews = stats?.totalPageviews ?? 54280;
-  const todayViews = stats?.todayPageviews ?? 412;
-  const last7Days = stats?.last7DaysVisitors ?? 1190;
-  const last30Days = stats?.last30DaysVisitors ?? 4860;
+  const totalUnique = stats?.totalUniqueVisitors ?? 0;
+  const todayUnique = stats?.todayUniqueVisitors ?? 0;
+  const totalViews = stats?.totalPageviews ?? 0;
+  const todayViews = stats?.todayPageviews ?? 0;
+  const last7Days = stats?.last7DaysVisitors ?? 0;
+  const last30Days = stats?.last30DaysVisitors ?? 0;
   const topPages = stats?.topPages ?? [];
 
   return (
@@ -589,10 +589,10 @@ function LiveVisitorAnalyticsBanner({
           </span>
           <div>
             <h2 id="canli-ziyaretci-baslik" className="text-sm font-black uppercase tracking-wider text-white sm:text-base">
-              Canlı Ziyaretçi &amp; Trafik İstatistikleri
+              Canlı Ziyaretçi &amp; Trafik İstatistikleri (%100 Gerçek Sayaç)
             </h2>
             <p className="text-[11px] text-slate-400">
-              Sıfır gecikmeli (`/api/analytics`) gerçek zamanlı oturum ve Avrupa Yakası sayfa telemetrisi
+              Sahte/başlangıç verisi olmadan yalnızca gerçek ziyaretçi oturumlarını ve sayfa görüntülemelerini sayar
             </p>
           </div>
         </div>
@@ -646,26 +646,30 @@ function LiveVisitorAnalyticsBanner({
 
         <div className="rounded-xl border border-white/10 bg-slate-900/90 p-4">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-violet-300">
-            En Çok Ziyaret Edilen Sayfalar &amp; Bölgeler
+            En Çok Ziyaret Edilen Sayfalar
           </div>
           <div className="mt-1.5 space-y-1 text-[11px]">
-            {topPages.slice(0, 3).map((page) => (
-              <div key={page.path} className="flex items-center justify-between gap-2 truncate">
-                <span className="truncate font-semibold text-slate-200">{page.path}</span>
-                <span className="shrink-0 font-mono font-bold text-sky-300">
-                  {page.views.toLocaleString('tr-TR')}
-                </span>
-              </div>
-            ))}
+            {topPages.length === 0 ? (
+              <span className="text-slate-500">Henüz sayfa ziyareti kaydedilmedi</span>
+            ) : (
+              topPages.slice(0, 3).map((page) => (
+                <div key={page.path} className="flex items-center justify-between gap-2 truncate">
+                  <span className="truncate font-semibold text-slate-200">{page.path}</span>
+                  <span className="shrink-0 font-mono font-bold text-sky-300">
+                    {page.views.toLocaleString('tr-TR')}
+                  </span>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
 
-      {/* Popüler Bölgeler & Sayfalar Detay Şeridi */}
+      {/* Popüler Sayfalar Detay Şeridi */}
       {topPages.length > 0 && (
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-3">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
-            Popüler Avrupa Yakası Bölgeleri &amp; Sayfalar:
+            Ziyaret Edilen Sayfalar:
           </span>
           {topPages.slice(0, 6).map((p) => (
             <span

@@ -13,7 +13,6 @@ const REVALIDATE_TARGETS = [
   '/blog',
   '/profesyoneller/blog',
   '/hizmetlerimiz',
-  '/bolgeler',
   '/kurumsal',
   '/iletisim',
   '/fiyat-hesapla',

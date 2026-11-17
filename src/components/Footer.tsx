@@ -4,7 +4,6 @@ import React, { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
-import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
 import { openCookiePreferences } from './CookieConsentBanner';
@@ -26,10 +25,10 @@ const FOOTER_QUICK = [
   { label: 'Ürünlerimiz (Tümü)', href: '/urunler' },
   { label: 'Winsa Sistemleri', href: '/urunler/winsa' },
   { label: 'Albert Genau Sistemleri', href: '/urunler/albert-genau' },
-  { label: 'Avrupa Yakası Hizmet Bölgeleri', href: '/bolgeler' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
-  { label: 'Blog & Mimari Rehberler', href: '/blog' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Bahçelievler Cam Balkon & Pimapen', href: '/bahcelievler-cam-balkon' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
 ];
@@ -88,17 +87,16 @@ export function Footer() {
   return (
     <footer className="bg-[#0F172A] text-slate-300">
       <div className="container-shell pt-12 sm:pt-14">
-        <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-7">
+        <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Marka */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <Link href="/" prefetch={true} aria-label="Çelikpen anasayfa" className="inline-block">
               <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
               1996’dan bugüne 30 yıllık üretim gücüyle Bahçelievler Kocasinan Merkez fabrikamızdan
-              tüm İstanbul Avrupa Yakası’nda (Bakırköy Florya, Beşiktaş Etiler, Sarıyer Zekeriyaköy,
-              Başakşehir Bahçeşehir, Beylikdüzü, Büyükçekmece, Şişli ve çevresi) cam balkon, kış bahçesi,
-              giyotin, bioklimatik pergola ve Winsa PVC doğrama çözümleri sunuyoruz.
+              İstanbul Avrupa Yakası genelinde cam balkon, kış bahçesi, giyotin, sürme cam, Winsa
+              PVC doğrama ve mimari alüminyum çözümleri sunuyoruz.
             </p>
             <button
               type="button"
@@ -127,13 +125,13 @@ export function Footer() {
             <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
               <span className="flex h-2 w-2 rounded-full bg-[#10B981]" aria-hidden="true" />
               <span className="text-[9.5px] font-medium tracking-wide text-slate-300">
-                Avrupa Yakası geneli ücretsiz lazerli keşif
+                Keşif ve fiyat teklifi ücretsiz
               </span>
             </div>
           </div>
 
           {/* Hizmetler */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
               Hizmetlerimiz
             </h2>
@@ -153,46 +151,33 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Avrupa Yakası Hizmet İlçelerimiz */}
-          <div className="lg:col-span-4">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-                Avrupa Yakası Hizmet İlçelerimiz
-              </h2>
-              <Link
-                href="/bolgeler"
-                className="text-[10px] font-semibold text-[#38BDF8] hover:underline"
-              >
-                Tüm İlçeler →
-              </Link>
-            </div>
-            <ul className="mt-4 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
-              {EUROPEAN_SIDE_DISTRICTS.map((district) => (
-                <li key={district.slug}>
+          {/* Hızlı Menü */}
+          <div className="lg:col-span-2">
+            <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
+              Hızlı Menü
+            </h2>
+            <ul className="mt-4 space-y-2.5">
+              {FOOTER_QUICK.map((item) => (
+                <li key={item.label}>
                   <Link
-                    href={`/bolgeler/${district.slug}`}
+                    href={item.href}
                     prefetch={true}
-                    className="group inline-flex items-start gap-1.5 text-[11px] leading-snug text-slate-400 transition-colors hover:text-[#BFDBFE]"
+                    className="group inline-flex items-center gap-1.5 text-[11.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
                   >
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#38BDF8]" />
-                    <span>
-                      <strong className="font-semibold text-slate-200 group-hover:text-white">
-                        {district.name}
-                      </strong>{' '}
-                      <span className="text-[10px] text-slate-400">({district.subDistricts})</span>
-                    </span>
+                    <span className="h-px w-0 bg-[#1E3A8A] transition-all duration-300 group-hover:w-2.5" />
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Hızlı Menü & İletişim */}
+          {/* İletişim */}
           <div className="lg:col-span-3">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-              Merkez Fabrika &amp; İletişim
+              İletişim &amp; Konum
             </h2>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-4 space-y-3.5">
               <li>
                 <a
                   href={`tel:${settings.phoneRaw || SITE_CONFIG.phoneRaw}`}
@@ -235,7 +220,7 @@ export function Footer() {
                 </span>
                 <span>
                   <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
-                    Merkez Showroom &amp; Fabrika
+                    Showroom
                   </span>
                   <span className="mt-0.5 block">{settings.address || SITE_CONFIG.address}</span>
                 </span>
@@ -254,40 +239,31 @@ export function Footer() {
                 </span>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Link
-                href="/iletisim?form=kesif"
-                prefetch={true}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-3.5 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-              >
-                Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <Link
-                href="/fiyat-hesapla"
-                prefetch={true}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 text-[11px] font-semibold text-slate-200 transition-colors hover:bg-white/10"
-              >
-                m² Fiyat Hesapla
-              </Link>
-            </div>
+            <Link
+              href="/iletisim?form=kesif"
+              prefetch={true}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+            >
+              Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </div>
 
-        {/* Hızlı Erişim Bandı */}
-        <div className="border-t border-white/10 py-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-              Kurumsal &amp; Hızlı Erişim:
-            </span>
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-              {FOOTER_QUICK.map((item) => (
+        {/* Hizmet bölgeleri */}
+        <div className="border-t border-white/10 py-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+              Bahçelievler Hizmet Mahallelerimiz
+            </p>
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+              {SITE_CONFIG.neighborhoods.map((neighborhood) => (
                 <Link
-                  key={item.href}
-                  href={item.href}
+                  key={neighborhood.slug}
+                  href={`/bahcelievler/${neighborhood.slug}`}
                   prefetch={true}
-                  className="text-[10.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
+                  className="text-[10px] text-slate-500 transition-colors hover:text-[#BFDBFE]"
                 >
-                  {item.label}
+                  {neighborhood.name}
                 </Link>
               ))}
             </div>

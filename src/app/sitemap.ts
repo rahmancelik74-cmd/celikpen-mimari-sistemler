@@ -4,7 +4,6 @@ import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
 import { BLOG_POSTS } from '../data/blogPosts';
-import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 
 /**
  * Tüm kamuya açık rotaları tek kaynaktan üretir.
@@ -26,12 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${base}/bolgeler`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.95,
     },
     {
       url: `${base}/urunler`,
@@ -156,13 +149,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  const europeanDistrictRoutes: MetadataRoute.Sitemap = EUROPEAN_SIDE_DISTRICTS.map((district) => ({
-    url: `${base}/bolgeler/${district.slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.92,
-  }));
-
   const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((post) => [
     {
       url: `${base}/blog/${post.slug}`,
@@ -234,7 +220,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...legalRoutes,
-    ...europeanDistrictRoutes,
     ...serviceRoutes,
     ...blogArticleRoutes,
     ...winsaCatalogRoutes,

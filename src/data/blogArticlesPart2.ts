@@ -60,7 +60,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
       'TSE EN 12150 ısıl temperleme ile normal cama göre 5 kat yüksek darbe direnci',
       'Fırtınada kanat açılmasını önleyen çelik pimli çocuk ve rüzgâr emniyet kilidi',
     ],
-    relatedProductHref: '/bolgeler/basaksehir-cam-balkon',
+    relatedProductHref: '/hizmetlerimiz/katlanir-cam-balkon',
     numberedChecklistTitle: 'Yüksek Katlı Rezidans ve Sitelerde 5 Maddelik Güvenlik Protokolü',
     numberedChecklist: [
       '6. kat ve üzerindeki dairelerde 8 mm tek cam yerine mutlaka 10 mm temperli (Vera Pro 10) veya 4+20+4 mm çift yüzü temperli ısıcam (Vera Termal) seçin.',
@@ -74,7 +74,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
         id: 'yuksek-katlarda-ruzgar-yuku-ve-cam-kalinligi',
         heading: 'Bahçeşehir, Ispartakule ve Beylikdüzü’nde Kat Yüksekliğine Göre Cam Seçimi',
         paragraphs: [
-          `[Başakşehir (Bahçeşehir, Ispartakule, Kayaşehir)](/bolgeler/basaksehir-cam-balkon) ve [Beylikdüzü](/bolgeler/beylikduzu-cam-balkon), İstanbul Avrupa Yakası’nın en yüksek rakımlı ve açık rüzgâr koridorlarına sahip iki bölgesidir. [TSE](https://www.tse.org.tr) EN 12210 standardına göre bina yüksekliği arttıkça cepheye etkiyen pozitif rüzgâr basıncı ve köşe bölgelerdeki negatif emme (vakum) kuvveti katlanarak artar.`,
+          `[Başakşehir (Bahçeşehir, Ispartakule, Kayaşehir)](/hizmetlerimiz/isicamli-cam-balkon) ve [Beylikdüzü](/hizmetlerimiz/katlanir-cam-balkon), İstanbul Avrupa Yakası’nın en yüksek rakımlı ve açık rüzgâr koridorlarına sahip iki bölgesidir. [TSE](https://www.tse.org.tr) EN 12210 standardına göre bina yüksekliği arttıkça cepheye etkiyen pozitif rüzgâr basıncı ve köşe bölgelerdeki negatif emme (vakum) kuvveti katlanarak artar.`,
           `Bu nedenle Çelikpen Mimari Mühendislik Ekibi olarak 1–5. kat arası korunaklı cephelerde 8 mm temperli cam (${m2('vns_8mm')}) uygularken; 6. kat ve üzerindeki açık cepheli dairelerde esneme (sehim) yapmayan **10 mm Şişecam Temperli Cam** (${m2('vns_10mm')}) veya toplam 8 mm temperli cam kütlesine ve 28 mm kesit rijitliğine sahip **4+20+4 mm Vera Termal Isıcam** (${m2('vbs_isicam')}) kullanıyoruz.`,
         ],
         table: {
@@ -91,14 +91,14 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     ],
     internalLinks: [
       {
-        label: 'Başakşehir & Bahçeşehir Bölge Hizmetlerimiz',
-        href: '/bolgeler/basaksehir-cam-balkon',
-        context: 'Bahçeşehir, Ispartakule ve Kayaşehir sitelerindeki cam balkon referanslarımız.',
+        label: '10 mm Temperli Katlanır Cam Balkon',
+        href: '/hizmetlerimiz/katlanir-cam-balkon',
+        context: 'Yüksek kat rüzgâr yüküne dayanıklı Vera Pro 10 mm sistem detayları.',
       },
       {
-        label: 'Beylikdüzü Bölge Hizmetlerimiz',
-        href: '/bolgeler/beylikduzu-cam-balkon',
-        context: 'Yakuplu Marina, Gürpınar ve Adnan Kahveci mahallesi yüksek kat uygulamalarımız.',
+        label: '4+20+4 Argonlu Isıcamlı Cam Balkon',
+        href: '/hizmetlerimiz/isicamli-cam-balkon',
+        context: 'Çift yüzü temperli 28 mm ısıcamlı cam balkon teknik özellikleri.',
       },
       {
         label: 'Yüksek Kat Cam Balkon Fiyat Hesaplama',
@@ -879,8 +879,8 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
         context: 'Cam balkon teklifinize kedi sinekliği ve plise perde ekleyerek toplam tutarı görün.',
       },
       {
-        label: 'Avrupa Yakası Hizmet Bölgelerimiz',
-        href: '/bolgeler',
+        label: 'Showroom ve Keşif Ağımız',
+        href: '/satis-noktalari',
         context: 'Tüm Avrupa Yakası ilçelerinde cam balkon ve doğrama ile entegre sineklik montajı.',
       },
     ],
@@ -993,7 +993,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
       'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C fabrikamızdan 15 dakikada aynı gün keşif',
       `Winsa Vera Termal Isıcamlı (${m2('vbs_isicam')}) & Winsa PVC Doğrama (${m2('pvc_dograma')})`,
     ],
-    relatedProductHref: '/bolgeler/bahcelievler-cam-balkon',
+    relatedProductHref: '/bahcelievler-cam-balkon',
     numberedChecklistTitle: 'Yeni Teslim Kentsel Dönüşüm Binaları İçin 5 Adımlı Toplu Uygulama Planı',
     numberedChecklist: [
       'İskân sonrası ilk bina yönetim toplantısında dış cephe bütünlüğü için standart profil rengini (genellikle Antrasit RAL 7016) ve cam tonunu karara bağlayın.',
@@ -1007,7 +1007,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
         id: 'kocasinan-merkez-fabrikadan-dogrudan-uretim-avantaji',
         heading: 'Kocasinan Merkez Fabrikamızdan Bahçelievler, Küçükçekmece ve Bağcılar’a Doğrudan Üretim',
         paragraphs: [
-          `[Bahçelievler](/bolgeler/bahcelievler-cam-balkon) (Kocasinan, Soğanlı, Siyavuşpaşa, Şirinevler, Yenibosna), [Küçükçekmece](/bolgeler/kucukcekmece-cam-balkon) (Atakent, Halkalı, Cennet, Sefaköy) ve [Bağcılar / Güngören](/bolgeler/bagcilar-cam-balkon) aksı, İstanbul Avrupa Yakası’nda kentsel dönüşümün ve yeni konut projelerinin en yoğun olduğu merkezdir. Yeni teslim edilen binalarda her dairenin farklı bir firmaya farklı renk ve modelde cam balkon yaptırması hem bina estetiğini bozar hem de daire başına maliyeti artırır.`,
+          `[Bahçelievler](/bahcelievler-cam-balkon) (Kocasinan, Soğanlı, Siyavuşpaşa, Şirinevler, Yenibosna), [Küçükçekmece](/satis-noktalari) (Atakent, Halkalı, Cennet, Sefaköy) ve [Bağcılar / Güngören](/hizmetlerimiz/pvc-pencere-kapi) aksı, İstanbul Avrupa Yakası’nda kentsel dönüşümün ve yeni konut projelerinin en yoğun olduğu merkezdir. Yeni teslim edilen binalarda her dairenin farklı bir firmaya farklı renk ve modelde cam balkon yaptırması hem bina estetiğini bozar hem de daire başına maliyeti artırır.`,
           `Çelikpen olarak **Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C Bahçelievler** adresindeki CNC üretim tesisimizden, komşu ilçelerimizdeki yeni binalara ve müteahhit projelerine aracı komisyonu olmadan doğrudan fabrika satış fiyatı ve **5+ dairede net %${BULK} toplu bina indirimi** uyguluyoruz. Bireysel ve toplu bina fiyatlarını [Fiyat Hesapla](/fiyat-hesapla) aracımızda anında görebilirsiniz.`,
         ],
         table: {
@@ -1046,13 +1046,13 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     internalLinks: [
       {
         label: 'Bahçelievler Bölge & Fabrika Showroom Rehberi',
-        href: '/bolgeler/bahcelievler-cam-balkon',
+        href: '/bahcelievler-cam-balkon',
         context: 'Kocasinan Merkez fabrikamız ve Bahçelievler 11 mahalle hizmet ağımız.',
       },
       {
-        label: 'Küçükçekmece (Atakent, Halkalı, Cennet) Rehberi',
-        href: '/bolgeler/kucukcekmece-cam-balkon',
-        context: 'Atakent, Halkalı ve Cennet Mahallesi site ve konut projelerimiz.',
+        label: 'Showroom & Satış Noktalarımız',
+        href: '/satis-noktalari',
+        context: 'Atakent, Halkalı, Güneşli ve tüm komşu ilçelere aynı gün keşif ağımız.',
       },
       {
         label: '%15 Toplu Bina İndirimli Fiyat Hesapla',

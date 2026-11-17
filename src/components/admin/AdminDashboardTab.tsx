@@ -139,11 +139,7 @@ export default function AdminDashboardTab({ draft, setActiveTab }: AdminTabProps
       </div>
 
       {/* ── Charts Row ──────────────────────────────────────── */}
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-[#0F172A] p-5">
-          <h3 className="mb-3 text-sm font-extrabold text-white">Aylık Ziyaretçi Trendi</h3>
-          <AreaChart data={MONTHLY_VISITORS} />
-        </div>
+      <div className="grid gap-4 lg:grid-cols-1">
         <div className="rounded-2xl border border-white/10 bg-[#0F172A] p-5">
           <h3 className="mb-3 text-sm font-extrabold text-white">Sistem m² Fiyat Karşılaştırması</h3>
           <BarChart data={priceChartData} />

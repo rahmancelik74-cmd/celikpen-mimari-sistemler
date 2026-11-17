@@ -2,7 +2,6 @@ import React from 'react';
 import { SITE_CONFIG } from '../config/site.config';
 import { TESTIMONIALS } from '../config/testimonials.config';
 import { CELIKPEN_PRICING_CONFIG } from '../config/pricing.config';
-import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 import {
   SEO_BUSINESS,
   SEO_FAQS,
@@ -45,12 +44,6 @@ const AREA_SERVED = [
     name: 'İstanbul Avrupa Yakası',
     containedInPlace: { '@type': 'Country', name: 'Türkiye' },
   },
-  ...EUROPEAN_SIDE_DISTRICTS.map((d) => ({
-    '@type': 'AdministrativeArea',
-    name: `${d.name} (${d.subDistricts}), İstanbul`,
-    url: absoluteUrl(`/bolgeler/${d.slug}`),
-    containedInPlace: { '@type': 'City', name: 'İstanbul' },
-  })),
   ...ISTANBUL_DISTRICTS.map((district) => ({
     '@type': 'AdministrativeArea',
     name: `${district}, İstanbul`,

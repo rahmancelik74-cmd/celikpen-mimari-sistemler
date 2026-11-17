@@ -80,7 +80,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         id: '2026-cam-balkon-m2-birim-fiyat-tablosu',
         heading: '2026 İstanbul Avrupa Yakası Güncel Cam Balkon m² Birim Fiyatları',
         paragraphs: [
-          `İstanbul Avrupa Yakası’nda cam balkon yaptırmak isteyen konut ve villa sahipleri için maliyetleri belirleyen en önemli unsur; seçilen sistemin termal yalıtım kapasitesi, cam kalınlığı ve alüminyum profil et kalınlığıdır. Bahçelievler Kocasinan Merkez’deki CNC üretim tesisimizden Bakırköy, Beşiktaş, Sarıyer, Başakşehir, Beylikdüzü ve tüm [Avrupa Yakası hizmet bölgelerimize](/bolgeler) aracı komisyonu olmadan doğrudan fabrika satış fiyatlarıyla üretim yapıyoruz.`,
+          `İstanbul Avrupa Yakası’nda cam balkon yaptırmak isteyen konut ve villa sahipleri için maliyetleri belirleyen en önemli unsur; seçilen sistemin termal yalıtım kapasitesi, cam kalınlığı ve alüminyum profil et kalınlığıdır. Bahçelievler Kocasinan Merkez’deki CNC üretim tesisimizden Bakırköy, Beşiktaş, Sarıyer, Başakşehir, Beylikdüzü ve tüm [Avrupa Yakası hizmet bölgelerimize](/satis-noktalari) aracı komisyonu olmadan doğrudan fabrika satış fiyatlarıyla üretim yapıyoruz.`,
           `Aşağıdaki tabloda yer alan 2026 net m² birim fiyatlarımız; [Şişecam](https://www.sisecam.com.tr) TSE EN 12150 sertifikalı temperli güvenlik camı, AISI 304 paslanmaz çelik rulmanlar, alüminyum mıknatıslı sızdırmazlık fitilleri ve kadrolu ekibimizle anahtar teslim montaj dahil değerlerdir. Kendi balkon ölçünüze göre saniyeler içinde bütçe çıkarmak için [Canlı m² Fiyat Hesaplama](/fiyat-hesapla) modülümüzü kullanabilirsiniz.`,
         ],
         table: {
@@ -145,8 +145,8 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         id: 'avrupa-yakasi-ilcelerine-gore-sistem-secimi',
         heading: 'Avrupa Yakası İlçelerine Göre Doğru Sistem ve Bütçe Optimizasyonu',
         paragraphs: [
-          `İstanbul Avrupa Yakası’nın mikro iklimi ilçeden ilçeye büyük farklılık gösterir. [Bakırköy, Florya ve Yeşilköy](/bolgeler/bakirkoy-cam-balkon) sahil bandında Marmara Denizi’nden gelen şiddetli lodos ve nem korozyonu ön plandayken; [Sarıyer Zekeriyaköy](/bolgeler/sariyer-cam-balkon) ve [Eyüpsultan Göktürk](/bolgeler/eyupsultan-gokturk-cam-balkon) hattında kış sıcaklıkları şehir merkezinden 4–5 °C daha düşüktür.`,
-          `[Başakşehir Bahçeşehir](/bolgeler/basaksehir-cam-balkon) ve [Beylikdüzü](/bolgeler/beylikduzu-cam-balkon) gibi yüksek katlı blokların yoğun olduğu ilçelerde ise [TSE](https://www.tse.org.tr) EN 12210 rüzgâr yükü standardına uyumlu 10 mm temperli veya 4+20+4 mm ısıcamlı profiller tercih edilmelidir. Tüm sistem detaylarını [Hizmetlerimiz](/hizmetlerimiz) sayfasında karşılaştırabilirsiniz.`,
+          `İstanbul Avrupa Yakası’nın mikro iklimi ilçeden ilçeye büyük farklılık gösterir. [Bakırköy, Florya ve Yeşilköy](/profesyoneller/referanslar) sahil bandında Marmara Denizi’nden gelen şiddetli lodos ve nem korozyonu ön plandayken; [Sarıyer Zekeriyaköy](/hizmetlerimiz/kis-bahcesi-sistemleri) ve [Eyüpsultan Göktürk](/hizmetlerimiz/bioklimatik-pergola) hattında kış sıcaklıkları şehir merkezinden 4–5 °C daha düşüktür.`,
+          `[Başakşehir Bahçeşehir](/hizmetlerimiz/isicamli-cam-balkon) ve [Beylikdüzü](/hizmetlerimiz/katlanir-cam-balkon) gibi yüksek katlı blokların yoğun olduğu ilçelerde ise [TSE](https://www.tse.org.tr) EN 12210 rüzgâr yükü standardına uyumlu 10 mm temperli veya 4+20+4 mm ısıcamlı profiller tercih edilmelidir. Tüm sistem detaylarını [Hizmetlerimiz](/hizmetlerimiz) sayfasında karşılaştırabilirsiniz.`,
         ],
       },
     ],
@@ -162,9 +162,9 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         context: 'Katlanır, ısıcamlı, sürme, motorlu giyotin ve kış bahçesi sistemlerimizin teknik özellikleri.',
       },
       {
-        label: 'İstanbul Avrupa Yakası Hizmet Bölgelerimiz',
-        href: '/bolgeler',
-        context: 'Bakırköy, Beşiktaş, Sarıyer, Başakşehir, Beylikdüzü ve tüm Avrupa Yakası keşif ağımız.',
+        label: 'Showroom ve Keşif Ağımız',
+        href: '/satis-noktalari',
+        context: 'Kocasinan Merkez fabrikamız ve Avrupa Yakası ücretsiz lazerli keşif ağımız.',
       },
     ],
     externalReferences: [
@@ -453,7 +453,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
       'EN 12208 Sınıf 9A fırtına su deşarj kanallı damlalık kasa profili',
       `Bakırköy & Florya 15 dk içinde ücretsiz lazerli keşif (${m2('vbs_isicam')})`,
     ],
-    relatedProductHref: '/bolgeler/bakirkoy-cam-balkon',
+    relatedProductHref: '/hizmetlerimiz/isicamli-cam-balkon',
     numberedChecklistTitle: 'Sahil Hattı (Florya, Yeşilköy, Ataköy) Montajlarında 5 Mühendislik Şartı',
     numberedChecklist: [
       'Deniz tuzunun oluşturduğu korozyona karşı zamak/demir tekerlek yerine 304 kalite paslanmaz çelik rulman kullanın.',
@@ -467,7 +467,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         id: 'sahil-hattinda-lodos-ve-korozyon-muhendisligi',
         heading: 'Florya, Yeşilköy ve Ataköy Sahil Hattında Lodos ve Deniz Nemi Koruması',
         paragraphs: [
-          `[Bakırköy, Florya, Yeşilköy ve Ataköy](/bolgeler/bakirkoy-cam-balkon) hattı, Marmara Denizi’nden gelen güneybatı (lodos) fırtınalarına doğrudan açık bir kıyı şerididir. Standart iç kesim apartmanları için üretilen ince profilli ve plastik fitilli cam balkonlar, sahil bandında 100 km/saat hıza ulaşan lodos altında ıslık sesi yapar, kanat aralarından yağmur suyu sızdırır ve 1–2 yıl içinde rulmanları paslanarak kilitlenir.`,
+          `[Bakırköy, Florya, Yeşilköy ve Ataköy](/profesyoneller/referanslar) hattı, Marmara Denizi’nden gelen güneybatı (lodos) fırtınalarına doğrudan açık bir kıyı şerididir. Standart iç kesim apartmanları için üretilen ince profilli ve plastik fitilli cam balkonlar, sahil bandında 100 km/saat hıza ulaşan lodos altında ıslık sesi yapar, kanat aralarından yağmur suyu sızdırır ve 1–2 yıl içinde rulmanları paslanarak kilitlenir.`,
           `Çelikpen Mimari Mühendislik Ekibi olarak Florya ve Yeşilköy’deki villa teraslarında ve Ataköy’deki yüksek katlı bloklarda [TSE](https://www.tse.org.tr) EN 12210 rüzgâr yükü standardında 3 mm et kalınlığına sahip T66 alüminyum profiller, çift sıra EPDM conta ve [Şişecam](https://www.sisecam.com.tr) 4+20+4 mm argonlu Konfor Isıcam uyguluyoruz.`,
         ],
         table: {
@@ -485,9 +485,9 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     ],
     internalLinks: [
       {
-        label: 'Bakırköy, Florya ve Yeşilköy Bölge Rehberi',
-        href: '/bolgeler/bakirkoy-cam-balkon',
-        context: 'Bakırköy ilçesindeki mahalle bazlı referanslarımız ve aynı gün keşif detayları.',
+        label: 'Saha Referanslarımız & Proje Galerisi',
+        href: '/profesyoneller/referanslar',
+        context: 'Florya, Yeşilköy ve Ataköy’de tamamladığımız villa ve rezidans projeleri.',
       },
       {
         label: 'Kış Bahçesi Sistemleri',
@@ -626,7 +626,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         id: 'zekeriyakoy-ve-gokturk-ikliminde-kis-bahcesi-tasarimi',
         heading: 'Zekeriyaköy ve Göktürk İkliminde Cam Tavan mı, Bioklimatik Pergola mı?',
         paragraphs: [
-          `[Sarıyer Zekeriyaköy](/bolgeler/sariyer-cam-balkon) ve [Eyüpsultan Göktürk / Kemerburgaz](/bolgeler/eyupsultan-gokturk-cam-balkon) bölgeleri, Belgrad Ormanı ve Karadeniz iklim etkisi nedeniyle İstanbul’un en yoğun yağış ve kar alan villa bölgeleridir. Bu bölgelerde inşa edilen bir kış bahçesinin kışın soğuk geçirmemesi, yazın ise sera etkisiyle bunaltmaması gerekir.`,
+          `[Sarıyer Zekeriyaköy](/hizmetlerimiz/kis-bahcesi-sistemleri) ve [Eyüpsultan Göktürk / Kemerburgaz](/hizmetlerimiz/bioklimatik-pergola) bölgeleri, Belgrad Ormanı ve Karadeniz iklim etkisi nedeniyle İstanbul’un en yoğun yağış ve kar alan villa bölgeleridir. Bu bölgelerde inşa edilen bir kış bahçesinin kışın soğuk geçirmemesi, yazın ise sera etkisiyle bunaltmaması gerekir.`,
           `Gökyüzünü ve ağaç manzarasını kesintisiz görmek isteyen villa sahipleri için [Şişecam](https://www.sisecam.com.tr) Solar Low-E kaplamalı lamine ısıcam tavanlı [Kış Bahçesi Sistemleri](/hizmetlerimiz/kis-bahcesi-sistemleri) idealdir. Yazın tavanı tamamen açıp doğal esinti almak isteyenler içinse kendi ekseninde 0°–135° dönen ve geriye toplanan [Bioklimatik Pergola](/hizmetlerimiz/bioklimatik-pergola) (${m2('pergola')}) en üst segment çözümdür.`,
         ],
         table: {
@@ -644,14 +644,14 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     ],
     internalLinks: [
       {
-        label: 'Sarıyer & Zekeriyaköy Bölge Hizmetlerimiz',
-        href: '/bolgeler/sariyer-cam-balkon',
-        context: 'Zekeriyaköy, Tarabya, İstinye ve Bahçeköy villa projelerimiz.',
+        label: 'Kış Bahçesi Sistemleri Hizmetimiz',
+        href: '/hizmetlerimiz/kis-bahcesi-sistemleri',
+        context: 'Lamine ısıcam tavanlı ve dört mevsim yalıtımlı villa kış bahçesi çözümlerimiz.',
       },
       {
-        label: 'Göktürk & Kemerburgaz Bölge Hizmetlerimiz',
-        href: '/bolgeler/eyupsultan-gokturk-cam-balkon',
-        context: 'Göktürk, Kemerburgaz ve Vadistanbul kış bahçesi ve doğrama çözümlerimiz.',
+        label: 'Canlı Kış Bahçesi m² Fiyat Hesapla',
+        href: '/fiyat-hesapla',
+        context: 'Veranda ve teras ölçünüze göre kış bahçesi ve pergola maliyetini hesaplayın.',
       },
       {
         label: 'Bioklimatik Pergola Teknik Detayları',
@@ -783,7 +783,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
         id: 'etiler-ve-ulus-teraslarinda-neden-giyotin-cam',
         heading: 'Etiler, Ulus ve Bebek Teraslarında Neden Motorlu Giyotin Cam Tercih Ediliyor?',
         paragraphs: [
-          `[Beşiktaş, Etiler, Ulus ve Bebek](/bolgeler/besiktas-cam-balkon) bölgesindeki çatı dublekslerinde ve teraslı dairelerde en değerli unsur Boğaz ve koru manzarasıdır. Klasik katlanır sistemlerde kanatlar açıldığında bir köşede toplanır ve her kanat birleşiminde dikey profiller bulunur. Oysa [Motorlu Giyotin Cam Sistemleri](/hizmetlerimiz/giyotin-cam-sistemleri) (Hareketli Küpeşte), uzaktan kumandanın tek tuşuyla dikey olarak aşağıya iner ve en alttaki sabit cam panelin arkasında toplanarak 110 cm yüksekliğinde güvenli bir cam korkuluk oluşturur.`,
+          `[Beşiktaş, Etiler, Ulus ve Bebek](/profesyoneller/referanslar) bölgesindeki çatı dublekslerinde ve teraslı dairelerde en değerli unsur Boğaz ve koru manzarasıdır. Klasik katlanır sistemlerde kanatlar açıldığında bir köşede toplanır ve her kanat birleşiminde dikey profiller bulunur. Oysa [Motorlu Giyotin Cam Sistemleri](/hizmetlerimiz/giyotin-cam-sistemleri) (Hareketli Küpeşte), uzaktan kumandanın tek tuşuyla dikey olarak aşağıya iner ve en alttaki sabit cam panelin arkasında toplanarak 110 cm yüksekliğinde güvenli bir cam korkuluk oluşturur.`,
           `Böylece ayrı bir demir veya alüminyum korkuluk yaptırmaya gerek kalmaz; otururken göz hizasında hiçbir profil olmadan kesintisiz manzara izlenir. Akşam rüzgâr çıktığında ise sistem saniyeler içinde yukarı kapanarak [Şişecam](https://www.sisecam.com.tr) 4+16+4 mm argonlu ısıcam sayesinde terası sıcak bir kış odasına dönüştürür.`,
         ],
         table: {
@@ -802,9 +802,9 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     ],
     internalLinks: [
       {
-        label: 'Beşiktaş, Etiler & Ulus Bölge Hizmetlerimiz',
-        href: '/bolgeler/besiktas-cam-balkon',
-        context: 'Beşiktaş ilçesindeki teras, rezidans ve kış bahçesi uygulamalarımız.',
+        label: 'Albert Genau Tambalkon Giyotin Kataloğu',
+        href: '/urunler/albert-genau',
+        context: 'Silinebilir kanatlı ve Somfy motorlu giyotin cam modelleri.',
       },
       {
         label: 'Motorlu Giyotin Cam Hizmet Sayfası',
