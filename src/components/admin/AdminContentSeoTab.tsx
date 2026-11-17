@@ -315,18 +315,29 @@ export default function AdminContentSeoTab(props: AdminTabProps) {
           const gi = globalIndex(post);
           return (
             <div key={post.slug} className="flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-[#0F172A] p-4 sm:flex-row sm:items-center">
-              <div className="space-y-1 min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded bg-[#1E3A8A] px-2.5 py-0.5 text-[10px] font-extrabold text-sky-200">{post.category}</span>
-                  <StatusBadge status={post.status || 'published'} />
-                  <span className="text-[11px] font-mono text-slate-400">/blog/{post.slug}</span>
-                  <span className="rounded bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-300">T:{post.metaTitle.length} D:{post.metaDescription.length}</span>
-                </div>
-                <h3 className="text-sm font-extrabold text-white truncate">{post.title}</h3>
-                <p className="text-xs text-slate-400 line-clamp-1">{post.excerpt}</p>
-                {post.tags && post.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mt-1">{post.tags.map(t => <span key={t} className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300">{t}</span>)}</div>
+              <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                {post.coverImage && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
+                    title={post.title}
+                    className="hidden h-16 w-24 shrink-0 rounded-lg border border-white/10 object-cover sm:block"
+                  />
                 )}
+                <div className="space-y-1 min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded bg-[#1E3A8A] px-2.5 py-0.5 text-[10px] font-extrabold text-sky-200">{post.category}</span>
+                    <StatusBadge status={post.status || 'published'} />
+                    <span className="text-[11px] font-mono text-slate-400">/blog/{post.slug}</span>
+                    <span className="rounded bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-300">T:{post.metaTitle.length} D:{post.metaDescription.length}</span>
+                  </div>
+                  <h3 className="text-sm font-extrabold text-white truncate">{post.title}</h3>
+                  <p className="text-xs text-slate-400 line-clamp-1">{post.excerpt}</p>
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-1">{post.tags.map(t => <span key={t} className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300">{t}</span>)}</div>
+                  )}
+                </div>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <Link href={`/blog/${post.slug}`} target="_blank" className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-sky-300 hover:bg-white/10">Gör ↗</Link>

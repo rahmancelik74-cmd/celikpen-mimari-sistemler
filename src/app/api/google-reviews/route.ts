@@ -8,14 +8,20 @@ import { readCmsFromBlob } from '../../../lib/blob-storage';
 export const dynamic = 'force-dynamic';
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
-const PRIMARY_BUSINESS_QUERY =
-  process.env.GOOGLE_BUSINESS_QUERY ||
-  'Pimapen tamircisi, Cam Balkon, Alüminyum Kızılelma Cad. No: 30/C Bahçelievler İstanbul';
+const EXACT_LAT = 41.0225161;
+const EXACT_LNG = 28.8353366;
+const EXACT_BUSINESS_NAME = 'Pimapen tamircisi, Cam Balkon, Alüminyum doğrama ve Sineklik';
+const EXACT_GOOGLE_MAPS_URL = GOOGLE_MAPS_REVIEW_URL;
+const EXACT_EMBED_MAP_URL = `https://maps.google.com/maps?q=${EXACT_LAT},${EXACT_LNG}&hl=tr&z=18&output=embed`;
+const DEFAULT_GOOGLE_PLACE_ID = (process.env.GOOGLE_PLACE_ID || '').trim();
+const PRIMARY_BUSINESS_QUERY = process.env.GOOGLE_BUSINESS_QUERY || EXACT_BUSINESS_NAME;
 const FALLBACK_BUSINESS_QUERY = 'Kızılelma Cad. No: 30/C Bahçelievler İstanbul';
 
 export interface GoogleReviewItem {
   id: string;
   authorName: string;
+  profilePhotoUrl?: string;
+  relativeTime?: string;
   location: string;
   system: string;
   rating: number;
@@ -36,12 +42,14 @@ export interface GoogleReviewsApiResponse {
   resolvedPlaceId: string;
   businessName: string;
   businessAddress: string;
+  coordinates: { latitude: number; longitude: number };
   rating: number;
   totalReviews: number;
   userRatingsTotal: number;
   googleMapsUrl: string;
   mapsUrl: string;
   writeReviewUrl: string;
+  embedMapUrl: string;
   apiDiagnostic?: string;
   reviews: GoogleReviewItem[];
   fetchedAt: string;
@@ -49,10 +57,11 @@ export interface GoogleReviewsApiResponse {
 
 interface PlacesV1Review {
   rating?: number;
+  relativePublishTimeDescription?: string;
   text?: { text?: string };
   originalText?: { text?: string };
   publishTime?: string;
-  authorAttribution?: { displayName?: string };
+  authorAttribution?: { displayName?: string; photoUri?: string };
 }
 
 interface PlacesV1Place {
@@ -106,25 +115,30 @@ function isValidPlaceId(val: string): boolean {
   return Boolean(val) && !val.includes(' ') && val.length >= 12;
 }
 
-function buildGoogleUrls(placeId: string, fallbackUri?: string) {
-  if (isValidPlaceId(placeId)) {
-    const googleMapsUrl = `https://www.google.com/maps/place/?q=place_id:${encodeURIComponent(placeId)}`;
-    const writeReviewUrl = `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`;
-    return { googleMapsUrl, writeReviewUrl };
-  }
+function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
+  const googleMapsUrl = apiMapsUri || EXACT_GOOGLE_MAPS_URL;
+  const writeReviewUrl = isValidPlaceId(placeId)
+    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
+    : EXACT_GOOGLE_MAPS_URL;
   return {
-    googleMapsUrl: fallbackUri || GOOGLE_MAPS_REVIEW_URL,
-    writeReviewUrl: fallbackUri || GOOGLE_MAPS_REVIEW_URL,
+    googleMapsUrl,
+    writeReviewUrl,
+    embedMapUrl: EXACT_EMBED_MAP_URL,
   };
 }
 
-function mapV1Reviews(reviews: PlacesV1Review[] | undefined, fallback: GoogleReviewItem[]): GoogleReviewItem[] {
+function mapV1Reviews(
+  reviews: PlacesV1Review[] | undefined,
+  fallback: GoogleReviewItem[]
+): GoogleReviewItem[] {
   if (!Array.isArray(reviews) || reviews.length === 0) return fallback;
   return reviews.map((r, idx) => ({
     id: `live-google-${idx + 1}`,
-    authorName: 'Google Doğrulanmış Müşteri Projesi',
-    location: 'İstanbul Avrupa Yakası',
-    system: 'Çelikpen Mimari Cam & PVC Sistemleri',
+    authorName: r.authorAttribution?.displayName || 'Google Doğrulanmış Müşteri',
+    profilePhotoUrl: r.authorAttribution?.photoUri,
+    relativeTime: r.relativePublishTimeDescription,
+    location: 'Bahçelievler / İstanbul',
+    system: 'Google Haritalar Müşteri Değerlendirmesi',
     rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
     text: r.text?.text || r.originalText?.text || '',
     date: r.publishTime ? r.publishTime.slice(0, 10) : new Date().toISOString().slice(0, 10),
@@ -133,7 +147,10 @@ function mapV1Reviews(reviews: PlacesV1Review[] | undefined, fallback: GoogleRev
   }));
 }
 
-async function queryPlacesV1Search(apiKey: string, query: string): Promise<{ place?: PlacesV1Place; error?: string }> {
+async function queryPlacesV1Search(
+  apiKey: string,
+  query: string
+): Promise<{ place?: PlacesV1Place; error?: string }> {
   const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
     method: 'POST',
     headers: {
@@ -145,6 +162,12 @@ async function queryPlacesV1Search(apiKey: string, query: string): Promise<{ pla
     body: JSON.stringify({
       textQuery: query,
       languageCode: 'tr',
+      locationBias: {
+        circle: {
+          center: { latitude: EXACT_LAT, longitude: EXACT_LNG },
+          radius: 100.0,
+        },
+      },
       maxResultCount: 3,
     }),
     cache: 'no-store',
@@ -161,7 +184,10 @@ async function queryPlacesV1Search(apiKey: string, query: string): Promise<{ pla
   return { error: data.error?.message || data.error?.status || `HTTP ${res.status}` };
 }
 
-async function queryPlacesV1Details(apiKey: string, placeId: string): Promise<{ place?: PlacesV1Place; error?: string }> {
+async function queryPlacesV1Details(
+  apiKey: string,
+  placeId: string
+): Promise<{ place?: PlacesV1Place; error?: string }> {
   const res = await fetch(
     `https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=tr`,
     {
@@ -182,7 +208,10 @@ async function queryPlacesV1Details(apiKey: string, placeId: string): Promise<{ 
   return { error: data.error?.message || data.error?.status || `HTTP ${res.status}` };
 }
 
-async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: string): Promise<GoogleReviewsApiResponse> {
+async function resolveGoogleReviews(
+  overrideKey?: string,
+  overridePlaceId?: string
+): Promise<GoogleReviewsApiResponse> {
   const cmsSettings = await readCmsSettings();
   const rawApiKey = (
     overrideKey ??
@@ -193,7 +222,7 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
   const rawPlaceId = (
     overridePlaceId ??
     cmsSettings.googlePlaceId ??
-    process.env.GOOGLE_PLACE_ID ??
+    DEFAULT_GOOGLE_PLACE_ID ??
     ''
   ).trim();
 
@@ -204,7 +233,7 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
 
   if (rawApiKey.length >= 15) {
     try {
-      /* 1. Places API (New) — Önce doğrudan Place ID veya iki kademeli metin araması */
+      /* 1. Places API (New) — Doğrudan Place ID veya 41.0225161, 28.8353366 locationBias araması */
       let v1Place: PlacesV1Place | undefined;
       if (isValidPlaceId(rawPlaceId)) {
         const detailAttempt = await queryPlacesV1Details(rawApiKey, rawPlaceId);
@@ -229,7 +258,10 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
         const resolvedId = v1Place.id;
         const totalReviews = v1Place.userRatingCount || fallbackReviews.length;
         const liveReviews = mapV1Reviews(v1Place.reviews, fallbackReviews);
-        const { googleMapsUrl, writeReviewUrl } = buildGoogleUrls(resolvedId, v1Place.googleMapsUri);
+        const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
+          resolvedId,
+          v1Place.googleMapsUri
+        );
 
         return {
           ok: true,
@@ -240,50 +272,41 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
           maskedKey: maskApiKey(rawApiKey),
           placeId: resolvedId,
           resolvedPlaceId: resolvedId,
-          businessName: v1Place.displayName?.text || 'Çelikpen Cam Balkon & Mimari Sistemler',
+          businessName: v1Place.displayName?.text || EXACT_BUSINESS_NAME,
           businessAddress: v1Place.formattedAddress || defaultAddress,
+          coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
           rating: v1Place.rating || 4.9,
           totalReviews,
           userRatingsTotal: totalReviews,
           googleMapsUrl,
           mapsUrl: googleMapsUrl,
           writeReviewUrl,
+          embedMapUrl,
           reviews: liveReviews,
           fetchedAt: new Date().toISOString(),
         };
       }
 
-      /* 2. Legacy Places API (findplacefromtext + details) Fallback */
+      /* 2. Legacy Places API (nearbysearch + details) Fallback */
       let targetPlaceId = rawPlaceId;
       if (!isValidPlaceId(targetPlaceId)) {
-        for (const query of [PRIMARY_BUSINESS_QUERY, FALLBACK_BUSINESS_QUERY]) {
-          const findUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(
-            query
-          )}&inputtype=textquery&fields=place_id,name,rating,user_ratings_total&key=${encodeURIComponent(
-            rawApiKey
-          )}`;
+        const nearbyUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${EXACT_LAT},${EXACT_LNG}&radius=80&keyword=${encodeURIComponent(
+          'Pimapen Cam Balkon'
+        )}&language=tr&key=${encodeURIComponent(rawApiKey)}`;
 
-          const findRes = await fetch(findUrl, { cache: 'no-store' });
-          if (findRes.ok) {
-            const findJson = (await findRes.json()) as {
-              status?: string;
-              error_message?: string;
-              candidates?: Array<{
-                place_id?: string;
-                name?: string;
-                rating?: number;
-                user_ratings_total?: number;
-              }>;
-            };
-
-            if (findJson.status === 'OK' && findJson.candidates?.[0]?.place_id) {
-              targetPlaceId = findJson.candidates[0].place_id;
-              break;
-            } else if (findJson.error_message) {
-              apiDiagnostic = apiDiagnostic
-                ? `${apiDiagnostic} | Legacy: ${findJson.error_message}`
-                : `Legacy: ${findJson.error_message}`;
-            }
+        const nearbyRes = await fetch(nearbyUrl, { cache: 'no-store' });
+        if (nearbyRes.ok) {
+          const nearbyJson = (await nearbyRes.json()) as {
+            status?: string;
+            error_message?: string;
+            results?: Array<{ place_id?: string; name?: string }>;
+          };
+          if (nearbyJson.status === 'OK' && nearbyJson.results?.[0]?.place_id) {
+            targetPlaceId = nearbyJson.results[0].place_id;
+          } else if (nearbyJson.error_message) {
+            apiDiagnostic = apiDiagnostic
+              ? `${apiDiagnostic} | Legacy Nearby: ${nearbyJson.error_message}`
+              : `Legacy Nearby: ${nearbyJson.error_message}`;
           }
         }
       }
@@ -309,6 +332,7 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
               url?: string;
               reviews?: Array<{
                 author_name?: string;
+                profile_photo_url?: string;
                 rating?: number;
                 text?: string;
                 time?: number;
@@ -325,9 +349,11 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
               Array.isArray(resData.reviews) && resData.reviews.length > 0
                 ? resData.reviews.map((r, idx) => ({
                     id: `live-google-${idx + 1}`,
-                    authorName: 'Google Doğrulanmış Müşteri Projesi',
-                    location: 'İstanbul Avrupa Yakası',
-                    system: 'Çelikpen Mimari Cam & PVC Sistemleri',
+                    authorName: r.author_name || 'Google Doğrulanmış Müşteri',
+                    profilePhotoUrl: r.profile_photo_url,
+                    relativeTime: r.relative_time_description,
+                    location: 'Bahçelievler / İstanbul',
+                    system: 'Google Haritalar Müşteri Değerlendirmesi',
                     rating: r.rating || 5,
                     text: r.text || '',
                     date: r.time
@@ -338,7 +364,10 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
                   }))
                 : fallbackReviews;
 
-            const { googleMapsUrl, writeReviewUrl } = buildGoogleUrls(finalPlaceId, resData.url);
+            const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
+              finalPlaceId,
+              resData.url
+            );
 
             return {
               ok: true,
@@ -349,14 +378,16 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
               maskedKey: maskApiKey(rawApiKey),
               placeId: finalPlaceId,
               resolvedPlaceId: finalPlaceId,
-              businessName: resData.name || 'Çelikpen Cam Balkon & Mimari Sistemler',
+              businessName: resData.name || EXACT_BUSINESS_NAME,
               businessAddress: resData.formatted_address || defaultAddress,
+              coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
               rating: resData.rating || 4.9,
               totalReviews,
               userRatingsTotal: totalReviews,
               googleMapsUrl,
               mapsUrl: googleMapsUrl,
               writeReviewUrl,
+              embedMapUrl,
               reviews: liveReviews,
               fetchedAt: new Date().toISOString(),
             };
@@ -370,32 +401,34 @@ async function resolveGoogleReviews(overrideKey?: string, overridePlaceId?: stri
     }
   }
 
-  /* 3. Graceful Fallback (Doğrulanmış Önizleme Modu) */
-  const { googleMapsUrl, writeReviewUrl } = buildGoogleUrls(rawPlaceId);
+  /* 3. Graceful Fallback (Doğrudan Gerçek Google İşletme Profili URL + Koordinat Kilitli Önizleme) */
+  const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(rawPlaceId);
 
   return {
     ok: true,
     mode: 'demo_verified_preview',
     statusBadge: rawApiKey
-      ? 'API Anahtarı Tanımlı (Places API (New) Yetkisi Bekleniyor)'
+      ? 'Google İşletme Konumu Kilitli (Places API (New) Yetkisi Bekleniyor)'
       : 'Demo Modu Aktif (API Anahtarı Tanımlı Değil)',
     statusMessage: rawApiKey
-      ? `API anahtarı (.env.local) okundu ancak Google Cloud projenizde "Places API (New)" (places.googleapis.com) yetkisi/faturalandırması kapalı görünüyor (${apiDiagnostic || 'PERMISSION_DENIED'}). Doğrulanmış proje yorumları kesintisiz gösterilmektedir.`
-      : 'Doğrulanmış saha projesi önizleme yorumları aktif. Google Places API anahtarı tanımlandığında otomatik canlı çekime geçer.',
+      ? `API anahtarı (.env.local) okundu ancak Google Cloud projenizde "Places API (New)" (places.googleapis.com) yetkisi kısıtlı (${apiDiagnostic || 'API_KEY_SERVICE_BLOCKED'}). Konum (41.0225161, 28.8353366) ve gerçek Google İşletme Profili bağlantıları aktif, doğrulanmış yorumlar gösterilmektedir.`
+      : 'Doğrulanmış saha projesi önizleme yorumları ve gerçek işletme konumu aktif.',
     hasConfiguredKey: Boolean(rawApiKey),
     maskedKey: maskApiKey(rawApiKey),
     placeId: isValidPlaceId(rawPlaceId) ? rawPlaceId : '',
     resolvedPlaceId: isValidPlaceId(rawPlaceId)
       ? rawPlaceId
-      : 'Henüz çözümlenemedi (Places API (New) etkinleştirildiğinde otomatik keşfedilir)',
-    businessName: 'Çelikpen Cam Balkon & Mimari Cam Sistemleri',
+      : 'Henüz çözümlenemedi (Places API (New) anahtar kısıtı açıldığında ChIJ Place ID otomatik alınır)',
+    businessName: EXACT_BUSINESS_NAME,
     businessAddress: defaultAddress,
+    coordinates: { latitude: EXACT_LAT, longitude: EXACT_LNG },
     rating: 4.9,
     totalReviews: 128,
     userRatingsTotal: 128,
     googleMapsUrl,
     mapsUrl: googleMapsUrl,
     writeReviewUrl,
+    embedMapUrl,
     apiDiagnostic: apiDiagnostic || undefined,
     reviews: fallbackReviews,
     fetchedAt: new Date().toISOString(),

@@ -8,6 +8,8 @@ import type { GoogleReviewItem, GoogleReviewsApiResponse } from '../app/api/goog
 interface DisplayReviewCard {
   id: string;
   authorName: string;
+  profilePhotoUrl?: string;
+  relativeTime?: string;
   location: string;
   system: string;
   rating: number;
@@ -38,6 +40,15 @@ function formatReviewDate(date: string) {
     year: 'numeric',
     timeZone: 'UTC',
   }).format(new Date(Date.UTC(year, month - 1, day, 12)));
+}
+
+function getAuthorInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toLocaleUpperCase('tr-TR') || '')
+    .join('');
 }
 
 export function CustomerReviews() {
@@ -74,6 +85,8 @@ export function CustomerReviews() {
             payload.reviews.map((r: GoogleReviewItem) => ({
               id: r.id,
               authorName: r.authorName,
+              profilePhotoUrl: r.profilePhotoUrl,
+              relativeTime: r.relativeTime,
               location: r.location,
               system: r.system,
               rating: r.rating,
@@ -172,7 +185,7 @@ export function CustomerReviews() {
                     <span>{review.verifiedLabel}</span>
                   </span>
                   <time dateTime={review.date} className="text-[10.5px] font-medium text-slate-400">
-                    {formatReviewDate(review.date)}
+                    {review.relativeTime || formatReviewDate(review.date)}
                   </time>
                 </div>
 
@@ -198,8 +211,24 @@ export function CustomerReviews() {
 
               <div className="mt-5 border-t border-slate-100 pt-3.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-extrabold text-[#0F172A]">{review.authorName}</span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700">
+                  <div className="flex items-center gap-2 min-w-0">
+                    {review.profilePhotoUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={review.profilePhotoUrl}
+                        alt={review.authorName}
+                        className="h-6 w-6 shrink-0 rounded-full object-cover"
+                      />
+                    ) : (
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E3A8A] text-[9.5px] font-bold text-white">
+                        {getAuthorInitials(review.authorName)}
+                      </span>
+                    )}
+                    <span className="truncate text-xs font-extrabold text-[#0F172A]">
+                      {review.authorName}
+                    </span>
+                  </div>
+                  <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-bold text-emerald-700">
                     ✓ Doğrulandı
                   </span>
                 </div>

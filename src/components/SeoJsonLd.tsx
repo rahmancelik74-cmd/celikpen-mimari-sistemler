@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../config/site.config';
-import { TESTIMONIALS } from '../config/testimonials.config';
+import { GOOGLE_MAPS_REVIEW_URL, TESTIMONIALS } from '../config/testimonials.config';
 import { CELIKPEN_PRICING_CONFIG } from '../config/pricing.config';
 import {
   SEO_BUSINESS,
@@ -58,7 +58,7 @@ const AREA_SERVED = [
 
 const SAME_AS_PROFILES = [
   'https://www.instagram.com/celikpen',
-  'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul',
+  GOOGLE_MAPS_REVIEW_URL,
   'https://www.winsa.com.tr/',
   'https://www.albertgenau.com/',
 ];
@@ -157,8 +157,7 @@ export function SeoJsonLd() {
           latitude: SEO_BUSINESS.geo.latitude,
           longitude: SEO_BUSINESS.geo.longitude,
         },
-        hasMap:
-          'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul',
+        hasMap: GOOGLE_MAPS_REVIEW_URL,
         sameAs: SAME_AS_PROFILES,
         knowsAbout: KNOWS_ABOUT_TOPICS,
         openingHoursSpecification: [OPENING_HOURS],

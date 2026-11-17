@@ -51,8 +51,8 @@ export const SITE_CONFIG = {
   whatsappNumber: '905323332085', // Başında + olmadan ülke kodu ile
   workingHours: 'Pazartesi - Cumartesi: 08:30 - 19:30',
   coordinates: {
-    latitude: 41.0151,
-    longitude: 28.8339,
+    latitude: 41.0225161,
+    longitude: 28.8353366,
   },
   warranties: {
     glassCertification: 'TSE EN 12150 Şişecam Temperli & Isıcam Konfor Sertifikalı',

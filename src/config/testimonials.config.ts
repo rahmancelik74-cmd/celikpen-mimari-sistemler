@@ -10,7 +10,7 @@ export interface Testimonial {
 }
 
 export const GOOGLE_MAPS_REVIEW_URL =
-  'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No+30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+  'https://www.google.com/maps/place/Pimapen+tamircisi,+Cam+Balkon,+Al%C3%BCminyum+do%C4%9Frama+ve+Sineklik/@41.0225161,28.8353366,19z/data=!3m1!4b1!4m6!3m5!1s0x14caa4e835eefa23:0xa7492c8743470278!8m2!3d41.0225161!4d28.8353366!16s%2Fg%2F11hckdph8v';
 
 export const TESTIMONIALS: Testimonial[] = [
   {
