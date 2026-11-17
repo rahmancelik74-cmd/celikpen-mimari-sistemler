@@ -8,6 +8,7 @@ import {
 } from '../lib/cms';
 
 const STORAGE_KEY = 'celikpen_cms_cache_v1';
+const LIVE_OVERRIDE_KEY = 'celikpen_cms_live_override';
 export const CMS_UPDATE_EVENT = 'celikpen-cms-updated';
 
 interface CmsContextValue {
@@ -22,17 +23,27 @@ const CmsContext = createContext<CmsContextValue>({
   refreshCms: async () => {},
 });
 
+function persistToLocalStorage(data: CmsStoreData) {
+  try {
+    const json = JSON.stringify(data);
+    window.localStorage.setItem(STORAGE_KEY, json);
+    window.localStorage.setItem(LIVE_OVERRIDE_KEY, json);
+  } catch {
+    // Ignore storage quota errors
+  }
+}
+
 export function CmsProvider({ children }: { children: React.ReactNode }) {
   const [cms, setCms] = useState<CmsStoreData>(DEFAULT_CMS_DATA);
 
   const setCmsState = useCallback((next: CmsStoreData) => {
     const normalized = normalizeCmsData(next);
     setCms(normalized);
+    persistToLocalStorage(normalized);
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
       window.dispatchEvent(new CustomEvent(CMS_UPDATE_EVENT, { detail: normalized }));
     } catch {
-      // Ignore storage quota errors
+      // Ignore event errors
     }
   }, []);
 
@@ -47,11 +58,7 @@ export function CmsProvider({ children }: { children: React.ReactNode }) {
           const prevTime = new Date(prev.updatedAt || 0).getTime();
           const serverTime = new Date(serverData.updatedAt || 0).getTime();
           const chosen = serverTime >= prevTime ? serverData : prev;
-          try {
-            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(chosen));
-          } catch {
-            // Ignore
-          }
+          persistToLocalStorage(chosen);
           return chosen;
         });
       }
@@ -62,7 +69,9 @@ export function CmsProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const cached = window.localStorage.getItem(STORAGE_KEY);
+      const cached =
+        window.localStorage.getItem(LIVE_OVERRIDE_KEY) ||
+        window.localStorage.getItem(STORAGE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached) as Partial<CmsStoreData>;
         const cachedData = normalizeCmsData(parsed);
@@ -79,7 +88,10 @@ export function CmsProvider({ children }: { children: React.ReactNode }) {
     void refreshCms();
 
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY && event.newValue) {
+      if (
+        (event.key === STORAGE_KEY || event.key === LIVE_OVERRIDE_KEY) &&
+        event.newValue
+      ) {
         try {
           setCms(normalizeCmsData(JSON.parse(event.newValue)));
         } catch {

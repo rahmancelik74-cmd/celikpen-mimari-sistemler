@@ -1,8 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { GOOGLE_MAPS_REVIEW_URL, TESTIMONIALS } from '../config/testimonials.config';
+import type { GoogleReviewItem, GoogleReviewsApiResponse } from '../app/api/google-reviews/route';
+
+interface DisplayReviewCard {
+  id: string;
+  authorName: string;
+  location: string;
+  system: string;
+  rating: number;
+  text: string;
+  date: string;
+  verifiedLabel: string;
+  districtHref: string;
+}
+
+const FALLBACK_CARDS: DisplayReviewCard[] = TESTIMONIALS.map((t, idx) => ({
+  id: `fallback-${idx + 1}`,
+  authorName: t.name,
+  location: t.neighborhoodSlug,
+  system: t.systemCode,
+  rating: t.rating,
+  text: t.comment,
+  date: t.date,
+  verifiedLabel: t.verifiedLabel,
+  districtHref: t.districtHref,
+}));
 
 function formatReviewDate(date: string) {
   const [year, month, day] = date.split('-').map(Number);
@@ -16,6 +41,61 @@ function formatReviewDate(date: string) {
 }
 
 export function CustomerReviews() {
+  const [rating, setRating] = useState<number>(4.9);
+  const [totalReviews, setTotalReviews] = useState<number>(128);
+  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>(GOOGLE_MAPS_REVIEW_URL);
+  const [writeReviewUrl, setWriteReviewUrl] = useState<string>(GOOGLE_MAPS_REVIEW_URL);
+  const [cards, setCards] = useState<DisplayReviewCard[]>(FALLBACK_CARDS);
+
+  useEffect(() => {
+    let active = true;
+    fetch('/api/google-reviews', { cache: 'no-store' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload: GoogleReviewsApiResponse | null) => {
+        if (!active || !payload?.ok) return;
+        if (typeof payload.rating === 'number' && payload.rating > 0) {
+          setRating(payload.rating);
+        }
+        if (typeof payload.totalReviews === 'number' && payload.totalReviews > 0) {
+          setTotalReviews(payload.totalReviews);
+        }
+        if (payload.googleMapsUrl) {
+          setGoogleMapsUrl(payload.googleMapsUrl);
+        }
+        if (payload.writeReviewUrl) {
+          setWriteReviewUrl(payload.writeReviewUrl);
+        }
+        if (
+          payload.mode === 'live_google_places_api' &&
+          Array.isArray(payload.reviews) &&
+          payload.reviews.length > 0
+        ) {
+          setCards(
+            payload.reviews.map((r: GoogleReviewItem) => ({
+              id: r.id,
+              authorName: r.authorName,
+              location: r.location,
+              system: r.system,
+              rating: r.rating,
+              text: r.text,
+              date: r.date,
+              verifiedLabel: r.verifiedLabel,
+              districtHref: r.districtHref,
+            }))
+          );
+        }
+      })
+      .catch(() => {
+        // Preserve static verified fallback
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const formattedRating = rating.toFixed(1);
+
   return (
     <section
       id="yorumlar"
@@ -29,7 +109,7 @@ export function CustomerReviews() {
             <div className="inline-flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#0F172A] shadow-2xs">
                 <GoogleGIcon className="h-4 w-4 shrink-0" />
-                <span>4.9 / 5.0 ★ — Google Haritalar Doğrulanmış İşletme Profili</span>
+                <span>{formattedRating} / 5.0 ★ — Google Haritalar Doğrulanmış İşletme Profili</span>
               </span>
               <span className="rounded-full bg-emerald-100 px-3 py-1 text-[10.5px] font-bold text-emerald-800">
                 ✓ %100 Gerçek Saha Projeleri
@@ -55,19 +135,19 @@ export function CustomerReviews() {
               <GoogleGIcon className="h-8 w-8 shrink-0" />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xl font-black text-[#0F172A]">4.9 / 5.0</span>
+                  <span className="text-xl font-black text-[#0F172A]">{formattedRating} / 5.0</span>
                   <span className="text-sm text-amber-500" aria-hidden="true">
                     ★★★★★
                   </span>
                 </div>
                 <p className="text-[11px] font-semibold text-slate-500">
-                  128+ Google Haritalar Doğrulanmış Değerlendirme
+                  {totalReviews}+ Google Haritalar Doğrulanmış Değerlendirme
                 </p>
               </div>
             </div>
 
             <a
-              href={GOOGLE_MAPS_REVIEW_URL}
+              href={writeReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-xl bg-[#1E3A8A] px-5 py-3 text-xs font-extrabold text-white shadow-navy transition hover:bg-[#1D4ED8]"
@@ -80,9 +160,9 @@ export function CustomerReviews() {
 
         {/* Salt-Okunur (Read-Only) Google Onaylı Yorum Kartları */}
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((review) => (
+          {cards.map((review) => (
             <article
-              key={review.name}
+              key={review.id}
               className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-[#BFDBFE] hover:shadow-md"
             >
               <div>
@@ -101,30 +181,30 @@ export function CustomerReviews() {
                     className="text-sm tracking-wider text-amber-500"
                     aria-label={`${review.rating} / 5 yıldız`}
                   >
-                    {'★'.repeat(review.rating)}
+                    {'★'.repeat(Math.max(1, Math.min(5, Math.round(review.rating))))}
                   </span>
                   <Link
                     href={review.districtHref}
                     className="rounded-md bg-[#EFF6FF] px-2.5 py-0.5 text-[10.5px] font-bold text-[#1E3A8A] hover:underline"
                   >
-                    📍 {review.neighborhoodSlug}
+                    📍 {review.location}
                   </Link>
                 </div>
 
                 <p className="mt-3 text-[12.5px] leading-relaxed text-slate-700">
-                  “{review.comment}”
+                  “{review.text}”
                 </p>
               </div>
 
               <div className="mt-5 border-t border-slate-100 pt-3.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-extrabold text-[#0F172A]">{review.name}</span>
+                  <span className="text-xs font-extrabold text-[#0F172A]">{review.authorName}</span>
                   <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700">
                     ✓ Doğrulandı
                   </span>
                 </div>
                 <span className="mt-1.5 inline-block rounded-lg bg-slate-100 px-2.5 py-1 text-[10px] font-semibold text-[#1E3A8A]">
-                  {review.systemCode}
+                  {review.system}
                 </span>
               </div>
             </article>
@@ -148,7 +228,7 @@ export function CustomerReviews() {
               Tüm Proje Değerlendirmeleri →
             </Link>
             <a
-              href={GOOGLE_MAPS_REVIEW_URL}
+              href={googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl bg-[#1E3A8A] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#1D4ED8]"

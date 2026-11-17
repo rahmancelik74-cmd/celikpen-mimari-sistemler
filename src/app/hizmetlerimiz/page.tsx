@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SITE_CONFIG } from '../../config/site.config';
 import { generatePageMetadata } from '../../config/seo.config';
+import { getMergedCmsData } from '../../lib/cms-server';
 import {
   JsonLd,
   buildBreadcrumbSchema,
@@ -247,7 +248,24 @@ const WORKFLOW_STEPS = [
   },
 ];
 
-export default function HizmetlerimizPage() {
+export default async function HizmetlerimizPage() {
+  const cms = await getMergedCmsData();
+  const cmsServiceById = new Map(cms.services.map((s) => [s.id, s]));
+  const mergedServices = ARCHITECTURAL_SERVICES.filter((srv) => {
+    const override = cmsServiceById.get(srv.id);
+    return override ? override.active !== false : true;
+  }).map((srv) => {
+    const override = cmsServiceById.get(srv.id);
+    return override
+      ? {
+          ...srv,
+          title: override.title || srv.title,
+          subtitle: override.subtitle || srv.subtitle,
+          image: override.image || srv.image,
+        }
+      : srv;
+  });
+
   const webPageSchema = buildWebPageSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
@@ -335,7 +353,7 @@ export default function HizmetlerimizPage() {
       {/* ============================ 8 CORE ARCHITECTURAL SERVICES GRID (GÜNGÖRPEN MINIMAL VISUAL CARDS) ============================ */}
       <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 sm:pt-14 lg:px-8" aria-label="Hizmetlerimiz Listesi">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {ARCHITECTURAL_SERVICES.map((service) => (
+          {mergedServices.map((service) => (
             <article
               key={service.id}
               id={service.id}

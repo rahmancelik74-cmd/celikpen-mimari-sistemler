@@ -67,14 +67,17 @@ function renderRichParagraph(text: string): React.ReactNode {
 
 export function BlogArticle({
   post,
+  allPosts = BLOG_POSTS,
   backSlot,
   breadcrumbBase = { label: 'Blog', href: '/blog' },
 }: {
   post: BlogPost;
+  allPosts?: BlogPost[];
   backSlot?: React.ReactNode;
   breadcrumbBase?: { label: string; href: string };
 }) {
-  const related = BLOG_POSTS.filter((p) => p.slug !== post.slug)
+  const related = allPosts
+    .filter((p) => p.slug !== post.slug)
     .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category))
     .slice(0, 3);
   const whatsappHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
@@ -211,30 +214,36 @@ export function BlogArticle({
                     ▶ Sistem Video İncelemesi
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="#infografik"
-                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
-                  >
-                    Teknik İnfografik &amp; Analiz
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#kontrol-listesi"
-                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
-                  >
-                    Adım Adım Kontrol Listesi
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#sesli-arama-yanitlari"
-                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
-                  >
-                    Hızlı Yanıtlar (Sesli Arama)
-                  </a>
-                </li>
+                {post.infographic.items.length > 0 && (
+                  <li>
+                    <a
+                      href="#infografik"
+                      className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
+                    >
+                      Teknik İnfografik &amp; Analiz
+                    </a>
+                  </li>
+                )}
+                {post.numberedChecklist.length > 0 && (
+                  <li>
+                    <a
+                      href="#kontrol-listesi"
+                      className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
+                    >
+                      Adım Adım Kontrol Listesi
+                    </a>
+                  </li>
+                )}
+                {post.voiceSearchQa.length > 0 && (
+                  <li>
+                    <a
+                      href="#sesli-arama-yanitlari"
+                      className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
+                    >
+                      Hızlı Yanıtlar (Sesli Arama)
+                    </a>
+                  </li>
+                )}
                 <li>
                   <a
                     href="#sss"

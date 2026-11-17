@@ -104,15 +104,20 @@ export default function AdminContentSeoTab(props: AdminTabProps) {
     const posts = [...draft.blogPosts];
     if (editIdx !== null && posts[editIdx]) posts[editIdx] = article;
     else posts.unshift(article);
+    const deletedBlogSlugs = (draft.deletedBlogSlugs || []).filter(s => s !== finalSlug);
     setShowEditor(false);
-    await saveAllToCms({ ...draft, blogPosts: posts } as CmsStoreData, 'Blog makalesi ve SEO meta etiketleri kaydedildi!');
+    await saveAllToCms({ ...draft, blogPosts: posts, deletedBlogSlugs } as CmsStoreData, 'Blog makalesi ve SEO meta etiketleri kaydedildi!');
   };
 
   const confirmDelete = async () => {
     if (deleteIdx === null) return;
+    const removed = draft.blogPosts[deleteIdx];
     const posts = draft.blogPosts.filter((_, i) => i !== deleteIdx);
+    const deletedBlogSlugs = removed?.slug
+      ? Array.from(new Set([...(draft.deletedBlogSlugs || []), removed.slug]))
+      : draft.deletedBlogSlugs || [];
     setDeleteIdx(null);
-    await saveAllToCms({ ...draft, blogPosts: posts } as CmsStoreData, 'Blog yazısı silindi.');
+    await saveAllToCms({ ...draft, blogPosts: posts, deletedBlogSlugs } as CmsStoreData, 'Blog yazısı silindi.');
   };
 
   const globalIndex = (pageItem: CmsBlogPostItem) => draft.blogPosts.findIndex(p => p.slug === pageItem.slug);

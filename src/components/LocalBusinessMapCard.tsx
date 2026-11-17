@@ -1,20 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SITE_CONFIG } from '../config/site.config';
 import { SEO_BUSINESS } from '../config/seo.config';
 
+interface GoogleReviewsLiveSummary {
+  placeId?: string;
+  rating?: number;
+  totalReviews?: number;
+  googleMapsUrl?: string;
+  writeReviewUrl?: string;
+}
+
 export function LocalBusinessMapCard({ className = '' }: { className?: string }) {
   const [loadMapIframe, setLoadMapIframe] = useState(false);
+  const [liveData, setLiveData] = useState<GoogleReviewsLiveSummary | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetch('/api/google-reviews', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json: (GoogleReviewsLiveSummary & { ok?: boolean }) | null) => {
+        if (active && json?.ok) {
+          setLiveData(json);
+        }
+      })
+      .catch(() => {
+        // Keep static config fallback
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const lat = SEO_BUSINESS.geo.latitude;
   const lng = SEO_BUSINESS.geo.longitude;
-  const googleMapsDirectionsUrl =
+  const fallbackDirectionsUrl =
     'https://www.google.com/maps/dir/?api=1&destination=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No%3A30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
-  const googleMapsSearchUrl =
+  const fallbackReviewUrl =
     'https://www.google.com/maps/search/?api=1&query=Kocasinan+Merkez+Mah.+K%C4%B1z%C4%B1lelma+Cad.+No%3A30%2FC+34186+Bah%C3%A7elievler+%C4%B0stanbul';
+  const googleMapsDirectionsUrl = liveData?.placeId
+    ? liveData.googleMapsUrl || `https://www.google.com/maps/place/?q=place_id:${encodeURIComponent(liveData.placeId)}`
+    : fallbackDirectionsUrl;
+  const googleMapsWriteReviewUrl = liveData?.placeId
+    ? liveData.writeReviewUrl || `https://search.google.com/local/writereview?placeid=${encodeURIComponent(liveData.placeId)}`
+    : liveData?.writeReviewUrl || fallbackReviewUrl;
   const embedMapUrl =
     'https://maps.google.com/maps?q=Kocasinan%20Merkez%20Mah.%20K%C4%B1z%C4%B1lelma%20Cad.%20No%3A30%2FC%20Bah%C3%A7elievler%20%C4%B0stanbul&t=&z=17&ie=UTF8&iwloc=&output=embed';
+  const displayRating = liveData?.rating ?? SEO_BUSINESS.aggregateRating.ratingValue;
+  const displayReviewCount = liveData?.totalReviews ?? SEO_BUSINESS.aggregateRating.reviewCount;
 
   return (
     <section
@@ -38,10 +72,10 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
           </div>
 
           <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2">
-            <span className="text-lg font-black text-amber-400">★ {SEO_BUSINESS.aggregateRating.ratingValue}</span>
+            <span className="text-lg font-black text-amber-400">★ {displayRating}</span>
             <div className="text-[10.5px] leading-tight text-slate-300">
               <strong className="block font-bold text-white">
-                {SEO_BUSINESS.aggregateRating.reviewCount}+ Doğrulanmış Müşteri
+                {displayReviewCount}+ Doğrulanmış Müşteri
               </strong>
               <span>Bahçelievler / İstanbul</span>
             </div>
@@ -113,7 +147,7 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
             </a>
 
             <a
-              href={googleMapsSearchUrl}
+              href={googleMapsWriteReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-seo-event="google_business_review_click"

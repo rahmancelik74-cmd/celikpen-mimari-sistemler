@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { SITE_CONFIG } from '../../../../config/site.config';
 import { absoluteUrl } from '../../../../config/seo.config';
-import { getAllBlogSlugs, getBlogPost } from '../../../../data/blogPosts';
+import { getAllBlogSlugs } from '../../../../data/blogPosts';
+import { getMergedRichBlogPost, getMergedRichBlogPosts } from '../../../../lib/cms-server';
 import { BlogArticle } from '../../../../components/blog/BlogArticle';
 import {
   blogPostPath,
@@ -13,7 +14,7 @@ import {
 } from '../../../../components/blog/blogSchema';
 import { JsonLd, buildBreadcrumbSchema } from '../../../../components/SeoJsonLd';
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
@@ -25,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getMergedRichBlogPost(slug);
   if (!post) return {};
 
   const canonical = absoluteUrl(blogPostPath(post.slug, '/profesyoneller/blog'));
@@ -76,7 +77,10 @@ export default async function ProfessionalBlogPostDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const [post, allPosts] = await Promise.all([
+    getMergedRichBlogPost(slug),
+    getMergedRichBlogPosts(),
+  ]);
   if (!post) notFound();
 
   const breadcrumbSchema = buildBreadcrumbSchema([
@@ -95,6 +99,7 @@ export default async function ProfessionalBlogPostDetailPage({
       <JsonLd data={faqSchema} id={`prof-blog-${post.slug}-faq-jsonld`} />
       <BlogArticle
         post={post}
+        allPosts={allPosts}
         breadcrumbBase={{ label: 'Profesyoneller / Blog', href: '/profesyoneller/blog' }}
         backSlot={
           <Link

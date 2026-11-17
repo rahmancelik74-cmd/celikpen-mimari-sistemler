@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
-import { readCmsFromBlob, writeCmsToBlob } from '../../../../lib/blob-storage';
+import { normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
+import { getMergedCmsData } from '../../../../lib/cms-server';
+import { writeCmsToBlob } from '../../../../lib/blob-storage';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -11,29 +12,52 @@ export const revalidate = 0;
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
 const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
 
-async function readCmsStoreFromFile(): Promise<CmsStoreData> {
-  try {
-    const rawText = await fs.readFile(CMS_FILE_PATH, 'utf-8');
-    const parsed = JSON.parse(rawText) as Partial<CmsStoreData>;
-    return normalizeCmsData(parsed);
-  } catch {
-    return DEFAULT_CMS_DATA;
-  }
-}
+async function commitCmsToGitHubIfConfigured(content: string): Promise<boolean> {
+  const token = process.env.GITHUB_TOKEN || '';
+  if (!token) return false;
 
-async function readCmsStore(): Promise<CmsStoreData> {
-  const blobData = await readCmsFromBlob();
-  if (blobData) {
-    const fileData = await readCmsStoreFromFile();
-    const blobTime = new Date(blobData.updatedAt || 0).getTime();
-    const fileTime = new Date(fileData.updatedAt || 0).getTime();
-    return blobTime >= fileTime ? normalizeCmsData(blobData) : fileData;
+  const repo = process.env.GITHUB_REPO || 'rahmancelik74-cmd/celikpen-mimari-sistemler';
+  const filePath = 'src/data/cms-store.json';
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+
+  try {
+    const existingRes = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+      },
+      cache: 'no-store',
+    });
+
+    let sha: string | undefined;
+    if (existingRes.ok) {
+      const existing = (await existingRes.json()) as { sha?: string };
+      sha = existing.sha;
+    }
+
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'chore(cms): admin paneli iki yonlu senkronizasyon guncellemesi',
+        content: Buffer.from(content, 'utf-8').toString('base64'),
+        ...(sha ? { sha } : {}),
+        branch: 'main',
+      }),
+    });
+
+    return putRes.ok;
+  } catch {
+    return false;
   }
-  return readCmsStoreFromFile();
 }
 
 export async function GET() {
-  const data = await readCmsStore();
+  const data = await getMergedCmsData();
   return NextResponse.json(
     {
       ok: true,
@@ -66,26 +90,30 @@ export async function POST(request: Request) {
       );
     }
 
-    const currentData = await readCmsStore();
+    const currentData = await getMergedCmsData();
     const mergedData: CmsStoreData = normalizeCmsData({
       ...currentData,
       ...(body.data || {}),
       updatedAt: new Date().toISOString(),
     });
 
+    const serialized = JSON.stringify(mergedData, null, 2);
+
     let persistedToDisk = false;
     try {
       await fs.mkdir(path.dirname(CMS_FILE_PATH), { recursive: true });
-      await fs.writeFile(CMS_FILE_PATH, JSON.stringify(mergedData, null, 2), 'utf-8');
+      await fs.writeFile(CMS_FILE_PATH, serialized, 'utf-8');
       persistedToDisk = true;
     } catch {
       persistedToDisk = false;
     }
 
     const persistedToBlob = await writeCmsToBlob(mergedData);
+    const persistedToGitHub = await commitCmsToGitHubIfConfigured(serialized);
 
     try {
       revalidatePath('/', 'layout');
+      revalidatePath('/');
       revalidatePath('/projelerimiz');
       revalidatePath('/fiyat-hesapla');
       revalidatePath('/profesyoneller/referanslar');
@@ -94,19 +122,27 @@ export async function POST(request: Request) {
       revalidatePath('/blog');
       revalidatePath('/profesyoneller/blog');
       revalidatePath('/iletisim');
+      revalidatePath('/kurumsal');
+      revalidatePath('/yorumlar');
+      revalidatePath('/sitemap.xml');
+      for (const post of mergedData.blogPosts) {
+        revalidatePath(`/blog/${post.slug}`);
+        revalidatePath(`/profesyoneller/blog/${post.slug}`);
+      }
     } catch {
       // Ignore revalidation errors in edge contexts
     }
 
-    const persisted = persistedToDisk || persistedToBlob;
+    const persisted = persistedToDisk || persistedToBlob || persistedToGitHub;
 
     return NextResponse.json({
       ok: true,
       persistedToDisk,
       persistedToBlob,
+      persistedToGitHub,
       message: persisted
         ? 'Değişiklikler başarıyla kaydedildi ve tüm sitede anında güncellendi.'
-        : 'Değişiklikler tarayıcı belleğine kaydedildi (Canlı sunucuya kalıcı işlemek için Vercel Blob Storage ayarlayın veya GitHub senkronizasyonunu kullanın).',
+        : 'Değişiklikler tarayıcı belleğine kaydedildi (Canlı sunucuya kalıcı işlemek için Vercel Blob Storage veya GITHUB_TOKEN ayarlayın).',
       data: mergedData,
     });
   } catch (error) {

@@ -2,13 +2,16 @@ import { NextResponse } from 'next/server';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { ANALYTICS_CONFIG, INDEXNOW_STATIC_KEY } from '../../../config/analytics.config';
 import { ARCHITECTURAL_VIDEO_CATALOG, getVideoForSlug } from '../../../config/videos.config';
-import { BLOG_POSTS } from '../../../data/blogPosts';
+import { getMergedRichBlogPosts } from '../../../lib/cms-server';
 import sitemap from '../../sitemap';
 
 export async function GET() {
-  const sitemapEntries = sitemap();
+  const [sitemapEntries, blogPosts] = await Promise.all([
+    sitemap(),
+    getMergedRichBlogPosts(),
+  ]);
 
-  const blogAudits = BLOG_POSTS.map((post) => {
+  const blogAudits = blogPosts.map((post) => {
     const titleLength = post.seoTitle.length;
     const descriptionLength = post.metaDescription.length;
     const matchedVideo = getVideoForSlug(post.slug);

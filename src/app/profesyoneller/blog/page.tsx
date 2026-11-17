@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { generatePageMetadata } from '../../../config/seo.config';
 import { BLOG_POSTS, FEATURED_BLOG_POST } from '../../../data/blogPosts';
+import { getMergedRichBlogPosts } from '../../../lib/cms-server';
 import { BlogHub } from '../../../components/blog/BlogHub';
 import {
   buildAggregateFaqSchema,
@@ -30,8 +31,11 @@ export const metadata: Metadata = generatePageMetadata({
   imageAlt: FEATURED_BLOG_POST.imageAlt,
 });
 
-export default function ProfessionalBlogPage() {
+export default async function ProfessionalBlogPage() {
   const path = '/profesyoneller/blog';
+  const posts = await getMergedRichBlogPosts();
+  const featured = posts.find((p) => p.featured) ?? posts[0] ?? FEATURED_BLOG_POST;
+
   const webPageSchema = buildWebPageSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
@@ -43,9 +47,9 @@ export default function ProfessionalBlogPage() {
     { name: 'Profesyoneller', path: '/profesyoneller' },
     { name: 'Blog', path },
   ]);
-  const blogSchema = buildBlogSchema(BLOG_POSTS, path);
-  const featuredArticleSchema = buildBlogPostingSchema(FEATURED_BLOG_POST);
-  const faqSchema = buildAggregateFaqSchema(hubFaqs(BLOG_POSTS), path);
+  const blogSchema = buildBlogSchema(posts, path);
+  const featuredArticleSchema = buildBlogPostingSchema(featured);
+  const faqSchema = buildAggregateFaqSchema(hubFaqs(posts), path);
 
   return (
     <main>
@@ -54,7 +58,7 @@ export default function ProfessionalBlogPage() {
       <JsonLd data={blogSchema} id="profesyoneller-blog-jsonld" />
       <JsonLd data={featuredArticleSchema} id="profesyoneller-blog-featured-article-jsonld" />
       <JsonLd data={faqSchema} id="profesyoneller-blog-faq-jsonld" />
-      <BlogHub basePath={path} breadcrumbLabel="Profesyoneller / Blog" />
+      <BlogHub basePath={path} breadcrumbLabel="Profesyoneller / Blog" initialPosts={posts} />
     </main>
   );
 }

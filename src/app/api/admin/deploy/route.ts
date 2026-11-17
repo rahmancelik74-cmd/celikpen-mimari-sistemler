@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { SITE_CONFIG } from '../../../../config/site.config';
 import { ANALYTICS_CONFIG, INDEXNOW_STATIC_KEY } from '../../../../config/analytics.config';
+import { getMergedRichBlogPosts } from '../../../../lib/cms-server';
 import sitemap from '../../../sitemap';
 
 export const dynamic = 'force-dynamic';
@@ -13,10 +14,12 @@ const REVALIDATE_TARGETS = [
   '/blog',
   '/profesyoneller/blog',
   '/hizmetlerimiz',
+  '/urunler',
+  '/projelerimiz',
+  '/profesyoneller/referanslar',
   '/kurumsal',
   '/iletisim',
   '/fiyat-hesapla',
-  '/urunler',
   '/yorumlar',
   '/sitemap.xml',
 ];
@@ -35,11 +38,17 @@ export async function POST(request: Request) {
       );
     }
 
+    const blogPosts = await getMergedRichBlogPosts().catch(() => []);
+
     /* 1. Next.js ISR & Route Önbelleklerini Anında Temizle */
     try {
       revalidatePath('/', 'layout');
       for (const route of REVALIDATE_TARGETS) {
         revalidatePath(route);
+      }
+      for (const post of blogPosts) {
+        revalidatePath(`/blog/${post.slug}`);
+        revalidatePath(`/profesyoneller/blog/${post.slug}`);
       }
     } catch {
       // Edge / dev ortamında revalidate hatalarını yoksay
@@ -58,7 +67,7 @@ export async function POST(request: Request) {
     }
 
     /* 3. IndexNow ile celikpen.com.tr URL'lerini Google/Bing/Yandex'e bildir */
-    const entries = sitemap();
+    const entries = await sitemap();
     const urlList = entries.map((entry) => entry.url);
     const host = new URL(SITE_CONFIG.siteUrl).host;
     const key = ANALYTICS_CONFIG.indexNowKey || INDEXNOW_STATIC_KEY;

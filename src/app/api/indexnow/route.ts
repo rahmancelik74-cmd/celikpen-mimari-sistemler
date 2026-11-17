@@ -9,7 +9,7 @@ import sitemap from '../../sitemap';
  * POST: Arama motorlarına anlık URL güncelleme bildirimi gönderir.
  */
 export async function GET() {
-  const entries = sitemap();
+  const entries = await sitemap();
   const urlList = entries.map((entry) => entry.url);
   const host = new URL(SITE_CONFIG.siteUrl).host;
   const key = ANALYTICS_CONFIG.indexNowKey || INDEXNOW_STATIC_KEY;
@@ -26,7 +26,7 @@ export async function GET() {
 }
 
 export async function POST() {
-  const entries = sitemap();
+  const entries = await sitemap();
   const urlList = entries.map((entry) => entry.url);
   const host = new URL(SITE_CONFIG.siteUrl).host;
   const key = ANALYTICS_CONFIG.indexNowKey || INDEXNOW_STATIC_KEY;

@@ -3,15 +3,16 @@ import { SITE_CONFIG } from '../config/site.config';
 import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
-import { BLOG_POSTS } from '../data/blogPosts';
+import { getMergedRichBlogPosts } from '../lib/cms-server';
 
 /**
  * Tüm kamuya açık rotaları tek kaynaktan üretir.
  * Öncelikler: ana sayfa 1.0, ürünler & bölgeler 0.9, blog ve alt sayfalar 0.85.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE_CONFIG.siteUrl;
   const now = new Date();
+  const blogPosts = await getMergedRichBlogPosts().catch(() => []);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -149,7 +150,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((post) => [
+  const blogArticleRoutes: MetadataRoute.Sitemap = blogPosts.flatMap((post) => [
     {
       url: `${base}/blog/${post.slug}`,
       lastModified: new Date(`${post.updatedDate}T00:00:00Z`),

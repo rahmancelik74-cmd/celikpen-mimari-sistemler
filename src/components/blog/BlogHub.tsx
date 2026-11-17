@@ -4,15 +4,13 @@ import React, { useCallback, useDeferredValue, useEffect, useMemo, useState } fr
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ALL_BLOG_TAGS,
-  BLOG_CATEGORIES,
   BLOG_POSTS,
-  FEATURED_BLOG_POST,
   formatBlogDate,
-  getBlogPost,
   type BlogCategory,
   type BlogPost,
 } from '../../data/blogPosts';
+import { useCms } from '../CmsProvider';
+import { DEFAULT_CMS_DATA, mergeCmsToRichBlogPosts } from '../../lib/cms';
 import { BlogArticle } from './BlogArticle';
 import { blogPostPath, hubFaqs } from './blogSchema';
 
@@ -21,10 +19,42 @@ const READER_PARAM = 'yazi';
 export function BlogHub({
   basePath,
   breadcrumbLabel = 'Blog',
+  initialPosts = BLOG_POSTS,
 }: {
   basePath: string;
   breadcrumbLabel?: string;
+  initialPosts?: BlogPost[];
 }) {
+  const { cms } = useCms();
+  const posts = useMemo(() => {
+    const defaultTime = new Date(DEFAULT_CMS_DATA.updatedAt || 0).getTime();
+    const cmsTime = new Date(cms.updatedAt || 0).getTime();
+    if (cmsTime > defaultTime && cms.blogPosts?.length > 0) {
+      return mergeCmsToRichBlogPosts(cms);
+    }
+    return initialPosts.length > 0 ? initialPosts : BLOG_POSTS;
+  }, [cms, initialPosts]);
+
+  const categories = useMemo(
+    () => Array.from(new Set(posts.map((p) => p.category))),
+    [posts]
+  );
+  const allTags = useMemo(
+    () => Array.from(new Set(posts.flatMap((p) => p.tags))),
+    [posts]
+  );
+  const featuredPost = useMemo(
+    () => posts.find((p) => p.featured) ?? posts[0],
+    [posts]
+  );
+  const findPost = useCallback(
+    (slug: string) =>
+      posts.find(
+        (post) => post.slug === slug || (post.slugAliases ?? []).includes(slug)
+      ),
+    [posts]
+  );
+
   const [query, setQuery] = useState('');
   const deferredQuery = useDeferredValue(query);
   const [category, setCategory] = useState<'all' | BlogCategory>('all');
@@ -36,13 +66,13 @@ export function BlogHub({
       const params = new URLSearchParams(window.location.search);
       const slug = params.get(READER_PARAM);
       const tagParam = params.get('etiket');
-      setActiveSlug(slug && getBlogPost(slug) ? slug : null);
+      setActiveSlug(slug && findPost(slug) ? slug : null);
       if (tagParam) setSelectedTag(tagParam);
     };
     sync();
     window.addEventListener('popstate', sync);
     return () => window.removeEventListener('popstate', sync);
-  }, []);
+  }, [findPost]);
 
   const closePost = useCallback(() => {
     window.history.pushState({}, '', basePath);
@@ -52,7 +82,7 @@ export function BlogHub({
 
   const filtered = useMemo(() => {
     const q = deferredQuery.trim().toLocaleLowerCase('tr-TR');
-    return BLOG_POSTS.filter((post) => {
+    return posts.filter((post) => {
       const inCategory = category === 'all' || post.category === category;
       const inTag = !selectedTag || post.tags.includes(selectedTag);
       const haystack = [
@@ -68,14 +98,15 @@ export function BlogHub({
         .toLocaleLowerCase('tr-TR');
       return inCategory && inTag && (!q || haystack.includes(q));
     });
-  }, [category, selectedTag, deferredQuery]);
+  }, [posts, category, selectedTag, deferredQuery]);
 
-  const activePost = activeSlug ? getBlogPost(activeSlug) : undefined;
+  const activePost = activeSlug ? findPost(activeSlug) : undefined;
 
   if (activePost) {
     return (
       <BlogArticle
         post={activePost}
+        allPosts={posts}
         breadcrumbBase={{ label: breadcrumbLabel, href: basePath }}
         backSlot={
           <button
@@ -90,11 +121,11 @@ export function BlogHub({
     );
   }
 
-  const showFeatured = category === 'all' && !selectedTag && !deferredQuery.trim();
-  const gridPosts = showFeatured
-    ? filtered.filter((p) => p.slug !== FEATURED_BLOG_POST.slug)
+  const showFeatured = Boolean(featuredPost) && category === 'all' && !selectedTag && !deferredQuery.trim();
+  const gridPosts = showFeatured && featuredPost
+    ? filtered.filter((p) => p.slug !== featuredPost.slug)
     : filtered;
-  const faqs = hubFaqs(BLOG_POSTS);
+  const faqs = hubFaqs(posts);
 
   return (
     <>
@@ -123,7 +154,7 @@ export function BlogHub({
             İstanbul Avrupa Yakası Cam Balkon, Winsa PVC ve Kış Bahçesi Mühendislik Rehberleri
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            2026 güncel m² birim fiyatları, ısı ve ses yalıtımı ($U_w$, dB) karşılaştırmaları, TSE EN 14351-1 standartları ve 30 yıllık Avrupa Yakası saha tecrübemizle hazırlanan 15 kapsamlı teknik rehber.
+            2026 güncel m² birim fiyatları, ısı ve ses yalıtımı ($U_w$, dB) karşılaştırmaları, TSE EN 14351-1 standartları ve 30 yıllık Avrupa Yakası saha tecrübemizle hazırlanan {posts.length} kapsamlı teknik rehber.
           </p>
 
           {/* Arama + kategori filtresi */}
@@ -143,7 +174,7 @@ export function BlogHub({
               aria-label="Kategoriler"
               className="flex flex-wrap gap-1.5"
             >
-              {(['all', ...BLOG_CATEGORIES] as const).map((cat) => {
+              {(['all', ...categories] as const).map((cat) => {
                 const active = category === cat;
                 return (
                   <button
@@ -158,7 +189,7 @@ export function BlogHub({
                         : 'border border-white/15 bg-white/5 text-slate-200 hover:bg-white/15'
                     }`}
                   >
-                    {cat === 'all' ? 'Tümü (15)' : cat}
+                    {cat === 'all' ? `Tümü (${posts.length})` : cat}
                   </button>
                 );
               })}
@@ -168,7 +199,7 @@ export function BlogHub({
           {/* Popüler Etiketler (Tags) */}
           <div className="mt-4 flex flex-wrap items-center gap-1.5">
             <span className="mr-1 text-[11px] font-semibold text-sky-200">Popüler Etiketler:</span>
-            {ALL_BLOG_TAGS.slice(0, 12).map((tag) => {
+            {allTags.slice(0, 12).map((tag) => {
               const active = selectedTag === tag;
               return (
                 <button
@@ -200,16 +231,16 @@ export function BlogHub({
 
       <div className="container-shell py-10 sm:py-14">
         {/* ------------------------------ Öne Çıkan Makale ------------------------------ */}
-        {showFeatured && (
+        {showFeatured && featuredPost && (
           <article className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:grid-cols-2">
             <Link
-              href={blogPostPath(FEATURED_BLOG_POST.slug, basePath)}
+              href={blogPostPath(featuredPost.slug, basePath)}
               className="relative block aspect-[16/10] lg:aspect-auto lg:min-h-[380px]"
             >
               <Image
-                src={FEATURED_BLOG_POST.image}
-                alt={FEATURED_BLOG_POST.imageAlt}
-                title={FEATURED_BLOG_POST.imageTitle}
+                src={featuredPost.image}
+                alt={featuredPost.imageAlt}
+                title={featuredPost.imageTitle}
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -222,34 +253,34 @@ export function BlogHub({
             <div className="flex flex-col justify-center p-6 sm:p-8">
               <div className="flex flex-wrap items-center gap-2 text-[11px]">
                 <span className="rounded-full bg-sky-50 px-2.5 py-1 font-semibold text-sky-700">
-                  {FEATURED_BLOG_POST.category}
+                  {featuredPost.category}
                 </span>
-                <span className="text-slate-500">{FEATURED_BLOG_POST.readTime} dk okuma</span>
+                <span className="text-slate-500">{featuredPost.readTime} dk okuma</span>
                 <span className="text-slate-400">·</span>
-                <time dateTime={FEATURED_BLOG_POST.updatedDate} className="text-slate-500">
-                  {formatBlogDate(FEATURED_BLOG_POST.updatedDate)}
+                <time dateTime={featuredPost.updatedDate} className="text-slate-500">
+                  {formatBlogDate(featuredPost.updatedDate)}
                 </time>
               </div>
 
               <h2 className="mt-3 text-xl font-bold leading-snug text-[#0F172A] sm:text-2xl">
                 <Link
-                  href={blogPostPath(FEATURED_BLOG_POST.slug, basePath)}
+                  href={blogPostPath(featuredPost.slug, basePath)}
                   className="hover:text-[#1E3A8A]"
                 >
-                  {FEATURED_BLOG_POST.title}
+                  {featuredPost.title}
                 </Link>
               </h2>
 
               <p className="mt-1.5 text-[11.5px] font-medium text-slate-500">
-                Hazırlayan: <strong className="text-slate-700">{FEATURED_BLOG_POST.author.name}</strong> ({FEATURED_BLOG_POST.author.role})
+                Hazırlayan: <strong className="text-slate-700">{featuredPost.author.name}</strong> ({featuredPost.author.role})
               </p>
 
               <p className="mt-3 text-[13.5px] leading-relaxed text-slate-600">
-                {FEATURED_BLOG_POST.excerpt}
+                {featuredPost.excerpt}
               </p>
 
               <ul className="mt-4 space-y-1.5">
-                {FEATURED_BLOG_POST.highlights.map((h) => (
+                {featuredPost.highlights.map((h) => (
                   <li key={h} className="flex gap-2 text-[12.5px] text-slate-700">
                     <span
                       aria-hidden="true"
@@ -261,7 +292,7 @@ export function BlogHub({
               </ul>
 
               <div className="mt-4 flex flex-wrap gap-1.5">
-                {FEATURED_BLOG_POST.tags.map((tag) => (
+                {featuredPost.tags.map((tag) => (
                   <button
                     key={tag}
                     type="button"
@@ -274,7 +305,7 @@ export function BlogHub({
               </div>
 
               <Link
-                href={blogPostPath(FEATURED_BLOG_POST.slug, basePath)}
+                href={blogPostPath(featuredPost.slug, basePath)}
                 className="mt-6 inline-flex min-h-[46px] w-fit items-center rounded-xl bg-[#1E3A8A] px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
               >
                 Rehberi Oku →
@@ -287,7 +318,7 @@ export function BlogHub({
         <section aria-labelledby="tum-rehberler" className={showFeatured ? 'mt-12' : ''}>
           <div className="flex items-end justify-between gap-4">
             <h2 id="tum-rehberler" className="text-lg font-bold text-[#0F172A] sm:text-xl">
-              {showFeatured ? 'Tüm Teknik Rehberler (15 Otorite Makale)' : `${filtered.length} rehber bulundu`}
+              {showFeatured ? `Tüm Teknik Rehberler (${posts.length} Otorite Makale)` : `${filtered.length} rehber bulundu`}
             </h2>
           </div>
           {gridPosts.length === 0 ? (
