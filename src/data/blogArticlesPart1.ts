@@ -51,7 +51,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 12,
     publishDate: '2026-01-10',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-01-istanbul-fiyatlari.jpeg',
+    image: '/images/blog/blog-01-istanbul-fiyatlari.jpg',
     imageAlt:
       '2026 İstanbul Avrupa Yakası panoramik ısıcamlı katlanır cam balkon uygulaması ve m² maliyet rehberi — Çelikpen',
     imageCaption:
@@ -274,7 +274,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-01-18',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-02-isicamli-vs-klasik.jpeg',
+    image: '/images/blog/blog-02-isicamli-vs-klasik.jpg',
     imageAlt:
       'Winsa Vera Termal 4+20+4 mm argon gazlı ısıcamlı cam balkon ile klasik tek camlı sistemin ısı yalıtım karşılaştırması',
     imageCaption:
@@ -440,7 +440,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-02-02',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-03-bakirkoy-florya.jpeg',
+    image: '/images/blog/blog-03-bakirkoy-florya.jpg',
     imageAlt:
       'Bakırköy Florya ve Yeşilköy sahil hattında rüzgar yüküne dayanıklı ısıcamlı cam balkon ve kış bahçesi uygulaması',
     imageCaption:
@@ -598,7 +598,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 12,
     publishDate: '2026-02-10',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-04-zekeriyakoy-villa.jpeg',
+    image: '/images/blog/blog-04-zekeriyakoy-villa.jpg',
     imageAlt:
       'Sarıyer Zekeriyaköy ve Göktürk villalarında motorlu bioklimatik pergola ve lamine ısıcamlı kış bahçesi uygulaması',
     imageCaption:
@@ -756,7 +756,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-02-16',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-05-besiktas-giyotin.jpeg',
+    image: '/images/blog/blog-05-besiktas-giyotin.jpg',
     imageAlt:
       'Beşiktaş Etiler ve Ulus teraslarında uzaktan kumandalı Somfy motorlu giyotin cam (hareketli küpeşte) uygulaması',
     imageCaption:
@@ -919,7 +919,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 12,
     publishDate: '2026-02-22',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-06-winsa-pvc.jpeg',
+    image: '/images/blog/blog-06-winsa-pvc.jpg',
     imageAlt:
       '2026 Winsa PVC pencere fiyatları: Dorado 76, Revotech Gold 84 mm ve Lotus serisi profil kesit karşılaştırması',
     imageCaption:
@@ -1078,7 +1078,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-03-01',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-07-albert-genau.jpeg',
+    image: '/images/blog/blog-07-albert-genau.jpg',
     imageAlt:
       'Albert Genau Tiara Twinmax ısıcamlı katlanır cam balkon ve SlideMaster eşiksiz sürme sistem detayı',
     imageCaption:
@@ -1236,7 +1236,7 @@ export const BLOG_ARTICLES_PART_1: RawBlogPost[] = [
     readTime: 10,
     publishDate: '2026-03-08',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-08-apartman-izni.jpeg',
+    image: '/images/blog/blog-08-apartman-izni.jpg',
     imageAlt:
       'Apartman ve sitelerde dış cephe rengine uyumlu (Antrasit RAL 7016) yasal cam balkon uygulaması — Çelikpen',
     imageCaption:

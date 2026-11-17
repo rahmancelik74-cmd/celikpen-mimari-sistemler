@@ -47,7 +47,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-03-14',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-09-bahcesehir-guvenlik.jpeg',
+    image: '/images/blog/blog-09-bahcesehir-guvenlik.jpg',
     imageAlt:
       'Başakşehir Bahçeşehir ve Beylikdüzü yüksek katlı konutlarda 10 mm temperli ve ısıcamlı güvenli cam balkon uygulaması',
     imageCaption:
@@ -207,7 +207,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 10,
     publishDate: '2026-03-20',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-10-esiksiz-surme.jpeg',
+    image: '/images/blog/blog-10-esiksiz-surme.jpg',
     imageAlt:
       'Eşiksiz sürme cam balkon ile katlanır cam balkon sisteminin balkon alanı kullanımı karşılaştırması',
     imageCaption:
@@ -358,7 +358,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-03-26',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-11-kafe-giyotin.jpeg',
+    image: '/images/blog/blog-11-kafe-giyotin.jpg',
     imageAlt:
       'Kafe ve restoran dış mekanlarında Somfy motorlu giyotin cam ve bioklimatik pergola (Rolling Roof) uygulaması',
     imageCaption:
@@ -508,7 +508,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 10,
     publishDate: '2026-04-02',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-12-epdm-izolasyon.jpeg',
+    image: '/images/blog/blog-12-epdm-izolasyon.jpg',
     imageAlt:
       'Su almayan ve rüzgar sesi yapmayan alüminyum mıknatıslı fitilli ve EPDM contalı cam balkon detayı',
     imageCaption:
@@ -668,7 +668,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-04-08',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-13-sisecam-konfor.jpeg',
+    image: '/images/blog/blog-13-sisecam-konfor.jpg',
     imageAlt:
       'Şişecam Isıcam Konfor (Solar Low-E) ve Isıcam Sinerji (Low-E) katman yapısı ve ısı yansıtma prensibi',
     imageCaption:
@@ -825,7 +825,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 9,
     publishDate: '2026-04-14',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-14-plise-sineklik.jpeg',
+    image: '/images/blog/blog-14-plise-sineklik.jpg',
     imageAlt:
       'Cam balkon ve PVC pencereler için patiye dayanıklı yırtılmaz kedi tüllü sineklik ve plise sineklik sistemi',
     imageCaption:
@@ -980,7 +980,7 @@ export const BLOG_ARTICLES_PART_2: RawBlogPost[] = [
     readTime: 11,
     publishDate: '2026-04-20',
     updatedDate: '2026-11-01',
-    image: '/images/blog/blog-15-kentsel-donusum.jpeg',
+    image: '/images/blog/blog-15-kentsel-donusum.jpg',
     imageAlt:
       'Bahçelievler, Bağcılar ve Küçükçekmece yeni kentsel dönüşüm binalarında Antrasit RAL 7016 Winsa PVC doğrama ve ısıcamlı cam balkon uygulaması',
     imageCaption:

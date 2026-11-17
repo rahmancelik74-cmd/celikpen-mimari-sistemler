@@ -3,7 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import { SITE_CONFIG } from '../config/site.config';
 import { SEO_BUSINESS } from '../config/seo.config';
-import { GOOGLE_MAPS_REVIEW_URL } from '../config/testimonials.config';
+import {
+  EXACT_COORDINATES,
+  EXACT_EMBED_MAP_URL,
+  EXACT_GOOGLE_MAPS_URL,
+  EXACT_WRITE_REVIEW_URL,
+  getExactWriteReviewUrl,
+} from '../lib/google-business';
 
 interface GoogleReviewsLiveSummary {
   placeId?: string;
@@ -13,8 +19,6 @@ interface GoogleReviewsLiveSummary {
   writeReviewUrl?: string;
   embedMapUrl?: string;
 }
-
-const EXACT_EMBED_MAP_URL = `https://maps.google.com/maps?q=${SEO_BUSINESS.geo.latitude},${SEO_BUSINESS.geo.longitude}&hl=tr&z=18&output=embed`;
 
 export function LocalBusinessMapCard({ className = '' }: { className?: string }) {
   const [loadMapIframe, setLoadMapIframe] = useState(false);
@@ -37,13 +41,12 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
     };
   }, []);
 
-  const lat = SEO_BUSINESS.geo.latitude;
-  const lng = SEO_BUSINESS.geo.longitude;
-  const googleMapsDirectionsUrl = liveData?.googleMapsUrl || GOOGLE_MAPS_REVIEW_URL;
+  const lat = EXACT_COORDINATES.latitude;
+  const lng = EXACT_COORDINATES.longitude;
+  const googleMapsDirectionsUrl = liveData?.googleMapsUrl || EXACT_GOOGLE_MAPS_URL;
   const googleMapsWriteReviewUrl = liveData?.placeId
-    ? liveData.writeReviewUrl ||
-      `https://search.google.com/local/writereview?placeid=${encodeURIComponent(liveData.placeId)}`
-    : liveData?.writeReviewUrl || GOOGLE_MAPS_REVIEW_URL;
+    ? liveData.writeReviewUrl || getExactWriteReviewUrl(liveData.placeId)
+    : liveData?.writeReviewUrl || EXACT_WRITE_REVIEW_URL;
   const embedMapUrl = liveData?.embedMapUrl || EXACT_EMBED_MAP_URL;
   const displayRating = liveData?.rating ?? SEO_BUSINESS.aggregateRating.ratingValue;
   const displayReviewCount = liveData?.totalReviews ?? SEO_BUSINESS.aggregateRating.reviewCount;

@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { GOOGLE_MAPS_REVIEW_URL, TESTIMONIALS } from '../config/testimonials.config';
+import { TESTIMONIALS } from '../config/testimonials.config';
+import { EXACT_GOOGLE_MAPS_URL, EXACT_WRITE_REVIEW_URL } from '../lib/google-business';
 import type { GoogleReviewItem, GoogleReviewsApiResponse } from '../app/api/google-reviews/route';
 
 interface DisplayReviewCard {
@@ -54,8 +55,8 @@ function getAuthorInitials(name: string) {
 export function CustomerReviews() {
   const [rating, setRating] = useState<number>(4.9);
   const [totalReviews, setTotalReviews] = useState<number>(128);
-  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>(GOOGLE_MAPS_REVIEW_URL);
-  const [writeReviewUrl, setWriteReviewUrl] = useState<string>(GOOGLE_MAPS_REVIEW_URL);
+  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>(EXACT_GOOGLE_MAPS_URL);
+  const [writeReviewUrl, setWriteReviewUrl] = useState<string>(EXACT_WRITE_REVIEW_URL);
   const [cards, setCards] = useState<DisplayReviewCard[]>(FALLBACK_CARDS);
 
   useEffect(() => {

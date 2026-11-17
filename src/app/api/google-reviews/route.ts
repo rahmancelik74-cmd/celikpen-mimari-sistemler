@@ -1,19 +1,25 @@
 import { NextResponse } from 'next/server';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { GOOGLE_MAPS_REVIEW_URL, TESTIMONIALS } from '../../../config/testimonials.config';
+import { TESTIMONIALS } from '../../../config/testimonials.config';
 import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../lib/cms';
 import { readCmsFromBlob } from '../../../lib/blob-storage';
+import {
+  EXACT_BUSINESS_NAME,
+  EXACT_BUSINESS_PLACE_ID,
+  EXACT_COORDINATES,
+  EXACT_EMBED_MAP_URL,
+  EXACT_GOOGLE_MAPS_URL,
+  getExactWriteReviewUrl,
+  isValidGooglePlaceId,
+} from '../../../lib/google-business';
 
 export const dynamic = 'force-dynamic';
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
-const EXACT_LAT = 41.0225161;
-const EXACT_LNG = 28.8353366;
-const EXACT_BUSINESS_NAME = 'Pimapen tamircisi, Cam Balkon, Alüminyum doğrama ve Sineklik';
-const EXACT_GOOGLE_MAPS_URL = GOOGLE_MAPS_REVIEW_URL;
-const EXACT_EMBED_MAP_URL = `https://maps.google.com/maps?q=${EXACT_LAT},${EXACT_LNG}&hl=tr&z=18&output=embed`;
-const DEFAULT_GOOGLE_PLACE_ID = (process.env.GOOGLE_PLACE_ID || '').trim();
+const EXACT_LAT = EXACT_COORDINATES.latitude;
+const EXACT_LNG = EXACT_COORDINATES.longitude;
+const DEFAULT_GOOGLE_PLACE_ID = EXACT_BUSINESS_PLACE_ID;
 const PRIMARY_BUSINESS_QUERY = process.env.GOOGLE_BUSINESS_QUERY || EXACT_BUSINESS_NAME;
 const FALLBACK_BUSINESS_QUERY = 'Kızılelma Cad. No: 30/C Bahçelievler İstanbul';
 
@@ -111,18 +117,10 @@ function buildFallbackReviews(): GoogleReviewItem[] {
   }));
 }
 
-function isValidPlaceId(val: string): boolean {
-  return Boolean(val) && !val.includes(' ') && val.length >= 12;
-}
-
 function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
-  const googleMapsUrl = apiMapsUri || EXACT_GOOGLE_MAPS_URL;
-  const writeReviewUrl = isValidPlaceId(placeId)
-    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
-    : EXACT_GOOGLE_MAPS_URL;
   return {
-    googleMapsUrl,
-    writeReviewUrl,
+    googleMapsUrl: apiMapsUri || EXACT_GOOGLE_MAPS_URL,
+    writeReviewUrl: getExactWriteReviewUrl(placeId),
     embedMapUrl: EXACT_EMBED_MAP_URL,
   };
 }
@@ -227,6 +225,7 @@ async function resolveGoogleReviews(
   ).trim();
 
   const fallbackReviews = buildFallbackReviews();
+  const isValidPlaceId = isValidGooglePlaceId;
   const defaultAddress =
     'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul';
   let apiDiagnostic = '';

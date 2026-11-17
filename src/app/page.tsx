@@ -147,7 +147,7 @@ const BLOG_POSTS = [
     category: 'Cam Balkon',
     read: '12 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
     href: '/blog/2026-istanbul-cam-balkon-m2-fiyatlari-avrupa-yakasi-rehberi',
-    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg',
+    image: '/images/blog/blog-01-istanbul-fiyatlari.jpg',
   },
   {
     title: '2026 Winsa PVC Pencere Fiyatları: Dorado 76, Revotech ve Lotus Serisi Teknik Analizi',
@@ -155,7 +155,7 @@ const BLOG_POSTS = [
     category: 'PVC Pencere',
     read: '12 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
     href: '/blog/winsa-pvc-pencere-fiyatlari-2026-dorado-76-revotech-karsilastirma',
-    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg',
+    image: '/images/blog/blog-06-winsa-pvc.jpg',
   },
   {
     title: 'Cam Balkon Yaptırmak Yasal mı? 2026 Kat Mülkiyeti Kanunu ve 4/5 Muvafakatname',
@@ -163,7 +163,7 @@ const BLOG_POSTS = [
     category: 'Yerel Rehber',
     read: '10 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
     href: '/blog/cam-balkon-apartman-yonetimi-izni-yargitay-4-5-muvafakatname-2026',
-    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg',
+    image: '/images/blog/blog-08-apartman-izni.jpg',
   },
 ];
 

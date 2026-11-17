@@ -7,6 +7,7 @@ import { SITE_CONFIG } from '../config/site.config';
 import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
 import { openCookiePreferences } from './CookieConsentBanner';
+import { EXACT_GOOGLE_MAPS_URL } from '../lib/google-business';
 
 const FOOTER_SERVICES = [
   { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz/katlanir-cam-balkon' },
@@ -232,12 +233,17 @@ export function Footer() {
                 <span className="mt-0.5 shrink-0 text-[#BFDBFE]">
                   <IconPin />
                 </span>
-                <span>
+                <a
+                  href={EXACT_GOOGLE_MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
+                >
                   <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
-                    Showroom &amp; Fabrika
+                    Showroom &amp; Fabrika (Google Haritalar ↗)
                   </span>
                   <span className="mt-0.5 block">{settings.address || SITE_CONFIG.address}</span>
-                </span>
+                </a>
               </li>
               <li className="flex items-start gap-2.5 text-[11.5px] leading-relaxed text-slate-400">
                 <span className="mt-0.5 shrink-0 text-[#BFDBFE]">
