@@ -272,24 +272,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Lower Horizontal Bar: Avrupa Yakası Hizmet İlçelerimiz (Clean Non-Clickable SEO Text Tags) */}
+        {/* Lower Horizontal Bar: Avrupa Yakası Hizmet İlçelerimiz (Plain Inline Text) */}
         <div className="border-t border-white/10 py-5">
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-400">
               AVRUPA YAKASI HİZMET İLÇELERİMİZ:
             </p>
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[10.5px] text-slate-400">
-              {EUROPEAN_SIDE_SEO_PILLS.map((districtText, idx) => (
-                <React.Fragment key={districtText}>
-                  <span className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5 text-[10px] font-medium text-slate-300">
-                    {districtText}
-                  </span>
-                  {idx < EUROPEAN_SIDE_SEO_PILLS.length - 1 && (
-                    <span className="text-slate-600" aria-hidden="true">
-                      •
-                    </span>
-                  )}
-                </React.Fragment>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-300">
+              {EUROPEAN_SIDE_SEO_PILLS.map((districtText) => (
+                <span key={districtText}>{districtText}</span>
               ))}
             </div>
           </div>
