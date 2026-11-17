@@ -22,15 +22,29 @@ const FOOTER_SERVICES = [
 const FOOTER_QUICK = [
   { label: 'Anasayfa', href: '/' },
   { label: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
-  { label: 'Ürünlerimiz (Tümü)', href: '/urunler' },
+  { label: 'Ürünlerimiz', href: '/urunler' },
   { label: 'Winsa Sistemleri', href: '/urunler/winsa' },
   { label: 'Albert Genau Sistemleri', href: '/urunler/albert-genau' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Bahçelievler Cam Balkon & Pimapen', href: '/bahcelievler-cam-balkon' },
+  { label: 'Blog & Mimari Rehberler', href: '/blog' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
+];
+
+const EUROPEAN_SIDE_SEO_PILLS = [
+  'Bakırköy (Florya, Yeşilköy, Ataköy)',
+  'Beşiktaş (Etiler, Levent, Bebek)',
+  'Sarıyer (Zekeriyaköy, Tarabya, Göktürk)',
+  'Başakşehir (Bahçeşehir)',
+  'Beylikdüzü',
+  'Büyükçekmece',
+  'Şişli',
+  'Bahçelievler',
+  'Küçükçekmece',
+  'Zeytinburnu',
+  'Kağıthane & Eyüpsultan',
+  'Bağcılar & Güngören',
 ];
 
 const FOOTER_LEGAL = [
@@ -88,7 +102,7 @@ export function Footer() {
     <footer className="bg-[#0F172A] text-slate-300">
       <div className="container-shell pt-12 sm:pt-14">
         <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Marka */}
+          {/* Column 1: Marka */}
           <div className="lg:col-span-4">
             <Link href="/" prefetch={true} aria-label="Çelikpen anasayfa" className="inline-block">
               <CelikpenLogo size="md" variant="light" />
@@ -125,12 +139,12 @@ export function Footer() {
             <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
               <span className="flex h-2 w-2 rounded-full bg-[#10B981]" aria-hidden="true" />
               <span className="text-[9.5px] font-medium tracking-wide text-slate-300">
-                Keşif ve fiyat teklifi ücretsiz
+                Avrupa Yakası geneli ücretsiz lazerli keşif
               </span>
             </div>
           </div>
 
-          {/* Hizmetler */}
+          {/* Column 2: Hizmetlerimiz */}
           <div className="lg:col-span-3">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
               Hizmetlerimiz
@@ -151,10 +165,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Hızlı Menü */}
+          {/* Column 3: Kurumsal & Hızlı Erişim */}
           <div className="lg:col-span-2">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-              Hızlı Menü
+              Kurumsal &amp; Hızlı Erişim
             </h2>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_QUICK.map((item) => (
@@ -172,10 +186,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* İletişim */}
+          {/* Column 4: Merkez Fabrika & İletişim */}
           <div className="lg:col-span-3">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-              İletişim &amp; Konum
+              Merkez Fabrika &amp; İletişim
             </h2>
             <ul className="mt-4 space-y-3.5">
               <li>
@@ -198,7 +212,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`mailto:${settings.email || 'iletisim@celikpen.com'}`}
+                  href={`mailto:${settings.email || 'iletisim@celikpen.com.tr'}`}
                   className="flex items-start gap-2.5 text-[11.5px] text-slate-300 transition-colors hover:text-white"
                 >
                   <span className="mt-0.5 text-[#BFDBFE]">
@@ -209,7 +223,7 @@ export function Footer() {
                       E-posta
                     </span>
                     <span className="mt-0.5 block text-slate-300">
-                      {settings.email || 'iletisim@celikpen.com'}
+                      {settings.email || 'iletisim@celikpen.com.tr'}
                     </span>
                   </span>
                 </a>
@@ -220,7 +234,7 @@ export function Footer() {
                 </span>
                 <span>
                   <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
-                    Showroom
+                    Showroom &amp; Fabrika
                   </span>
                   <span className="mt-0.5 block">{settings.address || SITE_CONFIG.address}</span>
                 </span>
@@ -239,32 +253,43 @@ export function Footer() {
                 </span>
               </li>
             </ul>
-            <Link
-              href="/iletisim?form=kesif"
-              prefetch={true}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-            >
-              Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href="/iletisim?form=kesif"
+                prefetch={true}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-3.5 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+              >
+                Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/fiyat-hesapla"
+                prefetch={true}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2.5 text-[11px] font-semibold text-slate-200 transition-colors hover:bg-white/10"
+              >
+                m² Fiyat Hesapla
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Hizmet bölgeleri */}
+        {/* Lower Horizontal Bar: Avrupa Yakası Hizmet İlçelerimiz (Clean Non-Clickable SEO Text Tags) */}
         <div className="border-t border-white/10 py-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-              Bahçelievler Hizmet Mahallelerimiz
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+              AVRUPA YAKASI HİZMET İLÇELERİMİZ:
             </p>
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5">
-              {SITE_CONFIG.neighborhoods.map((neighborhood) => (
-                <Link
-                  key={neighborhood.slug}
-                  href={`/bahcelievler/${neighborhood.slug}`}
-                  prefetch={true}
-                  className="text-[10px] text-slate-500 transition-colors hover:text-[#BFDBFE]"
-                >
-                  {neighborhood.name}
-                </Link>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[10.5px] text-slate-400">
+              {EUROPEAN_SIDE_SEO_PILLS.map((districtText, idx) => (
+                <React.Fragment key={districtText}>
+                  <span className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5 text-[10px] font-medium text-slate-300">
+                    {districtText}
+                  </span>
+                  {idx < EUROPEAN_SIDE_SEO_PILLS.length - 1 && (
+                    <span className="text-slate-600" aria-hidden="true">
+                      •
+                    </span>
+                  )}
+                </React.Fragment>
               ))}
             </div>
           </div>

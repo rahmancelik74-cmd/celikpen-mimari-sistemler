@@ -96,6 +96,8 @@ export interface CmsSiteSettings {
   facebookUrl: string;
   linkedinUrl: string;
   announcementText: string;
+  googlePlacesApiKey?: string;
+  googlePlaceId?: string;
 }
 
 export interface CmsPricingSystem {

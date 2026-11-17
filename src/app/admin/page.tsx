@@ -13,6 +13,7 @@ import { CelikpenLogo } from '../../components/CelikpenLogo';
 import { ToastStack, useToast } from '../../components/admin/AdminShared';
 import type { AdminTabId, AdminTabProps } from '../../components/admin/types';
 import type { VisitorAnalyticsData } from '../api/analytics/route';
+import type { GoogleReviewsApiResponse } from '../api/google-reviews/route';
 
 import AdminDashboardTab from '../../components/admin/AdminDashboardTab';
 import AdminSecurityTab from '../../components/admin/AdminSecurityTab';
@@ -541,6 +542,16 @@ export default function AdminDashboardPage() {
             onRefresh={() => void fetchVisitorAnalytics()}
           />
 
+          {/* GOOGLE HARİTALAR YORUM ENTEGRASYONU KARTI */}
+          {(activeTab === 'overview' || activeTab === 'reviews') && (
+            <GoogleReviewsIntegrationCard
+              draft={draft}
+              setDraft={setDraft}
+              saveAllToCms={saveAllToCms}
+              showNotice={showNotice}
+            />
+          )}
+
           {activeTab === 'overview' && <AdminDashboardTab {...tabProps} />}
           {(activeTab === 'pricing' || activeTab === 'references') && (
             <AdminDataTables
@@ -684,6 +695,204 @@ function LiveVisitorAnalyticsBanner({
           ))}
         </div>
       )}
+    </section>
+  );
+}
+
+/* ─── GOOGLE HARİTALAR YORUM ENTEGRASYONU KARTI ───────────────── */
+function GoogleReviewsIntegrationCard({
+  draft,
+  setDraft,
+  saveAllToCms,
+  showNotice,
+}: {
+  draft: CmsStoreData;
+  setDraft: React.Dispatch<React.SetStateAction<CmsStoreData>>;
+  saveAllToCms: (nextData?: CmsStoreData, customNotice?: string) => Promise<void>;
+  showNotice: (type: 'success' | 'error' | 'info', text: string) => void;
+}) {
+  const [statusData, setStatusData] = useState<GoogleReviewsApiResponse | null>(null);
+  const [apiKeyInput, setApiKeyInput] = useState(draft.siteSettings.googlePlacesApiKey || '');
+  const [placeIdInput, setPlaceIdInput] = useState(draft.siteSettings.googlePlaceId || '');
+  const [isTesting, setIsTesting] = useState(false);
+
+  const fetchGoogleReviewsStatus = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/google-reviews?refresh=1&t=${Date.now()}`, {
+        cache: 'no-store',
+      });
+      const json = (await res.json()) as GoogleReviewsApiResponse;
+      if (json?.ok) {
+        setStatusData(json);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    void fetchGoogleReviewsStatus();
+  }, [fetchGoogleReviewsStatus]);
+
+  const handleTestAndSave = async () => {
+    setIsTesting(true);
+    try {
+      const res = await fetch('/api/google-reviews?refresh=1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          apiKey: apiKeyInput.trim() || undefined,
+          placeId: placeIdInput.trim() || undefined,
+        }),
+      });
+      const json = (await res.json()) as GoogleReviewsApiResponse;
+      if (json?.ok) {
+        setStatusData(json);
+        if (apiKeyInput.trim() || placeIdInput.trim()) {
+          const nextDraft: CmsStoreData = {
+            ...draft,
+            siteSettings: {
+              ...draft.siteSettings,
+              googlePlacesApiKey: apiKeyInput.trim(),
+              googlePlaceId: placeIdInput.trim(),
+            },
+          };
+          setDraft(nextDraft);
+          await saveAllToCms(nextDraft, json.statusMessage);
+        } else {
+          showNotice('success', json.statusMessage);
+        }
+      }
+    } catch {
+      showNotice('error', 'Google Haritalar bağlantı testi sırasında hata oluştu.');
+    } finally {
+      setIsTesting(false);
+    }
+  };
+
+  const isLive = statusData?.mode === 'live_google_places_api';
+  const badgeText =
+    statusData?.statusBadge || 'Demo Modu Aktif (Örnek Anahtar Tanımlı)';
+
+  return (
+    <section
+      aria-labelledby="google-yorum-entegrasyon-baslik"
+      className="rounded-2xl border border-white/10 bg-[#0F172A] p-5 shadow-xl"
+    >
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+        <div>
+          <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-400">
+            Google Haritalar Yorum Entegrasyonu
+          </span>
+          <h2
+            id="google-yorum-entegrasyon-baslik"
+            className="mt-1 text-base font-black text-white sm:text-lg"
+          >
+            Google Places API &amp; Otomatik Place ID Keşif Modülü
+          </h2>
+        </div>
+
+        <span
+          className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-extrabold ${
+            isLive
+              ? 'border-emerald-400/40 bg-emerald-500/15 text-emerald-300'
+              : 'border-amber-400/40 bg-amber-500/15 text-amber-200'
+          }`}
+        >
+          <span
+            className={`h-2 w-2 rounded-full ${isLive ? 'bg-emerald-400' : 'bg-amber-400'}`}
+          />
+          {badgeText}
+        </span>
+      </div>
+
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <div>
+          <label
+            htmlFor="google-places-api-key"
+            className="block text-xs font-bold text-slate-200"
+          >
+            Google Places API Key
+          </label>
+          <input
+            id="google-places-api-key"
+            type="text"
+            value={apiKeyInput}
+            onChange={(e) => setApiKeyInput(e.target.value)}
+            placeholder={
+              statusData?.maskedKey || 'Örnek anahtar tanımlı (.env.local)'
+            }
+            className="mt-1.5 w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-white placeholder:text-slate-400 focus:border-sky-400 focus:outline-none"
+          />
+          <p className="mt-1 text-[11px] text-slate-400">
+            Aktif Anahtar:{' '}
+            <strong className="font-mono text-sky-300">
+              {statusData?.maskedKey || 'Örnek Anahtar Tanımlı (.env.local)'}
+            </strong>
+          </p>
+        </div>
+
+        <div>
+          <label
+            htmlFor="google-place-id"
+            className="block text-xs font-bold text-slate-200"
+          >
+            Google Place ID <span className="font-normal text-slate-400">(Opsiyonel)</span>
+          </label>
+          <input
+            id="google-place-id"
+            type="text"
+            value={placeIdInput}
+            onChange={(e) => setPlaceIdInput(e.target.value)}
+            placeholder="Örn: ChIJ... (Boş bırakılabilir)"
+            className="mt-1.5 w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 font-mono text-xs text-white placeholder:text-slate-400 focus:border-sky-400 focus:outline-none"
+          />
+          <p className="mt-1 text-[11px] text-emerald-300/90">
+            * Boş bırakırsanız sistem Kocasinan Merkez adresinizden Place ID kodunu otomatik bulur.
+          </p>
+        </div>
+      </div>
+
+      {statusData && (
+        <div className="mt-4 rounded-xl border border-white/10 bg-slate-900/90 p-3.5 text-xs text-slate-300">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span>
+              <strong className="text-white">Durum:</strong> {statusData.statusMessage}
+            </span>
+            <span className="rounded bg-sky-500/20 px-2.5 py-1 font-bold text-sky-300">
+              {statusData.rating} ★ ({statusData.userRatingsTotal} Değerlendirme •{' '}
+              {statusData.reviews.length} Yorum Aktif)
+            </span>
+          </div>
+          <div className="mt-1.5 text-[11px] text-slate-400">
+            Çözümlenen Konum: <strong className="text-slate-200">{statusData.resolvedPlaceId}</strong>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <button
+          type="button"
+          onClick={() => void handleTestAndSave()}
+          disabled={isTesting}
+          className="inline-flex items-center gap-2 rounded-xl bg-[#1E3A8A] px-5 py-2.5 text-xs font-extrabold text-white shadow-lg ring-1 ring-sky-400/30 transition hover:bg-[#1D4ED8] disabled:opacity-50"
+        >
+          <span>
+            {isTesting
+              ? '⏳ Google Haritalar Test Ediliyor...'
+              : '🔄 Bağlantıyı Test Et & Yorumları Şimdi Çek'}
+          </span>
+        </button>
+
+        <a
+          href={statusData?.mapsUrl || 'https://www.google.com/maps'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-bold text-sky-300 hover:underline"
+        >
+          Google Haritalar İşletme Profilini Aç ↗
+        </a>
+      </div>
     </section>
   );
 }
