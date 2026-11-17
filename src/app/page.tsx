@@ -98,7 +98,7 @@ const SERVICE_CARDS = [
 
 const TRUST_STATS = [
   { value: '15.000+', label: 'Tamamlanan proje' },
-  { value: '11', label: 'Bahçelievler mahallesi' },
+  { value: '25 İlçe', label: 'Avrupa Yakası Hizmet Ağı' },
   { value: '10 Yıl', label: 'Sistem garantisi' },
   { value: '38 dB', label: 'Akustik konfor' },
   { value: '%100', label: 'Ücretsiz keşif' },
@@ -142,35 +142,36 @@ const PROJECTS = [
 
 const BLOG_POSTS = [
   {
-    title: '2026 Isıcamlı Cam Balkon Rehberi: m² Fiyatları ve Vera Termal',
-    excerpt: 'Isıcamlı cam balkon m² fiyatları, 4+20+4 argon gazlı ısıcam ve ısı yalıtımı rehberi.',
+    title: '2026 İstanbul Cam Balkon m² Fiyatları: Avrupa Yakası Komple Maliyet Rehberi',
+    excerpt: 'Isıcamlı, katlanır, eşiksiz sürme ve motorlu giyotin cam balkon 2026 m² birim fiyatları ve bütçe rehberi.',
     category: 'Cam Balkon',
-    read: '9 dk okuma',
-    href: '/blog/isicamli-cam-balkon-rehberi-2026',
-    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg?v=2',
+    read: '12 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
+    href: '/blog/2026-istanbul-cam-balkon-m2-fiyatlari-avrupa-yakasi-rehberi',
+    image: '/images/blog/isicamli-cam-balkon-rehberi-2026.jpg',
   },
   {
-    title: 'Winsa Dorado 76 mı, Revotech Gold mu? PVC Pencere Karşılaştırması',
-    excerpt: 'Odacık sayısı, conta yapısı ve ısı yalıtımı açısından profil seçimini anlatıyoruz.',
+    title: '2026 Winsa PVC Pencere Fiyatları: Dorado 76, Revotech ve Lotus Serisi Teknik Analizi',
+    excerpt: 'Odacık sayısı, orta conta yapısı, Uw ısı yalıtımı ve dB ses izolasyonu açısından Winsa profil seçimi.',
     category: 'PVC Pencere',
-    read: '8 dk okuma',
-    href: '/blog/winsa-dorado-76-mi-revotech-gold-mu',
-    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg?v=2',
+    read: '12 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
+    href: '/blog/winsa-pvc-pencere-fiyatlari-2026-dorado-76-revotech-karsilastirma',
+    image: '/images/blog/dorado-76-revotech-gold-karsilastirma.jpg',
   },
   {
-    title: 'Bahçelievler ve İstanbul’da Cam Balkon Yaptırırken 10 Kritik Detay',
-    excerpt: '4/5 kat maliki muvafakatnamesi, cam kalınlığı, rüzgâr yükü ve montaj detayları.',
+    title: 'Cam Balkon Yaptırmak Yasal mı? 2026 Kat Mülkiyeti Kanunu ve 4/5 Muvafakatname',
+    excerpt: 'Kat Mülkiyeti Kanunu Madde 19, Yargıtay kararları, 4/5 kat maliki muvafakatnamesi ve dış cephe uyumu.',
     category: 'Yerel Rehber',
-    read: '9 dk okuma',
-    href: '/blog/bahcelievler-cam-balkon-10-kritik-detay',
-    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg?v=2',
+    read: '10 dk okuma • Çelikpen Mimari Mühendislik Ekibi',
+    href: '/blog/cam-balkon-apartman-yonetimi-izni-yargitay-4-5-muvafakatname-2026',
+    image: '/images/blog/bahcelievler-cam-balkon-10-kritik-detay.jpg',
   },
 ];
 
 const ADDITIONAL_LINKS = [
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
+  { label: 'Avrupa Yakası Hizmet Bölgeleri', href: '/bolgeler' },
   { label: 'Proje Galerisi', href: '/profesyoneller/referanslar' },
-  { label: 'Müşteri Yorumları', href: '/yorumlar' },
+  { label: 'Google Onaylı Yorumlar', href: '/yorumlar' },
   { label: 'Karşılaştır', href: '/karsilastir' },
 ];
 

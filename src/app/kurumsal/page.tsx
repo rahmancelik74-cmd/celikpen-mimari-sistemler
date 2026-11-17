@@ -112,9 +112,9 @@ export default function KurumsalPage() {
               </h1>
 
               <p className="mt-5 max-w-2xl text-[12.5px] leading-7 text-slate-300 sm:text-[13px]">
-                1996’dan bugüne İstanbul’un cam balkon ve mimari doğrama sistemleri alanında
-                üretiyoruz. Kendi CNC tesisimiz, lazer ölçüm ekiplerimiz, Winsa profil
-                teknolojilerimiz ve 10 yıl sistem garantimizle konut ve ticari projelere uçtan uca
+                1996’dan bugüne İstanbul Avrupa Yakası’nın cam balkon ve mimari doğrama sistemleri alanında
+                üretiyoruz. <strong className="font-semibold text-white">Çelikpen Mimari Mühendislik Ekibi (Mimari Cephe &amp; Yalıtım Sistemleri Teknik Kurulu)</strong> yönetimindeki kendi CNC tesisimiz, lazer ölçüm ekiplerimiz, Winsa profil
+                teknolojilerimiz ve 10 yıl sistem garantimizle konut, villa ve ticari projelere uçtan uca
                 değer katıyoruz.
               </p>
 

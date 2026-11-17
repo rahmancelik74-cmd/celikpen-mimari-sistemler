@@ -27,7 +27,7 @@ export function buildBlogPostingSchema(post: BlogPost, basePath = '/blog') {
       ]
         .join(' ')
         .split(/\s+/).length,
-    post.numberedChecklist.join(' ').split(/\s+/).length + 450,
+    post.numberedChecklist.join(' ').split(/\s+/).length + 520,
   );
 
   return {
@@ -44,7 +44,7 @@ export function buildBlogPostingSchema(post: BlogPost, basePath = '/blog') {
       {
         '@type': 'ImageObject',
         url: absoluteUrl(post.image.split('?')[0]),
-        caption: post.imageAlt,
+        caption: post.imageCaption || post.imageAlt,
         name: post.imageTitle,
       },
     ],
@@ -56,14 +56,14 @@ export function buildBlogPostingSchema(post: BlogPost, basePath = '/blog') {
     wordCount,
     timeRequired: `PT${post.readTime}M`,
     author: {
-      '@type': 'Person',
-      name: post.author.name,
-      jobTitle: post.author.role,
-      worksFor: { '@id': ORGANIZATION_ID },
+      '@type': 'Organization',
+      name: 'Çelikpen Mimari Mühendislik Ekibi',
+      description: 'Mimari Cephe & Yalıtım Sistemleri Teknik Kurulu',
+      url: absoluteUrl('/kurumsal'),
     },
     reviewedBy: {
       '@type': 'Organization',
-      name: 'Çelikpen Mimari Mühendislik & Ar-Ge Kurulu',
+      name: 'Mimari Cephe & Yalıtım Sistemleri Teknik Kurulu',
       url: absoluteUrl('/kurumsal/hakkimizda'),
     },
     publisher,
@@ -77,12 +77,6 @@ export function buildBlogPostingSchema(post: BlogPost, basePath = '/blog') {
       name: ref.title,
       publisher: { '@type': 'Organization', name: ref.organization },
       url: ref.url,
-    })),
-    commentCount: post.initialComments.length,
-    comment: post.initialComments.map((c) => ({
-      '@type': 'Comment',
-      text: c.comment,
-      author: { '@type': 'Person', name: c.author },
     })),
   };
 }
@@ -117,7 +111,7 @@ export function buildBlogSchema(posts: BlogPost[], path: string) {
     url: absoluteUrl(path),
     name: `${SITE_CONFIG.brandName} Mimari Rehber & Blog`,
     description:
-      'Isıcamlı cam balkon, Winsa PVC pencere, sürme sistemler, giyotin cam ve bioklimatik pergola hakkında mühendislik rehberleri.',
+      'İstanbul Avrupa Yakası ısıcamlı cam balkon, Winsa PVC pencere, Albert Genau sürme sistemler, motorlu giyotin cam ve bioklimatik pergola hakkında mühendislik rehberleri.',
     inLanguage: 'tr-TR',
     publisher,
     blogPost: posts.map((post) => ({
@@ -130,7 +124,10 @@ export function buildBlogSchema(posts: BlogPost[], path: string) {
       datePublished: post.publishDate,
       dateModified: post.updatedDate,
       keywords: [post.primaryKeyword, ...post.secondaryKeywords].join(', '),
-      author: { '@type': 'Person', name: post.author.name },
+      author: {
+        '@type': 'Organization',
+        name: 'Çelikpen Mimari Mühendislik Ekibi',
+      },
     })),
   };
 }
@@ -150,4 +147,5 @@ export function buildAggregateFaqSchema(faqs: BlogFaq[], path: string) {
 }
 
 /** Blog merkezinde gösterilen SSS listesi: her yazının ilk sorusu. */
-export const hubFaqs = (posts: BlogPost[]): BlogFaq[] => posts.map((post) => post.faqs[0]).filter(Boolean);
+export const hubFaqs = (posts: BlogPost[]): BlogFaq[] =>
+  posts.map((post) => post.faqs[0]).filter(Boolean);

@@ -4,11 +4,11 @@ import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
 import { BLOG_POSTS } from '../data/blogPosts';
+import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 
 /**
  * Tüm kamuya açık rotaları tek kaynaktan üretir.
- * Öncelikler: ana sayfa 1.0, ürünler 0.9, mahalle sayfaları 0.85,
- * profesyonel/kurumsal alt sayfalar 0.8.
+ * Öncelikler: ana sayfa 1.0, ürünler & bölgeler 0.9, blog ve alt sayfalar 0.85.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE_CONFIG.siteUrl;
@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${base}/bolgeler`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.95,
     },
     {
       url: `${base}/urunler`,
@@ -79,7 +85,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/yorumlar`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${base}/kurumsal`,
@@ -121,7 +127,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/blog`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${base}/profesyoneller/blog`,
@@ -133,7 +139,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/blog/eylul-2026-yargitay-cam-balkon-karari`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.75,
     },
   ];
 
@@ -144,10 +150,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/kullanim-kosullari',
     '/kunye',
   ].map((path) => ({
-    url: `\\`,
+    url: `${base}${path}`,
     lastModified: now,
     changeFrequency: 'yearly' as const,
     priority: 0.4,
+  }));
+
+  const europeanDistrictRoutes: MetadataRoute.Sitemap = EUROPEAN_SIDE_DISTRICTS.map((district) => ({
+    url: `${base}/bolgeler/${district.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.92,
   }));
 
   const blogArticleRoutes: MetadataRoute.Sitemap = BLOG_POSTS.flatMap((post) => [
@@ -155,7 +168,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/blog/${post.slug}`,
       lastModified: new Date(`${post.updatedDate}T00:00:00Z`),
       changeFrequency: 'weekly' as const,
-      priority: 0.85,
+      priority: 0.9,
     },
     {
       url: `${base}/profesyoneller/blog/${post.slug}`,
@@ -221,6 +234,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...legalRoutes,
+    ...europeanDistrictRoutes,
     ...serviceRoutes,
     ...blogArticleRoutes,
     ...winsaCatalogRoutes,

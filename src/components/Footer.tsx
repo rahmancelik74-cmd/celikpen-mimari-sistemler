@@ -4,6 +4,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { SITE_CONFIG } from '../config/site.config';
+import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
 import { openCookiePreferences } from './CookieConsentBanner';
@@ -25,10 +26,10 @@ const FOOTER_QUICK = [
   { label: 'Ürünlerimiz (Tümü)', href: '/urunler' },
   { label: 'Winsa Sistemleri', href: '/urunler/winsa' },
   { label: 'Albert Genau Sistemleri', href: '/urunler/albert-genau' },
+  { label: 'Avrupa Yakası Hizmet Bölgeleri', href: '/bolgeler' },
   { label: 'Projelerimiz', href: '/profesyoneller/referanslar' },
   { label: 'Hakkımızda', href: '/kurumsal/hakkimizda' },
-  { label: 'Blog', href: '/profesyoneller/blog' },
-  { label: 'Bahçelievler Cam Balkon & Pimapen', href: '/bahcelievler-cam-balkon' },
+  { label: 'Blog & Mimari Rehberler', href: '/blog' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
 ];
@@ -41,36 +42,21 @@ const FOOTER_LEGAL = [
   { label: 'Yasal Künye & Yer Sağlayıcı', href: '/kunye' },
 ];
 
-const FOOTER_SOCIAL = [
-  {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/celikpen',
-    icon: <IconInstagram />,
-  },
-  {
-    label: 'WhatsApp',
-    href: 'https://wa.me/905323332085',
-    icon: <IconWhatsApp />,
-  },
-  {
-    label: 'Telefon',
-    href: `tel:${SITE_CONFIG.phoneRaw}`,
-    icon: <IconPhone />,
-  },
-];
-
 export function Footer() {
   const pathname = usePathname();
   const router = useRouter();
   const { cms } = useCms();
   const settings = cms.siteSettings;
-  const [yilClicks, setYilClicks] = useState(0);
+  const [, setYilClicks] = useState(0);
   const yilTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleYilClick = useCallback(() => {
-    setYilClicks(prev => {
+    setYilClicks((prev) => {
       const next = prev + 1;
-      if (next >= 3) { router.push('/cp-yonetim-2026'); return 0; }
+      if (next >= 3) {
+        router.push('/admin');
+        return 0;
+      }
       if (yilTimer.current) clearTimeout(yilTimer.current);
       yilTimer.current = setTimeout(() => setYilClicks(0), 800);
       return next;
@@ -102,17 +88,23 @@ export function Footer() {
   return (
     <footer className="bg-[#0F172A] text-slate-300">
       <div className="container-shell pt-12 sm:pt-14">
-        <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-7">
           {/* Marka */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Link href="/" prefetch={true} aria-label="Çelikpen anasayfa" className="inline-block">
               <CelikpenLogo size="md" variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[11.5px] leading-relaxed text-slate-400">
-              1996’dan bugüne 30 yıllık üretim gücüyle Bahçelievler’in 11 mahallesinde cam balkon,
-              kış bahçesi, giyotin, sürme cam, PVC doğrama ve mimari alüminyum çözümleri sunuyoruz.
+              1996’dan bugüne 30 yıllık üretim gücüyle Bahçelievler Kocasinan Merkez fabrikamızdan
+              tüm İstanbul Avrupa Yakası’nda (Bakırköy Florya, Beşiktaş Etiler, Sarıyer Zekeriyaköy,
+              Başakşehir Bahçeşehir, Beylikdüzü, Büyükçekmece, Şişli ve çevresi) cam balkon, kış bahçesi,
+              giyotin, bioklimatik pergola ve Winsa PVC doğrama çözümleri sunuyoruz.
             </p>
-            <button type="button" onClick={handleYilClick} className="mt-4 inline-flex cursor-default items-center gap-2 border-l-2 border-[#38BDF8] pl-3">
+            <button
+              type="button"
+              onClick={handleYilClick}
+              className="mt-4 inline-flex cursor-default items-center gap-2 border-l-2 border-[#38BDF8] pl-3"
+            >
               <span className="text-[10px] font-extrabold tracking-[0.08em] text-white">30. YIL</span>
               <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                 1996 — 2026
@@ -135,13 +127,13 @@ export function Footer() {
             <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
               <span className="flex h-2 w-2 rounded-full bg-[#10B981]" aria-hidden="true" />
               <span className="text-[9.5px] font-medium tracking-wide text-slate-300">
-                Keşif ve fiyat teklifi ücretsiz
+                Avrupa Yakası geneli ücretsiz lazerli keşif
               </span>
             </div>
           </div>
 
           {/* Hizmetler */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
               Hizmetlerimiz
             </h2>
@@ -161,41 +153,58 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Hızlı Menü */}
-          <div className="lg:col-span-2">
-            <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-              Hızlı Menü
-            </h2>
-            <ul className="mt-4 space-y-2.5">
-              {FOOTER_QUICK.map((item) => (
-                <li key={item.label}>
+          {/* Avrupa Yakası Hizmet İlçelerimiz */}
+          <div className="lg:col-span-4">
+            <div className="flex items-center justify-between gap-2">
+              <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
+                Avrupa Yakası Hizmet İlçelerimiz
+              </h2>
+              <Link
+                href="/bolgeler"
+                className="text-[10px] font-semibold text-[#38BDF8] hover:underline"
+              >
+                Tüm İlçeler →
+              </Link>
+            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
+              {EUROPEAN_SIDE_DISTRICTS.map((district) => (
+                <li key={district.slug}>
                   <Link
-                    href={item.href}
+                    href={`/bolgeler/${district.slug}`}
                     prefetch={true}
-                    className="group inline-flex items-center gap-1.5 text-[11.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
+                    className="group inline-flex items-start gap-1.5 text-[11px] leading-snug text-slate-400 transition-colors hover:text-[#BFDBFE]"
                   >
-                    <span className="h-px w-0 bg-[#1E3A8A] transition-all duration-300 group-hover:w-2.5" />
-                    {item.label}
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#38BDF8]" />
+                    <span>
+                      <strong className="font-semibold text-slate-200 group-hover:text-white">
+                        {district.name}
+                      </strong>{' '}
+                      <span className="text-[10px] text-slate-400">({district.subDistricts})</span>
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* İletişim */}
+          {/* Hızlı Menü & İletişim */}
           <div className="lg:col-span-3">
             <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white">
-              İletişim & Konum
+              Merkez Fabrika &amp; İletişim
             </h2>
-            <ul className="mt-4 space-y-3.5">
+            <ul className="mt-4 space-y-3">
               <li>
                 <a
                   href={`tel:${settings.phoneRaw || SITE_CONFIG.phoneRaw}`}
                   className="flex items-start gap-2.5 text-[11.5px] text-slate-300 transition-colors hover:text-white"
                 >
-                  <span className="mt-0.5 text-[#BFDBFE]"><IconPhone /></span>
+                  <span className="mt-0.5 text-[#BFDBFE]">
+                    <IconPhone />
+                  </span>
                   <span>
-                    <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Telefon</span>
+                    <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
+                      Telefon
+                    </span>
                     <span className="mt-0.5 block font-semibold text-white">
                       {settings.phoneDisplay || SITE_CONFIG.phoneDisplay}
                     </span>
@@ -207,9 +216,13 @@ export function Footer() {
                   href={`mailto:${settings.email || 'iletisim@celikpen.com'}`}
                   className="flex items-start gap-2.5 text-[11.5px] text-slate-300 transition-colors hover:text-white"
                 >
-                  <span className="mt-0.5 text-[#BFDBFE]"><IconMail /></span>
+                  <span className="mt-0.5 text-[#BFDBFE]">
+                    <IconMail />
+                  </span>
                   <span>
-                    <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">E-posta</span>
+                    <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
+                      E-posta
+                    </span>
                     <span className="mt-0.5 block text-slate-300">
                       {settings.email || 'iletisim@celikpen.com'}
                     </span>
@@ -217,45 +230,64 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2.5 text-[11.5px] leading-relaxed text-slate-400">
-                <span className="mt-0.5 shrink-0 text-[#BFDBFE]"><IconPin /></span>
+                <span className="mt-0.5 shrink-0 text-[#BFDBFE]">
+                  <IconPin />
+                </span>
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Showroom</span>
+                  <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
+                    Merkez Showroom &amp; Fabrika
+                  </span>
                   <span className="mt-0.5 block">{settings.address || SITE_CONFIG.address}</span>
                 </span>
               </li>
               <li className="flex items-start gap-2.5 text-[11.5px] leading-relaxed text-slate-400">
-                <span className="mt-0.5 shrink-0 text-[#BFDBFE]"><IconClock /></span>
+                <span className="mt-0.5 shrink-0 text-[#BFDBFE]">
+                  <IconClock />
+                </span>
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">Çalışma Saatleri</span>
-                  <span className="mt-0.5 block">{settings.workingHours || SITE_CONFIG.workingHours}</span>
+                  <span className="block text-[9px] uppercase tracking-[0.12em] text-slate-500">
+                    Çalışma Saatleri
+                  </span>
+                  <span className="mt-0.5 block">
+                    {settings.workingHours || SITE_CONFIG.workingHours}
+                  </span>
                 </span>
               </li>
             </ul>
-            <Link
-              href="/iletisim?form=kesif"
-              prefetch={true}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-            >
-              Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href="/iletisim?form=kesif"
+                prefetch={true}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1E3A8A] px-3.5 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+              >
+                Ücretsiz Keşif İste <IconArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/fiyat-hesapla"
+                prefetch={true}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 text-[11px] font-semibold text-slate-200 transition-colors hover:bg-white/10"
+              >
+                m² Fiyat Hesapla
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Hizmet bölgeleri */}
-        <div className="border-t border-white/10 py-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-              Hizmet Bölgelerimiz
-            </p>
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5">
-              {SITE_CONFIG.neighborhoods.map((neighborhood) => (
+        {/* Hızlı Erişim Bandı */}
+        <div className="border-t border-white/10 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+              Kurumsal &amp; Hızlı Erişim:
+            </span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+              {FOOTER_QUICK.map((item) => (
                 <Link
-                  key={neighborhood.slug}
-                  href={`/bahcelievler/${neighborhood.slug}`}
+                  key={item.href}
+                  href={item.href}
                   prefetch={true}
-                  className="text-[10px] text-slate-500 transition-colors hover:text-[#BFDBFE]"
+                  className="text-[10.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
                 >
-                  {neighborhood.name}
+                  {item.label}
                 </Link>
               ))}
             </div>
@@ -267,15 +299,26 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-shell flex flex-col items-center justify-between gap-3 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:flex-row">
           <p className="text-center text-[9.5px] text-slate-500 sm:text-left">
-            © {new Date().getFullYear()} Çelikpen Cam Balkon & Mimari Sistemler. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Çelikpen Cam Balkon &amp; Mimari Sistemler. Tüm hakları saklıdır.
           </p>
-          <nav aria-label="Yasal bağlantılar" className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
+          <nav
+            aria-label="Yasal bağlantılar"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5"
+          >
             {FOOTER_LEGAL.map((l) => (
-              <Link key={l.href} href={l.href} className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]">
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
+              >
                 {l.label}
               </Link>
             ))}
-            <button type="button" onClick={openCookiePreferences} className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]">
+            <button
+              type="button"
+              onClick={openCookiePreferences}
+              className="text-[9.5px] text-slate-400 transition-colors hover:text-[#BFDBFE]"
+            >
               Çerez Tercihleri
             </button>
           </nav>
@@ -286,7 +329,8 @@ export function Footer() {
             </span>
             <span className="hidden h-3 w-px bg-white/10 sm:block" aria-hidden="true" />
             <span className="text-[9px] text-slate-600">
-              {settings.address || 'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul'}
+              {settings.address ||
+                'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C, 34186 Bahçelievler / İstanbul'}
             </span>
           </div>
         </div>

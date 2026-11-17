@@ -12,7 +12,7 @@ import {
   type BlogTable,
 } from '../../data/blogPosts';
 import { blogPostPath } from './blogSchema';
-import { BlogCommentsSection, BlogShareBar } from './BlogInteractiveTools';
+import { BlogShareBar } from './BlogInteractiveTools';
 import { LiteYouTubeEmbed } from '../LiteYouTubeEmbed';
 import { BacklinkCitationBox } from '../BacklinkCitationBox';
 
@@ -68,7 +68,7 @@ function renderRichParagraph(text: string): React.ReactNode {
 export function BlogArticle({
   post,
   backSlot,
-  breadcrumbBase = { label: 'Blog', href: '/profesyoneller/blog' },
+  breadcrumbBase = { label: 'Blog', href: '/blog' },
 }: {
   post: BlogPost;
   backSlot?: React.ReactNode;
@@ -145,7 +145,7 @@ export function BlogArticle({
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11.5px] text-slate-300">
-            <span itemProp="author" itemScope itemType="https://schema.org/Person">
+            <span itemProp="author" itemScope itemType="https://schema.org/Organization">
               <strong itemProp="name" className="font-semibold text-white">
                 {post.author.name}
               </strong>
@@ -164,9 +164,6 @@ export function BlogArticle({
               </time>
             </span>
             <span>{post.readTime} dk okuma</span>
-            <a href="#yorumlar" className="font-semibold text-sky-300 hover:underline">
-              {post.initialComments.length} Yorum
-            </a>
           </div>
 
           {/* Etiketler (Tags) */}
@@ -262,14 +259,6 @@ export function BlogArticle({
                     Kaynak Göster / Embed Aracı
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="#yorumlar"
-                    className="block rounded-md px-2 py-1 font-semibold text-[#0F172A] hover:bg-white hover:text-[#1E3A8A]"
-                  >
-                    Okuyucu Yorumları ({post.initialComments.length})
-                  </a>
-                </li>
               </ol>
             </nav>
 
@@ -308,7 +297,7 @@ export function BlogArticle({
             </ul>
           </div>
 
-          {/* Ana Görsel (SEO alt + title açıklamalı) */}
+          {/* Ana Görsel (SEO alt + caption + title açıklamalı) */}
           <figure className="mt-7 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
             <div className="relative aspect-[16/9] w-full">
               <Image
@@ -321,7 +310,7 @@ export function BlogArticle({
               />
             </div>
             <figcaption className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-[11.5px] text-slate-600">
-              <span>{post.imageTitle}</span>
+              <span>{post.imageCaption || post.imageTitle}</span>
               <span className="font-semibold text-[#1E3A8A]">Çelikpen Saha Uygulama Arşivi</span>
             </figcaption>
           </figure>
@@ -382,7 +371,7 @@ export function BlogArticle({
               className="mt-10 rounded-2xl border border-slate-200 bg-white p-6"
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#1E3A8A]">
-                İlgili Ürün &amp; Hizmet Sayfalarımız
+                İlgili Ürün, Hizmet &amp; Bölge Sayfalarımız
               </span>
               <h2 id="dahili-kaynaklar-baslik" className="mt-1 text-lg font-bold text-[#0F172A]">
                 Konuyla İlgili Çelikpen Sistemleri ve Hesaplama Araçları
@@ -416,7 +405,7 @@ export function BlogArticle({
                   Sesli Arama &amp; Hızlı Özet Yanıtlar (Speakable)
                 </span>
                 <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10.5px] font-semibold text-emerald-800">
-                  Doğrudan Mühendis Yanıtı
+                  Doğrudan Teknik Kurul Yanıtı
                 </span>
               </div>
               <h2 id="sesli-arama-baslik" className="mt-1.5 text-lg font-bold text-[#0F172A] sm:text-xl">
@@ -512,22 +501,18 @@ export function BlogArticle({
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#1E3A8A] text-lg font-extrabold text-white shadow-sm">
-                  {post.author.name
-                    .split(' ')
-                    .slice(-2)
-                    .map((n) => n[0])
-                    .join('')}
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#1E3A8A] text-base font-extrabold text-white shadow-sm">
+                  ÇM
                 </div>
                 <div>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10.5px] font-bold text-emerald-800">
-                    ✓ Çelikpen Mimari Mühendislik &amp; Ar-Ge Kurulu Tarafından Doğrulanmıştır
+                    ✓ Çelikpen Mimari Mühendislik Ekibi Tarafından Doğrulanmıştır
                   </span>
                   <h2 id="eeat-yazar-baslik" className="mt-1.5 text-base font-bold text-[#0F172A]">
                     {post.author.name} — <span className="font-medium text-slate-600">{post.author.role}</span>
                   </h2>
                   <p className="mt-1.5 text-[12.5px] leading-relaxed text-slate-600">
-                    1996’dan bugüne İstanbul Bahçelievler (Kocasinan Merkez) üretim tesisimizde TS EN 14351-1, EN 12150 ve EN 1279 normlarında üretilen cam balkon, Winsa PVC doğrama ve kış bahçesi projelerinin saha mühendisliği verileriyle hazırlanmıştır.
+                    1996’dan bugüne İstanbul Bahçelievler (Kocasinan Merkez) üretim tesisimizde TS EN 14351-1, EN 12150 ve EN 1279 normlarında üretilen ve İstanbul Avrupa Yakası genelinde uygulanan cam balkon, Winsa PVC doğrama ve kış bahçesi projelerinin saha mühendisliği verileriyle hazırlanmıştır.
                   </p>
                 </div>
               </div>
@@ -535,7 +520,7 @@ export function BlogArticle({
             <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-200/80 pt-3.5 text-[11px] font-semibold text-[#1E3A8A]">
               <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">TSE EN 12150 Temperli Cam</span>
               <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">EN 12210 Rüzgâr Dayanımı</span>
-              <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">Winsa Yetkili Üretici Bayi</span>
+              <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">Winsa &amp; Albert Genau Çözüm Ortağı</span>
               <span className="rounded-lg bg-white px-2.5 py-1 shadow-2xs">30 Yıllık Saha Deneyimi</span>
             </div>
           </section>
@@ -554,23 +539,20 @@ export function BlogArticle({
             <BlogShareBar title={post.title} url={canonicalArticleUrl} />
           </div>
 
-          {/* Okuyucu Yorumları & Soru-Cevap Bölümü */}
-          <BlogCommentsSection slug={post.slug} initialComments={post.initialComments} />
-
           {/* Dönüşüm kartı */}
           <section
             aria-labelledby="kesif-cta"
             className="mt-12 overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A8A] via-[#1E293B] to-[#0F172A] p-6 text-white sm:p-8"
           >
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-300">
-              Ücretsiz lazerli keşif
+              Ücretsiz lazerli keşif • İstanbul Avrupa Yakası
             </p>
             <h2 id="kesif-cta" className="mt-2 text-xl font-bold sm:text-2xl">
-              Mimarlarımızdan Ücretsiz Keşif İsteyin
+              Çelikpen Mimari Mühendislik Ekibinden Ücretsiz Keşif İsteyin
             </h2>
             <p className="mt-3 max-w-2xl text-[13.5px] leading-relaxed text-slate-300">
-              {SITE_CONFIG.yearsOfExperience} yıllık tecrübemizle balkonunuzu yerinde ölçelim, size en uygun sistemi ve net fiyatı aynı gün sunalım.
-              Bahçelievler’in tüm mahallelerinde keşif ve danışmanlık ücretsizdir.
+              {SITE_CONFIG.yearsOfExperience} yıllık tecrübemizle balkon veya terasınızı yerinde ölçelim, size en uygun sistemi ve net fabrika fiyatını aynı gün sunalım.
+              Bahçelievler, Bakırköy, Beşiktaş, Sarıyer, Başakşehir, Beylikdüzü ve tüm Avrupa Yakası ilçelerinde keşif ücretsizdir.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -727,7 +709,7 @@ function ArticleSection({ section }: { section: BlogSection }) {
       {section.proTip && (
         <aside className="mt-6 rounded-2xl border-l-4 border-orange-500 bg-orange-50 px-5 py-4">
           <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-orange-700">
-            Uzman Mühendis İpucu
+            Çelikpen Mimari Mühendislik Ekibi İpucu
           </p>
           <p className="mt-1.5 text-[14px] leading-relaxed text-slate-700">{section.proTip}</p>
         </aside>

@@ -46,7 +46,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Isıcamlı Cam Balkon',
     date: '15 Ekim 2026',
     readTime: '5 dk okuma',
-    author: 'Çelikpen Mühendislik Ekibi',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
     imageAlt: 'Winsa Vera Termal ısıcamlı cam balkon uygulaması',
     featured: true,
@@ -81,7 +81,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Winsa PVC Sistemleri',
     date: '08 Ekim 2026',
     readTime: '6 dk okuma',
-    author: 'Çelikpen Proje Departmanı',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
     imageAlt: 'Antrasit PVC pencere ve kapı sistemi uygulaması',
     keyTakeaways: [
@@ -115,7 +115,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Bakım & Montaj Rehberi',
     date: '01 Ekim 2026',
     readTime: '4 dk okuma',
-    author: 'Çelikpen Hukuk & Proje Ekibi',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
     imageAlt: 'Apartman terasında panoramik cam balkon uygulaması',
     keyTakeaways: [
@@ -149,7 +149,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Bakım & Montaj Rehberi',
     date: '22 Eylül 2026',
     readTime: '3 dk okuma',
-    author: 'Çelikpen Donanım Uzmanları',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/kocasinan-winsa-pencere-kol-kilit-donanimi.jpg',
     imageAlt: 'Kedi tüllü sineklik ve pencere donanım detayı',
     keyTakeaways: [
@@ -183,7 +183,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Kış Bahçesi & Pergola',
     date: '17 Eylül 2026',
     readTime: '7 dk okuma',
-    author: 'Çelikpen Mimari Çözümler Ekibi',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/bahcelievler-bioklimatik-pergola-kis-bahcesi.jpg',
     imageAlt: 'Winsa Vela ve Lotus bioklimatik pergola teras uygulaması',
     keyTakeaways: [
@@ -217,7 +217,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Isı & Ses Yalıtımı',
     date: '10 Eylül 2026',
     readTime: '6 dk okuma',
-    author: 'Çelikpen Termal Fizik Ekibi',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/bahcelievler-vera-slide-esiksiz-surme-cam-balkon.jpg',
     imageAlt: 'Isıcamlı sürme cam balkon ve geniş cam cephe uygulaması',
     keyTakeaways: [
@@ -251,7 +251,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Bakım & Montaj Rehberi',
     date: '03 Eylül 2026',
     readTime: '4 dk okuma',
-    author: 'Çelikpen Montaj Sonrası Destek',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/zafer-comfort-slide-surme-sistem.jpg',
     imageAlt: 'Sürme cam balkon ray ve profil detayı',
     keyTakeaways: [
@@ -285,7 +285,7 @@ export const MAGAZINE_POSTS: MagazinePost[] = [
     filterCategory: 'Isıcamlı Cam Balkon',
     date: '27 Ağustos 2026',
     readTime: '5 dk okuma',
-    author: 'Çelikpen Keşif Ekibi',
+    author: 'Çelikpen Mimari Mühendislik Ekibi',
     image: '/images/products/siyavuspasa-vera-katlanir-cam-balkon.jpg',
     imageAlt: 'Katlanır cam balkon ve panoramik balkon manzarası',
     keyTakeaways: [

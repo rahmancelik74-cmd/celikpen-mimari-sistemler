@@ -18,13 +18,6 @@ import { blogPostPath, hubFaqs } from './blogSchema';
 
 const READER_PARAM = 'yazi';
 
-/**
- * Lüks editoryal blog merkezi.
- * - Arama + kategori + popüler anahtar kelime etiketi (#Tag) filtreleri
- * - Öne çıkan amiral gemisi makale
- * - Kartlar doğrudan SEO dostu /profesyoneller/blog/[slug] ve /blog/[slug] URL'lerine gider;
- *   eski ?yazi=slug parametresiyle gelen bağlantıları da geriye dönük destekler.
- */
 export function BlogHub({
   basePath,
   breadcrumbLabel = 'Blog',
@@ -124,13 +117,13 @@ export function BlogHub({
             </ol>
           </nav>
           <span className="mt-4 inline-flex rounded-full border border-sky-300/30 bg-sky-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-200">
-            Çelikpen Mimari Rehber &amp; Mühendislik Kütüphanesi
+            Çelikpen Mimari Mühendislik Ekibi &amp; Bilgi Kütüphanesi
           </span>
           <h1 className="mt-4 max-w-3xl text-2xl font-bold leading-tight sm:text-4xl">
-            Cam Balkon, Winsa PVC ve Kış Bahçesi İçin Mühendis Rehberleri
+            İstanbul Avrupa Yakası Cam Balkon, Winsa PVC ve Kış Bahçesi Mühendislik Rehberleri
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            2026 güncel m² birim fiyatları, ısı ve ses yalıtımı ($U_w$, dB) karşılaştırmaları, TSE EN 14351-1 standartları ve 30 yıllık Bahçelievler saha tecrübemizle hazırlanan teknik makaleler.
+            2026 güncel m² birim fiyatları, ısı ve ses yalıtımı ($U_w$, dB) karşılaştırmaları, TSE EN 14351-1 standartları ve 30 yıllık Avrupa Yakası saha tecrübemizle hazırlanan 15 kapsamlı teknik rehber.
           </p>
 
           {/* Arama + kategori filtresi */}
@@ -141,7 +134,7 @@ export function BlogHub({
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Örn: ısıcamlı cam balkon, Dorado 76, giyotin, pergola..."
+                placeholder="Örn: ısıcamlı cam balkon, Dorado 76, Zekeriyaköy kış bahçesi, Florya..."
                 className="min-h-[44px] w-full rounded-xl border border-white/15 bg-white/10 px-4 text-[13px] text-white placeholder:text-slate-300 backdrop-blur focus:border-sky-300 focus:outline-none"
               />
             </label>
@@ -165,7 +158,7 @@ export function BlogHub({
                         : 'border border-white/15 bg-white/5 text-slate-200 hover:bg-white/15'
                     }`}
                   >
-                    {cat === 'all' ? 'Tümü' : cat}
+                    {cat === 'all' ? 'Tümü (15)' : cat}
                   </button>
                 );
               })}
@@ -236,10 +229,6 @@ export function BlogHub({
                 <time dateTime={FEATURED_BLOG_POST.updatedDate} className="text-slate-500">
                   {formatBlogDate(FEATURED_BLOG_POST.updatedDate)}
                 </time>
-                <span className="text-slate-400">·</span>
-                <span className="font-semibold text-[#1E3A8A]">
-                  {FEATURED_BLOG_POST.initialComments.length} Yorum
-                </span>
               </div>
 
               <h2 className="mt-3 text-xl font-bold leading-snug text-[#0F172A] sm:text-2xl">
@@ -252,7 +241,7 @@ export function BlogHub({
               </h2>
 
               <p className="mt-1.5 text-[11.5px] font-medium text-slate-500">
-                Yazar: <strong className="text-slate-700">{FEATURED_BLOG_POST.author.name}</strong> ({FEATURED_BLOG_POST.author.role})
+                Hazırlayan: <strong className="text-slate-700">{FEATURED_BLOG_POST.author.name}</strong> ({FEATURED_BLOG_POST.author.role})
               </p>
 
               <p className="mt-3 text-[13.5px] leading-relaxed text-slate-600">
@@ -298,7 +287,7 @@ export function BlogHub({
         <section aria-labelledby="tum-rehberler" className={showFeatured ? 'mt-12' : ''}>
           <div className="flex items-end justify-between gap-4">
             <h2 id="tum-rehberler" className="text-lg font-bold text-[#0F172A] sm:text-xl">
-              {showFeatured ? 'Tüm Teknik Rehberler' : `${filtered.length} rehber bulundu`}
+              {showFeatured ? 'Tüm Teknik Rehberler (15 Otorite Makale)' : `${filtered.length} rehber bulundu`}
             </h2>
           </div>
           {gridPosts.length === 0 ? (
@@ -348,10 +337,6 @@ export function BlogHub({
                         <time dateTime={post.updatedDate}>{formatBlogDate(post.updatedDate)}</time>
                         <span>·</span>
                         <span>{post.readTime} dk okuma</span>
-                        <span>·</span>
-                        <span className="font-semibold text-[#1E3A8A]">
-                          {post.initialComments.length} Yorum
-                        </span>
                       </div>
 
                       <h3 className="mt-2 text-[15px] font-bold leading-snug text-[#0F172A]">
@@ -425,11 +410,11 @@ export function BlogHub({
         <section className="mt-14 flex flex-col items-start justify-between gap-5 rounded-3xl bg-[#0F172A] p-6 text-white sm:flex-row sm:items-center sm:p-8">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-300">
-              Ücretsiz keşif
+              Ücretsiz keşif • Tüm İstanbul Avrupa Yakası
             </p>
-            <h2 className="mt-1.5 text-xl font-bold">Mimarlarımızdan Ücretsiz Keşif İsteyin</h2>
+            <h2 className="mt-1.5 text-xl font-bold">Çelikpen Mimari Mühendislik Ekibinden Ücretsiz Keşif İsteyin</h2>
             <p className="mt-2 max-w-xl text-[13px] text-slate-300">
-              Ölçü, danışmanlık ve net fiyat aynı gün — Bahçelievler’in tüm mahallelerinde.
+              Ölçü, danışmanlık ve net fabrika fiyatı aynı gün — Bahçelievler Kocasinan Merkez’den tüm Avrupa Yakası ilçelerine.
             </p>
           </div>
           <Link

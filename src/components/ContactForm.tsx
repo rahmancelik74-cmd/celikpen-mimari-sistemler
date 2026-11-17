@@ -212,7 +212,7 @@ export function ContactForm({ initialTab = 'kesif' }: { initialTab?: ContactForm
               minLength={2}
               value={ad}
               onChange={(e) => setAd(e.target.value)}
-              placeholder="Ahmet Yılmaz"
+              placeholder="Kurumsal Firma veya Ad Soyad"
               className="mt-1 w-full rounded-lg border border-slate-200 bg-[#F8FAFC] px-3 py-2.5 text-xs text-slate-900 transition-colors placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#BFDBFE]"
             />
             {errors.ad && (

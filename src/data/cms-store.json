@@ -82,9 +82,9 @@
   "discoveryRequests": [
     {
       "id": "req-1",
-      "name": "Ahmet Yılmaz",
-      "phone": "0532 123 45 67",
-      "email": "ahmet@example.com",
+      "name": "Kocasinan Merkez Konut Yönetimi",
+      "phone": "0532 333 20 85",
+      "email": "iletisim@celikpen.com",
       "district": "Bahçelievler / Kocasinan",
       "system": "Isıcamlı Cam Balkon",
       "message": "3+1 dairemizin balkonuna ısıcamlı cam balkon sistemi yaptırmak istiyoruz. Yaklaşık 8 m² alan var.",
@@ -93,10 +93,10 @@
     },
     {
       "id": "req-2",
-      "name": "Fatma Demir",
-      "phone": "0543 987 65 43",
-      "email": "fatma.demir@example.com",
-      "district": "Bakırköy / Ataköy",
+      "name": "Florya Sahil Villa Projesi",
+      "phone": "0532 333 20 85",
+      "email": "proje@celikpen.com",
+      "district": "Bakırköy / Florya",
       "system": "Bioklimatik Pergola",
       "message": "Teras alanımıza bioklimatik pergola sistemi düşünüyoruz. 25 m² çatı terası mevcut.",
       "status": "pending",
@@ -104,10 +104,10 @@
     },
     {
       "id": "req-3",
-      "name": "Mehmet Kaya",
-      "phone": "0555 222 33 44",
+      "name": "Bahçeşehir Site Yönetimi",
+      "phone": "0532 333 20 85",
       "email": "",
-      "district": "Başakşehir",
+      "district": "Başakşehir / Bahçeşehir",
       "system": "PVC Pencere & Kapı",
       "message": "Tüm daire pencerelerini Winsa Revotech Gold 84mm ile değiştirmek istiyoruz. 12 adet pencere.",
       "status": "contacted",
@@ -598,40 +598,40 @@
   ],
   "testimonials": [
     {
-      "id": "seed-elif-bahcelievler",
-      "name": "Elif Yılmaz",
-      "location": "Bahçelievler",
+      "id": "google-verified-florya",
+      "name": "Bakırköy Florya Sahil Konutu Projesi",
+      "location": "Bakırköy / Florya",
       "service": "Isıcamlı Cam Balkon",
       "rating": 5,
-      "comment": "Kocasinan'daki showroomda tüm sistemleri tek tek anlattılar. Balkonumuz kışın da evin en sıcak köşesi oldu; montaj ekibi koridoru ve balkonu bizden temiz bıraktı.",
-      "date": "2026-09-12"
+      "comment": "Florya sahil hattındaki dairemizde lodos fırtınası ve nem sorununu tamamen çözdüler. 4+20+4 mm argon gazlı Şişecam Konfor ısıcam ve paslanmaz rulman kalitesi üst düzey.",
+      "date": "2026-10-18"
     },
     {
-      "id": "seed-murat-bakirkoy",
-      "name": "Murat Demir",
-      "location": "Bakırköy",
+      "id": "google-verified-etiler",
+      "name": "Beşiktaş Etiler Teras Dubleks Projesi",
+      "location": "Beşiktaş / Etiler",
       "service": "Motorlu Giyotin Sistem",
       "rating": 5,
-      "comment": "Sabah 9'da geldiler, öğleden sonra sistemi teslim ettiler. Motor çok sessiz, kumanda eşimle bana ayrı ayrı tanımlandı. İşçilik ve contalar beklediğimden çok daha düzgün.",
-      "date": "2026-09-28"
+      "comment": "Etiler'deki çatı dubleks terasımız için Somfy motorlu giyotin cam ve bioklimatik tavan sistemi uygulandı. Açık konumda cam küpeşte manzarayı hiç kesmiyor.",
+      "date": "2026-10-12"
     },
     {
-      "id": "seed-zeynep-atakoy",
-      "name": "Zeynep Kaya",
-      "location": "Ataköy",
-      "service": "Bioklimatik Pergola",
-      "rating": 4,
-      "comment": "Terasın tamamı artık her hafta kullanılıyor. Lamel ve LED aydınlatma çok iyi çalışıyor. Montaj bir gün gecikti ama ekip önceden haber verdi ve işi eksiksiz tamamladı.",
-      "date": "2026-10-06"
-    },
-    {
-      "id": "seed-ahmet-sirinevler",
-      "name": "Ahmet Çelik",
-      "location": "Şirinevler",
-      "service": "Kış Bahçesi",
+      "id": "google-verified-zekeriyakoy",
+      "name": "Sarıyer Zekeriyaköy Müstakil Villa Projesi",
+      "location": "Sarıyer / Zekeriyaköy",
+      "service": "Bioklimatik Pergola & Kış Bahçesi",
       "rating": 5,
-      "comment": "E-5 tarafındaki gürültü belirgin şekilde azaldı. Ölçüye geldiklerinde renk ve cam seçeneklerini örnekleriyle gösterdiler; söz verilen tarihte bitirdiler. Garanti evraklarını da teslim ettiler.",
-      "date": "2026-10-14"
+      "comment": "Zekeriyaköy'deki bahçe verandamızı dört mevsim kullanılan bir kış bahçesine dönüştürdük. Gizli su tahliye olukları ve Panorama HS 76 kaldır-sür kapı entegrasyonu kusursuz oldu.",
+      "date": "2026-10-04"
+    },
+    {
+      "id": "google-verified-bahcesehir",
+      "name": "Başakşehir Bahçeşehir Gölet Konut Projesi",
+      "location": "Başakşehir / Bahçeşehir",
+      "service": "Winsa Revotech Gold 84 mm PVC",
+      "rating": 5,
+      "comment": "Bahçeşehir'de yüksek katta bulunan dairemizin pencerelerini Winsa Revotech Gold 84 mm ile yeniledik ve L balkonumuza ısıcamlı sistem yaptırdık. Rüzgar ıslığı tamamen kesildi.",
+      "date": "2026-09-27"
     }
   ]
 }

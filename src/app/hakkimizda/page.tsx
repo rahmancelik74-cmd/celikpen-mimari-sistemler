@@ -77,9 +77,9 @@ export default function HakkimizdaPage() {
       postalCode: '34186',
       addressCountry: 'TR',
     },
-    founder: {
-      '@type': 'Person',
-      jobTitle: 'Kurucu & Üretim Direktörü',
+    department: {
+      '@type': 'Organization',
+      name: 'Çelikpen Mimari Mühendislik Ekibi — Mimari Cephe & Yalıtım Sistemleri Teknik Kurulu',
     },
     numberOfEmployees: {
       '@type': 'QuantitativeValue',

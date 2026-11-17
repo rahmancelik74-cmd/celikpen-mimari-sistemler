@@ -5,13 +5,8 @@ import {
   SEO_FAQS,
   SEO_SERVICE_GROUPS,
 } from '../config/seo.config';
+import { EUROPEAN_SIDE_DISTRICTS } from '../data/districtsData';
 
-/**
- * Ana sayfanın en altında yer alan, görsel olarak sade kalan SEO rehberi.
- * Hizmet kategorileri ve mahalle sayfalarına iç link, SSS içeriğine ise
- * erişilebilir <details> akordeonu sağlar. İçerik HTML'de her zaman mevcuttur;
- * böylece FAQPage JSON-LD ile birebir eşleşir.
- */
 export function SeoGuide() {
   return (
     <section
@@ -25,12 +20,11 @@ export function SeoGuide() {
             id="seo-rehber-baslik"
             className="mt-2 text-xl font-semibold tracking-tight text-[#0F172A] sm:text-2xl"
           >
-            Bahçelievler Cam Balkon Rehberi ve Hizmet Bölgeleri
+            İstanbul Avrupa Yakası Cam Balkon Rehberi ve Hizmet Bölgeleri
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-[11.5px] leading-relaxed text-slate-500 sm:text-[12.5px]">
-            Aradığınız sistemleri ve mahallenizi tek ekranda bulun. Tüm hizmet
-            bölgelerimiz, ürün gruplarımız ve en sık sorulan teknik soruların
-            yanıtları aşağıda yer alıyor.
+            Bahçelievler Kocasinan Merkez fabrikamızdan tüm Avrupa Yakası ilçelerine sunduğumuz
+            sistemleri, hizmet bölgelerimizi ve en sık sorulan teknik soruların yanıtlarını inceleyin.
           </p>
         </div>
 
@@ -65,18 +59,18 @@ export function SeoGuide() {
 
           <div className="rounded-card border border-slate-200 bg-white p-5 shadow-xs sm:p-6">
             <h3 className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">
-              Bahçelievler Hizmet Bölgeleri
+              Avrupa Yakası Hizmet Bölgeleri
             </h3>
-            <nav aria-label="Bahçelievler mahalle sayfaları" className="mt-3">
+            <nav aria-label="Avrupa Yakası ilçe sayfaları" className="mt-3">
               <ul className="flex flex-wrap gap-1.5">
-                {SITE_CONFIG.neighborhoods.map((neighborhood) => (
-                  <li key={neighborhood.slug}>
+                {EUROPEAN_SIDE_DISTRICTS.map((district) => (
+                  <li key={district.slug}>
                     <Link
                       prefetch={true}
-                      href={`/bahcelievler/${neighborhood.slug}`}
+                      href={`/bolgeler/${district.slug}`}
                       className="inline-flex rounded-full border border-slate-200 bg-[#F8FAFC] px-3 py-1.5 text-[10.5px] font-semibold text-slate-700 transition-colors hover:border-[#BFDBFE] hover:bg-[#EFF6FF] hover:text-[#1D4ED8]"
                     >
-                      {neighborhood.name} cam balkon
+                      {district.footerLabel}
                     </Link>
                   </li>
                 ))}
@@ -84,10 +78,10 @@ export function SeoGuide() {
             </nav>
             <Link
               prefetch={true}
-              href="/satis-noktalari"
+              href="/bolgeler"
               className="mt-4 inline-flex items-center gap-1 text-[10.5px] font-semibold text-[#1E3A8A] hover:text-[#1D4ED8]"
             >
-              Showroom ve keşif ağını görüntüle <span aria-hidden="true">→</span>
+              Tüm Avrupa Yakası hizmet bölgelerini görüntüle <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

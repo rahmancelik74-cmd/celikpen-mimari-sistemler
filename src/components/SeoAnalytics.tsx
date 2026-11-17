@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Script from 'next/script';
+import { usePathname } from 'next/navigation';
 import { ANALYTICS_CONFIG } from '../config/analytics.config';
 import { COOKIE_CHANGE_EVENT, readCookieConsent } from './CookieConsentBanner';
 
@@ -13,6 +14,8 @@ declare global {
 }
 
 const ADS_CONVERSION_EVENTS = ['whatsapp_click', 'phone_call_click'];
+const SESSION_FLAG_KEY = 'celikpen_visitor_session_v1';
+const LOCAL_TELEMETRY_KEY = 'celikpen_visitor_telemetry_v1';
 
 export function pushSeoEvent(eventName: string, payload: Record<string, unknown> = {}) {
   if (typeof window === 'undefined') return;
@@ -44,12 +47,8 @@ export function pushSeoEvent(eventName: string, payload: Record<string, unknown>
   }
 }
 
-/**
- * Google Search Console, Bing, Yandex doğrulama meta etiketleri,
- * Google Analytics 4 (GA4), Google Tag Manager (GTM) ve
- * otomatik dönüşüm (conversion) olay izleme bileşeni.
- */
 export function SeoAnalytics() {
+  const pathname = usePathname();
   const {
     googleSiteVerification,
     gaMeasurementId,
@@ -69,10 +68,63 @@ export function SeoAnalytics() {
       setMarketingAllowed(Boolean(c?.marketing));
     };
     sync();
-    const onChange = sync;
     window.addEventListener(COOKIE_CHANGE_EVENT, onChange);
+    function onChange() {
+      sync();
+    }
     return () => window.removeEventListener(COOKIE_CHANGE_EVENT, onChange);
   }, []);
+
+  /* Sıfır gecikmeli (Zero-Latency) canlı ziyaretçi telemetri kaydı */
+  useEffect(() => {
+    if (!pathname || pathname.startsWith('/admin') || pathname.startsWith('/cp-yonetim-2026')) {
+      return;
+    }
+
+    const sendTelemetry = () => {
+      try {
+        let isNewSession = false;
+        if (!window.sessionStorage.getItem(SESSION_FLAG_KEY)) {
+          isNewSession = true;
+          window.sessionStorage.setItem(SESSION_FLAG_KEY, String(Date.now()));
+        }
+
+        fetch('/api/analytics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            path: pathname,
+            label: document.title || pathname,
+            isNewSession,
+          }),
+          keepalive: true,
+        })
+          .then((res) => res.json())
+          .then((json: { ok?: boolean; data?: unknown }) => {
+            if (json?.ok && json.data) {
+              try {
+                window.localStorage.setItem(LOCAL_TELEMETRY_KEY, JSON.stringify(json.data));
+              } catch {
+                // ignore storage quota
+              }
+            }
+          })
+          .catch(() => {
+            // non-blocking silent fallback
+          });
+      } catch {
+        // ignore
+      }
+    };
+
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(sendTelemetry, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(sendTelemetry, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
