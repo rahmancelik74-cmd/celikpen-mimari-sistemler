@@ -57,6 +57,25 @@ export default function AdminDashboardPage() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [visitorStats, setVisitorStats] = useState<VisitorAnalyticsData | null>(null);
+  const [persistedMode, setPersistedMode] = useState<'local' | 'github' | 'memory_only' | null>(null);
+
+  const fetchUnifiedCmsFromServer = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/admin/cms?t=${Date.now()}`, {
+        cache: 'no-store',
+        credentials: 'same-origin',
+      });
+      if (!res.ok) return;
+      const json = (await res.json()) as { ok?: boolean; data?: CmsStoreData };
+      if (json?.ok && json.data) {
+        const normalized = normalizeCmsData(json.data);
+        setDraft(normalized);
+        setCmsState(normalized);
+      }
+    } catch {
+      // ignore network errors
+    }
+  }, [setCmsState]);
 
   useEffect(() => {
     setMounted(true);
@@ -110,9 +129,10 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
+      void fetchUnifiedCmsFromServer();
       void fetchVisitorAnalytics();
     }
-  }, [isAuthenticated, fetchVisitorAnalytics]);
+  }, [isAuthenticated, fetchUnifiedCmsFromServer, fetchVisitorAnalytics]);
 
   const showNotice = (type: 'success' | 'error' | 'info', text: string) => showToast(type, text);
 
@@ -175,6 +195,7 @@ export default function AdminDashboardPage() {
       });
       const result = (await res.json()) as {
         ok?: boolean;
+        persistedTo?: 'local' | 'github' | 'memory_only';
         message?: string;
         error?: string;
         data?: CmsStoreData;
@@ -183,10 +204,15 @@ export default function AdminDashboardPage() {
         showNotice('error', result.error || 'Kaydetme hatası.');
         return;
       }
-      if (result.data) {
-        setDraft(normalizeCmsData(result.data));
-        setCmsState(normalizeCmsData(result.data));
+      if (result.persistedTo) {
+        setPersistedMode(result.persistedTo);
       }
+      if (result.data) {
+        const synced = normalizeCmsData(result.data);
+        setDraft(synced);
+        setCmsState(synced);
+      }
+      await fetchUnifiedCmsFromServer();
       showNotice('success', customNotice || result.message || 'Değişiklikler kaydedildi!');
     } catch (err) {
       showNotice(
@@ -568,6 +594,15 @@ export default function AdminDashboardPage() {
 
         {/* WORKSPACE */}
         <main className="min-w-0 space-y-6">
+          {persistedMode === 'memory_only' && (
+            <div className="rounded-2xl border border-amber-400/40 bg-amber-500/10 px-4 py-3 text-xs text-amber-200">
+              <strong className="font-extrabold text-amber-300">Canlı Sunucu Kalıcılık Notu:</strong>{' '}
+              Değişiklikler anlık sunucu belleğine uygulandı. Vercel üzerinde kalıcı dosya kaydı ve otomatik dağıtım için Vercel Environment Variables bölümüne{' '}
+              <code className="rounded bg-slate-900 px-1.5 py-0.5 font-mono text-sky-300">GITHUB_TOKEN</code>{' '}
+              ekleyin.
+            </div>
+          )}
+
           {/* CANLI ZİYARETÇİ & TRAFİK İSTATİSTİKLERİ PANELİ */}
           <LiveVisitorAnalyticsBanner
             stats={visitorStats}

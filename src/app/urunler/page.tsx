@@ -25,6 +25,9 @@ export const metadata: Metadata = generatePageMetadata({
   imageAlt: 'Çelikpen Winsa ve Albert Genau ürün kataloğu',
 });
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function UrunlerHubPage() {
   return (
     <main className="bg-[#F8FAFC] pb-16">

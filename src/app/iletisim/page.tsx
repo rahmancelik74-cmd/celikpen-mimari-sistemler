@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { SITE_CONFIG } from '../../config/site.config';
 import { generatePageMetadata } from '../../config/seo.config';
+import { getCmsData } from '../../lib/cms-server';
 import { ContactForm } from '../../components/ContactForm';
 import { MinimalSubpageHeader } from '../../components/MinimalSubpageHeader';
 import { LocalBusinessMapCard } from '../../components/LocalBusinessMapCard';
@@ -18,8 +19,19 @@ export const metadata: Metadata = generatePageMetadata({
   ],
 });
 
-export default function IletisimPage() {
-  const directionsWhatsappUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function IletisimPage() {
+  const cms = await getCmsData();
+  const settings = cms.siteSettings;
+  const addressText = settings.address || SITE_CONFIG.address;
+  const phoneDisplay = settings.phoneDisplay || SITE_CONFIG.phoneDisplay;
+  const phoneRaw = settings.phoneRaw || SITE_CONFIG.phoneRaw;
+  const workingHours = settings.workingHours || SITE_CONFIG.workingHours;
+  const emailText = settings.email || 'iletisim@celikpen.com';
+  const waNum = settings.whatsappNumber || SITE_CONFIG.whatsappNumber;
+  const directionsWhatsappUrl = `https://wa.me/${waNum}?text=${encodeURIComponent(
     `Merhaba Çelikpen (${SITE_CONFIG.headquartersNeighborhood}), Kocasinan Merkez showroom için konum paylaşabilir misiniz?`
   )}`;
 
@@ -40,7 +52,7 @@ export default function IletisimPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
               Showroom &amp; Üretim Adresi
             </span>
-            <p className="mt-2 text-[13px] font-semibold leading-relaxed text-[#0F172A]">{SITE_CONFIG.address}</p>
+            <p className="mt-2 text-[13px] font-semibold leading-relaxed text-[#0F172A]">{addressText}</p>
             <div className="mt-3 border-t border-slate-100 pt-3">
               <a
                 href={directionsWhatsappUrl}
@@ -61,12 +73,12 @@ export default function IletisimPage() {
                 Kurumsal Keşif Hattı
               </span>
               <a
-                href={`tel:${SITE_CONFIG.phoneRaw}`}
+                href={`tel:${phoneRaw}`}
                 className="mt-2 block text-xl font-semibold tracking-tight text-[#0F172A] transition-colors hover:text-[#1E3A8A]"
               >
-                {SITE_CONFIG.phoneDisplay}
+                {phoneDisplay}
               </a>
-              <p className="mt-1 text-[10.5px] text-slate-500">{SITE_CONFIG.workingHours}</p>
+              <p className="mt-1 text-[10.5px] text-slate-500">{workingHours}</p>
             </div>
 
             <div className="rounded-card border border-emerald-200 bg-emerald-50/70 p-4">
@@ -86,10 +98,10 @@ export default function IletisimPage() {
               Hızlı İletişim
             </p>
             <a
-              href="mailto:iletisim@celikpen.com"
+              href={`mailto:${emailText}`}
               className="mt-1.5 block text-[12px] font-semibold text-[#0F172A] hover:text-[#1D4ED8]"
             >
-              iletisim@celikpen.com
+              {emailText}
             </a>
             <p className="mt-1 text-[10px] text-slate-500">
               E-posta taleplerine aynı iş günü içinde dönüş yapıyoruz.

@@ -14,6 +14,8 @@ import {
 } from '../../../../components/blog/blogSchema';
 import { JsonLd, buildBreadcrumbSchema } from '../../../../components/SeoJsonLd';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export const dynamicParams = true;
 
 export function generateStaticParams() {

@@ -16,6 +16,7 @@ interface GoogleReviewsLiveSummary {
   rating?: number;
   totalReviews?: number;
   googleMapsUrl?: string;
+  readReviewsUrl?: string;
   writeReviewUrl?: string;
   embedMapUrl?: string;
 }
@@ -44,6 +45,8 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
   const lat = EXACT_COORDINATES.latitude;
   const lng = EXACT_COORDINATES.longitude;
   const googleMapsDirectionsUrl = liveData?.googleMapsUrl || EXACT_GOOGLE_MAPS_URL;
+  const googleMapsReadReviewsUrl =
+    liveData?.readReviewsUrl || liveData?.googleMapsUrl || EXACT_GOOGLE_MAPS_URL;
   const googleMapsWriteReviewUrl = liveData?.placeId
     ? liveData.writeReviewUrl || getExactWriteReviewUrl(liveData.placeId)
     : liveData?.writeReviewUrl || EXACT_WRITE_REVIEW_URL;
@@ -73,17 +76,22 @@ export function LocalBusinessMapCard({ className = '' }: { className?: string })
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2">
+          <a
+            href={googleMapsReadReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-3.5 py-2 transition hover:border-sky-300/40 hover:bg-white/10"
+          >
             <span className="text-lg font-black text-amber-400">
               {displayRating ? `★ ${displayRating.toFixed(1)}` : '★ Google'}
             </span>
             <div className="text-[10.5px] leading-tight text-slate-300">
               <strong className="block font-bold text-white">
-                {displayReviewCount ? `${displayReviewCount} Google Yorumu` : 'Doğrulanmış İşletme'}
+                {displayReviewCount ? `${displayReviewCount} Google Yorumu ↗` : 'Yorumları İncele ↗'}
               </strong>
               <span>Bahçelievler / İstanbul</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 

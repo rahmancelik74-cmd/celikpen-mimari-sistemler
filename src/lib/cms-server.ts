@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import path from 'node:path';
 import {
   DEFAULT_CMS_DATA,
@@ -11,9 +11,15 @@ import type { BlogPost } from '../data/blogTypes';
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
 
-export async function readCmsStoreFromFile(): Promise<CmsStoreData> {
+let runtimeCmsCache: CmsStoreData | null = null;
+
+export function setRuntimeCmsCache(data: CmsStoreData): void {
+  runtimeCmsCache = normalizeCmsData(data);
+}
+
+export function readCmsStoreFromFileSync(): CmsStoreData {
   try {
-    const rawText = await fs.readFile(CMS_FILE_PATH, 'utf-8');
+    const rawText = fsSync.readFileSync(CMS_FILE_PATH, 'utf-8');
     const parsed = JSON.parse(rawText) as Partial<CmsStoreData>;
     return normalizeCmsData(parsed);
   } catch {
@@ -21,30 +27,50 @@ export async function readCmsStoreFromFile(): Promise<CmsStoreData> {
   }
 }
 
+export async function readCmsStoreFromFile(): Promise<CmsStoreData> {
+  return readCmsStoreFromFileSync();
+}
+
 /**
- * Birleşik Sunucu Veri Kaynağı (Single Source of Truth):
- * `src/data/blogData.ts` içindeki tüm 15 SEO blog makalesi, hizmetler, ürünler, referanslar,
- * m² fiyatlandırma ve site ayarlarını `src/data/cms-store.json` + Vercel Blob kayıtlarıyla
- * iki yönlü olarak birleştirir.
+ * Tek Doğruluk Kaynağı (Single Source of Truth — Runtime Dynamic Loader):
+ * `src/data/cms-store.json` dosyasını çalışma anında `fs.readFileSync` ile dinamik olarak okur
+ * (derleme anında dondurulmuş statik JSON importuna bağlı kalmaz), bellek içi önbellek ve
+ * Vercel Blob ile karşılaştırarak en güncel durumu döndürür.
  */
-export async function getMergedCmsData(): Promise<CmsStoreData> {
-  const fileData = await readCmsStoreFromFile();
+export async function getCmsData(): Promise<CmsStoreData> {
+  const fileData = readCmsStoreFromFileSync();
+  let newest = fileData;
+
+  if (runtimeCmsCache) {
+    const memTime = new Date(runtimeCmsCache.updatedAt || 0).getTime();
+    const fileTime = new Date(newest.updatedAt || 0).getTime();
+    if (memTime >= fileTime) {
+      newest = runtimeCmsCache;
+    }
+  }
+
   try {
     const blobData = await readCmsFromBlob();
     if (blobData) {
       const normalizedBlob = normalizeCmsData(blobData);
       const blobTime = new Date(normalizedBlob.updatedAt || 0).getTime();
-      const fileTime = new Date(fileData.updatedAt || 0).getTime();
-      return blobTime >= fileTime ? normalizedBlob : fileData;
+      const newestTime = new Date(newest.updatedAt || 0).getTime();
+      if (blobTime >= newestTime) {
+        newest = normalizedBlob;
+      }
     }
   } catch {
-    // Fallback to fileData
+    // Fallback to newest (file / memory)
   }
-  return fileData;
+
+  runtimeCmsCache = newest;
+  return newest;
 }
 
+export const getMergedCmsData = getCmsData;
+
 export async function getMergedRichBlogPosts(): Promise<BlogPost[]> {
-  const merged = await getMergedCmsData();
+  const merged = await getCmsData();
   return mergeCmsToRichBlogPosts(merged);
 }
 

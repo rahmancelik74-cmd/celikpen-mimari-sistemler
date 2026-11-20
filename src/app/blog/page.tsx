@@ -30,6 +30,9 @@ export const metadata: Metadata = generatePageMetadata({
   imageAlt: FEATURED_BLOG_POST.imageAlt,
 });
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function BlogPage() {
   const path = '/blog';
   const posts = await getMergedRichBlogPosts();

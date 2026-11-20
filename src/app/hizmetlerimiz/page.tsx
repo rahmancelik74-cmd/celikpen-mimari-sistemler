@@ -248,6 +248,9 @@ const WORKFLOW_STEPS = [
   },
 ];
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function HizmetlerimizPage() {
   const cms = await getMergedCmsData();
   const cmsServiceById = new Map(cms.services.map((s) => [s.id, s]));

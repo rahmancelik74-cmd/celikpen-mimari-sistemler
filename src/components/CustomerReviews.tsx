@@ -41,7 +41,8 @@ export function CustomerReviews() {
         if (payload?.ok) {
           setRating(typeof payload.rating === 'number' ? payload.rating : 0);
           setTotalReviews(typeof payload.totalReviews === 'number' ? payload.totalReviews : 0);
-          if (payload.googleMapsUrl) setGoogleMapsUrl(payload.googleMapsUrl);
+          const readUrl = payload.readReviewsUrl || payload.googleMapsUrl;
+          if (readUrl) setGoogleMapsUrl(readUrl);
           if (payload.writeReviewUrl) setWriteReviewUrl(payload.writeReviewUrl);
           setReviews(Array.isArray(payload.reviews) ? payload.reviews : []);
         }

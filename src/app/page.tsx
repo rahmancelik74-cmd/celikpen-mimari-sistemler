@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import { SITE_CONFIG } from '../config/site.config';
+import { getCmsData, getMergedRichBlogPosts } from '../lib/cms-server';
 import { HeroSlider } from '../components/HeroSlider';
 import {
   CorporatePrestigeSection,
@@ -13,14 +14,14 @@ import { SeoGuide } from '../components/SeoGuide';
 
 /* Ağır etkileşimli bölümler ilk rota geçişini kilitlemesin diye ayrı chunk'lara
    bölünür; SSR korunur, böylece SEO HTML'i ve görsel düzen değişmez. */
-const ArchitecturalVirtualTour = dynamic(
+const ArchitecturalVirtualTour = nextDynamic(
   () =>
     import('../components/ArchitecturalVirtualTour').then(
       (module) => module.ArchitecturalVirtualTour
     ),
   { ssr: true }
 );
-const CustomerReviews = dynamic(
+const CustomerReviews = nextDynamic(
   () => import('../components/CustomerReviews').then((module) => module.CustomerReviews),
   { ssr: true }
 );
@@ -31,6 +32,7 @@ const CustomerReviews = dynamic(
 
 const SERVICE_CARDS = [
   {
+    id: 'katlanir-cam-balkon',
     title: 'Katlanır Cam Balkon Sistemleri',
     description:
       '8mm / 10mm Şişecam temperli güvenlik camı ve paslanmaz rulmanlarla %100 panoramik açılım.',
@@ -39,6 +41,7 @@ const SERVICE_CARDS = [
     badges: ['8/10 mm', 'Temperli'],
   },
   {
+    id: 'isicamli-cam-balkon',
     title: 'Isıcamlı Cam Balkon Sistemleri',
     description:
       '4+20+4 argon gazlı temperli cam ve antrasit profil ile dört mevsim yaşayan balkonlar.',
@@ -47,6 +50,7 @@ const SERVICE_CARDS = [
     badges: ['Uw: 1.1', '38 dB'],
   },
   {
+    id: 'surme-cam-balkon',
     title: 'Sürme Cam Balkon Sistemleri',
     description:
       'Eşiksiz alt ray, geniş açıklık ve tek parmakla sessiz kayma; dar balkonlarda alan kazancı.',
@@ -55,6 +59,7 @@ const SERVICE_CARDS = [
     badges: ['Eşiksiz', 'Sürme'],
   },
   {
+    id: 'giyotin-cam-sistemleri',
     title: 'Motorlu Giyotin Cam Sistemleri',
     description:
       'Kumandalı, dikey açılan cam cephe; açıkken güvenli küpeşte, kapalıyken tam yalıtım.',
@@ -63,6 +68,7 @@ const SERVICE_CARDS = [
     badges: ['Uw: 1.3', '36 dB'],
   },
   {
+    id: 'kis-bahcesi-sistemleri',
     title: 'Kış Bahçesi Sistemleri',
     description:
       'Teras ve bahçe katlarını dört mevsim kullanılan ferah bir yaşam alanına dönüştürün.',
@@ -71,6 +77,7 @@ const SERVICE_CARDS = [
     badges: ['Uw: 1.1', '40 dB'],
   },
   {
+    id: 'bioklimatik-pergola',
     title: 'Bioklimatik Pergola & Tente',
     description:
       'Motorlu alüminyum lamelli tavan, gizli yağmur tahliyesi ve entegre LED aydınlatma.',
@@ -79,6 +86,7 @@ const SERVICE_CARDS = [
     badges: ['0°-135°', 'Lamel'],
   },
   {
+    id: 'pvc-pencere-kapi',
     title: 'PVC Pencere & Kapı Montajı',
     description:
       'Revotech Gold, Dorado 76 ve Safir serileriyle yüksek yalıtımlı pencere ve kapı çözümleri.',
@@ -87,6 +95,7 @@ const SERVICE_CARDS = [
     badges: ['Uw: 0.79', '46 dB'],
   },
   {
+    id: 'panjur-kepenk-sineklik',
     title: 'Panjur, Kepenk & Kedi Sinekliği',
     description:
       'Kedi tüllü sineklik, plise perde ve Winstor monoblok panjur entegrasyonu.',
@@ -178,7 +187,39 @@ const ADDITIONAL_LINKS = [
    PAGE
    ============================================================================ */
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function HomePage() {
+  const [cms, richBlogs] = await Promise.all([getCmsData(), getMergedRichBlogPosts()]);
+  const cmsServiceById = new Map(cms.services.map((s) => [s.id, s]));
+  const liveServiceCards = SERVICE_CARDS.filter((card) => {
+    const override = cmsServiceById.get(card.id);
+    return override ? override.active !== false : true;
+  }).map((card) => {
+    const override = cmsServiceById.get(card.id);
+    return override
+      ? {
+          ...card,
+          title: override.title || card.title,
+          description: override.subtitle || card.description,
+          image: override.image || card.image,
+        }
+      : card;
+  });
+
+  const liveBlogCards =
+    richBlogs.length > 0
+      ? richBlogs.slice(0, 3).map((post) => ({
+          title: post.title,
+          excerpt: post.excerpt,
+          category: post.category,
+          read: `${post.readTime} dk okuma • ${post.author.name}`,
+          href: `/blog/${post.slug}`,
+          image: post.image,
+        }))
+      : BLOG_POSTS;
+
   return (
     <main className="min-h-screen bg-white">
       <HeroSlider />
@@ -216,7 +257,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICE_CARDS.map((service) => (
+            {liveServiceCards.map((service) => (
               <Link
                 prefetch={true}
                 key={service.title}
@@ -554,7 +595,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {BLOG_POSTS.map((post) => (
+            {liveBlogCards.map((post) => (
               <Link
                 prefetch={true}
                 key={post.title}

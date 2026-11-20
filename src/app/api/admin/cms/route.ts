@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import path from 'node:path';
 import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
-import { getMergedCmsData } from '../../../../lib/cms-server';
+import { getCmsData, setRuntimeCmsCache } from '../../../../lib/cms-server';
 import { writeCmsToBlob } from '../../../../lib/blob-storage';
 import { verifyAdminRequest } from '../../../../lib/admin-auth';
 
@@ -76,7 +76,7 @@ async function commitCmsToGitHubIfConfigured(content: string): Promise<boolean> 
 }
 
 export async function GET(request: Request) {
-  const data = await getMergedCmsData();
+  const data = await getCmsData();
   const isAdmin = verifyAdminRequest(request);
   return NextResponse.json(
     {
@@ -109,27 +109,36 @@ async function handleWriteCms(request: Request) {
       );
     }
 
-    const currentData = await getMergedCmsData();
+    const currentData = await getCmsData();
     const mergedData: CmsStoreData = normalizeCmsData({
       ...currentData,
       ...(body.data || {}),
       updatedAt: new Date().toISOString(),
     });
 
-    const serialized = JSON.stringify(mergedData, null, 2);
+    /* 1. Anlık çalışma zamanı belleğini güncelle */
+    setRuntimeCmsCache(mergedData);
 
+    const serialized = JSON.stringify(mergedData, null, 2) + '\n';
+
+    /* 2. Yerel dosya sistemine yaz (Vercel salt okunur ortamda try/catch ile korunur) */
     let persistedToDisk = false;
     try {
-      await fs.mkdir(path.dirname(CMS_FILE_PATH), { recursive: true });
-      await fs.writeFile(CMS_FILE_PATH, serialized, 'utf-8');
+      fsSync.mkdirSync(path.dirname(CMS_FILE_PATH), { recursive: true });
+      fsSync.writeFileSync(CMS_FILE_PATH, serialized, 'utf-8');
       persistedToDisk = true;
     } catch {
       persistedToDisk = false;
     }
 
+    /* 3. Vercel Blob veya GitHub Contents API üzerinden kalıcı senkronizasyon */
     const persistedToBlob = await writeCmsToBlob(mergedData);
-    const persistedToGitHub = await commitCmsToGitHubIfConfigured(serialized);
+    const shouldPushToGitHub = Boolean(process.env.GITHUB_TOKEN) && (Boolean(process.env.VERCEL) || !persistedToDisk || true);
+    const persistedToGitHub = shouldPushToGitHub
+      ? await commitCmsToGitHubIfConfigured(serialized)
+      : false;
 
+    /* 4. Tüm genel rotaların önbelleğini anında temizle */
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/');
@@ -152,16 +161,24 @@ async function handleWriteCms(request: Request) {
       // Ignore revalidation errors in edge contexts
     }
 
-    const persisted = persistedToDisk || persistedToBlob || persistedToGitHub;
+    const persistedTo: 'local' | 'github' | 'memory_only' = persistedToDisk
+      ? 'local'
+      : persistedToGitHub || persistedToBlob
+        ? 'github'
+        : 'memory_only';
 
     return NextResponse.json({
       ok: true,
+      persistedTo,
       persistedToDisk,
       persistedToBlob,
       persistedToGitHub,
-      message: persisted
-        ? 'Değişiklikler başarıyla kaydedildi ve tüm sitede anında güncellendi.'
-        : 'Değişiklikler tarayıcı belleğine kaydedildi (Canlı sunucuya kalıcı işlemek için Vercel Blob Storage veya GITHUB_TOKEN ayarlayın).',
+      message:
+        persistedTo === 'local'
+          ? 'Değişiklikler cms-store.json dosyasına kaydedildi ve tüm sitede anında güncellendi.'
+          : persistedTo === 'github'
+            ? 'Değişiklikler GitHub/Blob üzerine kalıcı olarak işlendi ve canlı site güncellendi.'
+            : 'Değişiklikler anlık sunucu belleğine kaydedildi (Canlı sunucuda kalıcı kayıt için Vercel Environment Variables bölümüne GITHUB_TOKEN ekleyin).',
       data: mergedData,
     });
   } catch (error) {

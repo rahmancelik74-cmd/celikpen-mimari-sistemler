@@ -52,6 +52,7 @@ export interface GoogleReviewsApiResponse {
   totalReviews: number;
   userRatingsTotal: number;
   googleMapsUrl: string;
+  readReviewsUrl: string;
   mapsUrl: string;
   writeReviewUrl: string;
   embedMapUrl: string;
@@ -103,8 +104,10 @@ function maskApiKey(key: string): string {
 }
 
 function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
+  const readReviewsUrl = apiMapsUri || EXACT_GOOGLE_MAPS_URL;
   return {
-    googleMapsUrl: apiMapsUri || EXACT_GOOGLE_MAPS_URL,
+    googleMapsUrl: readReviewsUrl,
+    readReviewsUrl,
     writeReviewUrl: getExactWriteReviewUrl(placeId),
     embedMapUrl: EXACT_EMBED_MAP_URL,
   };
@@ -236,7 +239,7 @@ async function resolveGoogleReviews(
         const liveReviews = mapV1Reviews(v1Place.reviews);
         const totalReviews = v1Place.userRatingCount ?? liveReviews.length;
         const rating = typeof v1Place.rating === 'number' ? v1Place.rating : 0;
-        const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
+        const { googleMapsUrl, readReviewsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
           resolvedId,
           v1Place.googleMapsUri
         );
@@ -257,6 +260,7 @@ async function resolveGoogleReviews(
           totalReviews,
           userRatingsTotal: totalReviews,
           googleMapsUrl,
+          readReviewsUrl,
           mapsUrl: googleMapsUrl,
           writeReviewUrl,
           embedMapUrl,
@@ -340,7 +344,7 @@ async function resolveGoogleReviews(
             const totalReviews = resData.user_ratings_total ?? liveReviews.length;
             const rating = typeof resData.rating === 'number' ? resData.rating : 0;
 
-            const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
+            const { googleMapsUrl, readReviewsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
               finalPlaceId,
               resData.url
             );
@@ -361,6 +365,7 @@ async function resolveGoogleReviews(
               totalReviews,
               userRatingsTotal: totalReviews,
               googleMapsUrl,
+              readReviewsUrl,
               mapsUrl: googleMapsUrl,
               writeReviewUrl,
               embedMapUrl,
@@ -378,7 +383,7 @@ async function resolveGoogleReviews(
   }
 
   /* 3. Sahte/Örnek Yorum Yok — Yalnızca Google API Yetkisi Beklenirken Boş Liste Döner */
-  const { googleMapsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(rawPlaceId);
+  const { googleMapsUrl, readReviewsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(rawPlaceId);
 
   return {
     ok: true,
@@ -402,6 +407,7 @@ async function resolveGoogleReviews(
     totalReviews: 0,
     userRatingsTotal: 0,
     googleMapsUrl,
+    readReviewsUrl,
     mapsUrl: googleMapsUrl,
     writeReviewUrl,
     embedMapUrl,

@@ -40,6 +40,9 @@ const ASSURANCES = [
   },
 ];
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function FiyatHesaplaPage() {
   return (
     <main className="bg-[#F8FAFC] pb-16">
