@@ -10,6 +10,28 @@ import {
   buildBreadcrumbSchema,
   buildWebPageSchema,
 } from '../../../components/SeoJsonLd';
+import {
+  SEO_SERVICE_PAGES,
+  getSeoServiceBySlug,
+  type SeoServicePageData,
+} from '../../../data/seoServices';
+import { SEO_DISTRICT_PAGES } from '../../../data/seoDistricts';
+import { LiteYouTubeEmbed } from '../../../components/LiteYouTubeEmbed';
+import {
+  EXACT_COORDINATES,
+  EXACT_GOOGLE_MAPS_URL,
+  EXACT_READ_REVIEWS_URL,
+  EXACT_WRITE_REVIEW_URL,
+} from '../../../lib/google-business';
+
+function extractYouTubeId(url?: string): string | null {
+  const cleaned = (url || '').trim();
+  if (!cleaned) return null;
+  const match = cleaned.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+  );
+  return match ? match[1] : null;
+}
 
 interface ServiceDetail {
   id: string;
@@ -443,7 +465,13 @@ function findService(slug: string): ServiceDetail | undefined {
 }
 
 export function generateStaticParams() {
-  return Object.keys(SLUG_ALIAS_MAP).map((slug) => ({ slug }));
+  const allSlugs = Array.from(
+    new Set([
+      ...SEO_SERVICE_PAGES.map((s) => s.slug),
+      ...Object.keys(SLUG_ALIAS_MAP),
+    ])
+  );
+  return allSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -452,6 +480,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const seoService = getSeoServiceBySlug(slug);
+  if (seoService) {
+    return generatePageMetadata({
+      title: seoService.metaTitle,
+      description: seoService.metaDescription,
+      path: `/hizmetlerimiz/${seoService.slug}`,
+      keywords: seoService.keywords,
+      image: seoService.heroImage,
+      imageAlt: seoService.heroImageAlt,
+    });
+  }
+
   const service = findService(slug);
   if (!service) return {};
 
@@ -465,12 +505,415 @@ export async function generateMetadata({
   });
 }
 
+function SeoAuthorityServicePage({ seoService }: { seoService: SeoServicePageData }) {
+  const youtubeId = extractYouTubeId(seoService.videoUrl);
+  const whatsappMessage = encodeURIComponent(
+    `Merhaba, ${seoService.name} ve 2026 m² fiyatları hakkında ücretsiz keşif & teklif almak istiyorum.`
+  );
+  const whatsappHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${whatsappMessage}`;
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Anasayfa', path: '/' },
+    { name: 'Hizmetlerimiz', path: '/hizmetlerimiz' },
+    { name: seoService.name, path: `/hizmetlerimiz/${seoService.slug}` },
+  ]);
+
+  const webPageSchema = buildWebPageSchema({
+    name: seoService.h1,
+    description: seoService.metaDescription,
+    path: `/hizmetlerimiz/${seoService.slug}`,
+    type: 'WebPage',
+  });
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${SITE_CONFIG.siteUrl}/hizmetlerimiz/${seoService.slug}#service`,
+    name: seoService.name,
+    serviceType: seoService.name,
+    description: seoService.metaDescription,
+    image: `${SITE_CONFIG.siteUrl}${seoService.heroImage}`,
+    url: `${SITE_CONFIG.siteUrl}/hizmetlerimiz/${seoService.slug}`,
+    areaServed: SEO_DISTRICT_PAGES.map((d) => ({
+      '@type': 'AdministrativeArea',
+      name: `${d.districtName}, İstanbul`,
+    })),
+    provider: {
+      '@type': 'LocalBusiness',
+      name: `${SITE_CONFIG.brandName} Cam Balkon & Mimari Sistemler`,
+      telephone: SITE_CONFIG.phoneRaw,
+      email: 'iletisim@celikpen.com.tr',
+      hasMap: EXACT_GOOGLE_MAPS_URL,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Kocasinan Merkez Mah. Kızılelma Cad. No: 30/C',
+        addressLocality: 'Bahçelievler',
+        addressRegion: 'İstanbul',
+        postalCode: '34186',
+        addressCountry: 'TR',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: EXACT_COORDINATES.latitude,
+        longitude: EXACT_COORDINATES.longitude,
+      },
+    },
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: seoService.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
+  const otherServices = SEO_SERVICE_PAGES.filter((s) => s.slug !== seoService.slug);
+
+  return (
+    <main className="bg-[#F8FAFC] pb-20">
+      <JsonLd data={webPageSchema} id={`seo-${seoService.slug}-webpage`} />
+      <JsonLd data={breadcrumbSchema} id={`seo-${seoService.slug}-breadcrumb`} />
+      <JsonLd data={serviceSchema} id={`seo-${seoService.slug}-service`} />
+      <JsonLd data={faqSchema} id={`seo-${seoService.slug}-faq`} />
+
+      {/* ==================== #1E3A8A HERO ==================== */}
+      <section className="relative overflow-hidden bg-[#1E3A8A] pt-10 pb-14 text-white sm:pt-14 sm:pb-18">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(191,219,254,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(191,219,254,0.22) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="container-shell relative">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-[11px] text-blue-200">
+            <Link href="/" className="transition-colors hover:text-white">
+              Anasayfa
+            </Link>
+            <span aria-hidden="true">›</span>
+            <Link href="/hizmetlerimiz" className="transition-colors hover:text-white">
+              Hizmetlerimiz
+            </Link>
+            <span aria-hidden="true">›</span>
+            <span className="font-semibold text-white">{seoService.name}</span>
+          </nav>
+
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.16em] text-blue-100">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                30 Yıllık Fabrika Üretimi • İstanbul Avrupa Yakası
+              </div>
+
+              <h1 className="mt-4 text-3xl font-black leading-[1.14] tracking-tight sm:text-4xl lg:text-[42px]">
+                {seoService.h1}
+              </h1>
+
+              <p className="mt-4 max-w-2xl text-[14px] leading-relaxed text-blue-100/95">
+                {seoService.heroSubtitle}
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link
+                  href="/iletisim?form=kesif"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#D91B24] px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-[#b5161e]"
+                >
+                  Ücretsiz Keşif İste
+                </Link>
+                <Link
+                  href={seoService.calculatorHref}
+                  className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/20"
+                >
+                  2026 m² Fiyat Hesapla
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/15 bg-slate-900 shadow-2xl">
+                <Image
+                  src={seoService.heroImage}
+                  alt={seoService.heroImageAlt}
+                  title={seoService.heroImageTitle}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 44vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== 2-COLUMN AUTHORITY BODY ==================== */}
+      <section className="container-shell pt-12">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+          {/* LEFT COLUMN: AI Summary + H2/H3 Authority Content + Specs + Conditional Video */}
+          <div className="space-y-10 lg:col-span-8">
+            {/* Concise AI-Search Summary Box (~45 words) */}
+            <div className="rounded-2xl border border-blue-200 bg-[#EFF6FF] p-6">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#1E3A8A]">
+                Hızlı Teknik Özet
+              </p>
+              <p className="mt-2 text-[14px] leading-7 text-slate-800">
+                {seoService.aiSummary}
+              </p>
+            </div>
+
+            {/* Crisp H2 / H3 Keyword & Technical Definitions */}
+            {seoService.sections.map((section) => (
+              <article key={section.heading} className="space-y-4">
+                <h2 className="text-2xl font-black tracking-tight text-[#0F172A]">
+                  {section.heading}
+                </h2>
+                {section.paragraphs.map((p, idx) => (
+                  <p key={idx} className="text-[14.5px] leading-7 text-slate-700">
+                    {p}
+                  </p>
+                ))}
+                {section.subSections && section.subSections.length > 0 && (
+                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                    {section.subSections.map((sub) => (
+                      <div
+                        key={sub.heading}
+                        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs"
+                      >
+                        <h3 className="text-[15px] font-bold text-[#0F172A]">{sub.heading}</h3>
+                        <p className="mt-2 text-[13.5px] leading-6 text-slate-600">{sub.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </article>
+            ))}
+
+            {/* Technical Specifications Table */}
+            <div>
+              <h2 className="text-xl font-black tracking-tight text-[#0F172A]">
+                {seoService.name} Teknik Özellikleri
+              </h2>
+              <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
+                <table className="w-full text-left text-[13.5px]">
+                  <tbody>
+                    {seoService.specs.map((spec, idx) => (
+                      <tr key={spec.label} className={idx % 2 === 0 ? 'bg-slate-50/80' : 'bg-white'}>
+                        <th className="w-2/5 px-5 py-3.5 font-bold text-[#0F172A]">{spec.label}</th>
+                        <td className="px-5 py-3.5 text-slate-700">{spec.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Conditional Video SEO Slot (Renders NOTHING & 0 KB JS when videoUrl is empty) */}
+            {youtubeId ? (
+              <LiteYouTubeEmbed
+                video={{
+                  videoId: youtubeId,
+                  title: seoService.videoTitle || seoService.h1,
+                  description: seoService.videoDescription || seoService.metaDescription,
+                  durationIso: 'PT1M30S',
+                  durationDisplay: '01:30',
+                  uploadDate: '2026-01-15',
+                  posterImage: seoService.heroImage,
+                  brandBadge: 'Çelikpen Video Rehber',
+                  highlights: seoService.specs.slice(0, 3).map((s) => `${s.label}: ${s.value}`),
+                }}
+              />
+            ) : null}
+          </div>
+
+          {/* RIGHT STICKY COLUMN: Compact 2026 m² Price Table + Calculator + WhatsApp */}
+          <aside className="space-y-5 lg:sticky lg:top-24 lg:col-span-4">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-base font-black text-[#0F172A]">2026 m² Fiyat Tablosu</h2>
+                <span className="rounded-md bg-[#EFF6FF] px-2.5 py-1 text-[10.5px] font-bold text-[#1E3A8A]">
+                  Güncel 2026
+                </span>
+              </div>
+
+              <div className="mt-4 divide-y divide-slate-100">
+                {seoService.priceRows.map((row) => (
+                  <div key={row.system} className="py-3 first:pt-1 last:pb-1">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="text-[13px] font-bold text-[#0F172A]">{row.system}</p>
+                      <p className="shrink-0 text-[13px] font-extrabold text-[#1E3A8A]">
+                        {row.priceRange2026}
+                      </p>
+                    </div>
+                    <p className="mt-0.5 text-[11.5px] text-slate-500">{row.spec}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-3 text-[11px] leading-relaxed text-slate-500">
+                * Fiyatlar 2026 İstanbul Avrupa Yakası referans m² aralıklarıdır. Net tutar ücretsiz
+                lazerli keşif sonrası belirlenir.
+              </p>
+
+              <div className="mt-5 space-y-2.5">
+                <Link
+                  href={seoService.calculatorHref}
+                  className="flex w-full items-center justify-center rounded-xl bg-[#1E3A8A] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1D4ED8]"
+                >
+                  Online m² Fiyat Hesapla
+                </Link>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center rounded-xl bg-[#25D366] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1fb855]"
+                >
+                  WhatsApp ile Hızlı Teklif Al
+                </a>
+                <a
+                  href={`tel:${SITE_CONFIG.phoneRaw}`}
+                  className="flex w-full items-center justify-center rounded-xl border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm font-bold text-[#0F172A] transition hover:bg-slate-100"
+                >
+                  {SITE_CONFIG.phoneDisplay}
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <h3 className="text-xs font-extrabold uppercase tracking-[0.14em] text-slate-500">
+                Diğer Hizmet &amp; Fiyat Rehberlerimiz
+              </h3>
+              <ul className="mt-3 space-y-2">
+                {otherServices.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={`/hizmetlerimiz/${s.slug}`}
+                      className="block text-[13px] font-semibold text-slate-700 transition hover:text-[#1E3A8A]"
+                    >
+                      → {s.footerLabel}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* ==================== EXPANDABLE FAQ ACCORDION ==================== */}
+      <section className="container-shell pt-14">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-2xl font-black tracking-tight text-[#0F172A]">
+            {seoService.name} — Sıkça Sorulan Sorular
+          </h2>
+          <div className="mt-6 space-y-3">
+            {seoService.faqs.map((faq, idx) => (
+              <details
+                key={faq.question}
+                open={idx === 0}
+                className="group rounded-xl border border-slate-200 bg-white p-5 shadow-xs"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[14.5px] font-bold text-[#0F172A]">
+                  <span>{faq.question}</span>
+                  <span className="shrink-0 text-lg font-bold text-[#1E3A8A] transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-[13.5px] leading-6 text-slate-600">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== LIVE GOOGLE 4.9★ REVIEW STRIP ==================== */}
+      <section className="container-shell pt-12">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-xs sm:flex-row sm:items-center">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-black text-[#0F172A]">4.9 / 5.0</span>
+              <span className="text-amber-500" aria-label="5 üzerinden 4.9 yıldız">
+                ★★★★★
+              </span>
+              <span className="text-xs font-semibold text-slate-500">
+                Google İşletme Profili (11 Doğrulanmış Değerlendirme)
+              </span>
+            </div>
+            <p className="mt-1 text-[13px] text-slate-600">
+              Bahçelievler Kocasinan Merkez fabrikamız ve Avrupa Yakası montaj ekibimiz için
+              doğrulanmış müşteri yorumlarını Google Haritalar’da görüntüleyin.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            <a
+              href={EXACT_READ_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-[#0F172A] transition hover:border-[#1E3A8A] hover:text-[#1E3A8A]"
+            >
+              Google Yorumlarını Oku ↗
+            </a>
+            <a
+              href={EXACT_WRITE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl bg-[#1E3A8A] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#1D4ED8]"
+            >
+              Google’da Yorum Bırak ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== CROSS-LINKS TO ALL 12 EUROPEAN SIDE DISTRICTS ==================== */}
+      <section className="container-shell pt-12">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+          <h2 className="text-lg font-black tracking-tight text-[#0F172A]">
+            İstanbul Avrupa Yakası Hizmet Verdiğimiz 12 Bölge
+          </h2>
+          <p className="mt-1 text-[13px] text-slate-600">
+            {seoService.name} için aynı gün ücretsiz lazerli keşif sunduğumuz ilçe rehberleri:
+          </p>
+          <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            {SEO_DISTRICT_PAGES.map((district) => (
+              <Link
+                key={district.slug}
+                href={`/bolgeler/${district.slug}`}
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-[13px] font-semibold text-slate-800 transition hover:border-[#1E3A8A] hover:bg-[#EFF6FF] hover:text-[#1E3A8A]"
+              >
+                <span>{district.footerLabel}</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 export default async function HizmetDetayPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  const seoService = getSeoServiceBySlug(slug);
+  if (seoService) {
+    return <SeoAuthorityServicePage seoService={seoService} />;
+  }
+
   const service = findService(slug);
   if (!service) notFound();
 

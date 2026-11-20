@@ -4,6 +4,8 @@ import { WINSA_PRODUCTS } from '../config/winsa-products.config';
 import { PROFESSIONAL_SUBPAGES } from '../config/winsa-professionals.config';
 import { CORPORATE_SUBPAGES } from '../config/winsa-corporate.config';
 import { getMergedRichBlogPosts } from '../lib/cms-server';
+import { SEO_SERVICE_PAGES } from '../data/seoServices';
+import { SEO_DISTRICT_PAGES } from '../data/seoDistricts';
 
 /**
  * Tüm kamuya açık rotaları tek kaynaktan üretir.
@@ -186,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const serviceSlugs = [
+  const legacyServiceSlugs = [
     'katlanir-cam-balkon',
     'isicamli-cam-balkon',
     'surme-cam-balkon',
@@ -197,11 +199,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'panjur-kepenk-sineklik',
   ];
 
-  const serviceRoutes: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
+  const allServiceSlugs = Array.from(
+    new Set([...SEO_SERVICE_PAGES.map((s) => s.slug), ...legacyServiceSlugs])
+  );
+
+  const serviceRoutes: MetadataRoute.Sitemap = allServiceSlugs.map((slug) => ({
     url: `${base}/hizmetlerimiz/${slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.9,
+  }));
+
+  const districtRoutes: MetadataRoute.Sitemap = SEO_DISTRICT_PAGES.map((d) => ({
+    url: `${base}/bolgeler/${d.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.85,
   }));
 
   const productRoutes: MetadataRoute.Sitemap = SITE_CONFIG.productSeries.map((p) => ({
@@ -222,6 +235,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticRoutes,
     ...legalRoutes,
     ...serviceRoutes,
+    ...districtRoutes,
     ...blogArticleRoutes,
     ...winsaCatalogRoutes,
     ...professionalSubRoutes,

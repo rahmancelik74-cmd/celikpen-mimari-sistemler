@@ -8,17 +8,13 @@ import { CelikpenLogo } from './CelikpenLogo';
 import { useCms } from './CmsProvider';
 import { openCookiePreferences } from './CookieConsentBanner';
 import { EXACT_GOOGLE_MAPS_URL } from '../lib/google-business';
+import { SEO_SERVICE_PAGES } from '../data/seoServices';
+import { SEO_DISTRICT_PAGES } from '../data/seoDistricts';
 
-const FOOTER_SERVICES = [
-  { label: 'Katlanır Cam Balkon Sistemleri', href: '/hizmetlerimiz/katlanir-cam-balkon' },
-  { label: 'Isıcamlı Cam Balkon Sistemleri', href: '/hizmetlerimiz/isicamli-cam-balkon' },
-  { label: 'Sürme Cam Balkon Sistemleri', href: '/hizmetlerimiz/surme-cam-balkon' },
-  { label: 'Motorlu Giyotin Cam Sistemleri', href: '/hizmetlerimiz/giyotin-cam-sistemleri' },
-  { label: 'Kış Bahçesi Sistemleri', href: '/hizmetlerimiz/kis-bahcesi-sistemleri' },
-  { label: 'Bioklimatik Pergola Sistemleri', href: '/hizmetlerimiz/bioklimatik-pergola' },
-  { label: 'PVC Pencere & Kapı Montajı', href: '/hizmetlerimiz/pvc-pencere-kapi' },
-  { label: 'Panjur, Kepenk & Kedi Sinekliği', href: '/hizmetlerimiz/panjur-kepenk-sineklik' },
-];
+const FOOTER_SERVICES = SEO_SERVICE_PAGES.map((service) => ({
+  label: service.footerLabel,
+  href: `/hizmetlerimiz/${service.slug}`,
+}));
 
 const FOOTER_QUICK = [
   { label: 'Anasayfa', href: '/' },
@@ -31,21 +27,6 @@ const FOOTER_QUICK = [
   { label: 'Blog & Mimari Rehberler', href: '/blog' },
   { label: 'Fiyat Hesapla', href: '/fiyat-hesapla' },
   { label: 'İletişim', href: '/iletisim' },
-];
-
-const EUROPEAN_SIDE_SEO_PILLS = [
-  'Bakırköy (Florya, Yeşilköy, Ataköy)',
-  'Beşiktaş (Etiler, Levent, Bebek)',
-  'Sarıyer (Zekeriyaköy, Tarabya, Göktürk)',
-  'Başakşehir (Bahçeşehir)',
-  'Beylikdüzü',
-  'Büyükçekmece',
-  'Şişli',
-  'Bahçelievler',
-  'Küçükçekmece',
-  'Zeytinburnu',
-  'Kağıthane & Eyüpsultan',
-  'Bağcılar & Güngören',
 ];
 
 const FOOTER_LEGAL = [
@@ -278,17 +259,27 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Lower Horizontal Bar: Avrupa Yakası Hizmet İlçelerimiz (Plain Inline Text) */}
+        {/* Lower Horizontal Bar: Avrupa Yakası Hizmet İlçelerimiz (SEO Internal Links) */}
         <div className="border-t border-white/10 py-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-slate-400">
               AVRUPA YAKASI HİZMET İLÇELERİMİZ:
             </p>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-300">
-              {EUROPEAN_SIDE_SEO_PILLS.map((districtText) => (
-                <span key={districtText}>{districtText}</span>
+            <nav
+              aria-label="Avrupa Yakası Hizmet İlçelerimiz"
+              className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-300"
+            >
+              {SEO_DISTRICT_PAGES.map((district) => (
+                <Link
+                  key={district.slug}
+                  href={`/bolgeler/${district.slug}`}
+                  prefetch={true}
+                  className="transition-colors hover:text-[#BFDBFE]"
+                >
+                  {district.footerLabel}
+                </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </div>
       </div>
