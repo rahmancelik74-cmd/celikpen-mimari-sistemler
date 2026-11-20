@@ -140,10 +140,10 @@ export function CustomerReviews() {
                   {/* Üst Satır: Avatar + Yazar Adı + Göreceli Tarih + Google G İkonu */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3">
-                      {review.profilePhotoUrl ? (
+                      {review.authorPhoto || review.profilePhotoUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                          src={review.profilePhotoUrl}
+                          src={review.authorPhoto || review.profilePhotoUrl}
                           alt={review.authorName}
                           className="h-10 w-10 shrink-0 rounded-full object-cover"
                         />

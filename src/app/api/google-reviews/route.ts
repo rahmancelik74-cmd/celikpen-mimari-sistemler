@@ -15,6 +15,7 @@ import {
 } from '../../../lib/google-business';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
 const EXACT_LAT = EXACT_COORDINATES.latitude;
@@ -29,6 +30,7 @@ let cachedReviews: { data: GoogleReviewsApiResponse; expiresAt: number } | null 
 export interface GoogleReviewItem {
   id: string;
   authorName: string;
+  authorPhoto?: string;
   profilePhotoUrl?: string;
   relativeTime?: string;
   rating: number;
@@ -38,6 +40,8 @@ export interface GoogleReviewItem {
 
 export interface GoogleReviewsApiResponse {
   ok: boolean;
+  status: 'ok' | 'missing_api_key' | 'google_api_denied' | 'no_place_found';
+  errorReason?: string;
   mode: 'live_google_places_api' | 'awaiting_google_api';
   statusBadge: string;
   statusMessage: string;
@@ -120,6 +124,7 @@ function mapV1Reviews(reviews: PlacesV1Review[] | undefined): GoogleReviewItem[]
     .map((r, idx) => ({
       id: `live-google-${idx + 1}`,
       authorName: r.authorAttribution?.displayName || 'Google Kullanıcısı',
+      authorPhoto: r.authorAttribution?.photoUri,
       profilePhotoUrl: r.authorAttribution?.photoUri,
       relativeTime: r.relativePublishTimeDescription,
       rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
@@ -246,6 +251,7 @@ async function resolveGoogleReviews(
 
         return {
           ok: true,
+          status: 'ok',
           mode: 'live_google_places_api',
           statusBadge: 'Google Places API Bağlı',
           statusMessage: `Google Places API bağlantısı aktif. Place ID (${resolvedId}) üzerinden ${totalReviews} değerlendirme ve ${liveReviews.length} gerçek yorum çekildi.`,
@@ -332,6 +338,7 @@ async function resolveGoogleReviews(
                   .map((r, idx) => ({
                     id: `live-google-${idx + 1}`,
                     authorName: r.author_name || 'Google Kullanıcısı',
+                    authorPhoto: r.profile_photo_url,
                     profilePhotoUrl: r.profile_photo_url,
                     relativeTime: r.relative_time_description,
                     rating: typeof r.rating === 'number' && r.rating > 0 ? r.rating : 5,
@@ -351,6 +358,7 @@ async function resolveGoogleReviews(
 
             return {
               ok: true,
+              status: 'ok',
               mode: 'live_google_places_api',
               statusBadge: 'Google Places API Bağlı',
               statusMessage: `Google Places API bağlantısı aktif. Place ID (${finalPlaceId}) üzerinden ${liveReviews.length} gerçek yorum çekildi.`,
@@ -384,9 +392,19 @@ async function resolveGoogleReviews(
 
   /* 3. Sahte/Örnek Yorum Yok — Yalnızca Google API Yetkisi Beklenirken Boş Liste Döner */
   const { googleMapsUrl, readReviewsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(rawPlaceId);
+  const errorStatus: GoogleReviewsApiResponse['status'] = !rawApiKey
+    ? 'missing_api_key'
+    : apiDiagnostic
+      ? 'google_api_denied'
+      : 'no_place_found';
+  const errorReason = !rawApiKey
+    ? 'GOOGLE_PLACES_API_KEY ortam değişkeni tanımlı değil.'
+    : apiDiagnostic || 'Google Places API işletme kaydını döndürmedi.';
 
   return {
     ok: true,
+    status: errorStatus,
+    errorReason,
     mode: 'awaiting_google_api',
     statusBadge: rawApiKey
       ? 'Google Places API Yetkisi Bekleniyor'
@@ -442,10 +460,12 @@ export async function GET(request: Request) {
   }
 
   const result = await resolveGoogleReviews();
-  cachedReviews = {
-    data: result,
-    expiresAt: Date.now() + REVIEWS_CACHE_TTL_MS,
-  };
+  if (result.mode === 'live_google_places_api') {
+    cachedReviews = {
+      data: result,
+      expiresAt: Date.now() + REVIEWS_CACHE_TTL_MS,
+    };
+  }
 
   return NextResponse.json(result, {
     status: 200,
