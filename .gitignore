@@ -10,7 +10,8 @@ next-env.d.ts
 
 # Environment files
 .env
-.env*.local
+.env*
+!.env.example
 
 # Logs and temporary artifacts
 npm-debug.log*

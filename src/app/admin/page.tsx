@@ -67,16 +67,20 @@ export default function AdminDashboardPage() {
   }, [cms]);
 
   useEffect(() => {
-    try {
-      const stored = window.sessionStorage.getItem(ADMIN_SESSION_KEY);
-      if (stored) {
-        setSavedPassword(stored);
-        setPasswordInput(stored);
-        setIsAuthenticated(true);
-      }
-    } catch {
-      // ignore
-    }
+    let active = true;
+    fetch('/api/admin/auth', { cache: 'no-store', credentials: 'same-origin' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json: { ok?: boolean; authenticated?: boolean } | null) => {
+        if (active && json?.ok && json.authenticated) {
+          setIsAuthenticated(true);
+        }
+      })
+      .catch(() => {
+        // Not authenticated yet
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const fetchVisitorAnalytics = useCallback(async () => {
@@ -112,27 +116,45 @@ export default function AdminDashboardPage() {
 
   const showNotice = (type: 'success' | 'error' | 'info', text: string) => showToast(type, text);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = passwordInput.trim();
-    if (trimmed === 'celikpen2026' || trimmed.length >= 6) {
+    if (!trimmed) {
+      setAuthError('Lütfen yönetici şifresini girin.');
+      return;
+    }
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ password: trimmed }),
+      });
+      const json = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        authenticated?: boolean;
+        error?: string;
+      };
+      if (!res.ok || !json.ok) {
+        setAuthError(json.error || 'Şifre hatalı veya giriş reddedildi.');
+        return;
+      }
       setSavedPassword(trimmed);
+      setPasswordInput('');
       setIsAuthenticated(true);
       setAuthError(null);
-      try {
-        window.sessionStorage.setItem(ADMIN_SESSION_KEY, trimmed);
-      } catch {
-        // ignore
-      }
       showNotice('success', 'Çelikpen Yönetim Paneline hoş geldiniz.');
-    } else {
-      setAuthError('Şifre hatalı. Lütfen doğru yönetici şifresini girin.');
+    } catch {
+      setAuthError('Kimlik doğrulama sunucusuna bağlanılamadı.');
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsAuthenticated(false);
+    setSavedPassword('');
+    setPasswordInput('');
     try {
+      await fetch('/api/admin/auth', { method: 'DELETE', credentials: 'same-origin' });
       window.sessionStorage.removeItem(ADMIN_SESSION_KEY);
     } catch {
       // ignore
@@ -148,7 +170,8 @@ export default function AdminDashboardPage() {
       const res = await fetch('/api/admin/cms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: savedPassword || 'celikpen2026', data: updated }),
+        credentials: 'same-origin',
+        body: JSON.stringify({ password: savedPassword || undefined, data: updated }),
       });
       const result = (await res.json()) as {
         ok?: boolean;
@@ -184,7 +207,8 @@ export default function AdminDashboardPage() {
       const deployRes = await fetch('/api/admin/deploy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: savedPassword || 'celikpen2026' }),
+        credentials: 'same-origin',
+        body: JSON.stringify({ password: savedPassword || undefined }),
       });
       const deployResult = (await deployRes.json()) as {
         ok?: boolean;
@@ -196,8 +220,9 @@ export default function AdminDashboardPage() {
       const publishRes = await fetch('/api/admin/publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({
-          password: savedPassword || 'celikpen2026',
+          password: savedPassword || undefined,
           data: draft,
           commitMessage: 'chore(cms): celikpen.com.tr canli site senkronizasyonu',
         }),
@@ -233,8 +258,9 @@ export default function AdminDashboardPage() {
       const res = await fetch('/api/admin/publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({
-          password: savedPassword || 'celikpen2026',
+          password: savedPassword || undefined,
           data: draft,
           commitMessage: 'chore(cms): admin paneli uzerinden guncelleme',
         }),
@@ -256,9 +282,15 @@ export default function AdminDashboardPage() {
     setIsUploading(true);
     try {
       const fd = new FormData();
-      fd.append('password', savedPassword || 'celikpen2026');
+      if (savedPassword) {
+        fd.append('password', savedPassword);
+      }
       fd.append('file', file);
-      const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: fd,
+      });
       const result = (await res.json()) as { ok?: boolean; url?: string; error?: string };
       if (!res.ok || !result.ok || !result.url) {
         showNotice('error', result.error || 'Görsel yüklenemedi.');

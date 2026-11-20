@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { verifyAdminRequest } from '../../../lib/admin-auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,6 +60,22 @@ const ZERO_ANALYTICS: VisitorAnalyticsData = {
 };
 
 let memoryStore: VisitorAnalyticsData = { ...ZERO_ANALYTICS };
+
+function sanitizeTrackedPath(raw?: string): string {
+  if (!raw || typeof raw !== 'string') return '/';
+  const withoutQuery = raw.split('?')[0].split('#')[0].trim();
+  const normalized = withoutQuery.replace(/[^a-zA-Z0-9/_-]/g, '').slice(0, 140);
+  if (!normalized.startsWith('/')) return '/';
+  return normalized.replace(/\/+/g, '/') || '/';
+}
+
+function sanitizeTrackedLabel(raw?: string, fallbackPath = '/'): string {
+  if (!raw || typeof raw !== 'string') {
+    return PAGE_LABELS[fallbackPath] || fallbackPath;
+  }
+  const cleaned = raw.replace(/[<>"'`\\\r\n\t]/g, '').trim().slice(0, 100);
+  return cleaned || PAGE_LABELS[fallbackPath] || fallbackPath;
+}
 
 async function readFromBlob(): Promise<VisitorAnalyticsData | null> {
   if (!isBlobConfigured()) return null;
@@ -142,7 +159,14 @@ async function writeAnalyticsStore(nextData: VisitorAnalyticsData): Promise<void
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim. Ziyaretçi analitikleri yalnızca yöneticilere açıktır.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store, max-age=0' } }
+    );
+  }
+
   const data = await readAnalyticsStore();
   return NextResponse.json(
     {
@@ -168,6 +192,13 @@ export async function POST(request: Request) {
     };
 
     if (body.action === 'reset') {
+      if (!verifyAdminRequest(request)) {
+        return NextResponse.json(
+          { ok: false, error: 'Yetkisiz işlem.' },
+          { status: 401, headers: { 'Cache-Control': 'no-store' } }
+        );
+      }
+
       const fresh: VisitorAnalyticsData = {
         ...ZERO_ANALYTICS,
         lastDateKey: getTodayKey(),
@@ -177,10 +208,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true, data: fresh });
     }
 
-    const rawPath = (body.path || '/').split('?')[0].trim() || '/';
+    const rawPath = sanitizeTrackedPath(body.path);
     if (rawPath.startsWith('/admin') || rawPath.startsWith('/cp-yonetim-2026')) {
-      const current = await readAnalyticsStore();
-      return NextResponse.json({ ok: true, data: current });
+      return NextResponse.json({ ok: true }, { status: 200 });
     }
 
     const current = await readAnalyticsStore();
@@ -198,7 +228,7 @@ export async function POST(request: Request) {
     } else {
       updatedPages.push({
         path: rawPath,
-        label: body.label || PAGE_LABELS[rawPath] || rawPath,
+        label: sanitizeTrackedLabel(body.label, rawPath),
         views: 1,
       });
     }
@@ -220,10 +250,10 @@ export async function POST(request: Request) {
     await writeAnalyticsStore(nextData);
 
     return NextResponse.json(
-      { ok: true, data: nextData },
+      { ok: true },
       { status: 200, headers: { 'Cache-Control': 'no-store' } }
     );
   } catch {
-    return NextResponse.json({ ok: true, data: memoryStore }, { status: 200 });
+    return NextResponse.json({ ok: true }, { status: 200 });
   }
 }

@@ -2,15 +2,34 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
+import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
 import { getMergedCmsData } from '../../../../lib/cms-server';
 import { writeCmsToBlob } from '../../../../lib/blob-storage';
+import { verifyAdminRequest } from '../../../../lib/admin-auth';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
+
+function redactSensitiveCmsFields(data: CmsStoreData): CmsStoreData {
+  return {
+    ...data,
+    siteSettings: {
+      ...data.siteSettings,
+      googlePlacesApiKey: '',
+    },
+    smtpSettings: {
+      ...DEFAULT_CMS_DATA.smtpSettings,
+      user: '',
+      password: '',
+    },
+    users: [],
+    sessions: [],
+    auditLogs: [],
+    discoveryRequests: [],
+  };
+}
 
 async function commitCmsToGitHubIfConfigured(content: string): Promise<boolean> {
   const token = process.env.GITHUB_TOKEN || '';
@@ -56,12 +75,13 @@ async function commitCmsToGitHubIfConfigured(content: string): Promise<boolean> 
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const data = await getMergedCmsData();
+  const isAdmin = verifyAdminRequest(request);
   return NextResponse.json(
     {
       ok: true,
-      data,
+      data: isAdmin ? data : redactSensitiveCmsFields(data),
     },
     {
       status: 200,
@@ -72,19 +92,18 @@ export async function GET() {
   );
 }
 
-export async function POST(request: Request) {
+async function handleWriteCms(request: Request) {
   try {
-    const body = (await request.json()) as {
+    const body = (await request.json().catch(() => ({}))) as {
       password?: string;
       data?: Partial<CmsStoreData>;
     };
 
-    const providedPassword = (body.password || '').trim();
-    if (providedPassword !== DEFAULT_ADMIN_PASSWORD && providedPassword !== 'celikpen2026') {
+    if (!verifyAdminRequest(request, body.password)) {
       return NextResponse.json(
         {
           ok: false,
-          error: 'Yönetici şifresi hatalı. Lütfen şifrenizi kontrol edin.',
+          error: 'Yetkisiz erişim. Lütfen yönetici girişi yapın.',
         },
         { status: 401 }
       );
@@ -154,4 +173,22 @@ export async function POST(request: Request) {
       { status: 400 }
     );
   }
+}
+
+export async function POST(request: Request) {
+  return handleWriteCms(request);
+}
+
+export async function PUT(request: Request) {
+  return handleWriteCms(request);
+}
+
+export async function DELETE(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim. Lütfen yönetici girişi yapın.' },
+      { status: 401 }
+    );
+  }
+  return NextResponse.json({ ok: true, message: 'İşlem yetkisi doğrulandı.' });
 }

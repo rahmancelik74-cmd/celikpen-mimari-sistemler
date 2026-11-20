@@ -1,14 +1,21 @@
 import { NextResponse } from 'next/server';
 import { SITE_CONFIG } from '../../../config/site.config';
 import { ANALYTICS_CONFIG, INDEXNOW_STATIC_KEY } from '../../../config/analytics.config';
+import { verifyAdminRequest } from '../../../lib/admin-auth';
 import sitemap from '../../sitemap';
 
 /**
  * IndexNow (Bing, Yandex ve ortak arama motorları) hızlı dizine ekleme uç noktası.
- * GET: Gönderime hazır tüm güncel URL listesini, IndexNow anahtarını ve keyLocation doğrulama dosyasını döner.
- * POST: Arama motorlarına anlık URL güncelleme bildirimi gönderir.
+ * Güvenlik sıkılaştırması: Yalnızca doğrulanmış yönetici oturumuyla erişilebilir.
  */
-export async function GET() {
+export async function GET(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim. Yönetici oturumu gerekli.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   const entries = await sitemap();
   const urlList = entries.map((entry) => entry.url);
   const host = new URL(SITE_CONFIG.siteUrl).host;
@@ -25,7 +32,14 @@ export async function GET() {
   });
 }
 
-export async function POST() {
+export async function POST(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim. Yönetici oturumu gerekli.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   const entries = await sitemap();
   const urlList = entries.map((entry) => entry.url);
   const host = new URL(SITE_CONFIG.siteUrl).host;

@@ -72,7 +72,8 @@ export default function AdminMediaTab({ showNotice, uploadImageFile, savedPasswo
       const res = await fetch('/api/admin/media', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: savedPassword || 'celikpen2026', url: deleteTarget.url }),
+        credentials: 'same-origin',
+        body: JSON.stringify({ password: savedPassword || undefined, url: deleteTarget.url }),
       });
       const json = (await res.json()) as { ok: boolean; error?: string };
       if (json.ok) {

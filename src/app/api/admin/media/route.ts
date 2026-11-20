@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { verifyAdminRequest } from '../../../../lib/admin-auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,9 +21,16 @@ const MEDIA_FOLDERS = [
   { dir: 'public/images/products', urlPrefix: '/images/products' },
 ];
 
-const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif', '.svg']);
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   const items: MediaItem[] = [];
 
   for (const folder of MEDIA_FOLDERS) {
@@ -53,19 +61,19 @@ export async function GET() {
 
   items.sort((a, b) => new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime());
 
-  return NextResponse.json({ ok: true, items }, {
-    headers: { 'Cache-Control': 'no-store, max-age=0' },
-  });
+  return NextResponse.json(
+    { ok: true, items },
+    {
+      headers: { 'Cache-Control': 'no-store, max-age=0' },
+    }
+  );
 }
-
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
 
 export async function DELETE(request: Request) {
   try {
-    const body = (await request.json()) as { password?: string; url?: string };
-    const password = (body.password || '').trim();
-    if (password !== DEFAULT_ADMIN_PASSWORD && password !== 'celikpen2026') {
-      return NextResponse.json({ ok: false, error: 'Yetki hatası.' }, { status: 401 });
+    const body = (await request.json().catch(() => ({}))) as { password?: string; url?: string };
+    if (!verifyAdminRequest(request, body.password)) {
+      return NextResponse.json({ ok: false, error: 'Yetkisiz erişim.' }, { status: 401 });
     }
 
     const url = body.url || '';

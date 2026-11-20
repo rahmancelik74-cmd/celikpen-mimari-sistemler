@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
    - Üretimde HTTP -> HTTPS 308 yönlendirmesi
    ========================================================================== */
 
-const ALLOWED_METHODS = new Set(['GET', 'HEAD', 'OPTIONS', 'POST']);
+const ALLOWED_METHODS = new Set(['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT', 'DELETE']);
 
 const WAF_PATTERNS: RegExp[] = [
   /* SQL Injection */
@@ -140,7 +140,7 @@ export function middleware(request: NextRequest) {
       new NextResponse('Method Not Allowed', {
         status: 405,
         headers: {
-          Allow: 'GET, HEAD, OPTIONS, POST',
+          Allow: 'GET, HEAD, OPTIONS, POST, PUT, DELETE',
           'Cache-Control': 'no-store',
           'Content-Type': 'text/plain; charset=utf-8',
         },
@@ -169,7 +169,7 @@ export function middleware(request: NextRequest) {
       new NextResponse(null, {
         status: 204,
         headers: {
-          Allow: 'GET, HEAD, OPTIONS, POST',
+          Allow: 'GET, HEAD, OPTIONS, POST, PUT, DELETE',
           'Cache-Control': 'no-store',
         },
       }),

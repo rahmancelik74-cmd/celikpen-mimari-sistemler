@@ -34,8 +34,8 @@ export default function AdminSecurityTab({ draft, setDraft, saveAllToCms, isSavi
     setDraft((prev: CmsStoreData) => ({
       ...prev,
       users: [...prev.users, {
-        id, name: 'Yeni Kullanıcı', email: '', password: 'celikpen2026',
-        role: 'editor' as UserRole, twoFactorEnabled: false, twoFactorPin: '202630',
+        id, name: 'Yeni Kullanıcı', email: '', password: '',
+        role: 'editor' as UserRole, twoFactorEnabled: false, twoFactorPin: '',
         createdAt: new Date().toISOString(),
       }],
     }));

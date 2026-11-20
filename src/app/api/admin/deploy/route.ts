@@ -3,11 +3,10 @@ import { revalidatePath } from 'next/cache';
 import { SITE_CONFIG } from '../../../../config/site.config';
 import { ANALYTICS_CONFIG, INDEXNOW_STATIC_KEY } from '../../../../config/analytics.config';
 import { getMergedRichBlogPosts } from '../../../../lib/cms-server';
+import { verifyAdminRequest } from '../../../../lib/admin-auth';
 import sitemap from '../../../sitemap';
 
 export const dynamic = 'force-dynamic';
-
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
 
 const REVALIDATE_TARGETS = [
   '/',
@@ -30,10 +29,9 @@ export async function POST(request: Request) {
       password?: string;
     };
 
-    const password = (body.password || 'celikpen2026').trim();
-    if (password !== DEFAULT_ADMIN_PASSWORD && password !== 'celikpen2026') {
+    if (!verifyAdminRequest(request, body.password)) {
       return NextResponse.json(
-        { ok: false, error: 'Yönetici şifresi doğrulanamadı.' },
+        { ok: false, error: 'Yetkisiz erişim. Yönetici oturumu doğrulanamadı.' },
         { status: 401 }
       );
     }

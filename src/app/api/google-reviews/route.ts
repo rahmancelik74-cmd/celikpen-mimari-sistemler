@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { DEFAULT_CMS_DATA, normalizeCmsData, type CmsStoreData } from '../../../lib/cms';
 import { readCmsFromBlob } from '../../../lib/blob-storage';
+import { verifyAdminRequest } from '../../../lib/admin-auth';
 import {
   EXACT_BUSINESS_NAME,
   EXACT_BUSINESS_PLACE_ID,
@@ -21,6 +22,9 @@ const EXACT_LNG = EXACT_COORDINATES.longitude;
 const DEFAULT_GOOGLE_PLACE_ID = EXACT_BUSINESS_PLACE_ID;
 const PRIMARY_BUSINESS_QUERY = process.env.GOOGLE_BUSINESS_QUERY || EXACT_BUSINESS_NAME;
 const FALLBACK_BUSINESS_QUERY = 'Kızılelma Cad. No: 30/C Bahçelievler İstanbul';
+const REVIEWS_CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+
+let cachedReviews: { data: GoogleReviewsApiResponse; expiresAt: number } | null = null;
 
 export interface GoogleReviewItem {
   id: string;
@@ -407,8 +411,36 @@ async function resolveGoogleReviews(
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const wantsRefresh = url.searchParams.get('refresh') === '1';
+
+  if (wantsRefresh && !verifyAdminRequest(request)) {
+    if (cachedReviews && cachedReviews.expiresAt > Date.now()) {
+      return NextResponse.json(cachedReviews.data, {
+        status: 200,
+        headers: { 'Cache-Control': 'public, max-age=300' },
+      });
+    }
+    return NextResponse.json(
+      { ok: false, error: 'Önbellek yenileme (?refresh=1) yalnızca yönetici oturumuna açıktır.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  if (!wantsRefresh && cachedReviews && cachedReviews.expiresAt > Date.now()) {
+    return NextResponse.json(cachedReviews.data, {
+      status: 200,
+      headers: { 'Cache-Control': 'public, max-age=300' },
+    });
+  }
+
   const result = await resolveGoogleReviews();
+  cachedReviews = {
+    data: result,
+    expiresAt: Date.now() + REVIEWS_CACHE_TTL_MS,
+  };
+
   return NextResponse.json(result, {
     status: 200,
     headers: { 'Cache-Control': 'no-store, max-age=0' },
@@ -416,11 +448,23 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Yetkisiz erişim. Yönetici oturumu gerekli.' },
+      { status: 401, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   const body = (await request.json().catch(() => ({}))) as {
     apiKey?: string;
     placeId?: string;
   };
   const result = await resolveGoogleReviews(body.apiKey, body.placeId);
+  cachedReviews = {
+    data: result,
+    expiresAt: Date.now() + REVIEWS_CACHE_TTL_MS,
+  };
+
   return NextResponse.json(result, {
     status: 200,
     headers: { 'Cache-Control': 'no-store, max-age=0' },

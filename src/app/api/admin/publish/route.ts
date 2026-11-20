@@ -6,11 +6,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { normalizeCmsData, type CmsStoreData } from '../../../../lib/cms';
 import { writeCmsToBlob } from '../../../../lib/blob-storage';
+import { verifyAdminRequest } from '../../../../lib/admin-auth';
 
 export const dynamic = 'force-dynamic';
 
 const execAsync = promisify(exec);
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'celikpen2026';
 const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms-store.json');
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
@@ -88,16 +88,15 @@ function revalidateAllPages() {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as {
+    const body = (await request.json().catch(() => ({}))) as {
       password?: string;
       commitMessage?: string;
       data?: Partial<CmsStoreData>;
     };
 
-    const password = (body.password || '').trim();
-    if (password !== DEFAULT_ADMIN_PASSWORD && password !== 'celikpen2026') {
+    if (!verifyAdminRequest(request, body.password)) {
       return NextResponse.json(
-        { ok: false, error: 'Yönetici şifresi doğrulanamadı.' },
+        { ok: false, error: 'Yetkisiz erişim. Yönetici oturumu doğrulanamadı.' },
         { status: 401 }
       );
     }
@@ -146,7 +145,7 @@ export async function POST(request: Request) {
         pushed: false,
         method: 'blob-only',
         message:
-          'CMS verileri Blob Storage\'a kaydedildi ve sayfa önbellekleri temizlendi. Kalıcı GitHub senkronizasyonu için GITHUB_TOKEN ortam değişkenini Vercel Dashboard\'da tanımlayın.',
+          "CMS verileri Blob Storage'a kaydedildi ve sayfa önbellekleri temizlendi. Kalıcı GitHub senkronizasyonu için GITHUB_TOKEN ortam değişkenini Vercel Dashboard'da tanımlayın.",
       });
     }
 
@@ -193,7 +192,7 @@ export async function POST(request: Request) {
         pushed: false,
         method: 'local-only',
         message:
-          'Veriler yerel CMS veritabanına kaydedildi. Git CLI hatası nedeniyle GitHub\'a gönderilemedi.',
+          "Veriler yerel CMS veritabanına kaydedildi. Git CLI hatası nedeniyle GitHub'a gönderilemedi.",
         details: gitError instanceof Error ? gitError.message : String(gitError),
       });
     }
