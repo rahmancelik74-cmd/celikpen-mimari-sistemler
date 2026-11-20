@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { EXACT_GOOGLE_MAPS_URL, EXACT_WRITE_REVIEW_URL } from '../lib/google-business';
+import {
+  EXACT_READ_REVIEWS_URL,
+  EXACT_WRITE_REVIEW_URL,
+} from '../lib/google-business';
 import type { GoogleReviewItem, GoogleReviewsApiResponse } from '../app/api/google-reviews/route';
 
 function formatReviewDate(date: string) {
@@ -28,7 +31,7 @@ export function CustomerReviews() {
   const [loaded, setLoaded] = useState(false);
   const [rating, setRating] = useState<number>(0);
   const [totalReviews, setTotalReviews] = useState<number>(0);
-  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>(EXACT_GOOGLE_MAPS_URL);
+  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>(EXACT_READ_REVIEWS_URL);
   const [writeReviewUrl, setWriteReviewUrl] = useState<string>(EXACT_WRITE_REVIEW_URL);
   const [reviews, setReviews] = useState<GoogleReviewItem[]>([]);
 
@@ -188,8 +191,9 @@ export function CustomerReviews() {
         ) : (
           <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-6 text-center shadow-sm sm:flex-row sm:text-left">
             <p className="text-sm text-slate-600">
-              Google Haritalar işletme profilimizdeki güncel müşteri değerlendirmelerini inceleyebilir
-              veya deneyiminizi paylaşabilirsiniz.
+              {totalReviews > 0
+                ? `Google Haritalar profilimizdeki ${totalReviews} müşteri değerlendirmesinin tamamını inceleyebilir veya deneyiminizi paylaşabilirsiniz.`
+                : 'Google Haritalar işletme profilimizdeki güncel müşteri değerlendirmelerini inceleyebilir veya deneyiminizi paylaşabilirsiniz.'}
             </p>
             <a
               href={googleMapsUrl}
@@ -197,7 +201,7 @@ export function CustomerReviews() {
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-[#0F172A] transition hover:border-[#1E3A8A] hover:text-[#1E3A8A]"
             >
-              Google Haritalar&apos;da İncele ↗
+              {totalReviews > 0 ? `${totalReviews} Google Yorumunu İncele ↗` : "Google Haritalar'da İncele ↗"}
             </a>
           </div>
         )}

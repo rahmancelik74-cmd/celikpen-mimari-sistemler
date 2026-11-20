@@ -7,10 +7,14 @@ export const EXACT_COORDINATES = {
 } as const;
 
 export const EXACT_BUSINESS_PLACE_ID =
-  (typeof process !== 'undefined' && process.env?.GOOGLE_PLACE_ID?.trim()) || '';
+  (typeof process !== 'undefined' && process.env?.GOOGLE_PLACE_ID?.trim()) ||
+  'ChIJI_ruNeikyhQReAJHQ4csSac';
 
 export const EXACT_GOOGLE_MAPS_URL =
   'https://www.google.com/maps/place/Pimapen+tamircisi,+Cam+Balkon,+Al%C3%BCminyum+do%C4%9Frama+ve+Sineklik/@41.0225161,28.8353366,19z/data=!3m1!4b1!4m6!3m5!1s0x14caa4e835eefa23:0xa7492c8743470278!8m2!3d41.0225161!4d28.8353366!16s%2Fg%2F11hckdph8v';
+
+export const EXACT_READ_REVIEWS_URL =
+  'https://www.google.com/maps/place//data=!4m4!3m3!1s0x14caa4e835eefa23:0xa7492c8743470278!9m1!1b1';
 
 export const EXACT_EMBED_MAP_URL = `https://maps.google.com/maps?q=${EXACT_COORDINATES.latitude},${EXACT_COORDINATES.longitude}&hl=tr&z=18&output=embed`;
 

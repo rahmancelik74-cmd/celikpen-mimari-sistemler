@@ -10,6 +10,7 @@ import {
   EXACT_COORDINATES,
   EXACT_EMBED_MAP_URL,
   EXACT_GOOGLE_MAPS_URL,
+  EXACT_READ_REVIEWS_URL,
   getExactWriteReviewUrl,
   isValidGooglePlaceId,
 } from '../../../lib/google-business';
@@ -81,6 +82,11 @@ interface PlacesV1Place {
   rating?: number;
   userRatingCount?: number;
   googleMapsUri?: string;
+  googleMapsLinks?: {
+    reviewsUri?: string;
+    writeAReviewUri?: string;
+    placeUri?: string;
+  };
   reviews?: PlacesV1Review[];
 }
 
@@ -107,11 +113,14 @@ function maskApiKey(key: string): string {
   return `${key.slice(0, 6)}••••••••••••••••••••${key.slice(-4)}`;
 }
 
-function buildGoogleUrls(placeId: string, apiMapsUri?: string) {
-  const readReviewsUrl = apiMapsUri || EXACT_GOOGLE_MAPS_URL;
+function buildGoogleUrls(
+  placeId: string,
+  apiMapsUri?: string,
+  apiReviewsUri?: string
+) {
   return {
-    googleMapsUrl: readReviewsUrl,
-    readReviewsUrl,
+    googleMapsUrl: apiMapsUri || EXACT_GOOGLE_MAPS_URL,
+    readReviewsUrl: apiReviewsUri || EXACT_READ_REVIEWS_URL,
     writeReviewUrl: getExactWriteReviewUrl(placeId),
     embedMapUrl: EXACT_EMBED_MAP_URL,
   };
@@ -180,7 +189,7 @@ async function queryPlacesV1Details(
       headers: {
         'X-Goog-Api-Key': apiKey,
         'X-Goog-FieldMask':
-          'id,displayName,formattedAddress,rating,userRatingCount,googleMapsUri,reviews',
+          'id,displayName,formattedAddress,rating,userRatingCount,googleMapsUri,googleMapsLinks,reviews',
       },
       cache: 'no-store',
     }
@@ -246,7 +255,8 @@ async function resolveGoogleReviews(
         const rating = typeof v1Place.rating === 'number' ? v1Place.rating : 0;
         const { googleMapsUrl, readReviewsUrl, writeReviewUrl, embedMapUrl } = buildGoogleUrls(
           resolvedId,
-          v1Place.googleMapsUri
+          v1Place.googleMapsUri,
+          v1Place.googleMapsLinks?.reviewsUri
         );
 
         return {
