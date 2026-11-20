@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T22:42:00.000Z",
+  "updatedAt": "2026-11-20T14:38:00.000Z",
   "siteSettings": {
     "phoneDisplay": "0 (532) 333 20 85",
     "phoneRaw": "+905323332085",
@@ -345,7 +345,7 @@
       "title": "Motorlu Giyotin (Hareketli Küpeşte) Cam",
       "subtitle": "Uzaktan kumandalı Somfy / Becker motorlu, dikey açılan tam otomatik cam cephe",
       "badge": "OTOMATİK & KUMANDALI",
-      "image": "/images/services/giyotin-cam.jpg",
+      "image": "/images/services/giyotin-cam-sistemleri.jpg",
       "href": "/urunler/giyotin-cam",
       "active": true
     },
@@ -354,7 +354,7 @@
       "title": "Kış Bahçesi Sistemleri",
       "subtitle": "Teras, bahçe ve dubleks katları dört mevsim yaşanabilir lüks odalara dönüştürün",
       "badge": "4 MEVSİM YAŞAM ALANI",
-      "image": "/images/services/kis-bahcesi.jpg",
+      "image": "/images/services/kis-bahcesi-sistemleri.jpg",
       "href": "/urunler/kis-bahcesi-pergola",
       "active": true
     },
@@ -381,7 +381,7 @@
       "title": "Motorlu Panjur, Kepenk & Kedi Sinekliği",
       "subtitle": "Winsa Winstor monoblok panjur, alüminyum kepenk ve yırtılmaz çelik/kedi tüllü sineklik",
       "badge": "TAMAMLAYICI SİSTEMLER",
-      "image": "/images/services/panjur-sineklik.jpg",
+      "image": "/images/services/panjur-kepenk-sineklik.jpg",
       "href": "/urunler/winsa",
       "active": true
     }
@@ -393,7 +393,7 @@
       "title": "Winsa Dorado 76 PVC Pencere ve Kapı Sistemi",
       "category": "PVC Pencere & Kapı",
       "badge": "76 MM / 5 ODACIK",
-      "image": "/images/products/winsa-dorado-76.jpg",
+      "image": "/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -403,7 +403,7 @@
       "title": "Winsa Revotech Gold 84 mm 7 Odacıklı Sistem",
       "category": "PVC Pencere & Kapı",
       "badge": "84 MM / 7 ODACIK / 3 CONTA",
-      "image": "/images/products/winsa-revotech.jpg",
+      "image": "/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -413,7 +413,7 @@
       "title": "Winsa Safir 76 Yeni Nesil Yalıtım Serisi",
       "category": "PVC Pencere & Kapı",
       "badge": "SAFİR 76 SERİSİ",
-      "image": "/images/products/winsa-safir-76.jpg",
+      "image": "/images/products/yenibosna-safir-76-pvc-pencere.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -423,7 +423,7 @@
       "title": "Winsa Panorama HS 76 Kaldır-Sür (Hebeschiebe)",
       "category": "Sürme Sistemleri",
       "badge": "400 KG KANAT KAPASİTESİ",
-      "image": "/images/products/winsa-panorama-hs-76.jpg",
+      "image": "/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -433,7 +433,7 @@
       "title": "Winsa Comfort Slide Plus & Lotus Sürme",
       "category": "Sürme Sistemleri",
       "badge": "VAKUM CONTALI SÜRME",
-      "image": "/images/products/winsa-comfort-slide.jpg",
+      "image": "/images/products/sirinevler-comfort-slide-plus-surme-kapi.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -443,7 +443,7 @@
       "title": "Winsa Vera Termal, Vera Pro & Vela Pergola",
       "category": "Cam Balkon & Pergola",
       "badge": "VERA & VELA SERİSİ",
-      "image": "/images/products/winsa-vera-cam-balkon.jpg",
+      "image": "/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg",
       "href": "/urunler/winsa",
       "active": true
     },
@@ -463,7 +463,7 @@
       "title": "Albert Genau VertiFlex Motorlu Giyotin & Targa Pergola",
       "category": "Giyotin & Bioklimatik",
       "badge": "VERTIFLEX & TARGA",
-      "image": "/images/services/giyotin-cam.jpg",
+      "image": "/images/services/giyotin-cam-sistemleri.jpg",
       "href": "/urunler/albert-genau",
       "active": true
     }

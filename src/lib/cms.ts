@@ -548,10 +548,32 @@ export function mergeCmsToRichBlogPosts(cmsData: Pick<CmsStoreData, 'blogPosts'>
     .map(cmsItemToRichBlogPost);
 }
 
+const LEGACY_IMAGE_FIX_MAP: Record<string, string> = {
+  '/images/services/giyotin-cam.jpg': '/images/services/giyotin-cam-sistemleri.jpg',
+  '/images/services/kis-bahcesi.jpg': '/images/services/kis-bahcesi-sistemleri.jpg',
+  '/images/services/panjur-sineklik.jpg': '/images/services/panjur-kepenk-sineklik.jpg',
+  '/images/products/winsa-dorado-76.jpg': '/images/products/siyavuspasa-dorado-76-pvc-pencere.jpg',
+  '/images/products/winsa-revotech.jpg': '/images/products/kocasinan-revotech-gold-antrasit-pvc-pencere.jpg',
+  '/images/products/winsa-safir-76.jpg': '/images/products/yenibosna-safir-76-pvc-pencere.jpg',
+  '/images/products/winsa-panorama-hs-76.jpg': '/images/products/bahcelievler-panorama-hs-76-kaldir-sur-kapi.jpg',
+  '/images/products/winsa-comfort-slide.jpg': '/images/products/sirinevler-comfort-slide-plus-surme-kapi.jpg',
+  '/images/products/winsa-vera-cam-balkon.jpg': '/images/products/kocasinan-vera-termal-isicamli-cam-balkon.jpg',
+};
+
+function fixLegacyImagePath(img: string): string {
+  return LEGACY_IMAGE_FIX_MAP[img] || img;
+}
+
 const rawJson = defaultCmsJson as unknown as CmsStoreData;
 
 export const DEFAULT_CMS_DATA: CmsStoreData = {
   ...rawJson,
+  services: Array.isArray(rawJson.services)
+    ? rawJson.services.map((s) => ({ ...s, image: fixLegacyImagePath(s.image) }))
+    : [],
+  products: Array.isArray(rawJson.products)
+    ? rawJson.products.map((p) => ({ ...p, image: fixLegacyImagePath(p.image) }))
+    : [],
   deletedBlogSlugs: Array.isArray(rawJson.deletedBlogSlugs) ? rawJson.deletedBlogSlugs : [],
   blogPosts: mergeBlogPostsForCms(rawJson.blogPosts, rawJson.deletedBlogSlugs),
 };
@@ -603,14 +625,16 @@ export function normalizeCmsData(raw: Partial<CmsStoreData> | null | undefined):
       Array.isArray(raw.references) && raw.references.length > 0
         ? raw.references
         : DEFAULT_CMS_DATA.references,
-    services:
+    services: (
       Array.isArray(raw.services) && raw.services.length > 0
         ? raw.services
-        : DEFAULT_CMS_DATA.services,
-    products:
+        : DEFAULT_CMS_DATA.services
+    ).map((s) => ({ ...s, image: fixLegacyImagePath(s.image) })),
+    products: (
       Array.isArray(raw.products) && raw.products.length > 0
         ? raw.products
-        : DEFAULT_CMS_DATA.products,
+        : DEFAULT_CMS_DATA.products
+    ).map((p) => ({ ...p, image: fixLegacyImagePath(p.image) })),
     blogPosts: mergeBlogPostsForCms(
       Array.isArray(raw.blogPosts) && raw.blogPosts.length > 0
         ? raw.blogPosts
